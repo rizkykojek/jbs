@@ -53,3 +53,8 @@ code {
 .borderless {
     border: none !important;
 }
+
+.body-background {
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}

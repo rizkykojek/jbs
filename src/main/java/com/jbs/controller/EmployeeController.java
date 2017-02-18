@@ -15,4 +15,9 @@ public class EmployeeController {
         return "index";
     }
 
+    @RequestMapping(value = "/summary", method = RequestMethod.GET)
+    public String getSummary() {
+        return "summary";
+    }
+
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"/>
+
+<body>
+    <nav th:replace="fragments/header :: header"/>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Employee Summary</h3>
+            </div>
+            <div class="panel-body body-background">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img src="../static/images/none.jpeg" th:src="@{'/images/none.jpeg'}" class="img-thumbnail" width="100" height="200"/>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <tbody>
+                                <tr>
+                                    <td class="borderless"><b>First Name: </b>Joe</td>
+                                    <td class="borderless"><b>Last Name: </b>Blog</td>
+                                    <td class="borderless"><b>Gender: </b>M</td>
+                                    <td class="borderless"><b>EE ID: </b>11112222</td>
+                                    <td class="borderless"><b>DOB: </b>1978/12/12</td>
+                                    <td class="borderless"><b>Mobile Phone: </b>041044711</td>
+                                </tr>
+                                <tr>
+                                    <td class="borderless"><b>Address 1: </b>6/10 Smith Street</td>
+                                    <td class="borderless"><b>Address 2: </b>Neutral Bay</td>
+                                    <td class="borderless"><b>State: </b>NSW</td>
+                                    <td class="borderless"><b>Postal Code: </b>2055</td>
+                                    <td class="borderless"><b>Hire Date: </b>2016/12/12</td>
+                                    <td class="borderless"><b>Plant: </b>Dinmoore</td>
+                                </tr>
+                                <tr>
+                                    <td class="borderless"><b>Position: </b>Slicer</td>
+                                    <td class="borderless"><b>EE Type: </b>Seasonal</td>
+                                    <td class="borderless"><b>Trainee/Trainer: </b>Trainee</td>
+                                    <td class="borderless"><b>Job Class: </b>4</td>
+                                    <td class="borderless"><b>Shift: </b>1</td>
+                                    <td class="borderless"><b>Roster: </b>1</td>
+                                </tr>
+                                <tr>
+                                    <td class="borderless"><b>Department: </b>Finance</td>
+                                    <td class="borderless"><b>Leave: </b>20 days</td>
+                                    <td class="borderless"><b>Annual Leave: </b>20 days</td>
+                                    <td class="borderless" colspan="2"><b>Personal Leave: </b>4 days</td>
+                                    <td class="borderless"><b>Status: </b>Workers Comp</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"/>
+</body>
+</html>
