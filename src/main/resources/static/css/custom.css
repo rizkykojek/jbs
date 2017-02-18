@@ -49,3 +49,7 @@ code {
 .btn{
     width: 100%;
 }
+
+.borderless {
+    border: none !important;
+}
