@@ -227,6 +227,109 @@
                         <button type="button" class="btn btn-info">Save</button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>
+                            <a href="#"><u>&lt;Event History&gt;</u></a>
+                        </label>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Event :</label>
+                            <select class="form-control">
+                                <option value="">Event A</option>
+                                <option value="">Event B</option>
+                                <option value="">Event C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <label class="input-group-addon borderless no-background" >Start :</label>
+                            <div class='input-group date' id='datetimepicker4'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <label class="input-group-addon borderless no-background" >End :</label>
+                            <div class='input-group date' id='datetimepicker5'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option value="">Months</option>
+                            <option value="">3 Months</option>
+                            <option value="">6 Months</option>
+                            <option value="">9 Months</option>
+                            <option value="">12 Months</option>
+                            <option value="">18 Months</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-hover">
+                                <thead>
+                                <tr class="success">
+                                    <td class="text-center text-white">Date &amp; Time</td>
+                                    <td class="text-center text-white">Event ID</td>
+                                    <td class="text-center text-white">Event</td>
+                                    <td class="text-center text-white">Status</td>
+                                    <td class="text-center text-white">Start Date</td>
+                                    <td class="text-center text-white">End Date</td>
+                                    <td class="text-center text-white">Comments</td>
+                                    <td class="text-center text-white">By</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="info">
+                                    <td class="text-center success">4 feb 2017 16&#58;10PM</td>
+                                    <td class="text-center success">7678</td>
+                                    <td class="text-center success">Absent (AB)</td>
+                                    <td class="text-center success">Resolved</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Did not present documents</td>
+                                    <td class="text-center success">Yong Hull Lee</td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">1 feb 2017 13&#58;10PM</td>
+                                    <td class="text-center success">7679</td>
+                                    <td class="text-center success">Called In Absent (AC)</td>
+                                    <td class="text-center success">open</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Called in Absent. Sickwith fever</td>
+                                    <td class="text-center success">Sarah Wong</td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">&nbsp;</td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -243,6 +346,12 @@
             });
             $('#datetimepicker3').datetimepicker({
                 format: 'LT'
+            });
+            $('#datetimepicker4').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker5').datetimepicker({
+                format: 'DD MMM YYYY'
             });
         });
 
