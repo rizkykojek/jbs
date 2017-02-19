@@ -127,9 +127,7 @@
                     </div>
                     <div class="col-md-3 text-center">
                         <label>
-                            <span class="glyphicon glyphicon-chevron-left"/>
-                            <a href="#"><u>Kronous Calendar</u></a>
-                            <span class="glyphicon glyphicon-chevron-right"/>
+                            <a href="#"><u>&lt;Kronous Calendar&gt;</u></a>
                         </label>
                     </div>
                     <div class="col-md-3 text-right">
@@ -186,7 +184,6 @@
                                     <td class="text-center success">T</td>
                                 </tr>
                                 <tr>
-                                    <t- class="text-center success">09.30-17.30</t->
                                     <td class="text-center success">09.30-17.30</td>
                                     <td class="text-center success">09.30-17.30</td>
                                     <td class="text-center success">09.30-17.30</td>
@@ -205,10 +202,366 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <a href="#"><u>&lt;Event History&gt;</u></a>
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Event <span class="caret"/>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Event A</a></li>
+                                <li><a href="#">Event B</a></li>
+                                <li><a href="#">Event C</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Months <span class="caret"/>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">3 Months</a></li>
+                                <li><a href="#">6 Months</a></li>
+                                <li><a href="#">9 Months</a></li>
+                                <li><a href="#">12 Months</a></li>
+                                <li><a href="#">18 Months</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-offset-6">
+                                <button type="button" class="btn btn-info">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-hover">
+                                <thead>
+                                <tr class="success">
+                                    <td class="text-center text-white">Date &amp; Time</td>
+                                    <td class="text-center text-white">Event ID</td>
+                                    <td class="text-center text-white">Event</td>
+                                    <td class="text-center text-white">Status</td>
+                                    <td class="text-center text-white">Start Date</td>
+                                    <td class="text-center text-white">End Date</td>
+                                    <td class="text-center text-white">Comments</td>
+                                    <td class="text-center text-white">By</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="info">
+                                    <td class="text-center success">4 feb 2017 16&#58;10PM</td>
+                                    <td class="text-center success">7678</td>
+                                    <td class="text-center success">Absent (AB)</td>
+                                    <td class="text-center success">Resolved</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Did not present documents</td>
+                                    <td class="text-center success">Yong Hull Lee</td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">1 feb 2017 13&#58;10PM</td>
+                                    <td class="text-center success">7679</td>
+                                    <td class="text-center success">Called In Absent (AC)</td>
+                                    <td class="text-center success">open</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Called in Absent. Sickwith fever</td>
+                                    <td class="text-center success">Sarah Wong</td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">&nbsp;</td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <a href="#"><u>&lt;PM History&gt;</u></a>
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Action <span class="caret"/>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action A</a></li>
+                                <li><a href="#">Action B</a></li>
+                                <li><a href="#">Action C</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker4'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Months <span class="caret"/>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">3 Months</a></li>
+                                <li><a href="#">6 Months</a></li>
+                                <li><a href="#">9 Months</a></li>
+                                <li><a href="#">12 Months</a></li>
+                                <li><a href="#">18 Months</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-offset-6">
+                                <button type="button" class="btn btn-info">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-hover">
+                                <thead>
+                                <tr class="success">
+                                    <td class="text-center text-white">Date &amp; Time</td>
+                                    <td class="text-center text-white">Action ID</td>
+                                    <td class="text-center text-white">Action</td>
+                                    <td class="text-center text-white">Start Date</td>
+                                    <td class="text-center text-white">End Date</td>
+                                    <td class="text-center text-white">Comments</td>
+                                    <td class="text-center text-white">By</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="info">
+                                    <td class="text-center success">4 feb 2017 16&#58;10PM</td>
+                                    <td class="text-center success">2044</td>
+                                    <td class="text-center success">2nd Warning</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Issued 2nd Warning Letter</td>
+                                    <td class="text-center success">Yong Hull Lee</td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">4 feb 2017 16&#58;10PM</td>
+                                    <td class="text-center success">2044</td>
+                                    <td class="text-center success">1st Warning</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Issued 1st Warning Letter</td>
+                                    <td class="text-center success">Sarah Wong</td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">&nbsp;</td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <a href="#"><u>&lt;Leave History&gt;</u></a>
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Leave <span class="caret"/>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Leave A</a></li>
+                                <li><a href="#">Leave B</a></li>
+                                <li><a href="#">Leave C</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker5'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker6'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Months <span class="caret"/>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">3 Months</a></li>
+                                <li><a href="#">6 Months</a></li>
+                                <li><a href="#">9 Months</a></li>
+                                <li><a href="#">12 Months</a></li>
+                                <li><a href="#">18 Months</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-offset-6">
+                                <button type="button" class="btn btn-info">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-hover">
+                                <thead>
+                                <tr class="success">
+                                    <td class="text-center text-white">Leave ID</td>
+                                    <td class="text-center text-white">Leave Type</td>
+                                    <td class="text-center text-white">Date Applied</td>
+                                    <td class="text-center text-white">From</td>
+                                    <td class="text-center text-white">To</td>
+                                    <td class="text-center text-white">Status</td>
+                                    <td class="text-center text-white">Action</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="info">
+                                    <td class="text-center success">1123</td>
+                                    <td class="text-center success">Annual Leave (AL)</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Pending Approval</td>
+                                    <td class="text-center success"><a href="#"><u>View</u></a></td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">1124</td>
+                                    <td class="text-center success">Sick Leave (SL)</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">1 feb 2017</td>
+                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">Approved</td>
+                                    <td class="text-center success"><a href="#"><u>View</u></a></td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">&nbsp;</td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                    <td class="text-center success"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-10">
+                        <button type="button" class="btn btn-info">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <footer th:replace="fragments/footer :: footer"/>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker3').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker4').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker5').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker6').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+        });
+    </script>
 </body>
 </html>
