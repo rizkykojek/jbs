@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"/>
+
+<body>
+    <nav th:replace="fragments/header :: header"/>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="panel-title">Add Event</h3>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <label><u>Quick Links</u></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-8">
+                        <a href="#">&#9679; Employee Summary</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-6">
+                        <a href="#">&#9679; Add Leave Record</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#">&#9679; Event Reports</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Name : Joe Blog</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Employee ID : 123456</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Department : Finace</label>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#">&#9679; Add PM</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#">&#9679; PM Report</a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body body-background">
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Category :</label>
+                            <select class="form-control">
+                                <option value="">Attendance</option>
+                                <option value="">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label class="input-group-addon borderless no-background">Event :</label>
+                            <select class="form-control">
+                                <option value="">AC - Absent Call In</option>
+                                <option value="">AB - Absent</option>
+                                <option value="">AA - Authorized Absence</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label class="input-group-addon borderless no-background">Status :</label>
+                            <select class="form-control">
+                                <option value="">Resolved</option>
+                                <option value="">Unresolved</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-4">
+                        <div class="input-group" style="width: 100%">
+                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Start Date :</label>
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group" style="width: 100%">
+                            <label class="input-group-addon borderless no-background">End Date :</label>
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group" style="width: 100%">
+                            <label class="input-group-addon borderless no-background">Time :</label>
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label>Comments:</label>
+                            <textarea class="form-control" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row" style="margin-bottom: 20px">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label class="input-group-addon borderless no-background">EAP :</label>
+                                    <select class="form-control">
+                                        <option value="">Not Applicable</option>
+                                        <option value="">Yes, Referred</option>
+                                        <option value="">Yes, JBS EAP</option>
+                                        <option value="">No, Declined</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>EAP Comments:</label>
+                                    <textarea class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Requested Documentation :</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""/>MC</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""/>Specialist Clearance</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""/>Start Declaration</label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""/>Receipt</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""/>Funeral Notice</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""/>Penalty Notice</label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""/>Other</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment Type :</label>
+                            <select class="form-control">
+                                <option value="">Medical Certificate</option>
+                                <option value="">Stat Declaration</option>
+                                <option value="">Receipt</option>
+                                <option value="">Funeral Notice</option>
+                                <option value="">Penalty</option>
+                                <option value="">Notice</option>
+                                <option value="">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Browse&hellip; <input type="file" style="display: none;" multiple="true"/>
+                                </span>
+                            </label>
+                            <input type="text" class="form-control" readonly="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c; color: white">
+                            <div class="row text-center">
+                                <label> UA(4)  |  AB(3)  |  PC(3)  |  PCN(2) </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-md-offset-4">
+                        <button type="button" class="btn btn-info">Close</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"/>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker3').datetimepicker({
+                format: 'LT'
+            });
+        });
+
+        $(function() {
+            // We can attach the `fileselect` event to all file inputs on the page
+            $(document).on('change', ':file', function() {
+                var input = $(this),
+                        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [numFiles, label]);
+            });
+
+            // We can watch for our custom `fileselect` event like this
+            $(document).ready( function() {
+                $(':file').on('fileselect', function(event, numFiles, label) {
+                    var input = $(this).parents('.input-group').find(':text'),
+                            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                    if( input.length ) {
+                        input.val(log);
+                    } else {
+                        if( log ) alert(log);
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

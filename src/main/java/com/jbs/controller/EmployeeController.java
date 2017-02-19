@@ -20,4 +20,9 @@ public class EmployeeController {
         return "summary";
     }
 
+    @RequestMapping(value = "/event", method = RequestMethod.GET)
+    public String getEvent() {
+        return "event";
+    }
+
 }
