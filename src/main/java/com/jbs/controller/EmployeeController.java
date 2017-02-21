@@ -25,4 +25,8 @@ public class EmployeeController {
         return "event";
     }
 
+    @RequestMapping(value = "/performance", method = RequestMethod.GET)
+    public String getPerformance() {
+        return "performance";
+    }
 }
