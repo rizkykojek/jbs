@@ -189,7 +189,9 @@
                                 <tbody>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>1</td>
-                                    <td><a href="#" th:href="@{/summary}">Derrick Stewart</a></td>
+                                    <td>
+                                        <a href="#" data-toggle="popover">Derrick Stewart</a>
+                                    </td>
                                     <td>230945</td>
                                     <td>Packing Loin Lvl7</td>
                                     <td>OPS AND PROCESSES</td>
@@ -480,5 +482,16 @@
     </div>
 
     <footer th:replace="fragments/footer :: footer"/>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover({
+                content : '<a href="#" th:href="@{/summary}">Summary</a> ' +
+                    '<br/> <a href="#" th:href="@{/event}">Event</a> ' +
+                    '<br/> <a href="#" th:href="@{/performance}">Performance</a>',
+                html: true
+            });
+        });
+    </script>
 </body>
 </html>
