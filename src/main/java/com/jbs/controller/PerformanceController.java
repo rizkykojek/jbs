@@ -26,7 +26,7 @@ public class PerformanceController {
         try {
             DefaultResourceLoader loader = new DefaultResourceLoader();
 
-            Docx docx = new Docx(loader.getResource("classpath:static/doc/letter.docx").getInputStream());
+            Docx docx = new Docx(loader.getResource("classpath:com/jbs/doc/letter.docx").getInputStream());
             docx.setVariablePattern(new VariablePattern("${", "}"));
 
             // fill template
@@ -34,7 +34,7 @@ public class PerformanceController {
             docx.fillTemplate(variables);
 
             // save filled .docx file
-            File tempFile = File.createTempFile("tmp",".docx", new File (loader.getClassLoader().getResource("static/doc").getPath()));
+            File tempFile = File.createTempFile("tmp",".docx", new File (loader.getClassLoader().getResource("com/jbs/doc/").getPath()));
             docx.save(new FileOutputStream(tempFile, false));
 
             response.setContentType("application/octet-stream");
