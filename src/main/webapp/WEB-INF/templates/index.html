@@ -516,11 +516,11 @@
     <script>
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover({
-                content : '<a href="#" th:href="@{/summary}">Employee Summary</a> ' +
-                    '<br/> <a href="#" th:href="@{/event}">Add Event</a> ' +
-                    '<br/> <a href="#" th:href="@{/performance}">Add PM</a>'+
-                    '<br/> <a href="#" th:href="@{/}">Employee Central</a>'+
-                    '<br/> <a href="#" th:href="@{/}">Add Leave Record</a>',
+                content : '<a href="/summary">Employee Summary</a> ' +
+                    '<br/> <a href="/event">Add Event</a> ' +
+                    '<br/> <a href="/performance">Add PM</a>'+
+                    '<br/> <a href="#">Employee Central</a>'+
+                    '<br/> <a href="#">Add Leave Record</a>',
                 html: true
             });
         });

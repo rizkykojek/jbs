@@ -21,7 +21,7 @@ import java.util.Date;
 @Controller
 public class PerformanceController {
 
-    @RequestMapping(value = "/generate_letter", method = RequestMethod.GET)
+    @RequestMapping(value = "/performance/generate_letter", method = RequestMethod.GET)
     public void generateLetter(HttpServletResponse response) {
         try {
             DefaultResourceLoader loader = new DefaultResourceLoader();
