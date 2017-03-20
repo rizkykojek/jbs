@@ -1,8 +1,12 @@
 package com.jbs.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.init.DataSourceInitializer;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,7 +21,21 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages={"com.jbs"})
 @EnableTransactionManagement
 public class HibernateConfig {
-	 
+
+	@Value("classpath:com/jbs/sql/initial-data.sql")
+	private Resource dataScript;
+
+	@Bean
+	public DataSourceInitializer dataSourceInitializer(final DataSource dataSource) {
+		final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScript(dataScript);
+
+		final DataSourceInitializer initializer = new DataSourceInitializer();
+		initializer.setDataSource(dataSource);
+		initializer.setDatabasePopulator(populator);
+		return initializer;
+	}
+
 	@Bean
 	public DataSource getDataSource() {
 		final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
