@@ -3,33 +3,28 @@
 <head th:replace="fragments/head :: head"/>
 
 <body>
-    <nav th:replace="fragments/header :: header"/>
+    <!-- <nav th:replace="fragments/header :: header"/> -->
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="panel-title">Add Event</h3>
+     	    <div class="panel-heading">
+    	    	<table border="0" width="100%">
+    	    		<tr><td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Add Performance Management</b></h3></td>
+    	    		<td width="20%">                
+    	    		<form class="form-inline" style="margin-top: 1px">
+                    <div class="form-group">
+                        <label>Search:</label>
+                        <input type="text" class="form-control" style="width: 50%"/>
+                        <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <label><u>Quick Links</u></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-8">
-                        <a href="#">&#9679; Employee Summary</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-6">
-                        <a href="#">&#9679; Add Leave Record</a>
-                    </div>
-                    <div class="col-md-2">
-                        <a href="#">&#9679; Event Reports</a>
-                    </div>
-                </div>
-                <div class="row">
+                </form>
+                </td></tr>
+    	    	</table>
+            </div>             
+            <div class="panel-body body-background">
+
+
+               <div class="row">
                     <div class="col-md-2">
                         <label>Name : Joe Blog</label>
                     </div>
@@ -40,14 +35,67 @@
                         <label>Department : Finace</label>
                     </div>
                     <div class="col-md-2">
-                        <a href="#">&#9679; Add PM</a>
+                        <label>Department : Finace</label>
                     </div>
-                    <div class="col-md-2">
-                        <a href="#">&#9679; PM Report</a>
+                    <div class="col-md-4">
+
+				<div class="well" style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white">
+				<div class="row text-center">
+					<label style="color: black"><u>Quick Links</u></label>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Event Report</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" th:href="@{/event}" style="color: black">Add Event</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">PM Report</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" th:href="@{/performance}" style="color: black">Add PM</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Employee Central</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					&nbsp;
+				</div>
+				<!-- <div style="margin-left: -40px">
+				<table class="table table-condensed">
+					<tr>
+						<td class="borderless">
+							<ul>
+							<li><a href="#" style="color: black">Add Leae</a></li>
+							<li><a href="#" th:href="@{/event}" style="color: black">Add Event</a></li>
+							<li><a href="#" th:href="@{/performance}" style="color: black">Add PM</a></li>
+							</ul>
+						</td>
+						<td class="borderless">
+							<ul>
+							<li><a href="#" style="color: black">Event Report</a></li>
+							<li><a href="#" style="color: black">PM Report</a></li>
+							<li><a href="#" style="color: black">Employee Central</a></li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+				</div>-->
+			</div>
+
+
                     </div>
                 </div>
-            </div>
-            <div class="panel-body body-background">
+                
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col-md-4">
                         <div class="input-group">
@@ -56,6 +104,16 @@
                                 <option value="">Abandonment of employment</option>
                                 <option value="">Warning in lieu of termination</option>
                                 <option value="">Re-confirmation of final</option>
+                                <option value="">Supervisor&rsquo;s report</option>
+                                <option value="">Counselling session</option>
+                                <option value="">Written counselling</option>
+                                <option value="">Suspension</option>
+                                <option value="">1st warming</option>
+                                <option value="">2nd warning</option>
+                                <option value="">Final warning</option>
+                                <option value="">Attendance monitoring</option>
+                                <option value="">Written response</option>
+                                <option value="">Stood Aside</option>
                             </select>
                         </div>
                     </div>
@@ -63,9 +121,24 @@
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background">Category :</label>
                             <select class="form-control">
+                                <option value="">Complaints Policy</option>
                                 <option value="">OCP – Communication Policy</option>
                                 <option value="">OFS – Food Safety Policy</option>
                                 <option value="">OPP – Privacy Policy</option>
+                                <option value="">OTP – Training Policy</option>
+                                <option value="">ODP – Discrimination Policy</option>
+                                <option value="">OWS – Workspace Safety Policy</option>
+                                <option value="">OEP – Environment Policy</option>
+                                <option value="">OEC – Employment Contract</option>
+                                <option value="">Standard Terms and Conditions</option>
+                                <option value="">OHP – Harassment Policy</option>
+                                <option value="">Trade practices</option>
+                                <option value="">Code of conduct</option>
+                                <option value="">Contact of interest</option>
+                                <option value="">Alcohol and other drugs</option>
+                                <option value="">ID card policy</option>
+                                <option value="">Animal welfare</option>
+                                <option value="">Workplace rehab</option>
                             </select>
                         </div>
                     </div>
@@ -86,8 +159,20 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Template :</label>
                             <select class="form-control">
                                 <option value="">Abandonment of employment</option>
-                                <option value="">Warning in lieu of terminatio</option>
+                                <option value="">Warning in lieu of termination</option>
+                                <option value="">Warning in lieu of termination – Letter 1</option>
+                                <option value="">Warning in lieu of termination – Letter 2</option>
+                                <option value="">Warning in lieu of termination – Letter 3</option>
                                 <option value="">Re-confirmation of final</option>
+                                <option value="">Supervisor�s report</option>
+                                <option value="">Counselling session</option>
+                                <option value="">Written counselling</option>
+                                <option value="">Suspension </option>
+                                <option value="">1st warming </option>
+                                <option value="">2nd warning </option>
+                                <option value="">Final warning</option>
+                                <option value="">Attendance monitoring</option>
+                                <option value="">Written response</option>
                             </select>
                         </div>
                     </div>
@@ -214,11 +299,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 col-md-offset-4">
-                        <a href="#" th:href="@{/summary}"><button type="button" class="btn btn-info">Close</button></a>
+                     <div class="col-md-2  col-md-offset-4">
+                        <button type="button" class="btn btn-info">Save</button>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-info">Save</button>
+                        <a href="#" th:href="@{/}"><button type="button" class="btn btn-info">Close</button></a>
                     </div>
                 </div>
                 <div class="row">
@@ -234,9 +319,19 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Action :</label>
                             <select class="form-control">
                                 <option value=""></option>
-                                <option value="">Action A</option>
-                                <option value="">Action B</option>
-                                <option value="">Action C</option>
+                                <option value="">Abandonment of employment</option>
+                                <option value="">Warning in lieu of termination</option>
+                                <option value="">Re-confirmation of final</option>
+                                <option value="">Supervisor&rsquo;s report</option>
+                                <option value="">Counselling session</option>
+                                <option value="">Written counselling</option>
+                                <option value="">Suspension</option>
+                                <option value="">1st warming</option>
+                                <option value="">2nd warning</option>
+                                <option value="">Final warning</option>
+                                <option value="">Attendance monitoring</option>
+                                <option value="">Written response</option>
+                                <option value="">Stood Aside</option>
                             </select>
                         </div>
                     </div>
@@ -315,6 +410,43 @@
                                     <td class="text-center success"></td>
                                     <td class="text-center success"></td>
                                     <td class="text-center success"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>
+                            <a href="#"><u>&lt;Audit&gt;</u></a>
+                        </label>
+                    </div>
+                </div>
+				<div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-hover">
+                                <thead>
+                                <tr class="success">
+                                    <td class="text-center text-white">Date &amp; Time</td>
+                                    <td class="text-center text-white">Fields Updated</td>
+                                    <td class="text-center text-white">Comments</td>
+                                    <td class="text-center text-white">By</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="info">
+                                    <td class="text-center success">3 Mar 2017 16&#58;10PM</td>
+                                    <td class="text-left success">Attendees Updated. Interpreter changed to Yes</td>
+                                    <td class="text-left success">First written warning</td>
+                                    <td class="text-left success">Brenda Wong</td>
+                                </tr>
+                                <tr class="info">
+                                    <td class="text-center success">2 Mar 2017 09&#58;05AM</td>
+                                    <td class="text-left success">Action: First warning. Category: Discipline</td>
+                                    <td class="text-left success">Called in absent, will be back 4 Feb. Sick with yellow fever.</td>
+                                    <td class="text-left success">Carol Lee</td>
                                 </tr>
                                 </tbody>
                             </table>

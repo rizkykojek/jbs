@@ -3,18 +3,35 @@
 <head th:replace="fragments/head :: head"/>
 
 <body>
-    <nav th:replace="fragments/header :: header"/>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <label>
-                    Welcome Tito <br/>
-                    Date : 06 February 2017
-                </label>
+    <div class="container-fluid">
+    	 <div class="panel panel-default">
+    	    <div class="panel-heading">
+    	    	<table border="0" width="100%">
+    	    		<tr><td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Summary Screen</b></h3></td>
+    	    		<td width="20%">                
+    	    		<form class="form-inline" style="margin-top: 1px">
+                    <div class="form-group">
+                        <label>Search:</label>
+                        <input type="text" class="form-control" style="width: 50%"/>
+                        <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
+                    </div>
+                </form>
+                </td></tr>
+    	    	</table>
             </div>
-            <div class="col-md-2">
-                <select class="form-control">
+             <div class="panel-body body-background">
+             <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+             	<tr>
+             		<td>
+             		<div class="row">
+            			<div class="col-md-3">
+                			<label>
+                    			Welcome HR Admin <br/>
+                    			Date : 17 March 2017
+                			</label>
+            			</div>
+            			<div class="col-md-2">
+                			<select class="form-control">
                     <option value="">Department</option>
                     <option value="">ADELAIDE</option>
                     <option value="">BEEF BUYERS</option>
@@ -104,22 +121,14 @@
             <div class="col-md-1">
                 <button type="button" class="btn btn-link" style="margin-left: -10px">Clear Filters</button>
             </div>
-            <div class="col-md-3">
-                <form class="form-inline" style="margin-top: 1px">
-                    <div class="form-group">
-                        <label>Search:</label>
-                        <input type="text" class="form-control" style="width: 50%"/>
-                        <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
-                    </div>
-                </form>
-            </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-5">
-                <div class="row">
+       <div class="row">
+            <div class="col-md-6">
+               <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+               	<tr>
+               		<td>
                     <div class="col-md-8">
-                        <h4>HR Clearance</h4>
+                        <h4><b>HR Clearance</b></h4>
                     </div>
                     <div class="col-md-4">
                         <select class="form-control">
@@ -169,10 +178,11 @@
                             <option value="">WACOL</option>
                             <option value="">WORKERS COMP</option>
                         </select>
-                    </div>
-                </div>
-
-                <div class="row">
+                    </div>             		
+               		</td>
+               	</tr>
+               	<tr>
+               		<td>
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-responsive table-condensed table-hover">
@@ -187,10 +197,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="warning" style="font-size: 12px">
+                                <tr class="danger" style="font-size: 12px">
                                     <td>1</td>
                                     <td>
-                                        <a href="#" data-toggle="popover">Derrick Stewart</a>
+                                        <a href="#" data-toggle="popover"><b>Derrick Stewart</b></a>
                                     </td>
                                     <td>230945</td>
                                     <td>Packing Loin Lvl7</td>
@@ -199,15 +209,15 @@
                                 </tr>
                                 <tr class="danger"  style="font-size: 12px">
                                     <td>2</td>
-                                    <td>Alison Bennett</td>
+                                    <td><a href="#" id="pop1"><b>Alison Bennett</b></a></td>
                                     <td>610700</td>
                                     <td>Analyst Programmer (Net)</td>
                                     <td>SYDNEY</td>
                                     <td>AM</td>
                                 </tr>
-                                <tr class="warning" style="font-size: 12px">
+                                <tr class="danger" style="font-size: 12px">
                                     <td>3</td>
-                                    <td>Janice Ferguson</td>
+                                    <td><b>Janice Ferguson</b></td>
                                     <td>61368</td>
                                     <td>Packing Legs Lvl7</td>
                                     <td>PRIME CITY</td>
@@ -215,15 +225,15 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>4</td>
-                                    <td>Sammy Day</td>
+                                    <td><b>Sammy Day</b></td>
                                     <td>231605</td>
                                     <td>Trades Assistant Maint</td>
                                     <td>ROCKHAMPTON</td>
                                     <td>SA</td>
                                 </tr>
-                                <tr class="danger" style="font-size: 12px">
+                                <tr class="warning" style="font-size: 12px">
                                     <td>5</td>
-                                    <td>Clifton Ball</td>
+                                    <td><b>Clifton Ball</b></td>
                                     <td>300110</td>
                                     <td>Training Officer HR</td>
                                     <td>TOWNSVILLE</td>
@@ -231,7 +241,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>6</td>
-                                    <td>Brian Huff</td>
+                                    <td><b>Brian Huff</b></td>
                                     <td>230687</td>
                                     <td>Training Lvl7</td>
                                     <td>ROCKHAMPTON</td>
@@ -239,7 +249,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>7</td>
-                                    <td>Josh Newman</td>
+                                    <td><b>Josh Newman</b></td>
                                     <td>1001575</td>
                                     <td>Cryoval Operator Lvl7</td>
                                     <td>PRODUCTION STREET</td>
@@ -247,7 +257,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>8</td>
-                                    <td>Bradford Montgomery</td>
+                                    <td><b>Bradford Montgomery</b></td>
                                     <td>212812</td>
                                     <td>Engineering Supervisor Bacon Packaging</td>
                                     <td>WORKERS COMP</td>
@@ -255,7 +265,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>9</td>
-                                    <td>Rosa Baldwin</td>
+                                    <td><b>Rosa Baldwin</b></td>
                                     <td>230935</td>
                                     <td>Rejects Lvl7</td>
                                     <td>WORKERS COMP</td>
@@ -263,7 +273,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>10</td>
-                                    <td>Kurt Graves</td>
+                                    <td><b>Kurt Graves</b></td>
                                     <td>300444</td>
                                     <td>Engineering Supervisor Salami/Slice Pack</td>
                                     <td>WORKERS COMP</td>
@@ -274,13 +284,22 @@
                             </table>
                         </div>
                     </div>
-                </div>
+               		</td>
+               	</tr>
+               </table>
+                
+                
+                
+
+                
             </div>
 
-            <div class="col-md-5">
-                <div class="row">
+            <div class="col-md-6">
+               <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+               <tr>
+               	<td>
                     <div class="col-md-8">
-                        <h4>Absent</h4>
+                        <h4><b>Absent</b></h4>
                     </div>
                     <div class="col-md-4">
                         <select class="form-control">
@@ -331,9 +350,10 @@
                             <option value="">WORKERS COMP</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="row">
+               	</td>
+               </tr>
+               <tr>
+               	<td>
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-condensed table-hover">
@@ -348,25 +368,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="warning" style="font-size: 12px">
+                                <tr class="info" style="font-size: 12px">
                                     <td>1</td>
-                                    <td>Dale Higgins</td>
+                                    <td><b>Dale Higgins</b></td>
                                     <td>300599</td>
                                     <td>Site Accountant - Qld</td>
                                     <td>ADELAIDE</td>
                                     <td>AC</td>
                                 </tr>
-                                <tr class="warning" style="font-size: 12px">
+                                <tr class="info" style="font-size: 12px">
                                     <td>2</td>
-                                    <td>Kathryn George</td>
+                                    <td><b>Kathryn George</b></td>
                                     <td>608961</td>
                                     <td>QDC L2 Production</td>
                                     <td>BRISBANE</td>
                                     <td>AB</td>
                                 </tr>
-                                <tr class="success" style="font-size: 12px">
+                                <tr class="info" style="font-size: 12px">
                                     <td>3</td>
-                                    <td>Dianna Holloway</td>
+                                    <td><b>Dianna Holloway</b></td>
                                     <td>231631</td>
                                     <td>Helpdesk Officer</td>
                                     <td>DEVELOPMENT</td>
@@ -374,7 +394,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>4</td>
-                                    <td>Wilbur Arnold</td>
+                                    <td><b>Wilbur Arnold</b></td>
                                     <td>400109</td>
                                     <td>Storeman</td>
                                     <td>FOODPARTNERS</td>
@@ -382,7 +402,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>5</td>
-                                    <td>Shaun Morales</td>
+                                    <td><b>Shaun Morales</b></td>
                                     <td>611860</td>
                                     <td>Weighbridge Clerk</td>
                                     <td>HR SYSTEMS</td>
@@ -390,15 +410,15 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>6</td>
-                                    <td>Willis Phillips</td>
+                                    <td><b>Willis Phillips</b></td>
                                     <td>591001</td>
                                     <td>State Manager Retail Qld</td>
                                     <td>INFRASTRUCTURE</td>
                                     <td>AC</td>
                                 </tr>
-                                <tr class="success" style="font-size: 12px">
+                                <tr class="warning" style="font-size: 12px">
                                     <td>7</td>
-                                    <td>Floyd French</td>
+                                    <td><b>Floyd French</b></td>
                                     <td>609646</td>
                                     <td>President JBS Australia</td>
                                     <td></td>
@@ -406,15 +426,15 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>8</td>
-                                    <td>Charlie Reese</td>
+                                    <td><b>Charlie Reese</b></td>
                                     <td>300645</td>
                                     <td>Packing Legs Lvl7</td>
                                     <td>LEGAL</td>
                                     <td>AA</td>
                                 </tr>
-                                <tr class="success" style="font-size: 12px">
+                                <tr class="warning" style="font-size: 12px">
                                     <td>9</td>
-                                    <td>Erin Brown</td>
+                                    <td><b>Erin Brown</b></td>
                                     <td>300676</td>
                                     <td>Feed Team Leading Hand Lvl1</td>
                                     <td>OPS AND PROCESSES</td>
@@ -422,7 +442,7 @@
                                 </tr>
                                 <tr class="warning" style="font-size: 12px">
                                     <td>10</td>
-                                    <td>Julius Kelley</td>
+                                    <td><b>Julius Kelley</b></td>
                                     <td>231432</td>
                                     <td>Packing Racks Lvl7</td>
                                     <td>OPS AND PROCESSES</td>
@@ -433,51 +453,61 @@
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
+               	</td>
+               </tr>
+				</table>
+                
 
-            <div class="col-md-2">
-                <div class="well" style="background-color: #122b40 !important; border-color: #2aabd2; color: white">
-                    <div class="row text-center">
-                        <label style="color: yellow"><u>Quick Links</u></label>
-                    </div>
-                    <ul style="margin-left: -35px">
-                        <li><a href="#" style="color: white">Suitable Duties</a></li>
-                        <!-- <li><a href="#" style="color: white">Add Task</a></li>
-                        <li><a href="#" style="color: white">Service Anniversary</a></li>
-                        <li><a href="#" style="color: white">Birthdays</a></li> -->
-                    </ul>
-                </div>
-                <div class="well" style="background-color: #3c763d !important; border-color: #3e8f3e;">
-                    <div class="row text-center">
-                        <label style="color: white"><u>Trends</u></label>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">3 AB</button>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">WC/MC</button>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">UA | UA</button>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">3 days</button>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">UA | PH</button>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">LS | LE</button>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">Off Day vs Extra Day</button>
-                    </div>
-                    <div class="row" style="padding-bottom: 5px;">
-                        <button type="button" class="btn btn-warning">Overtime</button>
-                    </div>
-                </div>
+                
             </div>
+        </div>      		
+             		</td>
+             		<td width="20%" align="center" valign="top">
+             		<table border="0" width="100%">
+             			<tr>
+             				<td>
+             		   			<div class="col-md-8 col-md-offset-2">
+                					<div class="well well-sm" style="background-color: #cce6ff !important; border-color: #2aabd2; color: white">
+                    					<div class="row text-center">
+                        					<label style="color: black"><u>Quick Links</u></label>
+                    					</div>
+                    			
+                        				<a href="#" style="color: black" th:href="@{/duties}" th:target="_blank">&bull;Suitable Duties</a>
+                					</div>
+            					</div>
+             				</td>
+             			</tr>
+             			<tr>
+             				<td>
+             		   <div class="col-md-8 col-md-offset-2">
+            			<div class="well well-sm" style="background-color: #cce6ff !important; border-color: #3e8f3e;">
+                    		<div class="row text-center">
+                        		<label style="color: black"><u>Trends</u></label>
+                    		</div>
+             				<table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+             					<tr>
+             						<td><a href="#" th:href="@{/wcmc}" th:target="_blank"><button type="button" class="btn btn-success">WC/MC</button></a></td>
+             					</tr>
+             					<tr>
+             						<td><button type="button" class="btn btn-success">UA | PA</button></td>
+             					</tr>
+             				    <tr>
+             						<td><button type="button" class="btn btn-success">UA | PH</button></td>
+             					</tr>
+             				</table>
+                		</div>
+                		</div>
+             				</td>
+             			</tr>
+             		</table>
+            			
+             		</td>
+             	</tr>
+             </table>
+              
+
+        
+        </div>
         </div>
     </div>
 
@@ -486,12 +516,15 @@
     <script>
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover({
-                content : '<a href="#" th:href="@{/summary}">Summary</a> ' +
-                    '<br/> <a href="#" th:href="@{/event}">Event</a> ' +
-                    '<br/> <a href="#" th:href="@{/performance}">Performance</a>',
+                content : '<a href="#" th:href="@{/summary}">Employee Summary</a> ' +
+                    '<br/> <a href="#" th:href="@{/event}">Add Event</a> ' +
+                    '<br/> <a href="#" th:href="@{/performance}">Add PM</a>'+
+                    '<br/> <a href="#" th:href="@{/}">Employee Central</a>'+
+                    '<br/> <a href="#" th:href="@{/}">Add Leave Record</a>',
                 html: true
             });
         });
+        
     </script>
 </body>
 </html>

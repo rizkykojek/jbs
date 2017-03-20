@@ -25,6 +25,16 @@ public class EmployeeController {
         return "event";
     }
 
+    @RequestMapping(value = "/duties", method = RequestMethod.GET)
+    public String getDuties() {
+        return "duties";
+    }
+
+    @RequestMapping(value = "/wcmc", method = RequestMethod.GET)
+    public String getWcmc() {
+        return "wcmc";
+    }
+
     @RequestMapping(value = "/performance", method = RequestMethod.GET)
     public String getPerformance() {
         return "performance";

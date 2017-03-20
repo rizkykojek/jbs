@@ -3,33 +3,27 @@
 <head th:replace="fragments/head :: head"/>
 
 <body>
-    <nav th:replace="fragments/header :: header"/>
+    <!-- <nav th:replace="fragments/header :: header"/>-->
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="panel-title">Add Event</h3>
+    	    <div class="panel-heading">
+    	    	<table border="0" width="100%">
+    	    		<tr><td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Add Event</b></h3></td>
+    	    		<td width="20%">                
+    	    		<form class="form-inline" style="margin-top: 1px">
+                    <div class="form-group">
+                        <label>Search:</label>
+                        <input type="text" class="form-control" style="width: 50%"/>
+                        <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <label><u>Quick Links</u></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-8">
-                        <a href="#">&#9679; Employee Summary</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-6">
-                        <a href="#">&#9679; Add Leave Record</a>
-                    </div>
-                    <div class="col-md-2">
-                        <a href="#">&#9679; Event Reports</a>
-                    </div>
-                </div>
-                <div class="row">
+                </form>
+                </td></tr>
+    	    	</table>
+            </div>            
+            <div class="panel-body body-background">
+            
+               <div class="row">
                     <div class="col-md-2">
                         <label>Name : Joe Blog</label>
                     </div>
@@ -40,14 +34,66 @@
                         <label>Department : Finace</label>
                     </div>
                     <div class="col-md-2">
-                        <a href="#">&#9679; Add PM</a>
+                        <label>Department : Finace</label>
                     </div>
-                    <div class="col-md-2">
-                        <a href="#">&#9679; PM Report</a>
+                    <div class="col-md-4">
+
+				<div class="well" style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white">
+				<div class="row text-center">
+					<label style="color: black"><u>Quick Links</u></label>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Event Report</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" th:href="@{/event}" style="color: black">Add Event</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">PM Report</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" th:href="@{/performance}" style="color: black">Add PM</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Employee Central</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					&nbsp;
+				</div>
+				<!-- <div style="margin-left: -40px">
+				<table class="table table-condensed">
+					<tr>
+						<td class="borderless">
+							<ul>
+							<li><a href="#" style="color: black">Add Leae</a></li>
+							<li><a href="#" th:href="@{/event}" style="color: black">Add Event</a></li>
+							<li><a href="#" th:href="@{/performance}" style="color: black">Add PM</a></li>
+							</ul>
+						</td>
+						<td class="borderless">
+							<ul>
+							<li><a href="#" style="color: black">Event Report</a></li>
+							<li><a href="#" style="color: black">PM Report</a></li>
+							<li><a href="#" style="color: black">Employee Central</a></li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+				</div>-->
+			</div>
+
+
                     </div>
-                </div>
-            </div>
-            <div class="panel-body body-background">
+                </div>    
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col-md-4">
                         <div class="input-group">
@@ -62,9 +108,34 @@
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background">Event :</label>
                             <select class="form-control">
-                                <option value="">AC - Absent Call In</option>
-                                <option value="">AB - Absent</option>
-                                <option value="">AA - Authorized Absence</option>
+								<option value=""></option>
+                                <option value="">Absent Call In</option>
+                                <option value="">Absent</option>
+                                <option value="">Authorised Absence</option>
+                                <option value="">Leave of Absence</option>
+                                <option value="">Missed Swipe</option>
+                                <option value="">Stood Down</option>
+                                <option value="">Started Late</option>
+                                <option value="">Unauthorised Absence</option>
+                                <option value="">Went Home</option>
+                                <option value="">Compassionate Leave</option>
+                                <option value="">Annual Leave</option>
+                                <option value="">Leave Maternity</option>
+                                <option value="">Leave Paternity</option>
+                                <option value="">Long Service Leave</option>
+                                <option value="">Personal/Carer's Leave - with cert</option>
+                                <option value="">Personal/Carer's Leave - without cert</option>
+                                <option value="">Lost Card</option>
+                                <option value="">Breathalyser Test - All Clear (Less than 0.05%)</option>
+                                <option value="">Breathalyser Test - Positive (0.05% or greater)</option>
+                                <option value="">Drug Test - All Clear</option>
+                                <option value="">Drug Test - Confirmed Positive</option>
+                                <option value="">Drug Test - Non Negative</option>
+                                <option value="">Medical Certificate</option>
+                                <option value="">Suitable Duties in the Team</option>
+                                <option value="">Suitable Duties Above the Team</option>
+                                <option value="">Grievance</option>
+                                <option value="">File Note</option>
                             </select>
                         </div>
                     </div>
@@ -136,8 +207,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>EAP Comments:</label>
+                                <div class="input-group">
+                                    <label class="input-group-addon borderless no-background">EAP Comments:</label>
                                     <textarea class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
@@ -165,7 +236,7 @@
                             <label><input type="checkbox" value=""/>Start Declaration</label>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="checkbox">
                             <label><input type="checkbox" value=""/>Receipt</label>
                         </div>
@@ -220,12 +291,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 col-md-offset-4">
-                        <a href="#" th:href="@{/summary}"><button type="button" class="btn btn-info">Close</button></a>
-                    </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2  col-md-offset-4">
                         <button type="button" class="btn btn-info">Save</button>
                     </div>
+                    <div class="col-md-2">
+                        <a href="#" th:href="@{/}"><button type="button" class="btn btn-info">Close</button></a>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -239,9 +311,33 @@
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Event :</label>
                             <select class="form-control">
-                                <option value="">Event A</option>
-                                <option value="">Event B</option>
-                                <option value="">Event C</option>
+                                <option value="">Absent Call In</option>
+                                <option value="">Absent</option>
+                                <option value="">Authorised Absence</option>
+                                <option value="">Leave of Absence</option>
+                                <option value="">Missed Swipe</option>
+                                <option value="">Stood Down</option>
+                                <option value="">Started Late</option>
+                                <option value="">Unauthorised Absence</option>
+                                <option value="">Went Home</option>
+                                <option value="">Compassionate Leave</option>
+                                <option value="">Annual Leave</option>
+                                <option value="">Leave Maternity</option>
+                                <option value="">Leave Paternity</option>
+                                <option value="">Long Service Leave</option>
+                                <option value="">Personal/Carer's Leave - with cert</option>
+                                <option value="">Personal/Carer's Leave - without cert</option>
+                                <option value="">Lost Card</option>
+                                <option value="">Breathalyser Test - All Clear (Less than 0.05%)</option>
+                                <option value="">Breathalyser Test - Positive (0.05% or greater)</option>
+                                <option value="">Drug Test - All Clear</option>
+                                <option value="">Drug Test - Confirmed Positive</option>
+                                <option value="">Drug Test - Non Negative</option>
+                                <option value="">Medical Certificate</option>
+                                <option value="">Suitable Duties in the Team</option>
+                                <option value="">Suitable Duties Above the Team</option>
+                                <option value="">Grievance</option>
+                                <option value="">File Note</option>
                             </select>
                         </div>
                     </div>

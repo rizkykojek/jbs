@@ -3,12 +3,23 @@
 <head th:replace="fragments/head :: head"/>
 
 <body>
-    <nav th:replace="fragments/header :: header"/>
+    <!-- <nav th:replace="fragments/header :: header"/> -->
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Employee Summary</h3>
+    	    <div class="panel-heading">
+    	    	<table border="0" width="100%">
+    	    		<tr><td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Employee Screen</b></h3></td>
+    	    		<td width="20%">                
+    	    		<form class="form-inline" style="margin-top: 1px">
+                    <div class="form-group">
+                        <label>Search:</label>
+                        <input type="text" class="form-control" style="width: 50%"/>
+                        <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
+                    </div>
+                </form>
+                </td></tr>
+    	    	</table>
             </div>
             <div class="panel-body body-background">
                 <div class="row">
@@ -55,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c;">
                             <div class="row text-center">
@@ -65,73 +76,118 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="well" style="background-color: #5bc0de !important; border-color: #2e6da4;">
+                    <div class="col-md-8">
+                        <div class="well" style="background-color: #c3dbef !important; border-color: #2e6da4;">
+                            <div class="row text-center">                            
+                            <div class="col-md-4">
                             <div class="row text-center">
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <button type="button" class="btn btn-default btn-circle btn-lg">20</button>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <button type="button" class="btn btn-default btn-circle btn-lg">2</button>
                                 </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-default btn-circle btn-lg">7</button>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-default btn-circle btn-lg">1</button>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-default btn-circle btn-lg">3</button>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-default btn-circle btn-lg">12</button>
-                                </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <button type="button" class="btn btn-default btn-circle btn-lg">7</button>
                                 </div>
                             </div>
                             <div class="row text-center">
-                                <div class="col-md-2">
-                                    <label class="small">Planned Leave</label>
+                                <div class="col-md-4">
+                                    <label style="color:#3687c9;font-size: 10px">WC/MC</label>
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="small">Unplanned Leave</label>
+                                <div class="col-md-4">
+                                    <label style="color:#3687c9;font-size: 10px">UA | PA</label>
                                 </div>
-                                <div class="col-md-1">
-                                    <label class="small">Disciplines</label>
+                                <div class="col-md-4">
+                                    <label style="color:#3687c9;font-size: 10px">UA | PH</label>
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="small">Injuries</label>
-                                </div>
-                                <div class="col-md-1">
-                                    <label class="small">LS | HE</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="small">Extra days</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="small">Unplanned Leave Days</label>
-                                </div>
+                            </div>
+                            </div>
+                            <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c;">
+                            <div class="row text-center">
+                                <label style="color: red">Employee is currently on Attendance Monitoring</label>
+                                <label style="color: white">Employee is currently on Suitable Duties</label>
                             </div>
                         </div>
                     </div>
-                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+			<div class="well" style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white">
+				<div class="row text-center">
+					<label style="color: black"><u>Quick Links</u></label>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Event Report</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" th:href="@{/event}" style="color: black">Add Event</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">PM Report</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" th:href="@{/performance}" style="color: black">Add PM</a>
+					</div>
+					<div class="col-md-6">
+						<label style="color: black">&bull;</label> <a href="#" style="color: black">Employee Central</a>
+					</div>
+				</div>
+				<div class="row text-left">
+					&nbsp;
+				</div>
+				<!-- <div style="margin-left: -40px">
+				<table class="table table-condensed">
+					<tr>
+						<td class="borderless">
+							<ul>
+							<li><a href="#" style="color: black">Add Leae</a></li>
+							<li><a href="#" th:href="@{/event}" style="color: black">Add Event</a></li>
+							<li><a href="#" th:href="@{/performance}" style="color: black">Add PM</a></li>
+							</ul>
+						</td>
+						<td class="borderless">
+							<ul>
+							<li><a href="#" style="color: black">Event Report</a></li>
+							<li><a href="#" style="color: black">PM Report</a></li>
+							<li><a href="#" style="color: black">Employee Central</a></li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+				</div>-->
+			</div>
+
+                    </div>
+                   </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <label><span class="glyphicon glyphicon-backward"/> Pay Perriod</label>
+                        <a href="#"><label><span class="glyphicon glyphicon-backward"/> <u>Previous Pay Period</u></label></a>
                     </div>
                     <div class="col-md-3 text-center">
                         <label>Amended Roster</label>
                     </div>
                     <div class="col-md-3 text-center">
                         <label>
-                            <a href="#"><u>&lt;Kronous Calendar&gt;</u></a>
+                            <a href="#"><u>&lt;Kronos Calendar&gt;</u></a>
                         </label>
                     </div>
                     <div class="col-md-3 text-right">
-                        <label><span class="glyphicon glyphicon-forward"/> Pay Perriod</label>
+                        <a href="#"><label><span class="glyphicon glyphicon-forward"/> <u>Next Pay Period</u></label></a>
                     </div>
                 </div>
                 <div class="row">
@@ -140,34 +196,34 @@
                             <table class="table table-bordered table-condensed table-hover">
                                 <thead>
                                 <tr style="background-color: #3e8f3e">
-                                    <td class="text-center text-white">6 feb</td>
-                                    <td class="text-center text-white">7 feb</td>
-                                    <td class="text-center text-white">8 feb</td>
-                                    <td class="text-center text-white">9 feb</td>
-                                    <td class="text-center text-white">10 feb</td>
-                                    <td class="text-center text-white">11 feb</td>
-                                    <td class="text-center text-white">12 feb</td>
-                                    <td class="text-center text-white">13 feb</td>
-                                    <td class="text-center text-white">14 feb</td>
-                                    <td class="text-center text-white">15 feb</td>
-                                    <td class="text-center text-white">16 feb</td>
-                                    <td class="text-center text-white">17 feb</td>
+                                    <td class="text-center text-white">6 FEB</td>
+                                    <td class="text-center text-white">7 FEB</td>
+                                    <td class="text-center text-white">8 FEB</td>
+                                    <td class="text-center text-white">9 FEB</td>
+                                    <td class="text-center text-white">10 FEB</td>
+                                    <td class="text-center text-white">11 FEB</td>
+                                    <td class="text-center text-white">12 FEB</td>
+                                    <td class="text-center text-white">13 FEB</td>
+                                    <td class="text-center text-white">14 FEB</td>
+                                    <td class="text-center text-white">15 FEB</td>
+                                    <td class="text-center text-white">16 FEB</td>
+                                    <td class="text-center text-white">17 FEB</td>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class="text-center success">Mon</td>
-                                    <td class="text-center success">Tue</td>
-                                    <td class="text-center success">Wed</td>
-                                    <td class="text-center success">Thu</td>
-                                    <td class="text-center success">Fri</td>
-                                    <td class="text-center success">Sat</td>
-                                    <td class="text-center success">Mon</td>
-                                    <td class="text-center success">Sun</td>
-                                    <td class="text-center success">Tue</td>
-                                    <td class="text-center success">Wed</td>
-                                    <td class="text-center success">Thu</td>
-                                    <td class="text-center success">Fri</td>
+                                    <td class="text-center success"><b>Mon</b></td>
+                                    <td class="text-center success"><b>Tue</b></td>
+                                    <td class="text-center success"><b>Wed</b></td>
+                                    <td class="text-center success"><b>Thu</b></td>
+                                    <td class="text-center success"><b>Fri</b></td>
+                                    <td class="text-center success"><b>Sat</b></td>
+                                    <td class="text-center success"><b>Mon</b></td>
+                                    <td class="text-center success"><b>Sun</b></td>
+                                    <td class="text-center success"><b>Tue</b></td>
+                                    <td class="text-center success"><b>Wed</b></td>
+                                    <td class="text-center success"><b>Thu</b></td>
+                                    <td class="text-center success"><b>Fri</b></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center success">RO</td>
@@ -215,9 +271,33 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Event :</label>
                             <select class="form-control">
                                 <option value=""></option>
-                                <option value="">Event A</option>
-                                <option value="">Event B</option>
-                                <option value="">Event C</option>
+                                <option value="">Absent Call In</option>
+                                <option value="">Absent</option>
+                                <option value="">Authorised Absence</option>
+                                <option value="">Leave of Absence</option>
+                                <option value="">Missed Swipe</option>
+                                <option value="">Stood Down</option>
+                                <option value="">Started Late</option>
+                                <option value="">Unauthorised Absence</option>
+                                <option value="">Went Home</option>
+                                <option value="">Compassionate Leave</option>
+                                <option value="">Annual Leave</option>
+                                <option value="">Leave Maternity</option>
+                                <option value="">Leave Paternity</option>
+                                <option value="">Long Service Leave</option>
+                                <option value="">Personal/Carer's Leave - with cert</option>
+                                <option value="">Personal/Carer's Leave - without cert</option>
+                                <option value="">Lost Card</option>
+                                <option value="">Breathalyser Test - All Clear (Less than 0.05%)</option>
+                                <option value="">Breathalyser Test - Positive (0.05% or greater)</option>
+                                <option value="">Drug Test - All Clear</option>
+                                <option value="">Drug Test - Confirmed Positive</option>
+                                <option value="">Drug Test - Non Negative</option>
+                                <option value="">Medical Certificate</option>
+                                <option value="">Suitable Duties in the Team</option>
+                                <option value="">Suitable Duties Above the Team</option>
+                                <option value="">Grievance</option>
+                                <option value="">File Note</option>
                             </select>
                         </div>
                     </div>
@@ -253,9 +333,9 @@
                             <option value="">18 Months</option>
                         </select>
                     </div>
-                    <div class="col-md-1 text-right">
+                    <!-- <div class="col-md-1 text-right">
                         <a href="#" th:href="@{/event}"><button type="button" class="btn btn-info">Add</button></a>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -279,8 +359,8 @@
                                     <td class="text-center success">7678</td>
                                     <td class="text-center success">Absent (AB)</td>
                                     <td class="text-center success">Resolved</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">6 Feb 2017</td>
+                                    <td class="text-center success">17 Feb 2017</td>
                                     <td class="text-center success">Did not present documents</td>
                                     <td class="text-center success">Yong Hull Lee</td>
                                 </tr>
@@ -289,8 +369,8 @@
                                     <td class="text-center success">7679</td>
                                     <td class="text-center success">Called In Absent (AC)</td>
                                     <td class="text-center success">open</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">6 Feb 2017</td>
+                                    <td class="text-center success">17 Feb 2017</td>
                                     <td class="text-center success">Called in Absent. Sickwith fever</td>
                                     <td class="text-center success">Sarah Wong</td>
                                 </tr>
@@ -322,9 +402,19 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Action :</label>
                             <select class="form-control">
                                 <option value=""></option>
-                                <option value="">Action A</option>
-                                <option value="">Action B</option>
-                                <option value="">Action C</option>
+                                <option value="">Abandonment of employment</option>
+                                <option value="">Warning in lieu of termination</option>
+                                <option value="">Re-confirmation of final</option>
+                                <option value="">Supervisor’s report</option>
+                                <option value="">Counselling session</option>
+                                <option value="">Written counselling</option>
+                                <option value="">Suspension</option>
+                                <option value="">1st warming</option>
+                                <option value="">2nd warning</option>
+                                <option value="">Final warning</option>
+                                <option value="">Attendance monitoring</option>
+                                <option value="">Written response</option>
+                                <option value="">Stood Aside</option>
                             </select>
                         </div>
                     </div>
@@ -360,9 +450,9 @@
                             <option value="">18 Months</option>
                         </select>
                     </div>
-                    <div class="col-md-1 text-right">
+                    <!-- <div class="col-md-1 text-right">
                         <a href="#" th:href="@{/performance}"><button type="button" class="btn btn-info">Add</button></a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -384,8 +474,8 @@
                                     <td class="text-center success">4 feb 2017 16&#58;10PM</td>
                                     <td class="text-center success">2044</td>
                                     <td class="text-center success">2nd Warning</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">6 Feb 2017</td>
+                                    <td class="text-center success">17 Feb 2017</td>
                                     <td class="text-center success">Issued 2nd Warning Letter</td>
                                     <td class="text-center success">Yong Hull Lee</td>
                                 </tr>
@@ -393,8 +483,8 @@
                                     <td class="text-center success">4 feb 2017 16&#58;10PM</td>
                                     <td class="text-center success">2044</td>
                                     <td class="text-center success">1st Warning</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">6 Feb 2017</td>
+                                    <td class="text-center success">17 Feb 2017</td>
                                     <td class="text-center success">Issued 1st Warning Letter</td>
                                     <td class="text-center success">Sarah Wong</td>
                                 </tr>
@@ -425,9 +515,11 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Leave :</label>
                             <select class="form-control">
                                 <option value=""></option>
-                                <option value="">Leave A</option>
-                                <option value="">Leave B</option>
-                                <option value="">Leave C</option>
+                                <option value="">UNPAID ABSENCE</option>
+                                <option value="">PAID ABSENCE</option>
+                                <option value="">Stood aside</option>
+                                <option value="">Suspended</option>
+                                <option value="">Etc.</option>
                             </select>
                         </div>
                     </div>
@@ -463,9 +555,9 @@
                             <option value="">18 Months</option>
                         </select>
                     </div>
-                    <div class="col-md-1 text-right">
+                    <!-- <div class="col-md-1 text-right">
                         <button type="button" class="btn btn-info">Add</button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -487,8 +579,8 @@
                                     <td class="text-center success">1123</td>
                                     <td class="text-center success">Annual Leave (AL)</td>
                                     <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">6 Feb 2017</td>
+                                    <td class="text-center success">17 Feb 2017</td>
                                     <td class="text-center success">Pending Approval</td>
                                     <td class="text-center success"><a href="#"><u>View</u></a></td>
                                 </tr>
@@ -496,8 +588,8 @@
                                     <td class="text-center success">1124</td>
                                     <td class="text-center success">Sick Leave (SL)</td>
                                     <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
+                                    <td class="text-center success">6 Feb 2017</td>
+                                    <td class="text-center success">17 Feb 2017</td>
                                     <td class="text-center success">Approved</td>
                                     <td class="text-center success"><a href="#"><u>View</u></a></td>
                                 </tr>
