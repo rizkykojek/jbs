@@ -7,506 +7,338 @@
     	 <div class="panel panel-default">
     	    <div class="panel-heading">
     	    	<table border="0" width="100%">
-    	    		<tr><td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Summary Screen</b></h3></td>
-    	    		<td width="20%">                
-    	    		<form class="form-inline" style="margin-top: 1px">
-                    <div class="form-group">
-                        <label>Search:</label>
-                        <input type="text" class="form-control" style="width: 50%"/>
-                        <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
-                    </div>
-                </form>
-                </td></tr>
+    	    		<tr>
+                        <td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Summary Screen</b></h3></td>
+    	    		    <td width="20%">
+                            <form class="form-inline" style="margin-top: 1px">
+                                <div class="form-group">
+                                    <label>Search:</label>
+                                    <input type="text" class="form-control" style="width: 50%"/>
+                                    <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
     	    	</table>
             </div>
-             <div class="panel-body body-background">
-             <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+            <div class="panel-body body-background">
+                <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
              	<tr>
              		<td>
-             		<div class="row">
-            			<div class="col-md-3">
-                			<label>
-                    			Welcome HR Admin <br/>
-                    			Date : 17 March 2017
-                			</label>
-            			</div>
-            			<div class="col-md-2">
-                			<select class="form-control">
-                    <option value="">Department</option>
-                    <option value="">ADELAIDE</option>
-                    <option value="">BEEF BUYERS</option>
-                    <option value="">BEEF CITY</option>
-                    <option value="">BORDERTOWN</option>
-                    <option value="">BRISBANE</option>
-                    <option value="">BROOKLYN</option>
-                    <option value="">BROOKLYN</option>
-                    <option value="">CHULORA</option>
-                    <option value="">COBRAM</option>
-                    <option value="">DEVELOPMENT</option>
-                    <option value="">DEVONPORT</option>
-                    <option value="">DINMORE</option>
-                    <option value="">FOODPARTNERS</option>
-                    <option value="">HELP DESK</option>
-                    <option value="">HR SYSTEMS</option>
-                    <option value="">INFRASTRUCTURE</option>
-                    <option value="">INTERNAL AUDIT</option>
-                    <option value="">JOES SITES</option>
-                    <option value="">LEGAL</option>
-                    <option value="">LONGFORD</option>
-                    <option value="">MAN ACCOUNTING</option>
-                    <option value="">MELBOURNE</option>
-                    <option value="">MUGINDI</option>
-                    <option value="">OHS</option>
-                    <option value="">OPS AND PROCESSES</option>
-                    <option value="">PAYROLL</option>
-                    <option value="">PERTH</option>
-                    <option value="">PORT WAKEFIELD</option>
-                    <option value="">PRIME CITY</option>
-                    <option value="">PRODUCTION STREET</option>
-                    <option value="">REG AND PUBLIC AFFAIRS</option>
-                    <option value="">RIVERINA</option>
-                    <option value="">ROCKHAMPTON</option>
-                    <option value="">SCONE</option>
-                    <option value="">SHEEP BUYERS</option>
-                    <option value="">SHIPPING</option>
-                    <option value="">SYDNEY</option>
-                    <option value="">TASMANIA</option>
-                    <option value="">TOWNSVILLE</option>
-                    <option value="">TRADING</option>
-                    <option value="">TRAINING</option>
-                    <option value="">TREASURY</option>
-                    <option value="">WACOL</option>
-                    <option value="">WORKERS COMP</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select class="form-control">
-                    <option value="">Section</option>
-                    <option value="">BACON</option>
-                    <option value="">BONING ROOM</option>
-                    <option value="">BONING ROOM - BEEF</option>
-                    <option value="">BONING ROOM - SHEEP</option>
-                    <option value="">COLD STORES</option>
-                    <option value="">ENGINEERING OPERATIONS</option>
-                    <option value="">ENVIRONMENT</option>
-                    <option value="">FINANCE &amp; ADMINISTRATION</option>
-                    <option value="">FSQA</option>
-                    <option value="">HAM</option>
-                    <option value="">HIDES</option>
-                    <option value="">HR OPERATIONS</option>
-                    <option value="">KILL FLOOR</option>
-                    <option value="">KILL FLOOR - BEEF</option>
-                    <option value="">KILL FLOOR - SHEEP</option>
-                    <option value="">LOADOUT</option>
-                    <option value="">OFFAL</option>
-                    <option value="">PRODUCTION CONTROL</option>
-                    <option value="">PURCHASING</option>
-                    <option value="">RENDERING</option>
-                    <option value="">SAFETY</option>
-                    <option value="">SALAMI</option>
-                    <option value="">SALES</option>
-                    <option value="">TRANSPORT &amp; LOGISTICS</option>
-                    <option value="">VALUE ADDED</option>
-                    <option value="">WAREHOUSE &amp; DISTRIBUTION</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select class="form-control">
-                    <option value="">Shift</option>
-                    <option value="">Day Shift</option>
-                    <option value="">Afternoon Shift</option>
-                    <option value="">Night Shift</option>
-                </select>
-            </div>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-link" style="margin-left: -10px">Clear Filters</button>
-            </div>
-        </div>
-       <div class="row">
-            <div class="col-md-6">
-               <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
-               	<tr>
-               		<td>
-                    <div class="col-md-8">
-                        <h4><b>HR Clearance</b></h4>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-control">
-                            <option value="">Department</option>
-                            <option value="">ADELAIDE</option>
-                            <option value="">BEEF BUYERS</option>
-                            <option value="">BEEF CITY</option>
-                            <option value="">BORDERTOWN</option>
-                            <option value="">BRISBANE</option>
-                            <option value="">BROOKLYN</option>
-                            <option value="">BROOKLYN</option>
-                            <option value="">CHULORA</option>
-                            <option value="">COBRAM</option>
-                            <option value="">DEVELOPMENT</option>
-                            <option value="">DEVONPORT</option>
-                            <option value="">DINMORE</option>
-                            <option value="">FOODPARTNERS</option>
-                            <option value="">HELP DESK</option>
-                            <option value="">HR SYSTEMS</option>
-                            <option value="">INFRASTRUCTURE</option>
-                            <option value="">INTERNAL AUDIT</option>
-                            <option value="">JOES SITES</option>
-                            <option value="">LEGAL</option>
-                            <option value="">LONGFORD</option>
-                            <option value="">MAN ACCOUNTING</option>
-                            <option value="">MELBOURNE</option>
-                            <option value="">MUGINDI</option>
-                            <option value="">OHS</option>
-                            <option value="">OPS AND PROCESSES</option>
-                            <option value="">PAYROLL</option>
-                            <option value="">PERTH</option>
-                            <option value="">PORT WAKEFIELD</option>
-                            <option value="">PRIME CITY</option>
-                            <option value="">PRODUCTION STREET</option>
-                            <option value="">REG AND PUBLIC AFFAIRS</option>
-                            <option value="">RIVERINA</option>
-                            <option value="">ROCKHAMPTON</option>
-                            <option value="">SCONE</option>
-                            <option value="">SHEEP BUYERS</option>
-                            <option value="">SHIPPING</option>
-                            <option value="">SYDNEY</option>
-                            <option value="">TASMANIA</option>
-                            <option value="">TOWNSVILLE</option>
-                            <option value="">TRADING</option>
-                            <option value="">TRAINING</option>
-                            <option value="">TREASURY</option>
-                            <option value="">WACOL</option>
-                            <option value="">WORKERS COMP</option>
-                        </select>
-                    </div>             		
-               		</td>
-               	</tr>
-               	<tr>
-               		<td>
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-responsive table-condensed table-hover">
-                                <thead>
-                                <tr class="info">
-                                    <td align="center"><b>No</b></td>
-                                    <td align="center"><b>Name</b></td>
-                                    <td align="center"><b>EE ID</b></td>
-                                    <td align="center"><b>Position</b></td>
-                                    <td align="center"><b>Department</b></td>
-                                    <td align="center"><b>Event</b></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="danger" style="font-size: 12px">
-                                    <td>1</td>
-                                    <td>
-                                        <a href="#" data-toggle="popover"><b>Derrick Stewart</b></a>
-                                    </td>
-                                    <td>230945</td>
-                                    <td>Packing Loin Lvl7</td>
-                                    <td>OPS AND PROCESSES</td>
-                                    <td>FW</td>
-                                </tr>
-                                <tr class="danger"  style="font-size: 12px">
-                                    <td>2</td>
-                                    <td><a href="#" id="pop1"><b>Alison Bennett</b></a></td>
-                                    <td>610700</td>
-                                    <td>Analyst Programmer (Net)</td>
-                                    <td>SYDNEY</td>
-                                    <td>AM</td>
-                                </tr>
-                                <tr class="danger" style="font-size: 12px">
-                                    <td>3</td>
-                                    <td><b>Janice Ferguson</b></td>
-                                    <td>61368</td>
-                                    <td>Packing Legs Lvl7</td>
-                                    <td>PRIME CITY</td>
-                                    <td>WR</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>4</td>
-                                    <td><b>Sammy Day</b></td>
-                                    <td>231605</td>
-                                    <td>Trades Assistant Maint</td>
-                                    <td>ROCKHAMPTON</td>
-                                    <td>SA</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>5</td>
-                                    <td><b>Clifton Ball</b></td>
-                                    <td>300110</td>
-                                    <td>Training Officer HR</td>
-                                    <td>TOWNSVILLE</td>
-                                    <td>AM</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>6</td>
-                                    <td><b>Brian Huff</b></td>
-                                    <td>230687</td>
-                                    <td>Training Lvl7</td>
-                                    <td>ROCKHAMPTON</td>
-                                    <td>FW</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>7</td>
-                                    <td><b>Josh Newman</b></td>
-                                    <td>1001575</td>
-                                    <td>Cryoval Operator Lvl7</td>
-                                    <td>PRODUCTION STREET</td>
-                                    <td>SA</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>8</td>
-                                    <td><b>Bradford Montgomery</b></td>
-                                    <td>212812</td>
-                                    <td>Engineering Supervisor Bacon Packaging</td>
-                                    <td>WORKERS COMP</td>
-                                    <td>WR</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>9</td>
-                                    <td><b>Rosa Baldwin</b></td>
-                                    <td>230935</td>
-                                    <td>Rejects Lvl7</td>
-                                    <td>WORKERS COMP</td>
-                                    <td></td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>10</td>
-                                    <td><b>Kurt Graves</b></td>
-                                    <td>300444</td>
-                                    <td>Engineering Supervisor Salami/Slice Pack</td>
-                                    <td>WORKERS COMP</td>
-                                    <td>SR</td>
-                                </tr>
+             		    <div class="row">
+                            <div class="col-md-3">
+                                <label>
+                                    Welcome HR Admin <br/>
+                                    Date : 17 March 2017
+                                </label>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control">
+                                    <option value="">Department</option>
+                                    <option th:each="department : ${listDepartment}" th:value="${department.id}" th:text="${department.name}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control">
+                                    <option value="">Section</option>
+                                    <option th:each="section : ${listSection}" th:value="${section.id}" th:text="${section.name}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control">
+                                    <option value="">Shift</option>
+                                    <option th:each="shift : ${listShift}" th:value="${shift.id}" th:text="${shift.name}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-link" style="margin-left: -10px">Clear Filters</button>
+                            </div>
+                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                               <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+                                    <tr>
+                                        <td>
+                                            <div class="col-md-8">
+                                                <h4><b>HR Clearance</b></h4>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <select class="form-control">
+                                                    <option value="">Department</option>
+                                                    <option th:each="department : ${listDepartment}" th:value="${department.id}" th:text="${department.name}"></option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-responsive table-condensed table-hover">
+                                                        <thead>
+                                                        <tr class="info">
+                                                            <td align="center"><b>No</b></td>
+                                                            <td align="center"><b>Name</b></td>
+                                                            <td align="center"><b>EE ID</b></td>
+                                                            <td align="center"><b>Position</b></td>
+                                                            <td align="center"><b>Department</b></td>
+                                                            <td align="center"><b>Event</b></td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr class="danger" style="font-size: 12px">
+                                                            <td>1</td>
+                                                            <td>
+                                                                <a href="#" data-toggle="popover"><b>Derrick Stewart</b></a>
+                                                            </td>
+                                                            <td>230945</td>
+                                                            <td>Packing Loin Lvl7</td>
+                                                            <td>OPS AND PROCESSES</td>
+                                                            <td>FW</td>
+                                                        </tr>
+                                                        <tr class="danger"  style="font-size: 12px">
+                                                            <td>2</td>
+                                                            <td><a href="#" id="pop1"><b>Alison Bennett</b></a></td>
+                                                            <td>610700</td>
+                                                            <td>Analyst Programmer (Net)</td>
+                                                            <td>SYDNEY</td>
+                                                            <td>AM</td>
+                                                        </tr>
+                                                        <tr class="danger" style="font-size: 12px">
+                                                            <td>3</td>
+                                                            <td><b>Janice Ferguson</b></td>
+                                                            <td>61368</td>
+                                                            <td>Packing Legs Lvl7</td>
+                                                            <td>PRIME CITY</td>
+                                                            <td>WR</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>4</td>
+                                                            <td><b>Sammy Day</b></td>
+                                                            <td>231605</td>
+                                                            <td>Trades Assistant Maint</td>
+                                                            <td>ROCKHAMPTON</td>
+                                                            <td>SA</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>5</td>
+                                                            <td><b>Clifton Ball</b></td>
+                                                            <td>300110</td>
+                                                            <td>Training Officer HR</td>
+                                                            <td>TOWNSVILLE</td>
+                                                            <td>AM</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>6</td>
+                                                            <td><b>Brian Huff</b></td>
+                                                            <td>230687</td>
+                                                            <td>Training Lvl7</td>
+                                                            <td>ROCKHAMPTON</td>
+                                                            <td>FW</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>7</td>
+                                                            <td><b>Josh Newman</b></td>
+                                                            <td>1001575</td>
+                                                            <td>Cryoval Operator Lvl7</td>
+                                                            <td>PRODUCTION STREET</td>
+                                                            <td>SA</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>8</td>
+                                                            <td><b>Bradford Montgomery</b></td>
+                                                            <td>212812</td>
+                                                            <td>Engineering Supervisor Bacon Packaging</td>
+                                                            <td>WORKERS COMP</td>
+                                                            <td>WR</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>9</td>
+                                                            <td><b>Rosa Baldwin</b></td>
+                                                            <td>230935</td>
+                                                            <td>Rejects Lvl7</td>
+                                                            <td>WORKERS COMP</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>10</td>
+                                                            <td><b>Kurt Graves</b></td>
+                                                            <td>300444</td>
+                                                            <td>Engineering Supervisor Salami/Slice Pack</td>
+                                                            <td>WORKERS COMP</td>
+                                                            <td>SR</td>
+                                                        </tr>
 
-                                </tbody>
-                            </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                               </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+                                    <tr>
+                                        <td>
+                                            <div class="col-md-8">
+                                                <h4><b>Absent</b></h4>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <select class="form-control">
+                                                    <option value="">Department</option>
+                                                    <option th:each="department : ${listDepartment}" th:value="${department.id}" th:text="${department.name}"></option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-condensed table-hover">
+                                                        <thead>
+                                                        <tr class="info">
+                                                            <td align="center"><b>No</b></td>
+                                                            <td align="center"><b>Name</b></td>
+                                                            <td align="center"><b>EE ID</b></td>
+                                                            <td align="center"><b>Position</b></td>
+                                                            <td align="center"><b>Department</b></td>
+                                                            <td align="center"><b>Event</b></td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr class="info" style="font-size: 12px">
+                                                            <td>1</td>
+                                                            <td><b>Dale Higgins</b></td>
+                                                            <td>300599</td>
+                                                            <td>Site Accountant - Qld</td>
+                                                            <td>ADELAIDE</td>
+                                                            <td>AC</td>
+                                                        </tr>
+                                                        <tr class="info" style="font-size: 12px">
+                                                            <td>2</td>
+                                                            <td><b>Kathryn George</b></td>
+                                                            <td>608961</td>
+                                                            <td>QDC L2 Production</td>
+                                                            <td>BRISBANE</td>
+                                                            <td>AB</td>
+                                                        </tr>
+                                                        <tr class="info" style="font-size: 12px">
+                                                            <td>3</td>
+                                                            <td><b>Dianna Holloway</b></td>
+                                                            <td>231631</td>
+                                                            <td>Helpdesk Officer</td>
+                                                            <td>DEVELOPMENT</td>
+                                                            <td>AB</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>4</td>
+                                                            <td><b>Wilbur Arnold</b></td>
+                                                            <td>400109</td>
+                                                            <td>Storeman</td>
+                                                            <td>FOODPARTNERS</td>
+                                                            <td>AA</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>5</td>
+                                                            <td><b>Shaun Morales</b></td>
+                                                            <td>611860</td>
+                                                            <td>Weighbridge Clerk</td>
+                                                            <td>HR SYSTEMS</td>
+                                                            <td>UA</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>6</td>
+                                                            <td><b>Willis Phillips</b></td>
+                                                            <td>591001</td>
+                                                            <td>State Manager Retail Qld</td>
+                                                            <td>INFRASTRUCTURE</td>
+                                                            <td>AC</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>7</td>
+                                                            <td><b>Floyd French</b></td>
+                                                            <td>609646</td>
+                                                            <td>President JBS Australia</td>
+                                                            <td></td>
+                                                            <td>AB</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>8</td>
+                                                            <td><b>Charlie Reese</b></td>
+                                                            <td>300645</td>
+                                                            <td>Packing Legs Lvl7</td>
+                                                            <td>LEGAL</td>
+                                                            <td>AA</td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>9</td>
+                                                            <td><b>Erin Brown</b></td>
+                                                            <td>300676</td>
+                                                            <td>Feed Team Leading Hand Lvl1</td>
+                                                            <td>OPS AND PROCESSES</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="warning" style="font-size: 12px">
+                                                            <td>10</td>
+                                                            <td><b>Julius Kelley</b></td>
+                                                            <td>231432</td>
+                                                            <td>Packing Racks Lvl7</td>
+                                                            <td>OPS AND PROCESSES</td>
+                                                            <td></td>
+                                                        </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-               		</td>
-               	</tr>
-               </table>
-                
-                
-                
-
-                
-            </div>
-
-            <div class="col-md-6">
-               <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
-               <tr>
-               	<td>
-                    <div class="col-md-8">
-                        <h4><b>Absent</b></h4>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-control">
-                            <option value="">Department</option>
-                            <option value="">ADELAIDE</option>
-                            <option value="">BEEF BUYERS</option>
-                            <option value="">BEEF CITY</option>
-                            <option value="">BORDERTOWN</option>
-                            <option value="">BRISBANE</option>
-                            <option value="">BROOKLYN</option>
-                            <option value="">BROOKLYN</option>
-                            <option value="">CHULORA</option>
-                            <option value="">COBRAM</option>
-                            <option value="">DEVELOPMENT</option>
-                            <option value="">DEVONPORT</option>
-                            <option value="">DINMORE</option>
-                            <option value="">FOODPARTNERS</option>
-                            <option value="">HELP DESK</option>
-                            <option value="">HR SYSTEMS</option>
-                            <option value="">INFRASTRUCTURE</option>
-                            <option value="">INTERNAL AUDIT</option>
-                            <option value="">JOES SITES</option>
-                            <option value="">LEGAL</option>
-                            <option value="">LONGFORD</option>
-                            <option value="">MAN ACCOUNTING</option>
-                            <option value="">MELBOURNE</option>
-                            <option value="">MUGINDI</option>
-                            <option value="">OHS</option>
-                            <option value="">OPS AND PROCESSES</option>
-                            <option value="">PAYROLL</option>
-                            <option value="">PERTH</option>
-                            <option value="">PORT WAKEFIELD</option>
-                            <option value="">PRIME CITY</option>
-                            <option value="">PRODUCTION STREET</option>
-                            <option value="">REG AND PUBLIC AFFAIRS</option>
-                            <option value="">RIVERINA</option>
-                            <option value="">ROCKHAMPTON</option>
-                            <option value="">SCONE</option>
-                            <option value="">SHEEP BUYERS</option>
-                            <option value="">SHIPPING</option>
-                            <option value="">SYDNEY</option>
-                            <option value="">TASMANIA</option>
-                            <option value="">TOWNSVILLE</option>
-                            <option value="">TRADING</option>
-                            <option value="">TRAINING</option>
-                            <option value="">TREASURY</option>
-                            <option value="">WACOL</option>
-                            <option value="">WORKERS COMP</option>
-                        </select>
-                    </div>
-               	</td>
-               </tr>
-               <tr>
-               	<td>
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-hover">
-                                <thead>
-                                <tr class="info">
-                                    <td align="center"><b>No</b></td>
-                                    <td align="center"><b>Name</b></td>
-                                    <td align="center"><b>EE ID</b></td>
-                                    <td align="center"><b>Position</b></td>
-                                    <td align="center"><b>Department</b></td>
-                                    <td align="center"><b>Event</b></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="info" style="font-size: 12px">
-                                    <td>1</td>
-                                    <td><b>Dale Higgins</b></td>
-                                    <td>300599</td>
-                                    <td>Site Accountant - Qld</td>
-                                    <td>ADELAIDE</td>
-                                    <td>AC</td>
-                                </tr>
-                                <tr class="info" style="font-size: 12px">
-                                    <td>2</td>
-                                    <td><b>Kathryn George</b></td>
-                                    <td>608961</td>
-                                    <td>QDC L2 Production</td>
-                                    <td>BRISBANE</td>
-                                    <td>AB</td>
-                                </tr>
-                                <tr class="info" style="font-size: 12px">
-                                    <td>3</td>
-                                    <td><b>Dianna Holloway</b></td>
-                                    <td>231631</td>
-                                    <td>Helpdesk Officer</td>
-                                    <td>DEVELOPMENT</td>
-                                    <td>AB</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>4</td>
-                                    <td><b>Wilbur Arnold</b></td>
-                                    <td>400109</td>
-                                    <td>Storeman</td>
-                                    <td>FOODPARTNERS</td>
-                                    <td>AA</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>5</td>
-                                    <td><b>Shaun Morales</b></td>
-                                    <td>611860</td>
-                                    <td>Weighbridge Clerk</td>
-                                    <td>HR SYSTEMS</td>
-                                    <td>UA</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>6</td>
-                                    <td><b>Willis Phillips</b></td>
-                                    <td>591001</td>
-                                    <td>State Manager Retail Qld</td>
-                                    <td>INFRASTRUCTURE</td>
-                                    <td>AC</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>7</td>
-                                    <td><b>Floyd French</b></td>
-                                    <td>609646</td>
-                                    <td>President JBS Australia</td>
-                                    <td></td>
-                                    <td>AB</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>8</td>
-                                    <td><b>Charlie Reese</b></td>
-                                    <td>300645</td>
-                                    <td>Packing Legs Lvl7</td>
-                                    <td>LEGAL</td>
-                                    <td>AA</td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>9</td>
-                                    <td><b>Erin Brown</b></td>
-                                    <td>300676</td>
-                                    <td>Feed Team Leading Hand Lvl1</td>
-                                    <td>OPS AND PROCESSES</td>
-                                    <td></td>
-                                </tr>
-                                <tr class="warning" style="font-size: 12px">
-                                    <td>10</td>
-                                    <td><b>Julius Kelley</b></td>
-                                    <td>231432</td>
-                                    <td>Packing Racks Lvl7</td>
-                                    <td>OPS AND PROCESSES</td>
-                                    <td></td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-               	</td>
-               </tr>
-				</table>
-                
-
-                
-            </div>
-        </div>      		
              		</td>
              		<td width="20%" align="center" valign="top">
-             		<table border="0" width="100%">
-             			<tr>
-             				<td>
-             		   			<div class="col-md-8 col-md-offset-2">
-                					<div class="well well-sm" style="background-color: #cce6ff !important; border-color: #2aabd2; color: white">
-                    					<div class="row text-center">
-                        					<label style="color: black"><u>Quick Links</u></label>
-                    					</div>
-                    			
-                        				<a href="#" style="color: black" th:href="@{/duties}" th:target="_blank">&bull;Suitable Duties</a>
-                					</div>
-            					</div>
-             				</td>
-             			</tr>
-             			<tr>
-             				<td>
-             		   <div class="col-md-8 col-md-offset-2">
-            			<div class="well well-sm" style="background-color: #cce6ff !important; border-color: #3e8f3e;">
-                    		<div class="row text-center">
-                        		<label style="color: black"><u>Trends</u></label>
-                    		</div>
-             				<table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
-             					<tr>
-             						<td><a href="#" th:href="@{/wcmc}" th:target="_blank"><button type="button" class="btn btn-success">WC/MC</button></a></td>
-             					</tr>
-             					<tr>
-             						<td><button type="button" class="btn btn-success">UA | PA</button></td>
-             					</tr>
-             				    <tr>
-             						<td><button type="button" class="btn btn-success">UA | PH</button></td>
-             					</tr>
-             				</table>
-                		</div>
-                		</div>
-             				</td>
-             			</tr>
-             		</table>
-            			
+                        <table border="0" width="100%">
+                            <tr>
+                                <td>
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <div class="well well-sm" style="background-color: #cce6ff !important; border-color: #2aabd2; color: white">
+                                            <div class="row text-center">
+                                                <label style="color: black"><u>Quick Links</u></label>
+                                            </div>
+                                            <a href="#" style="color: black" th:href="@{/duties}" th:target="_blank">&bull;Suitable Duties</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <div class="col-md-8 col-md-offset-2">
+                                        <div class="well well-sm" style="background-color: #cce6ff !important; border-color: #3e8f3e;">
+                                            <div class="row text-center">
+                                                <label style="color: black"><u>Trends</u></label>
+                                            </div>
+                                            <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
+                                                <tr>
+                                                    <td><a href="#" th:href="@{/wcmc}" th:target="_blank"><button type="button" class="btn btn-success">WC/MC</button></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><button type="button" class="btn btn-success">UA | PA</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><button type="button" class="btn btn-success">UA | PH</button></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
              		</td>
              	</tr>
              </table>
-              
-
-        
         </div>
         </div>
     </div>

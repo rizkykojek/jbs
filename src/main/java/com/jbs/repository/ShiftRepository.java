@@ -1,11 +1,11 @@
 package com.jbs.repository;
 
-import com.jbs.entity.Employee;
+import com.jbs.entity.Shift;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * Created by rizkykojek on 3/10/17.
  */
-public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+public interface ShiftRepository extends CrudRepository<Shift, Long> {
 
 }

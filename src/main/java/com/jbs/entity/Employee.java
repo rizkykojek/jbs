@@ -24,9 +24,4 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
 }

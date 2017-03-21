@@ -21,6 +21,11 @@ import java.util.Date;
 @Controller
 public class PerformanceController {
 
+    @RequestMapping(value = "/performance", method = RequestMethod.GET)
+    public String getPerformance() {
+        return "performance";
+    }
+
     @RequestMapping(value = "/performance/generate_letter", method = RequestMethod.GET)
     public void generateLetter(HttpServletResponse response) {
         try {

@@ -1,14 +1,34 @@
 package com.jbs.controller;
 
+import com.google.common.collect.Lists;
+import com.jbs.entity.Department;
+import com.jbs.entity.Section;
+import com.jbs.entity.Shift;
+import com.jbs.repository.DepartmentRepository;
+import com.jbs.repository.SectionRepository;
+import com.jbs.repository.ShiftRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * Created by rizkykojek on 2/18/17.
  */
 @Controller
 public class EmployeeController {
+
+    @Autowired
+    private ShiftRepository shiftRepository;
+
+    @Autowired
+    private SectionRepository sectionRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndex() {
@@ -18,11 +38,6 @@ public class EmployeeController {
     @RequestMapping(value = "/summary", method = RequestMethod.GET)
     public String getSummary() {
         return "summary";
-    }
-
-    @RequestMapping(value = "/event", method = RequestMethod.GET)
-    public String getEvent() {
-        return "event";
     }
 
     @RequestMapping(value = "/duties", method = RequestMethod.GET)
@@ -35,8 +50,19 @@ public class EmployeeController {
         return "wcmc";
     }
 
-    @RequestMapping(value = "/performance", method = RequestMethod.GET)
-    public String getPerformance() {
-        return "performance";
+    @ModelAttribute("listShift")
+    public List<Shift> getListShift() {
+        return Lists.newArrayList(shiftRepository.findAll());
     }
+
+    @ModelAttribute("listSection")
+    public List<Section> getListSection() {
+        return Lists.newArrayList(sectionRepository.findAll());
+    }
+
+    @ModelAttribute("listDepartment")
+    public List<Department> getListDepartment() {
+        return Lists.newArrayList(departmentRepository.findAll());
+    }
+
 }
