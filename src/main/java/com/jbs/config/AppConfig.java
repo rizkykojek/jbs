@@ -59,6 +59,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         resolver.setPrefix("/WEB-INF/templates/");
         resolver.setTemplateMode(TemplateMode.HTML);
         resolver.setSuffix(".html");
+        //resolver.setCacheable(false); //uncomment this if you want to use SpringDEvTool reload feature
         return resolver;
     }
     //end Thymeleaf specific configuration
