@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -26,7 +27,7 @@ public class HibernateConfig {
 	private Resource dataScript;
 
 	@Bean
-	public DataSourceInitializer dataSourceInitializer(final DataSource dataSource) {
+	public DataSourceInitializer executeDataSourceInitializer(final DataSource dataSource) {
 		final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(dataScript);
 
@@ -43,7 +44,7 @@ public class HibernateConfig {
         DataSource dataSource = dsLookup.getDataSource("jdbc/DefaultDB");
         return dataSource;
 	}
-	 
+
 	@Bean
 	public JpaTransactionManager transactionManager(
 			EntityManagerFactory entityManagerFactory) {
@@ -53,10 +54,15 @@ public class HibernateConfig {
 	}
  
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IllegalArgumentException, NamingException {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
 				new LocalContainerEntityManagerFactoryBean();
+
 		entityManagerFactoryBean.setDataSource(this.getDataSource());
+		/** Uncomment this to enable Spring Boot
+		 *
+		 * entityManagerFactoryBean.setDataSource(AppBootApplication.getDataSource());*/
+
 		entityManagerFactoryBean
 				.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		entityManagerFactoryBean.setPackagesToScan("com.jbs");
