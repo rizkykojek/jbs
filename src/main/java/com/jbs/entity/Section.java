@@ -21,9 +21,9 @@ public class Section {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true, name = "code")
+    @Column(unique = true, name = "code", nullable = false)
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 }

@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @lombok.Getter
 @lombok.Setter
 @Entity
-public class Shift {
+public class Position {
 
     @Id
     @GeneratedValue

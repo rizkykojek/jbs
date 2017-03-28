@@ -21,9 +21,9 @@ public class Department {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true, name = "code")
+    @Column(name = "code", unique = true, nullable = false)
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 }
