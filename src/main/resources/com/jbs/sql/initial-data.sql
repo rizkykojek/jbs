@@ -1,6 +1,3 @@
-INSERT INTO employee(id, first_name, last_name) VALUES (1,'Derrick', 'Stewart');
-INSERT INTO employee(id, first_name, last_name) VALUES (2,'Janice', 'Ferguson');
-
 INSERT INTO department(id, code, name) VALUES (1,'department_1', 'ADELAIDE');
 INSERT INTO department(id, code, name) VALUES (2,'department_2', 'BEEF BUYERS');
 INSERT INTO department(id, code, name) VALUES (3,'department_3', 'BEEF CITY');
@@ -75,3 +72,47 @@ INSERT INTO section(id, code, name) VALUES (26,'section_26', 'WAREHOUSE & DISTRI
 INSERT INTO shift(id, code, name) VALUES (1,'shift_1', 'Day Shift');
 INSERT INTO shift(id, code, name) VALUES (2,'shift_2', 'Afternoon Shift');
 INSERT INTO shift(id, code, name) VALUES (3,'shift_3', 'Night Shift');
+
+INSERT INTO position(id, code, name) VALUES (1,'position_1', 'Packing Loin Lvl7');
+INSERT INTO position(id, code, name) VALUES (2,'position_2', 'Analyst Programmer (Net)');
+INSERT INTO position(id, code, name) VALUES (3,'position_3', 'Packing Legs Lvl7');
+INSERT INTO position(id, code, name) VALUES (4,'position_4', 'Trades Assistant Maint');
+INSERT INTO position(id, code, name) VALUES (5,'position_5', 'Training Officer HR');
+INSERT INTO position(id, code, name) VALUES (6,'position_6', 'Training Lvl7');
+INSERT INTO position(id, code, name) VALUES (7,'position_7', 'Cryoval Operator Lvl7');
+INSERT INTO position(id, code, name) VALUES (8,'position_8', 'Engineering Supervisor Bacon Packaging');
+INSERT INTO position(id, code, name) VALUES (9,'position_9', 'Rejects Lvl7');
+INSERT INTO position(id, code, name) VALUES (10,'position_10', 'Engineering Supervisor Salami/Slice Pack');
+
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (1,'230945','Derrick','Stewart',1,1);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (2,'610700','Alison','Bennett',2,2);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (3,'61368','Janice','Ferguson',3,3);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (4,'231605','Sammy','Day',4,4);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (5,'300110','Clifton','Ball',5,5);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (6,'230687','Brian','Huff',6,6);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (7,'1001575','Josh','Newman',7,7);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (8,'212812','Bradford','Montgomery',8,8);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (9,'300444','Rosa','Baldwin',9,9);
+INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (10,'230935','Kurt','Grave',10,10);
+
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (1,1,'FW',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (2,2,'AM',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (3,3,'WR',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (4,4,'SA',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (5,5,'AM',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (6,6,'FW',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (7,7,'SA',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (8,8,'WR',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (9,9,'SR',1);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (10,10,'FW',1);
+
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (11,1,'AC',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (12,2,'AB',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (13,3,'AB',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (14,4,'AA',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (15,5,'UA',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (16,6,'AC',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (17,7,'AB',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (18,8,'UA',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (19,9,'AB',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (20,10,'AA',2);
