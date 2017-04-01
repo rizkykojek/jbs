@@ -1,6 +1,8 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,5 +27,6 @@ public class Position {
     private String code;
 
     @Column(name = "name", nullable = false)
+    @JsonView(DataTablesOutput.View.class)
     private String name;
 }
