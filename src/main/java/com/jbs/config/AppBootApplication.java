@@ -12,15 +12,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jndi.JndiObjectFactoryBean;
 
 import javax.naming.NamingException;
-import javax.sql.DataSource;*/
+import javax.sql.DataSource;
 
-/**
+*//**
  * Created by rizkykojek on 3/23/17.
- */
-//@SpringBootApplication
-public class AppBootApplication /*extends SpringBootServletInitializer*/ {
+ *//*
+@SpringBootApplication
+public class AppBootApplication extends SpringBootServletInitializer {
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(AppBootApplication.class, args);
     }
 
@@ -59,5 +59,9 @@ public class AppBootApplication /*extends SpringBootServletInitializer*/ {
         bean.setLookupOnStartup(false);
         bean.afterPropertiesSet();
         return (DataSource)bean.getObject();
-    }*/
+    }
+}*/
+
+public class AppBootApplication {
+
 }

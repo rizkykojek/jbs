@@ -1,5 +1,8 @@
 package com.jbs.config;
 
+import com.jbs.util.ODataUtil;
+import org.apache.olingo.odata2.api.edm.Edm;
+import org.apache.olingo.odata2.api.exception.ODataException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +18,8 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import java.io.IOException;
+
 /**
  * Created by rizkykojek on 3/19/17.
  */
@@ -27,6 +32,11 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     public void setApplicationContext(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
+    }
+
+    @Bean
+    public Edm edm() throws IOException, ODataException {
+        return ODataUtil.readEdm();
     }
 
     @Override
