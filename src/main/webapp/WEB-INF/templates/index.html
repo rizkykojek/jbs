@@ -72,9 +72,9 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div class="col-md-12" style="margin-top: -30px">
+                                            <div class="col-md-12">
                                                 <div class="table-responsive">
-                                                    <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover">
+                                                    <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover" style="margin-top: -30px !important;">
                                                         <thead>
                                                         <tr class="info">
                                                             <td align="center"><b>No</b></td>
@@ -112,9 +112,9 @@
                                    </tr>
                                    <tr>
                                         <td>
-                                            <div class="col-md-12" style="margin-top: -30px">
+                                            <div class="col-md-12" >
                                                 <div class="table-responsive">
-                                                    <table id="absentTable" class="table table-bordered table-condensed table-hover">
+                                                    <table id="absentTable" class="table table-bordered table-condensed table-hover" style="margin-top: -30px !important;">
                                                         <thead>
                                                         <tr class="info">
                                                             <td align="center"><b>No</b></td>
@@ -182,19 +182,21 @@
 
     <footer th:replace="fragments/footer :: footer"/>
 
-    <script th:inline="none">
+    <script th:inline="javascript">
         $(document).ready(function(){
+            var _ctx = /*[[@{/}]]*/ 'context';
+
             $('[data-toggle="popover"]').popover({
-                content : '<a href="/JBS/summary">Employee Summary</a> ' +
-                    '<br/> <a href="/JBS/event">Add Event</a> ' +
-                    '<br/> <a href="/JBS/performance">Add PM</a>'+
+                content : '<a href="/JBS/summary" th:href="@{/summary}">Employee Summary</a> ' +
+                    '<br/> <a href="/JBS/event" th:href="@{/event}">Add Event</a> ' +
+                    '<br/> <a href="/JBS/performance" th:href="@{/performance}">Add PM</a>'+
                     '<br/> <a href="#">Employee Central</a>'+
                     '<br/> <a href="#">Add Leave Record</a>',
                 html: true
             });
 
             var hrClearanceTable = $('#hrClearanceTable').DataTable({
-                "ajax":         "/hrClearanceTable",
+                "ajax":         _ctx + "hrClearanceTable",
                 "serverSide":   true,
                 "pagingType":   "full",
                 "searching":    false,
@@ -210,7 +212,7 @@
                     "orderable": false,
                     "targets": 0
                 } ],
-                "order": [[ 1, 'asc' ]],
+                "order": [ [ 1, 'asc' ] ],
                 "columns": [
                     { "data": "id"},
                     { "data": "employee.firstName" },
@@ -222,7 +224,7 @@
             });
 
             var absentTable = $('#absentTable').DataTable({
-                "ajax":         "/hrClearanceTable",
+                "ajax":         _ctx + "absentTable",
                 "serverSide":   true,
                 "pagingType":   "full",
                 "searching":    false,
@@ -238,7 +240,7 @@
                     "orderable": false,
                     "targets": 0
                 } ],
-                "order": [[ 1, 'asc' ]],
+                "order": [ [ 1, 'asc' ] ],
                 "columns": [
                     { "data": "id"},
                     { "data": "employee.firstName" },
