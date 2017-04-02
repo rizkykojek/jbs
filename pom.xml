@@ -120,6 +120,12 @@
       <groupId>com.github.darrachequesne</groupId>
       <artifactId>spring-data-jpa-datatables</artifactId>
       <version>4.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Uncomment this to enable SpringBoot for development only, don't forget comment spring-webvc -->
