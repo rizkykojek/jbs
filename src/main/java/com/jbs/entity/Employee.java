@@ -1,6 +1,7 @@
 package com.jbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
@@ -22,6 +23,7 @@ public class Employee {
 
     @Column(name = "employee_number", unique = true, nullable = false)
     @JsonView(DataTablesOutput.View.class)
+    @SerializedName("personIdExternal")
     private String employeeNumber;
 
     @Column(name = "first_name", nullable = false)

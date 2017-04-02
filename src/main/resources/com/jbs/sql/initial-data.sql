@@ -84,7 +84,7 @@ INSERT INTO position(id, code, name) VALUES (8,'position_8', 'Engineering Superv
 INSERT INTO position(id, code, name) VALUES (9,'position_9', 'Rejects Lvl7');
 INSERT INTO position(id, code, name) VALUES (10,'position_10', 'Engineering Supervisor Salami/Slice Pack');
 
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (1,'230945','Derrick','Stewart',1,1);
+/*INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (1,'230945','Derrick','Stewart',1,1);
 INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (2,'610700','Alison','Bennett',2,2);
 INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (3,'61368','Janice','Ferguson',3,3);
 INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (4,'231605','Sammy','Day',4,4);
@@ -115,4 +115,4 @@ INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (16,6
 INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (17,7,'AB',2);
 INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (18,8,'UA',2);
 INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (19,9,'AB',2);
-INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (20,10,'AA',2);
+INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (20,10,'AA',2);*/
