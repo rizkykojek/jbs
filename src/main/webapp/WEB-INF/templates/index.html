@@ -32,19 +32,13 @@
                                     Date : 17 March 2017
                                 </label>
                             </div>
-                            <div class="col-md-2">
-                                <select class="form-control">
-                                    <option value="">Department</option>
-                                    <option th:each="department : ${listDepartment}" th:value="${department.id}" th:text="${department.name}"></option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <select class="form-control">
                                     <option value="">Section</option>
                                     <option th:each="section : ${listSection}" th:value="${section.id}" th:text="${section.name}"></option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <select class="form-control">
                                     <option value="">Shift</option>
                                     <option th:each="shift : ${listShift}" th:value="${shift.id}" th:text="${shift.name}"></option>
@@ -56,83 +50,46 @@
                          </div>
                         <div class="row">
                             <div class="col-md-6">
-                               <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
-                                    <tr>
-                                        <td>
-                                            <div class="col-md-8">
-                                                <h4><b>HR Clearance</b></h4>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select class="form-control">
-                                                    <option value="">Department</option>
-                                                    <option th:each="department : ${listDepartment}" th:value="${department.id}" th:text="${department.name}"></option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="col-md-12">
-                                                <div class="table-responsive">
-                                                    <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover" style="margin-top: -30px !important;">
-                                                        <thead>
-                                                        <tr class="info">
-                                                            <td align="center"><b>No</b></td>
-                                                            <td align="center"><b>Name</b></td>
-                                                            <td align="center"><b>EE ID</b></td>
-                                                            <td align="center"><b>Position</b></td>
-                                                            <td align="center"><b>Department</b></td>
-                                                            <td align="center"><b>Event</b></td>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                               </table>
+                                <div class="col-md-12">
+                                    <h4><b>HR Clearance</b></h4>
+                                </div>
+                                <div class="col-md-12">
+                                    <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover" style="margin-top: -20px !important;">
+                                        <thead>
+                                        <tr class="info">
+                                            <td align="center"><b>No</b></td>
+                                            <td align="center"><b>Name</b></td>
+                                            <td align="center"><b>EE ID</b></td>
+                                            <td align="center"><b>Position</b></td>
+                                            <td align="center"><b>Department</b></td>
+                                            <td align="center"><b>Event</b></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="font-size: 11px;">
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
-                                    <tr>
-                                        <td>
-                                            <div class="col-md-8">
-                                                <h4><b>Absent</b></h4>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select class="form-control">
-                                                    <option value="">Department</option>
-                                                    <option th:each="department : ${listDepartment}" th:value="${department.id}" th:text="${department.name}"></option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td>
-                                            <div class="col-md-12" >
-                                                <div class="table-responsive">
-                                                    <table id="absentTable" class="table table-bordered table-condensed table-hover" style="margin-top: -30px !important;">
-                                                        <thead>
-                                                        <tr class="info">
-                                                            <td align="center"><b>No</b></td>
-                                                            <td align="center"><b>Name</b></td>
-                                                            <td align="center"><b>EE ID</b></td>
-                                                            <td align="center"><b>Position</b></td>
-                                                            <td align="center"><b>Department</b></td>
-                                                            <td align="center"><b>Event</b></td>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div class="col-md-12">
+                                    <h4><b>Absent</b></h4>
+                                </div>
+                                <div class="col-md-12" >
+                                    <table id="absentTable" class="table table-bordered table-condensed table-hover" style="margin-top: -20px !important;">
+                                        <thead>
+                                        <tr class="info">
+                                            <td align="center"><b>No</b></td>
+                                            <td align="center"><b>Name</b></td>
+                                            <td align="center"><b>EE ID</b></td>
+                                            <td align="center"><b>Position</b></td>
+                                            <td align="center"><b>Department</b></td>
+                                            <td align="center"><b>Event</b></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="font-size: 11px;">
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
              		</td>
@@ -141,11 +98,13 @@
                             <tr>
                                 <td>
                                     <div class="col-md-8 col-md-offset-2">
-                                        <div class="well well-sm" style="background-color: #cce6ff !important; border-color: #2aabd2; color: white">
+                                        <div class="well well-sm" style="background-color: #cce6ff !important; border-color: #2aabd2; color: black">
                                             <div class="row text-center">
                                                 <label style="color: black"><u>Quick Links</u></label>
                                             </div>
-                                            <a href="#" style="color: black" th:href="@{/duties}" th:target="_blank">&bull;Suitable Duties</a>
+                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/duties}" th:target="_blank">Suitable Duties</a><br/>
+                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/event_report}" th:target="_blank">Event Report</a><br/>
+                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/pm_report}" th:target="_blank">PM Report</a>
                                         </div>
                                     </div>
                                 </td>
@@ -159,7 +118,7 @@
                                             </div>
                                             <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
                                                 <tr>
-                                                    <td><a href="#" th:href="@{/wcmc}" th:target="_blank"><button type="button" class="btn btn-success">WC/MC</button></a></td>
+                                                    <td><a href="#" th:href="@{/wcmc}" th:target="_blank"><button type="button" class="btn btn-success">WC | MC</button></a></td>
                                                 </tr>
                                                 <tr>
                                                     <td><button type="button" class="btn btn-success">UA | PA</button></td>

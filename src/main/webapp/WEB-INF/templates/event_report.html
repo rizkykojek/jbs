@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"/>
+
+<body>
+    <!-- <nav th:replace="fragments/header :: header"/> -->
+
+    <div class="container-fluid">
+        <div class="panel panel-default">
+    	    <div class="panel-heading">
+    	    	<table border="0" width="100%">
+    	    		<tr><td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Event Report</b></h3></td>
+					</tr>
+    	    	</table>
+            </div>
+            <div class="panel-body body-background">
+                <div class="row">
+					<label>Filter by:</label>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+    	    		<form class="form-inline" style="margin-top: 1px">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="empID" placeholder="Enter Employee ID"/>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name"/>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name"/><br/><br/>
+                    </div>
+                </form>
+
+                    </div>
+                    <div class="col-md-6">
+    	    		<form class="form-inline" style="margin-top: 1px">
+                    <div class="form-group">
+					<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;From :</label>
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+          					<label>To :</label>
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>
+                          <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
+                    </div>
+                </form>
+
+                    </div>
+                   </div>
+                <div class="row">
+                      <div class="col-md-12">
+                        <div class="table-responsive">
+							<table class="table table-bordered table-condensed table-hover">
+                                <thead>
+                                <tr class="success">
+                                    <td class="text-center">#</td>
+                                    <td class="text-center">Event ID</td>
+                                    <td class="text-center">Event Code</td>
+                                    <td class="text-center">Event Name</td>
+                                    <td class="text-center">Entry</td>
+                                    <td class="text-center">Category</td>
+                                    <td class="text-center">Status</td>
+                                    <td class="text-center">Saved</td>
+                                    <td class="text-center">Start Date</td>
+                                    <td class="text-center">End Date</td>
+                                    <td class="text-center">Time</td>
+                                    <td class="text-center">Comments</td>
+                                    <td class="text-center">EAP</td>
+                                    <td class="text-center">EAP Comments</td>
+                                    <td class="text-center">Req. Doc.</td>
+                                    <td class="text-center">Att</td>
+                                    <td class="text-cente">Att type</td>
+                                    <td class="text-center">EE ID</td>
+                                    <td class="text-center">EE Status</td>
+                                    <td class="text-center">First Name</td>
+                                    <td class="text-center">Last Name</td>
+                                    <td class="text-center">Dept</td>
+                                    <td class="text-center">Position</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+								<tr class="info">
+                                    <td class="text-center success">1</td>
+                                    <td class="text-left success">1234</td>
+                                    <td class="text-left success">AB</td>
+                                    <td class="text-left success">Absent</td>
+                                    <td class="text-left success">1</td>
+                                    <td class="text-left success">Attendance</td>
+                                    <td class="text-left success">Res</td>
+                                    <td class="text-left success">20/03/2017 16:02</td>
+                                    <td class="text-left success">17/02/2017</td>
+                                    <td class="text-left success">19/02/2017</td>
+                                    <td class="text-left success">09:00</td>
+                                    <td class="text-left success">Comments</td>
+                                    <td class="text-left success">EAP</td>                                    
+                                    <td class="text-left success">EAP Comments</td>
+                                    <td class="text-left success">MC, Receipt</td>
+                                    <td class="text-left success">Receipt1.pdf</td>
+                                    <td class="text-left success">Receipt</td>
+                                    <td class="text-left success">12345</td>
+                                    <td class="text-left success">Active</td>
+                                    <td class="text-left success">John</td>
+                                    <td class="text-left success">Smith</td>
+                                    <td class="text-left success">Dinmoore</td>
+                                    <td class="text-left success">Boner</td>
+                                </tr>
+								<tr class="info">
+                                    <td class="text-center success">1</td>
+                                    <td class="text-left success">1234</td>
+                                    <td class="text-left success">AB</td>
+                                    <td class="text-left success">Absent</td>
+                                    <td class="text-left success">2</td>
+                                    <td class="text-left success">Attendance</td>
+                                    <td class="text-left success">Unres</td>
+                                    <td class="text-left success">22/03/2017 16:02</td>
+                                    <td class="text-left success">22/02/2017</td>
+                                    <td class="text-left success">25/02/2017</td>
+                                    <td class="text-left success">07:00</td>
+                                    <td class="text-left success">Comments</td>
+                                    <td class="text-left success">EAP</td>                                    
+                                    <td class="text-left success">EAP Comments</td>
+                                    <td class="text-left success">MC, Receipt</td>
+                                    <td class="text-left success">Receipt1.pdf</td>
+                                    <td class="text-left success">Receipt</td>
+                                    <td class="text-left success">12345</td>
+                                    <td class="text-left success">Active</td>
+                                    <td class="text-left success">John</td>
+                                    <td class="text-left success">Smith</td>
+                                    <td class="text-left success">Dinmoore</td>
+                                    <td class="text-left success">Boner</td>
+                                </tr>
+								<tr class="info">
+                                    <td class="text-center success">2</td>
+                                    <td class="text-left success">5678</td>
+                                    <td class="text-left success">AC</td>
+                                    <td class="text-left success">Called In</td>
+                                    <td class="text-left success">1</td>
+                                    <td class="text-left success">Attendance</td>
+                                    <td class="text-left success">Res</td>
+                                    <td class="text-left success">16/03/2017 16:02</td>
+                                    <td class="text-left success">01/02/2017</td>
+                                    <td class="text-left success">03/02/2017</td>
+                                    <td class="text-left success">06:30</td>
+                                    <td class="text-left success">Comments</td>
+                                    <td class="text-left success">EAP</td>                                    
+                                    <td class="text-left success">EAP Comments</td>
+                                    <td class="text-left success">MC, Receipt</td>
+                                    <td class="text-left success">Receipt1.pdf</td>
+                                    <td class="text-left success">Receipt</td>
+                                    <td class="text-left success">12345</td>
+                                    <td class="text-left success">Active</td>
+                                    <td class="text-left success">Black</td>
+                                    <td class="text-left success">Peter</td>
+                                    <td class="text-left success">Brooklyn</td>
+                                    <td class="text-left success">Killer</td>
+                                </tr>
+                               </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                <div class="row">
+                	<div class="col-md-8">
+                	&nbsp;
+                	</div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info">Export</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info" onclick="self.close()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"/>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker3').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker4').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker5').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+            $('#datetimepicker6').datetimepicker({
+                format: 'DD MMM YYYY'
+            });
+        });
+    </script>
+</body>
+</html>

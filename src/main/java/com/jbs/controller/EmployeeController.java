@@ -59,6 +59,15 @@ public class EmployeeController {
         return "wcmc";
     }
 
+    @RequestMapping(value = "/pm_report", method = RequestMethod.GET)
+    public String getPMreport() {
+        return "pm_report";
+    }
+    @RequestMapping(value = "/event_report", method = RequestMethod.GET)
+    public String getEvenreport() {
+        return "event_report";
+    }
+
     @ModelAttribute("listShift")
     public List<Shift> getListShift() {
         return Lists.newArrayList(shiftRepository.findAll());
