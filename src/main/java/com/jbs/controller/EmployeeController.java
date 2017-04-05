@@ -3,6 +3,7 @@ package com.jbs.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
 import com.jbs.entity.Department;
+import com.jbs.entity.EmployeeEvent;
 import com.jbs.entity.Section;
 import com.jbs.entity.Shift;
 import com.jbs.repository.DepartmentRepository;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by rizkykojek on 2/18/17.
@@ -87,16 +89,20 @@ public class EmployeeController {
     @RequestMapping(value = "/hrClearanceTable", method = RequestMethod.GET)
     public @ResponseBody
     DataTablesOutput getHrClearanceTable(@Valid DataTablesInput request) {
-
-        return employeeEventTableRepository.findAll(request);
+        AtomicInteger atomicInteger = new AtomicInteger(request.getStart() + 1);
+        DataTablesOutput<EmployeeEvent> results = employeeEventTableRepository.findAll(request);
+        results.getData().stream().forEach(s -> s.setCounterNumber(atomicInteger.getAndIncrement()));
+        return results;
     }
 
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/absentTable", method = RequestMethod.GET)
     public @ResponseBody
     DataTablesOutput getAbsentTable(@Valid DataTablesInput request) {
-
-        return employeeEventTableRepository.findAll(request);
+        AtomicInteger atomicInteger = new AtomicInteger(request.getStart() + 1);
+        DataTablesOutput<EmployeeEvent> results = employeeEventTableRepository.findAll(request);
+        results.getData().stream().forEach(s -> s.setCounterNumber(atomicInteger.getAndIncrement()));
+        return results;
     }
 
 

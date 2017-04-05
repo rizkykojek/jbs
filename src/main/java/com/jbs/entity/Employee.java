@@ -44,6 +44,9 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private Department department;
 
+    @JsonView(DataTablesOutput.View.class)
+    private String fullName;
+
     public String getFullName(){
         return firstName + " " + lastName;
     }

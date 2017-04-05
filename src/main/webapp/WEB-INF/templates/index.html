@@ -173,8 +173,16 @@
                 } ],
                 "order": [ [ 1, 'asc' ] ],
                 "columns": [
-                    { "data": "id"},
-                    { "data": "employee.firstName" },
+                    { "data": "id", render: function(data, type, row)
+                        {
+                            return row.counterNumber;
+                        }
+                    },
+                    { "data": "employee.firstName", render: function(data, type, row)
+                        {
+                            return "<a href='"+ _ctx +"summary'>"+row.employee.fullName+"</a>";
+                        }
+                    },
                     { "data": "employee.employeeNumber" },
                     { "data": "employee.position.name" },
                     { "data": "employee.department.name" },
@@ -201,8 +209,16 @@
                 } ],
                 "order": [ [ 1, 'asc' ] ],
                 "columns": [
-                    { "data": "id"},
-                    { "data": "employee.firstName" },
+                    { "data": "id", render: function(data, type, row)
+                        {
+                            return row.counterNumber;
+                        }
+                    },
+                    { "data": "employee.firstName", render: function(data, type, row)
+                        {
+                            return "<a href='"+ _ctx +"summary'>"+row.employee.fullName+"</a>";
+                        }
+                        },
                     { "data": "employee.employeeNumber" },
                     { "data": "employee.position.name" },
                     { "data": "employee.department.name" },

@@ -32,4 +32,7 @@ public class EmployeeEvent {
 
     @Column(name = "event_type")
     private Integer eventType;
+
+    @JsonView(DataTablesOutput.View.class)
+    private Integer counterNumber;
 }
