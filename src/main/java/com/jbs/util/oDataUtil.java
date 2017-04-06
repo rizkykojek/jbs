@@ -20,8 +20,8 @@ import java.net.URL;
  */
 public final class ODataUtil {
 
-    public static final String URI_API = "https://apisalesdemo4.successfactors.com/odata/v2";
-    public static final String AUTHORIZATION = "Basic " + new String(Base64.encodeBase64(("adminDDG@acejsd:Kucing1234!").getBytes()));
+    public static final String URI_API = "https://api10.successfactors.com/odata/v2";
+    public static final String AUTHORIZATION = "Basic " + new String(Base64.encodeBase64(("adminddg@jbsaustralD:daya111").getBytes()));
 
     public static final String HTTP_METHOD_PUT = "PUT";
     public static final String HTTP_METHOD_POST = "POST";
