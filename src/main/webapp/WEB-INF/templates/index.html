@@ -141,6 +141,46 @@
 
     <footer th:replace="fragments/footer :: footer"/>
 
+    <style type="text/css">
+        .dropbtn {
+            color: #337ab7;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            margin-left: 40px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #337ab7;
+            padding: 5px 5px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            text-decoration: underline;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+    </style>
+
     <script th:inline="javascript">
         $(document).ready(function(){
             var _ctx = /*[[@{/}]]*/ 'context';
@@ -180,7 +220,15 @@
                     },
                     { "data": "employee.firstName", render: function(data, type, row)
                         {
-                            return "<a href='"+ _ctx +"summary'>"+row.employee.fullName+"</a>";
+                            return '<div class="dropdown"><a class="dropbtn">'+ row.employee.fullName +'</a>' +
+                                        '<div class="dropdown-content">' +
+                                            '<a href="'+_ctx + 'summary">View Employee Summary</a>' +
+                                            '<a href="'+_ctx + 'event">Add Event</a>' +
+                                            '<a href="'+_ctx + 'performance">Add PM</a>' +
+                                            '<a href="#">View Employee Record</a>' +
+                                            '<a href="#">Add Leave</a>' +
+                                        '</div>' +
+                                    '</div>';
                         }
                     },
                     { "data": "employee.employeeNumber" },
@@ -216,9 +264,17 @@
                     },
                     { "data": "employee.firstName", render: function(data, type, row)
                         {
-                            return "<a href='"+ _ctx +"summary'>"+row.employee.fullName+"</a>";
+                            return '<div class="dropdown"><a class="dropbtn">'+ row.employee.fullName +'</a>' +
+                                        '<div class="dropdown-content">' +
+                                            '<a href="'+_ctx + 'summary">View Employee Summary</a>' +
+                                            '<a href="'+_ctx + 'event">Add Event</a>' +
+                                            '<a href="'+_ctx + 'performance">Add PM</a>' +
+                                            '<a href="#">View Employee Record</a>' +
+                                            '<a href="#">Add Leave</a>' +
+                                        '</div>' +
+                                    '</div>';
                         }
-                        },
+                    },
                     { "data": "employee.employeeNumber" },
                     { "data": "employee.position.name" },
                     { "data": "employee.department.name" },
@@ -226,7 +282,7 @@
                 ]
             });
         });
-        
+
     </script>
 </body>
 </html>
