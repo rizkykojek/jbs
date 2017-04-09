@@ -44,6 +44,7 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private Department department;
 
+    @Transient
     @JsonView(DataTablesOutput.View.class)
     private String fullName;
 
