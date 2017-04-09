@@ -8,7 +8,14 @@
     	    <div class="panel-heading">
     	    	<table border="0" width="100%">
     	    		<tr>
-                        <td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Summary Screen</b></h3></td>
+                        <td width="10%">
+                            <img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/>
+                        </td>
+                        <td align="center">
+                            <h3 class="panel-title">
+                                <b>Shift Summary Screen</b>
+                            </h3>
+                        </td>
     	    		    <td width="20%">
                             <form class="form-inline" style="margin-top: 1px">
                                 <div class="form-group">
@@ -49,46 +56,50 @@
                             </div>
                          </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="padding-left: 0px;">
                                 <div class="col-md-12">
                                     <h4><b>HR Clearance</b></h4>
                                 </div>
                                 <div class="col-md-12">
-                                    <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover" style="margin-top: -20px !important;">
-                                        <thead>
-                                        <tr class="info">
-                                            <td align="center"><b>No</b></td>
-                                            <td align="center"><b>Name</b></td>
-                                            <td align="center"><b>EE ID</b></td>
-                                            <td align="center"><b>Position</b></td>
-                                            <td align="center"><b>Department</b></td>
-                                            <td align="center"><b>Event</b></td>
-                                        </tr>
-                                        </thead>
-                                        <tbody style="font-size: 11px;">
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive"  style="font-size: 11px">
+                                        <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover" style="margin-top: -20px !important;">
+                                            <thead>
+                                            <tr class="info">
+                                                <td align="center"><b>No</b></td>
+                                                <td align="center"><b>Name</b></td>
+                                                <td align="center"><b>EE ID</b></td>
+                                                <td align="center"><b>Position</b></td>
+                                                <td align="center"><b>Department</b></td>
+                                                <td align="center"><b>Event</b></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody style="font-size: 11px;">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="padding-left: 0px;">
                                 <div class="col-md-12">
                                     <h4><b>Absent</b></h4>
                                 </div>
                                 <div class="col-md-12" >
-                                    <table id="absentTable" class="table table-bordered table-condensed table-hover" style="margin-top: -20px !important;">
-                                        <thead>
-                                        <tr class="info">
-                                            <td align="center"><b>No</b></td>
-                                            <td align="center"><b>Name</b></td>
-                                            <td align="center"><b>EE ID</b></td>
-                                            <td align="center"><b>Position</b></td>
-                                            <td align="center"><b>Department</b></td>
-                                            <td align="center"><b>Event</b></td>
-                                        </tr>
-                                        </thead>
-                                        <tbody style="font-size: 11px;">
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive"  style="font-size: 11px">
+                                        <table id="absentTable" class="table table-bordered table-condensed table-hover" style="margin-top: -20px !important;">
+                                            <thead>
+                                            <tr class="info">
+                                                <td align="center"><b>No</b></td>
+                                                <td align="center"><b>Name</b></td>
+                                                <td align="center"><b>EE ID</b></td>
+                                                <td align="center"><b>Position</b></td>
+                                                <td align="center"><b>Department</b></td>
+                                                <td align="center"><b>Event</b></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody style="font-size: 11px;">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -184,15 +195,6 @@
     <script th:inline="javascript">
         $(document).ready(function(){
             var _ctx = /*[[@{/}]]*/ 'context';
-
-            $('[data-toggle="popover"]').popover({
-                content : '<a href="/JBS/summary" th:href="@{/summary}">Employee Summary</a> ' +
-                    '<br/> <a href="/JBS/event" th:href="@{/event}">Add Event</a> ' +
-                    '<br/> <a href="/JBS/performance" th:href="@{/performance}">Add PM</a>'+
-                    '<br/> <a href="#">Employee Central</a>'+
-                    '<br/> <a href="#">Add Leave Record</a>',
-                html: true
-            });
 
             var hrClearanceTable = $('#hrClearanceTable').DataTable({
                 "ajax":         _ctx + "hrClearanceTable",
