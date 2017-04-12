@@ -84,16 +84,16 @@ INSERT INTO position(id, code, name) VALUES (8,'position_8', 'Engineering Superv
 INSERT INTO position(id, code, name) VALUES (9,'position_9', 'Rejects Lvl7');
 INSERT INTO position(id, code, name) VALUES (10,'position_10', 'Engineering Supervisor Salami/Slice Pack');
 
-/*INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (1,'230945','Derrick','Stewart',1,1);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (2,'610700','Alison','Bennett',2,2);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (3,'61368','Janice','Ferguson',3,3);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (4,'231605','Sammy','Day',4,4);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (5,'300110','Clifton','Ball',5,5);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (6,'230687','Brian','Huff',6,6);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (7,'1001575','Josh','Newman',7,7);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (8,'212812','Bradford','Montgomery',8,8);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (9,'300444','Rosa','Baldwin',9,9);
-INSERT INTO employee(id, employee_number, first_name, last_name, position_id, department_id) VALUES (10,'230935','Kurt','Grave',10,10);
+/*INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (1,'230945','Derrick','Stewart','Derrick Stewart',1,1,1,1);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (2,'610700','Alison','Bennett','Alison Bennett',2,2,2,2);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (3,'61368','Janice','Ferguson','Janice Ferguson',3,3,3,3);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (4,'231605','Sammy','Day','Sammy Day',4,4,4,1);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (5,'300110','Clifton','Ball','Clifton Ball',5,5,5,2);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (6,'230687','Brian','Huff','Brian Huff',6,6,6,3);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (7,'1001575','Josh','Newman','Josh Newman',7,7,7,1);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (8,'212812','Bradford','Montgomery','Bradford Montgomery',8,8,8,2);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (9,'300444','Rosa','Baldwin','Rosa Baldwin',9,9,9,3);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id) VALUES (10,'230935','Kurt','Grave','Kurt Grave',10,10,10,1);
 
 INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (1,1,'FW',1);
 INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (2,2,'AM',1);

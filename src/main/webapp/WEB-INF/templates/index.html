@@ -20,7 +20,7 @@
                             <form class="form-inline" style="margin-top: 1px">
                                 <div class="form-group">
                                     <label>Search:</label>
-                                    <input type="text" class="form-control" style="width: 50%"/>
+                                    <input id="searchNameId" type="text" class="form-control" style="width: 50%"/>
                                     <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
                                 </div>
                             </form>
@@ -40,14 +40,14 @@
                                 </label>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-control">
-                                    <option value="">Section</option>
+                                <select id="sectionId" class="form-control">
+                                    <option value="">Please Select Section</option>
                                     <option th:each="section : ${listSection}" th:value="${section.id}" th:text="${section.name}"></option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-control">
-                                    <option value="">Shift</option>
+                                <select id="shiftId" class="form-control">
+                                    <option value="">Please Select Shift</option>
                                     <option th:each="shift : ${listShift}" th:value="${shift.id}" th:text="${shift.name}"></option>
                                 </select>
                             </div>
@@ -200,7 +200,7 @@
                 "ajax":         _ctx + "hrClearanceTable",
                 "serverSide":   true,
                 "pagingType":   "full",
-                "searching":    false,
+                "searching":    true,
                 "lengthChange": true,
                 "pageLength": 10,
                 "lengthMenu": [ 5, 10, 25, 50 ],
@@ -214,7 +214,10 @@
                     "searchable": false,
                     "orderable": false,
                     "targets": 0
-                } ],
+                }, {
+                    "targets": [6,7,8],
+                    "visible": false
+                }  ],
                 "order": [ [ 1, 'asc' ] ],
                 "columns": [
                     { "data": "id", render: function(data, type, row)
@@ -238,7 +241,10 @@
                     { "data": "employee.employeeNumber" },
                     { "data": "employee.position.name" },
                     { "data": "employee.department.name" },
-                    { "data": "eventName" }
+                    { "data": "eventName" },
+                    { "data": "employee.section.id" },
+                    { "data": "employee.shift.id" },
+                    { "data": "employee.fullName" }
                 ]
             });
 
@@ -246,7 +252,7 @@
                 "ajax":         _ctx + "absentTable",
                 "serverSide":   true,
                 "pagingType":   "full",
-                "searching":    false,
+                "searching":    true,
                 "lengthChange": true,
                 "pageLength": 10,
                 "lengthMenu": [ 5, 10, 25, 50 ],
@@ -257,9 +263,12 @@
                     "infoPostFix":  "",
                 },
                 "columnDefs": [ {
+                    "targets": [0],
                     "searchable": false,
-                    "orderable": false,
-                    "targets": 0
+                    "orderable": false
+                }, {
+                    "targets": [6,7,8],
+                    "visible": false
                 } ],
                 "order": [ [ 1, 'asc' ] ],
                 "columns": [
@@ -284,9 +293,40 @@
                     { "data": "employee.employeeNumber" },
                     { "data": "employee.position.name" },
                     { "data": "employee.department.name" },
-                    { "data": "eventName" }
+                    { "data": "eventName" },
+                    { "data": "employee.section.id" },
+                    { "data": "employee.shift.id" },
+                    { "data": "employee.fullName" }
                 ]
             });
+
+            $("#sectionId").change(function() {
+                if ($("#sectionId").val() != "") {
+                    absentTable.columns(6).search($("#sectionId").val() + '+').draw();
+                    hrClearanceTable.columns(6).search($("#sectionId").val() + '+').draw();
+                } else {
+                    absentTable.columns(6).search("").draw();
+                    hrClearanceTable.columns(6).search("").draw();
+                }
+            });
+
+            $("#shiftId").change(function() {
+                if ($("#shiftId").val() != "") {
+                    absentTable.columns(7).search($("#shiftId").val() + '+').draw();
+                    hrClearanceTable.columns(7).search($("#shiftId").val() + '+').draw();
+                } else {
+                    absentTable.columns(7).search("").draw();
+                    hrClearanceTable.columns(7).search("").draw();
+                }
+            });
+
+            $("#searchNameId").keyup(function () {
+                absentTable.columns(8).search($("#searchNameId").val()).draw();
+                hrClearanceTable.columns(8).search($("#searchNameId").val()).draw();
+            });
+
+
+            $("#absentTable_filter,#hrClearanceTable_filter").css("display","none");
         });
 
     </script>

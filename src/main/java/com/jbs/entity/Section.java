@@ -1,6 +1,8 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +21,7 @@ public class Section {
 
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private Long id;
 
     @Column(unique = true, name = "code", nullable = false)

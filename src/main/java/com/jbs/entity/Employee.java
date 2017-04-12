@@ -34,6 +34,10 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private String lastName;
 
+    @Column(name = "full_name")
+    @JsonView(DataTablesOutput.View.class)
+    private String fullName;
+
     @ManyToOne
     @JoinColumn(name="position_id", nullable=false)
     @JsonView(DataTablesOutput.View.class)
@@ -44,12 +48,24 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private Department department;
 
-    @Transient
+    @ManyToOne
+    @JoinColumn(name="section_id", nullable=false)
     @JsonView(DataTablesOutput.View.class)
-    private String fullName;
+    private Section section;
 
-    public String getFullName(){
-        return firstName + " " + lastName;
+    @ManyToOne
+    @JoinColumn(name="shift_id", nullable=false)
+    @JsonView(DataTablesOutput.View.class)
+    private Shift shift;
+
+    @PrePersist
+    public void prePersist() {
+        this.fullName = this.firstName + " " + this.lastName;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.fullName = this.firstName + " " + this.lastName;
     }
 
 }
