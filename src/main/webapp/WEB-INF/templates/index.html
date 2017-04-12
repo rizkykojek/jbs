@@ -199,16 +199,18 @@
             var hrClearanceTable = $('#hrClearanceTable').DataTable({
                 "ajax":         _ctx + "hrClearanceTable",
                 "serverSide":   true,
+                "processing": true,
                 "pagingType":   "full",
                 "searching":    true,
                 "lengthChange": true,
                 "pageLength": 10,
                 "lengthMenu": [ 5, 10, 25, 50 ],
                 "language": {
-                    "info":         "Total _MAX_ entries",
+                    "info":         "Total _TOTAL_ entries",
                     "infoFiltered": "",
                     "infoEmpty":    "",
                     "infoPostFix":  "",
+                    "processing": "<div class='loader'></div>"
                 },
                 "columnDefs": [ {
                     "searchable": false,
@@ -251,16 +253,18 @@
             var absentTable = $('#absentTable').DataTable({
                 "ajax":         _ctx + "absentTable",
                 "serverSide":   true,
+                "processing": true,
                 "pagingType":   "full",
                 "searching":    true,
                 "lengthChange": true,
                 "pageLength": 10,
                 "lengthMenu": [ 5, 10, 25, 50 ],
                 "language": {
-                    "info":         "Total _MAX_ entries",
+                    "info":         "Total _TOTAL_ entries",
                     "infoFiltered": "",
                     "infoEmpty":    "",
                     "infoPostFix":  "",
+                    "processing": "<div class='loader'></div>"
                 },
                 "columnDefs": [ {
                     "targets": [0],
