@@ -52,7 +52,7 @@
                                 </select>
                             </div>
                             <div class="col-md-1">
-                                <button type="button" class="btn btn-link" style="margin-left: -10px">Clear Filters</button>
+                                <button id="clearFilterId" type="button" class="btn btn-link" style="margin-left: -10px">Clear Filters</button>
                             </div>
                          </div>
                         <div class="row">
@@ -323,6 +323,20 @@
             $("#searchNameId").keyup(function () {
                 absentTable.columns(8).search($("#searchNameId").val()).draw();
                 hrClearanceTable.columns(8).search($("#searchNameId").val()).draw();
+            });
+
+            $("#clearFilterId").click(function() {
+                absentTable.columns(6).search("");
+                absentTable.columns(7).search("");
+                absentTable.columns(8).search("");
+                absentTable.draw();
+
+                hrClearanceTable.columns(6).search("");
+                hrClearanceTable.columns(7).search("");
+                hrClearanceTable.columns(8).search("");
+                hrClearanceTable.draw();
+
+                $("#shiftId,#sectionId,#searchNameId").val("");
             });
 
 
