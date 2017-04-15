@@ -1,7 +1,9 @@
 package com.jbs.controller;
 
 import com.jbs.dto.PerformanceDto;
+import com.jbs.entity.Employee;
 import com.jbs.entity.Performance;
+import com.jbs.repository.EmployeeRepository;
 import com.jbs.repository.PerformanceRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +37,20 @@ public class PerformanceController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @RequestMapping(value = {"/performance/{performanceId}", "/performance"}, method = RequestMethod.GET)
-    public String getPerformance(@PathVariable Optional<Long> performanceId, final Model model) {
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @RequestMapping(value = {"/employee/{employeeId}/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
+    public String getPerformance(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
         if (performanceId.isPresent()) {
             Performance performance = performanceRepository.findOne(performanceId.get());
         } else {
             model.addAttribute(new PerformanceDto());
         }
+
+        Employee employee = employeeRepository.findOne(employeeId);
+        model.addAttribute(employee);
+
         return "performance";
     }
 

@@ -26,17 +26,31 @@
         </div>
         <div class="panel-body body-background">
             <div class="row">
-                <div class="col-md-2">
-                    <label>Name : Joe Blog</label>
-                </div>
-                <div class="col-md-2">
-                    <label>Employee ID : 123456</label>
-                </div>
-                <div class="col-md-2">
-                    <label>Department : Finace</label>
-                </div>
-                <div class="col-md-2">
-                    <label>Department : Finace</label>
+                <div class="col-md-8">
+                    <div class="col-md-2">
+                        <b>Name</b>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="normal" th:text="${employee.fullName}"/>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Employee ID</b>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="normal" th:text="${employee.employeeNumber}"/>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Department</b>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="normal" th:text="${employee.department.name}"/>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Position</b>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="normal" th:text="${employee.position.name}"/>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="well"
