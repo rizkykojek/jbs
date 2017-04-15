@@ -14,9 +14,6 @@ import org.springframework.jndi.JndiObjectFactoryBean;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-*//**
- * Created by rizkykojek on 3/23/17.
- *//*
 @SpringBootApplication
 public class AppBootApplication extends SpringBootServletInitializer {
 
