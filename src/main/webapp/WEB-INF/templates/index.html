@@ -115,7 +115,7 @@
                                             </div>
                                             &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/duties}" th:target="_blank">Suitable Duties</a><br/>
                                             &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/event_report}" th:target="_blank">Event Report</a><br/>
-                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/pm_report}" th:target="_blank">PM Report</a>
+                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/performance_report}" th:target="_blank">PM Report</a>
                                         </div>
                                     </div>
                                 </td>
@@ -231,7 +231,7 @@
                         {
                             return '<div class="dropdown"><a class="dropbtn">'+ row.employee.fullName +'</a>' +
                                         '<div class="dropdown-content">' +
-                                            '<a href="'+_ctx + 'summary">View Employee Summary</a>' +
+                                            '<a href="'+_ctx + 'summary/'+ row.employee.id +'">View Employee Summary</a>' +
                                             '<a href="'+_ctx + 'event">Add Event</a>' +
                                             '<a href="'+_ctx + 'performance">Add PM</a>' +
                                             '<a href="#">View Employee Record</a>' +
@@ -285,7 +285,7 @@
                         {
                             return '<div class="dropdown"><a class="dropbtn">'+ row.employee.fullName +'</a>' +
                                         '<div class="dropdown-content">' +
-                                            '<a href="'+_ctx + 'summary">View Employee Summary</a>' +
+                                            '<a href="'+_ctx + 'summary/'+ row.employee.id +'">View Employee Summary</a>' +
                                             '<a href="'+_ctx + 'event">Add Event</a>' +
                                             '<a href="'+_ctx + 'performance">Add PM</a>' +
                                             '<a href="#">View Employee Record</a>' +

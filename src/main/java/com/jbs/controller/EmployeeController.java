@@ -2,22 +2,14 @@ package com.jbs.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
-import com.jbs.entity.Department;
-import com.jbs.entity.EmployeeEvent;
-import com.jbs.entity.Section;
-import com.jbs.entity.Shift;
-import com.jbs.repository.DepartmentRepository;
-import com.jbs.repository.EmployeeEventTableRepository;
-import com.jbs.repository.SectionRepository;
-import com.jbs.repository.ShiftRepository;
+import com.jbs.entity.*;
+import com.jbs.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -41,13 +33,18 @@ public class EmployeeController {
     @Autowired
     private EmployeeEventTableRepository employeeEventTableRepository;
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndex() {
         return "index";
     }
 
-    @RequestMapping(value = "/summary", method = RequestMethod.GET)
-    public String getSummary() {
+    @RequestMapping(value = "/summary/{employeeId}", method = RequestMethod.GET)
+    public String getSummary(@PathVariable final Long employeeId, final Model model) {
+        Employee employee = employeeRepository.findOne(employeeId);
+        model.addAttribute(employee);
         return "summary";
     }
 
@@ -61,12 +58,13 @@ public class EmployeeController {
         return "wcmc";
     }
 
-    @RequestMapping(value = "/pm_report", method = RequestMethod.GET)
-    public String getPMreport() {
-        return "pm_report";
+    @RequestMapping(value = "/performance_report", method = RequestMethod.GET)
+    public String getPerformanceReport() {
+        return "performance_report";
     }
+
     @RequestMapping(value = "/event_report", method = RequestMethod.GET)
-    public String getEvenreport() {
+    public String getEventReport() {
         return "event_report";
     }
 

@@ -19,6 +19,7 @@ public class Employee {
 
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private Long id;
 
     @Column(name = "employee_number", unique = true, nullable = false)

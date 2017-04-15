@@ -132,3 +132,7 @@ code {
     cursor: inherit;
     display: block;
 }
+
+.normal {
+    font-weight: normal !important;
+}
