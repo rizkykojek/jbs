@@ -1,19 +1,27 @@
 package com.jbs.controller;
 
+import com.jbs.dto.PerformanceDto;
+import com.jbs.entity.Performance;
+import com.jbs.repository.PerformanceRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.jsolve.templ4docx.core.Docx;
 import pl.jsolve.templ4docx.core.VariablePattern;
 import pl.jsolve.templ4docx.variable.TextVariable;
 import pl.jsolve.templ4docx.variable.Variables;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * Created by rizkykojek on 3/5/17.
@@ -21,9 +29,36 @@ import java.util.Date;
 @Controller
 public class PerformanceController {
 
-    @RequestMapping(value = "/performance", method = RequestMethod.GET)
-    public String getPerformance() {
+    @Autowired
+    private PerformanceRepository performanceRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @RequestMapping(value = {"/performance/{performanceId}", "/performance"}, method = RequestMethod.GET)
+    public String getPerformance(@PathVariable Optional<Long> performanceId, final Model model) {
+        if (performanceId.isPresent()) {
+            Performance performance = performanceRepository.findOne(performanceId.get());
+        } else {
+            model.addAttribute(new PerformanceDto());
+        }
         return "performance";
+    }
+
+    @RequestMapping(value = "/performance/create", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public PerformanceDto create(@Valid @RequestBody PerformanceDto performanceDto) {
+        Performance performance = convertToEntity(performanceDto);
+        performance = performanceRepository.save(performance);
+        return convertToDto(performance);
+    }
+
+    @RequestMapping(value = "/performance/update/{performanceId}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@Valid @RequestBody PerformanceDto performanceDto, @PathVariable Long performanceId) {
+        Performance performance = convertToEntity(performanceDto);
+        performanceRepository.save(performance);
     }
 
     @RequestMapping(value = "/performance/generate_letter", method = RequestMethod.GET)
@@ -51,6 +86,21 @@ public class PerformanceController {
         } catch (IOException ex) {
             throw new RuntimeException("IOError writing file to output stream");
         }
+    }
+
+    private Performance convertToEntity(PerformanceDto performanceDto) {
+        Performance performance = modelMapper.map(performanceDto, Performance.class);
+        if (performanceDto.getId() != null) {
+            Performance oldPerformance = performanceRepository.findOne(performanceDto.getId());
+            performance.setId(oldPerformance.getId());
+        }
+
+        return  performance;
+    }
+
+    private PerformanceDto convertToDto(Performance performance) {
+        PerformanceDto performanceDto = modelMapper.map(performance, PerformanceDto.class);
+        return performanceDto;
     }
 
     private Variables preparingVariables() {

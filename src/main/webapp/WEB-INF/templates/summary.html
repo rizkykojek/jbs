@@ -85,7 +85,7 @@
                                 <tr>
                                     <td class="borderless">
                                         <b>Position: </b>
-                                        Packing Loin Lvl7
+                                        <label th:text="${employee.position.name}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>EE Type: </b>
@@ -101,7 +101,7 @@
                                     </td>
                                     <td class="borderless">
                                         <b>Shift: </b>
-                                        Day Shift
+                                        <label th:text="${employee.shift.name}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Roster: </b>
@@ -111,7 +111,7 @@
                                 <tr>
                                     <td class="borderless">
                                         <b>Department: </b>
-                                        OPS AND PROCESSES
+                                        <label th:text="${employee.department.name}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Status: </b>
