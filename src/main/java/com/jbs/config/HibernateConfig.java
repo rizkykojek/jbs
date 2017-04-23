@@ -59,10 +59,9 @@ public class HibernateConfig {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
 				new LocalContainerEntityManagerFactoryBean();
 
+		/** Uncomment this to running on Spring Boot */
 		entityManagerFactoryBean.setDataSource(this.getDataSource());
-		/** Uncomment this to enable Spring Boot
-		 *
-		 * entityManagerFactoryBean.setDataSource(AppBootApplication.getDataSource());*/
+		//entityManagerFactoryBean.setDataSource(AppBootApplication.getDataSource());
 
 		entityManagerFactoryBean
 				.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
