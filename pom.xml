@@ -10,12 +10,12 @@
 
   <!-- Uncomment this to enable SpringBoot for development only, don't forget comment spring-webvc -->
   <!-- lookup parent from repository -->
-  <!--<parent>
+  <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>1.5.1.RELEASE</version>
     <relativePath/>
-  </parent>-->
+  </parent>
 
   <properties>
     <java-version>1.8</java-version>
@@ -27,11 +27,11 @@
     <org.apache.olingo.version>2.0.8</org.apache.olingo.version>
   </properties>
   <dependencies>
-    <dependency>
+    <!--<dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${org.springframework-version}</version>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-jpa</artifactId>
@@ -167,7 +167,7 @@
     </dependency>
 
     <!-- Uncomment this to enable SpringBoot for development only, don't forget comment spring-webvc -->
-    <!--<dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
@@ -196,7 +196,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
-    </dependency>-->
+    </dependency>
   </dependencies>
   <build>
     <finalName>JBS</finalName>

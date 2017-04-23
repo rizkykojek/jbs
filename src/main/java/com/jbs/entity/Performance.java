@@ -58,11 +58,4 @@ public class Performance {
     @Column(name = "comment", length = 4000)
     private String comment;
 
-    public PerformanceDto transformToDto() {
-        return transformToDto(new PerformanceDto());
-    }
-
-    public PerformanceDto transformToDto(PerformanceDto dto) {
-        return dto;
-    }
 }

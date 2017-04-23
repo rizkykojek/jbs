@@ -55,7 +55,7 @@ public class PerformanceController {
     }
 
     @RequestMapping(value = "/employee/{employeeId}/performance/create", method = RequestMethod.POST)
-    public String create(@PathVariable Long employeeId, @Valid @ModelAttribute("performanceDto")PerformanceDto performanceDto, BindingResult bindingResult, Model model) {
+    public String create(@PathVariable Long employeeId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) {
         Employee employee = employeeRepository.findOne(employeeId);
         model.addAttribute(employee);
 
@@ -82,7 +82,7 @@ public class PerformanceController {
             docx.setVariablePattern(new VariablePattern("${", "}"));
 
             // fill template
-            Variables variables = preparingVariables();
+            Variables variables = preparingVariablesOnLetter();
             docx.fillTemplate(variables);
 
             // save filled .docx file
@@ -115,7 +115,7 @@ public class PerformanceController {
         return performanceDto;
     }
 
-    private Variables preparingVariables() {
+    private Variables preparingVariablesOnLetter() {
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
         Variables variables = new Variables();
         variables.addTextVariable(new TextVariable("${employee_id}", "1111222"));
