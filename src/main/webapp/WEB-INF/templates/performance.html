@@ -30,6 +30,9 @@
                     <div class="col-md-12">
                         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                             <p>Please correct values in error below: </p>
+                            <ul>
+                                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -183,10 +186,10 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="input-group" style="width: 100%">
-                            <label class="input-group-addon borderless no-background">Start Date :</label>
+                        <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startDate')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background ">Start Date :</label>
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control"/>
+                                <input type='text' class="form-control" th:field="*{startDate}"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -194,10 +197,10 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="input-group" style="width: 100%">
-                            <label class="input-group-addon borderless no-background">End Date :</label>
+                        <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('endDate')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background ">End Date :</label>
                             <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control"/>
+                                <input type='text' class="form-control" th:field="*{endDate}"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -205,10 +208,10 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="input-group" style="width: 100%">
-                            <label class="input-group-addon borderless no-background">Time :</label>
+                        <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('time')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background ">Time :</label>
                             <div class='input-group date' id='datetimepicker3'>
-                                <input type='text' class="form-control"/>
+                                <input type='text' class="form-control" th:field="*{time}"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -218,35 +221,35 @@
                 </div>
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Issued By :</label>
-                            <input type="text" class="form-control"/>
+                        <div class="input-group" th:class="${#fields.hasErrors('issuedBy')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background " style="padding-left: 0px">Issued By :</label>
+                            <input type="text" class="form-control" th:field="*{issuedBy}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">Place :</label>
-                            <input type="text" class="form-control"/>
+                        <div class="input-group" th:class="${#fields.hasErrors('place')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background ">Place :</label>
+                            <input type="text" class="form-control" th:field="*{place}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">Attendees :</label>
-                            <input type="text" class="form-control"/>
+                        <div class="input-group" th:class="${#fields.hasErrors('attendee')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background ">Attendees :</label>
+                            <input type="text" class="form-control" th:field="*{attendee}"/>
                         </div>
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Support Response :</label>
-                            <input type="text" class="form-control"/>
+                        <div class="input-group" th:class="${#fields.hasErrors('supportResponse')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background " style="padding-left: 0px">Support Response :</label>
+                            <input type="text" class="form-control" th:field="*{supportResponse}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">Support Person :</label>
-                            <input type="text" class="form-control"/>
+                        <div class="input-group" th:class="${#fields.hasErrors('supportPerson')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background ">Support Person :</label>
+                            <input type="text" class="form-control" th:field="*{supportPerson}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -261,9 +264,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="form-group">
+                        <div class="form-group" th:class="${#fields.hasErrors('comment')} ? 'form-group has-error' : 'form-group'">
                             <label class="normal">Comments :</label>
-                            <textarea class="form-control" rows="6"></textarea>
+                            <textarea class="form-control" rows="6" th:field="*{comment}"></textarea>
                         </div>
                     </div>
                     <div class="col-md-4">

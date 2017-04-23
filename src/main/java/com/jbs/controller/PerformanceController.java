@@ -8,10 +8,10 @@ import com.jbs.repository.PerformanceRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.jsolve.templ4docx.core.Docx;
 import pl.jsolve.templ4docx.core.VariablePattern;
@@ -54,17 +54,20 @@ public class PerformanceController {
         return "performance";
     }
 
-    @RequestMapping(value = "/performance/create", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    public PerformanceDto create(@Valid @RequestBody PerformanceDto performanceDto) {
-        Performance performance = convertToEntity(performanceDto);
-        performance = performanceRepository.save(performance);
-        return convertToDto(performance);
+    @RequestMapping(value = "/employee/{employeeId}/performance/create", method = RequestMethod.POST)
+    public String create(@PathVariable Long employeeId, @Valid @ModelAttribute("performanceDto")PerformanceDto performanceDto, BindingResult bindingResult, Model model) {
+        Employee employee = employeeRepository.findOne(employeeId);
+        model.addAttribute(employee);
+
+        if (!bindingResult.hasErrors()){
+            Performance performance = convertToEntity(performanceDto);
+            performance = performanceRepository.save(performance);
+            model.addAttribute(convertToDto(performance));
+        }
+        return "performance";
     }
 
     @RequestMapping(value = "/performance/update/{performanceId}", method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
     public void update(@Valid @RequestBody PerformanceDto performanceDto, @PathVariable Long performanceId) {
         Performance performance = convertToEntity(performanceDto);
         performanceRepository.save(performance);

@@ -135,4 +135,10 @@ code {
 
 .normal {
     font-weight: normal !important;
+    color: #555 !important;
 }
+
+.has-error label {
+    color: #a94442 !important;
+}
+

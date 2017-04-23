@@ -6,14 +6,22 @@ import org.apache.olingo.odata2.api.exception.ODataException;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -21,6 +29,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * Created by rizkykojek on 3/19/17.
@@ -48,11 +57,40 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     }
 
     @Override
+    public Validator getValidator() {
+        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+        return validator;
+    }
+
+    @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/default_theme/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/default_theme/js/");
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/default_theme/images/");
     }
+
+    //start internationalization
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("/resources/i18/language");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
+
+    @Bean
+    public LocaleResolver localeResolver(){
+        SessionLocaleResolver resolver = new SessionLocaleResolver ();
+        resolver.setDefaultLocale(new Locale("en"));
+        return resolver;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        registry.addInterceptor(interceptor);
+    }
+    //end internationalization
 
     //start Thymeleaf specific configuration
     @Bean
@@ -77,7 +115,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         resolver.setPrefix("/WEB-INF/templates/");
         resolver.setTemplateMode(TemplateMode.HTML);
         resolver.setSuffix(".html");
-        //resolver.setCacheable(false); //uncomment this if you want to use SpringDEvTool reload feature
+        resolver.setCacheable(false); //uncomment this if you want to use SpringDEvTool reload feature
         return resolver;
     }
     //end Thymeleaf specific configuration
