@@ -55,7 +55,7 @@ public class Performance {
     @Column(name = "is_supervisor_report")
     private Boolean isSupervisorReport;
 
-    @Column(name = "comment", columnDefinition = "TEXT")
+    @Column(name = "comment", length = 4000)
     private String comment;
 
     public PerformanceDto transformToDto() {
