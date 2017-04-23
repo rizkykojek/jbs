@@ -79,7 +79,6 @@ public class HibernateConfig {
 		properties.put("hibernate.dialect","org.hibernate.dialect.HANARowStoreDialect");
 		properties.put("hibernate.hbm2ddl.auto","create");
 		properties.put("hibernate.default_schema","JBSUSER");
-		//properties.put("hibernate.default_schema","KOJEK");
 		return properties;
 	}
 }
