@@ -6,4 +6,8 @@
     <res-ref-name>jdbc/DefaultDB</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
   </resource-ref>
+  <resource-ref>
+    <res-ref-name>EcmService</res-ref-name>
+    <res-type>com.sap.ecm.api.EcmService</res-type>
+  </resource-ref>
 </web-app>
