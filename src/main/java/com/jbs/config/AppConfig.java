@@ -14,6 +14,8 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -60,6 +62,13 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public Validator getValidator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         return validator;
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver(){
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(1000000);
+        return  multipartResolver;
     }
 
     @Override
