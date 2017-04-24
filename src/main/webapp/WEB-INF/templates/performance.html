@@ -24,7 +24,7 @@
                 </tr>
             </table>
         </div>
-        <form action="#" th:action="@{'/employee/' + ${employee.id} + '/performance/create'}" th:object="${performanceDto}" method="post">
+        <form action="#" th:action="@{'/employee/' + ${employee.id} + '/performance/create'}" th:object="${performanceDto}" method="post" enctype="multipart/form-data">
             <div class="panel-body body-background">
                 <div class="row">
                     <div class="col-md-12">
@@ -295,7 +295,7 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment :</label>
                             <label class="input-group-btn">
                                 <span class="btn btn-primary">
-                                    Browse&hellip; <input type="file" style="display: none;" multiple="true"/>
+                                    Browse&hellip; <input type="file" style="display: none;" multiple="true" th:field="*{files}"/>
                                 </span>
                             </label>
                             <input type="text" class="form-control" readonly="true"/>

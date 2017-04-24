@@ -1,6 +1,7 @@
 package com.jbs.controller;
 
 import com.jbs.dto.PerformanceDto;
+import com.jbs.entity.Attachment;
 import com.jbs.entity.Employee;
 import com.jbs.entity.Performance;
 import com.jbs.repository.EmployeeRepository;
@@ -12,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.jsolve.templ4docx.core.Docx;
 import pl.jsolve.templ4docx.core.VariablePattern;
 import pl.jsolve.templ4docx.variable.TextVariable;
@@ -23,7 +27,9 @@ import javax.validation.Valid;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by rizkykojek on 3/5/17.
@@ -105,6 +111,22 @@ public class PerformanceController {
         if (performanceDto.getId() != null) {
             Performance oldPerformance = performanceRepository.findOne(performanceDto.getId());
             performance.setId(oldPerformance.getId());
+        }
+
+        Set<Attachment> attachments = new HashSet<>();
+        performanceDto.getFiles().stream().filter(file -> !file.isEmpty()).forEach(file -> {
+            try {
+                Attachment attachment = new Attachment();
+                attachment.setDocumentName(file.getOriginalFilename());
+                attachment.setContentType(file.getContentType());
+                attachment.setFile(file.getBytes());
+                attachments.add(attachment);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        if (!attachments.isEmpty()) {
+            performance.setAttachments(attachments);
         }
 
         return  performance;

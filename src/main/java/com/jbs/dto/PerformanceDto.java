@@ -5,9 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rizkykojek on 4/15/17.
@@ -54,5 +56,7 @@ public class PerformanceDto {
 
     @NotEmpty
     private String comment;
+
+    private List<MultipartFile> files;
 
 }

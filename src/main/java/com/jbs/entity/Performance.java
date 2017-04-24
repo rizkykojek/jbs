@@ -1,10 +1,10 @@
 package com.jbs.entity;
 
-import com.jbs.dto.PerformanceDto;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by rizkykojek on 4/15/17.
@@ -57,5 +57,9 @@ public class Performance {
 
     @Column(name = "comment", length = 4000)
     private String comment;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="performance_attachment", joinColumns=@JoinColumn(name="performance_id"), inverseJoinColumns=@JoinColumn(name="attachment_id"))
+    public Set<Attachment> attachments;
 
 }
