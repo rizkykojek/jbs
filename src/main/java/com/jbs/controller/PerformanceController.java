@@ -1,17 +1,29 @@
 package com.jbs.controller;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.jbs.dto.PerformanceDto;
 import com.jbs.entity.Attachment;
 import com.jbs.entity.Employee;
 import com.jbs.entity.Performance;
+import com.jbs.repository.AttachmentRepository;
 import com.jbs.repository.EmployeeRepository;
 import com.jbs.repository.PerformanceRepository;
+import com.jbs.util.OpenCmisUtil;
+import com.sap.ecm.api.EcmService;
+import org.apache.chemistry.opencmis.client.api.Document;
+import org.apache.chemistry.opencmis.client.api.Folder;
+import org.apache.chemistry.opencmis.client.api.Session;
+import org.apache.chemistry.opencmis.commons.PropertyIds;
+import org.apache.chemistry.opencmis.commons.data.ContentStream;
+import org.apache.chemistry.opencmis.commons.enums.VersioningState;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,14 +34,12 @@ import pl.jsolve.templ4docx.core.VariablePattern;
 import pl.jsolve.templ4docx.variable.TextVariable;
 import pl.jsolve.templ4docx.variable.Variables;
 
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by rizkykojek on 3/5/17.
@@ -46,6 +56,12 @@ public class PerformanceController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private EcmService ecmService;
+
+    @Autowired
+    private AttachmentRepository attachmentRepository;
+
     @RequestMapping(value = {"/employee/{employeeId}/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
         if (performanceId.isPresent()) {
@@ -61,13 +77,14 @@ public class PerformanceController {
     }
 
     @RequestMapping(value = "/employee/{employeeId}/performance/create", method = RequestMethod.POST)
-    public String create(@PathVariable Long employeeId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) {
+    public String create(@PathVariable Long employeeId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws NamingException, UnsupportedEncodingException {
         Employee employee = employeeRepository.findOne(employeeId);
         model.addAttribute(employee);
 
         if (!bindingResult.hasErrors()){
             Performance performance = convertToEntity(performanceDto);
             performance = performanceRepository.save(performance);
+            saveToDocumentStorage(performance);
             model.addAttribute(convertToDto(performance));
         }
         return "performance";
@@ -120,6 +137,8 @@ public class PerformanceController {
                 attachment.setDocumentName(file.getOriginalFilename());
                 attachment.setContentType(file.getContentType());
                 attachment.setFile(file.getBytes());
+                String extension =  Iterables.getLast(Lists.newArrayList(StringUtils.split(attachment.getDocumentName(), ".")), null);
+                attachment.setExtension(extension);
                 attachments.add(attachment);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -135,6 +154,29 @@ public class PerformanceController {
     private PerformanceDto convertToDto(Performance performance) {
         PerformanceDto performanceDto = modelMapper.map(performance, PerformanceDto.class);
         return performanceDto;
+    }
+
+    private void saveToDocumentStorage(Performance performance) {
+        if (!performance.getAttachments().isEmpty()) {
+            Session session = OpenCmisUtil.openSession(ecmService);
+            Folder root = session.getRootFolder();
+
+            performance.getAttachments().stream().forEach( attachment -> {
+                Map<String, Object> properties = new HashMap<>();
+                properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
+                properties.put(PropertyIds.NAME, attachment.getDocumentName());
+
+                /** save file to HANA Document Storage */
+                byte[] content = attachment.getFile();
+                InputStream stream = new ByteArrayInputStream(content);
+                ContentStream contentStream = session.getObjectFactory().createContentStream(attachment.getDocumentName(), content.length, attachment.getContentType(), stream);
+                Document document = root.createDocument(properties, contentStream, VersioningState.NONE);
+
+                /** save documentId from HANA Document Storage*/
+                attachment.setDocumentId(document.getId());
+                attachmentRepository.save(attachment);
+            });
+        }
     }
 
     private Variables preparingVariablesOnLetter() {

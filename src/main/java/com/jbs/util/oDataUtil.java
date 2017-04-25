@@ -26,7 +26,7 @@ public final class ODataUtil {
     public static final String HTTP_METHOD_PUT = "PUT";
     public static final String HTTP_METHOD_POST = "POST";
     public static final String HTTP_METHOD_GET = "GET";
-    private static final String HTTP_METHOD_DELETE = "DELETE";
+    public static final String HTTP_METHOD_DELETE = "DELETE";
 
     public static final String HTTP_HEADER_CONTENT_TYPE = "Content-Type";
     public static final String HTTP_HEADER_ACCEPT = "Accept";
@@ -42,7 +42,7 @@ public final class ODataUtil {
 
     public static final boolean PRINT_RAW_CONTENT = false;
 
-    public static  Edm readEdm() throws IOException, ODataException {
+    public static  Edm initEdm() throws IOException, ODataException {
         print("\n----- Read Edm ------------------------------");
         InputStream content = execute(URI_API + SEPARATOR + METADATA, AUTHORIZATION, APPLICATION_XML, HTTP_METHOD_GET);
         return EntityProvider.readMetadata(content, false);

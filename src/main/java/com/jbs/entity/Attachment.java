@@ -22,16 +22,16 @@ public class Attachment {
     @Column(name = "document_id", unique = true)
     private String documentId;
 
-    @Column(name = "document_name")
+    @Column(name = "document_name", nullable = false)
     private String documentName;
 
-    @Column(name = "extension")
+    @Column(name = "extension", nullable = false)
     private String extension;
 
-    @Column(name="content_type")
+    @Column(name="content_type", nullable = false)
     private String contentType;
 
     @Lob
-    @Column(name = "file")
+    @Column(name = "file", nullable = false)
     private byte[] file;
 }

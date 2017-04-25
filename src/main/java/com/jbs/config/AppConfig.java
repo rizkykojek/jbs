@@ -1,6 +1,8 @@
 package com.jbs.config;
 
 import com.jbs.util.ODataUtil;
+import com.jbs.util.OpenCmisUtil;
+import com.sap.ecm.api.EcmService;
 import org.apache.olingo.odata2.api.edm.Edm;
 import org.apache.olingo.odata2.api.exception.ODataException;
 import org.modelmapper.ModelMapper;
@@ -30,6 +32,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import javax.naming.NamingException;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -50,7 +53,12 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Bean
     public Edm edm() throws IOException, ODataException {
-        return ODataUtil.readEdm();
+        return ODataUtil.initEdm();
+    }
+
+    @Bean
+    public EcmService ecmService() throws NamingException {
+        return OpenCmisUtil.initEcmService();
     }
 
     @Bean
