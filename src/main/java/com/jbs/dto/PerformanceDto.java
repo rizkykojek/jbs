@@ -59,4 +59,8 @@ public class PerformanceDto {
 
     private List<MultipartFile> files;
 
+    public Boolean isExist(){
+        return id != null && id != 0;
+    }
+
 }

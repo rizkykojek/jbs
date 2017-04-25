@@ -27,7 +27,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.jsolve.templ4docx.core.Docx;
@@ -63,15 +62,22 @@ public class PerformanceController {
     @Autowired
     private AttachmentRepository attachmentRepository;
 
-    @RequestMapping(value = {"/employee/{employeeId}/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
-    public String getPerformance(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
+    @RequestMapping(value = {"/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
+    public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
+        Employee employee = null;
+        PerformanceDto performanceDto = null;
+
         if (performanceId.isPresent()) {
             Performance performance = performanceRepository.findOne(performanceId.get());
-        } else {
-            model.addAttribute(new PerformanceDto());
+            employee = performance.getEmployee();
+            performanceDto = convertToDto(performance);
+
+        } else if (employeeId.isPresent()) {
+            employee = employeeRepository.findOne(employeeId.get());
+            performanceDto = new PerformanceDto();
         }
 
-        Employee employee = employeeRepository.findOne(employeeId);
+        model.addAttribute(performanceDto);
         model.addAttribute(employee);
 
         return "performance";
@@ -83,7 +89,7 @@ public class PerformanceController {
         model.addAttribute(employee);
 
         if (!bindingResult.hasErrors()){
-            Performance performance = convertToEntity(performanceDto);
+            Performance performance = convertToEntity(performanceDto, Optional.empty());
             performance = performanceRepository.save(performance);
             saveToDocumentStorage(performance);
             model.addAttribute(convertToDto(performance));
@@ -91,10 +97,19 @@ public class PerformanceController {
         return "performance";
     }
 
-    @RequestMapping(value = "/performance/update/{performanceId}", method = RequestMethod.PUT)
-    public void update(@Valid @RequestBody PerformanceDto performanceDto, @PathVariable Long performanceId) {
-        Performance performance = convertToEntity(performanceDto);
-        performanceRepository.save(performance);
+    @RequestMapping(value = "/employee/{employeeId}/performance/update/{performanceId}", method = RequestMethod.POST)
+    public String update(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws NamingException, UnsupportedEncodingException {
+        Employee employee = employeeRepository.findOne(employeeId);
+        model.addAttribute(employee);
+
+        if (!bindingResult.hasErrors()) {
+            Performance performance = convertToEntity(performanceDto, performanceId);
+            performance = performanceRepository.save(performance);
+            saveToDocumentStorage(performance);
+            model.addAttribute(convertToDto(performance));
+        }
+
+        return "performance";
     }
 
     @RequestMapping(value = "/performance/generate_letter", method = RequestMethod.GET)
@@ -124,11 +139,14 @@ public class PerformanceController {
         }
     }
 
-    private Performance convertToEntity(PerformanceDto performanceDto) {
-        Performance performance = modelMapper.map(performanceDto, Performance.class);
-        if (performanceDto.getId() != null) {
-            Performance oldPerformance = performanceRepository.findOne(performanceDto.getId());
-            performance.setId(oldPerformance.getId());
+    private Performance convertToEntity(PerformanceDto performanceDto, Optional<Long> performanceId) {
+        Performance performance = null;
+        if (performanceId.isPresent()) {
+            performance = performanceRepository.findOne(performanceId.get());
+            modelMapper.map(performanceDto, performance);
+            performance.setId(performanceId.get());
+        } else {
+            performance = modelMapper.map(performanceDto, Performance.class);
         }
 
         Set<Attachment> attachments = new HashSet<>();
