@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -157,7 +158,7 @@ public class PerformanceController {
     }
 
     private void saveToDocumentStorage(Performance performance) {
-        if (!performance.getAttachments().isEmpty()) {
+        if (!CollectionUtils.isEmpty(performance.getAttachments())) {
             Session session = OpenCmisUtil.openSession(ecmService);
             Folder root = session.getRootFolder();
 
