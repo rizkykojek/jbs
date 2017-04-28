@@ -17,12 +17,15 @@ public final class OpenCmisUtil {
     public static final String JNDI_LOOKUP_NAME = "java:comp/env/EcmService";
 
     public static EcmService initEcmService() throws NamingException {
-        InitialContext ctx = new InitialContext();
-        EcmService ecmService = (EcmService) ctx.lookup(JNDI_LOOKUP_NAME);
-
+        EcmService ecmService = ecmService();
         createRepository(ecmService);
 
         return  ecmService;
+    }
+
+    public static EcmService ecmService() throws NamingException {
+        InitialContext ctx = new InitialContext();
+        return (EcmService) ctx.lookup(JNDI_LOOKUP_NAME);
     }
 
     public static Session openSession(EcmService ecmService) {

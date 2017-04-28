@@ -91,7 +91,7 @@ public class PerformanceController {
         if (!bindingResult.hasErrors()){
             Performance performance = convertToEntity(performanceDto, Optional.empty());
             performance = performanceRepository.save(performance);
-            saveToDocumentStorage(performance);
+            //saveToDocumentStorage(performance);
             model.addAttribute(convertToDto(performance));
         }
         return "performance";
@@ -105,7 +105,7 @@ public class PerformanceController {
         if (!bindingResult.hasErrors()) {
             Performance performance = convertToEntity(performanceDto, performanceId);
             performance = performanceRepository.save(performance);
-            saveToDocumentStorage(performance);
+            //saveToDocumentStorage(performance);
             model.addAttribute(convertToDto(performance));
         }
 
