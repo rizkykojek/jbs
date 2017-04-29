@@ -31,16 +31,18 @@ public class UserTokenFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String user = httpRequest.getParameter("user");
-        if (StringUtils.isNotEmpty(user)) {
+        String userId = httpRequest.getParameter("user");
+        if (StringUtils.isNotEmpty(userId)) {
             Optional<Authentication> authentication = Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication());
-            boolean isCreateNewToken = !authentication.isPresent() || (authentication.isPresent() && !StringUtils.equals(authentication.get().getPrincipal().toString(), user));
+            boolean isCreateNewToken = !authentication.isPresent() ||
+                    (authentication.isPresent() && !StringUtils.equals(authentication.get().getPrincipal().toString(), userId));
 
             if (isCreateNewToken) {
-                Optional<Employee> employee = Optional.ofNullable(employeeRepository.findOne(Long.parseLong(user)));
+                Optional<Employee> employee = Optional.ofNullable(employeeRepository.findOne(Long.parseLong(userId)));
                 if (employee.isPresent()) {
+                    UserApplication userApplication = new UserApplication(httpRequest.getParameter("user"), "password", new ArrayList<>(), employee.get().getId(), employee.get().getFullName());
                     SecurityContextHolder.getContext()
-                            .setAuthentication(new UsernamePasswordAuthenticationToken(httpRequest.getParameter("user"), "password", new ArrayList<>()));
+                            .setAuthentication(new UsernamePasswordAuthenticationToken(userApplication, "password", new ArrayList<>()));
                 }
             }
         }
