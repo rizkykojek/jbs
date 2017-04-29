@@ -1,5 +1,6 @@
 package com.jbs.config;
 
+import com.google.common.collect.Sets;
 import com.jbs.util.ODataUtil;
 import com.jbs.util.OpenCmisUtil;
 import com.sap.ecm.api.EcmService;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -123,6 +125,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setEnableSpringELCompiler(true);
         engine.setTemplateResolver(templateResolver());
+        engine.setAdditionalDialects(Sets.newHashSet(new SpringSecurityDialect()));
         return engine;
     }
 

@@ -35,8 +35,8 @@
              		    <div class="row">
                             <div class="col-md-3">
                                 <label>
-                                    Welcome HR Admin <br/>
-                                    Date : 17 March 2017
+                                    Welcome <span th:text="${#authentication.principal.fullName}"/> <br/>
+                                    Date : <span th:text="${#dates.format(#dates.createNow(), 'dd MMMM yyyy')}"/>
                                 </label>
                             </div>
                             <div class="col-md-3">
