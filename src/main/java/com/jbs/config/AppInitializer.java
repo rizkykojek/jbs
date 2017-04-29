@@ -1,5 +1,6 @@
 package com.jbs.config;
 
+import com.jbs.config.security.SessionListener;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -20,9 +21,10 @@ public class AppInitializer implements WebApplicationInitializer {
         ctx.setServletContext(servletContext);
 
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
-
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
+
+        servletContext.addListener(new SessionListener());
 
     }
 
