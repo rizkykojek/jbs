@@ -1,7 +1,7 @@
 package com.jbs.config;
 
 import com.google.common.collect.Sets;
-import com.jbs.util.ODataUtil;
+import com.jbs.util.ODataUtilTest;
 import com.jbs.util.OpenCmisUtil;
 import com.sap.ecm.api.EcmService;
 import org.apache.olingo.odata2.api.edm.Edm;
@@ -55,7 +55,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Bean
     public Edm edm() throws IOException, ODataException {
-        return ODataUtil.initEdm();
+        return ODataUtilTest.initEdm();
     }
 
     @Bean

@@ -18,7 +18,7 @@ import java.net.URL;
 /**
  * Created by rizkykojek on 4/2/17.
  */
-public final class ODataUtil {
+public final class ODataUtilTest {
 
     public static final String URI_API = "https://api10.successfactors.com/odata/v2";
     public static final String AUTHORIZATION = "Basic " + new String(Base64.encodeBase64(("adminddg@jbsaustralD:daya111").getBytes()));

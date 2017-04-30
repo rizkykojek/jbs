@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
 import com.jbs.service.SchedulerService;
-import com.jbs.util.ODataUtil;
+import com.jbs.util.ODataUtilTest;
 import org.apache.olingo.odata2.api.edm.Edm;
 import org.apache.olingo.odata2.api.ep.entry.ODataEntry;
 import org.apache.olingo.odata2.api.ep.feed.ODataFeed;
@@ -48,7 +48,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Scheduled(fixedDelay = 1000000000, initialDelay = 1)
     @Transactional
     public void employeeDetails() throws Exception {
-        ODataFeed feed = ODataUtil.readFeed(edm, "PerPersonal");
+        ODataFeed feed = ODataUtilTest.readFeed(edm, "PerPersonal");
         List<Department> departments = Lists.newArrayList(departmentRepository.findAll());
         List<Position> positions = Lists.newArrayList(positionRepository.findAll());
         List<Section> sections = Lists.newArrayList(sectionRepository.findAll());
