@@ -24,7 +24,7 @@
                 </tr>
             </table>
         </div>
-        <form action="#" th:action="${performanceDto.isExist()} ? @{'/employee/' + ${employee.id} + '/performance/update/' + ${performanceDto.id}} : @{'/employee/' + ${employee.id} + '/performance/create'}" th:object="${performanceDto}" method="post" enctype="multipart/form-data">
+        <form action="#" th:action="${performanceDto.isExist()} ? @{'/employee/' + ${employee.id} + '/performance/update/' + ${performanceDto.id}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} : @{'/employee/' + ${employee.id} + '/performance/create'} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} " th:object="${performanceDto}" method="post" enctype="multipart/form-data">
             <div class="panel-body body-background">
                 <div class="row">
                     <div class="col-md-12">
