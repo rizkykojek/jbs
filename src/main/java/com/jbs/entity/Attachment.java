@@ -45,8 +45,7 @@ public class Attachment {
     @Column(name="content_type", nullable = false)
     private String contentType;
 
-    @Lob
-    @Column(name = "file", nullable = false)
+    @Transient
     private byte[] file;
 
     @PrePersist
