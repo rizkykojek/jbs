@@ -2,11 +2,10 @@ package com.jbs.entity;
 
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * Created by rizkykojek on 4/15/17.
@@ -16,7 +15,7 @@ import java.util.Set;
 @lombok.Getter
 @lombok.Setter
 @Entity
-@Audited
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 public class Performance {
 
     @Id
@@ -25,7 +24,6 @@ public class Performance {
 
     @ManyToOne
     @JoinColumn(name="employee_id", nullable=false)
-    @NotAudited
     private Employee employee;
 
     @Column(name = "start_date")
@@ -62,9 +60,52 @@ public class Performance {
     @Column(name = "comment", length = 4000)
     private String comment;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="performance_attachment", joinColumns=@JoinColumn(name="performance_id"), inverseJoinColumns=@JoinColumn(name="attachment_id"))
-    @NotAudited
-    public Set<Attachment> attachments;
+    @ManyToOne
+    @JoinColumn(name="attachment_1")
+    private Attachment attachment1;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_2")
+    private Attachment attachment2;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_3")
+    private Attachment attachment3;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_4")
+    private Attachment attachment4;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_5")
+    private Attachment attachment5;
+
+    public void addAttachment(Attachment attachment) {
+        if (attachment1 == null) {
+            attachment1 = attachment;
+        } else if (attachment2 == null) {
+            attachment2 = attachment;
+        } else if (attachment3 == null) {
+            attachment3 = attachment;
+        } else if (attachment4 == null) {
+            attachment4 = attachment;
+        } else if (attachment5 == null) {
+            attachment5 = attachment;
+        }
+    }
+
+    public void removeAttachment(long attachmentId) {
+        if (attachment1 != null && attachment1.getId() == attachmentId) {
+            attachment1 = null;
+        } else if (attachment2 != null && attachment2.getId() == attachmentId) {
+            attachment2 = null;
+        } else if (attachment3 != null && attachment3.getId() == attachmentId) {
+            attachment3 = null;
+        } else if (attachment4 != null && attachment4.getId() == attachmentId) {
+            attachment4 = null;
+        } else if (attachment5 != null && attachment5.getId() == attachmentId) {
+            attachment5 = null;
+        }
+    }
 
 }

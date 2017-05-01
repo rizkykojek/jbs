@@ -1,21 +1,17 @@
 package com.jbs.controller;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.jbs.dto.PerformanceDto;
-import com.jbs.entity.Attachment;
 import com.jbs.entity.Employee;
 import com.jbs.entity.Performance;
-import com.jbs.repository.AttachmentRepository;
 import com.jbs.repository.EmployeeRepository;
 import com.jbs.repository.PerformanceRepository;
+import com.jbs.service.PerformanceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +26,7 @@ import javax.validation.Valid;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Created by rizkykojek on 3/5/17.
@@ -50,7 +44,7 @@ public class PerformanceController {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    private AttachmentRepository attachmentRepository;
+    private PerformanceService performanceService;
 
     @RequestMapping(value = {"/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
@@ -74,26 +68,26 @@ public class PerformanceController {
     }
 
     @RequestMapping(value = "/employee/{employeeId}/performance/create", method = RequestMethod.POST)
-    public String create(@PathVariable Long employeeId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) {
+    public String create(@PathVariable Long employeeId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws Exception {
         Employee employee = employeeRepository.findOne(employeeId);
         model.addAttribute(employee);
 
         if (!bindingResult.hasErrors()){
             Performance performance = convertToEntity(performanceDto, Optional.empty());
-            performance = performanceRepository.save(performance);
+            performance = performanceService.save(performance, performanceDto.getFiles());
             model.addAttribute(convertToDto(performance));
         }
         return "performance";
     }
 
     @RequestMapping(value = "/employee/{employeeId}/performance/update/{performanceId}", method = RequestMethod.POST)
-    public String update(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) {
+    public String update(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws Exception {
         Employee employee = employeeRepository.findOne(employeeId);
         model.addAttribute(employee);
 
         if (!bindingResult.hasErrors()) {
             Performance performance = convertToEntity(performanceDto, performanceId);
-            performance = performanceRepository.save(performance);
+            performance = performanceService.save(performance, performanceDto.getFiles());
             model.addAttribute(convertToDto(performance));
         }
 
@@ -135,24 +129,6 @@ public class PerformanceController {
             performance.setId(performanceId.get());
         } else {
             performance = modelMapper.map(performanceDto, Performance.class);
-        }
-
-        Set<Attachment> attachments = new HashSet<>();
-        performanceDto.getFiles().stream().filter(file -> !file.isEmpty()).forEach(file -> {
-            try {
-                Attachment attachment = new Attachment();
-                attachment.setDocumentName(file.getOriginalFilename());
-                attachment.setContentType(file.getContentType());
-                attachment.setFile(file.getBytes());
-                String extension =  Iterables.getLast(Lists.newArrayList(StringUtils.split(attachment.getDocumentName(), ".")), null);
-                attachment.setExtension(extension);
-                attachments.add(attachment);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        if (!attachments.isEmpty()) {
-            performance.setAttachments(attachments);
         }
 
         return  performance;
