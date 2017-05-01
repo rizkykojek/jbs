@@ -1,6 +1,8 @@
 package com.jbs.entity;
 
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.Set;
 @lombok.Getter
 @lombok.Setter
 @Entity
+@Audited
 public class Performance {
 
     @Id
@@ -22,6 +25,7 @@ public class Performance {
 
     @ManyToOne
     @JoinColumn(name="employee_id", nullable=false)
+    @NotAudited
     private Employee employee;
 
     @Column(name = "start_date")
@@ -60,6 +64,7 @@ public class Performance {
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="performance_attachment", joinColumns=@JoinColumn(name="performance_id"), inverseJoinColumns=@JoinColumn(name="attachment_id"))
+    @NotAudited
     public Set<Attachment> attachments;
 
 }
