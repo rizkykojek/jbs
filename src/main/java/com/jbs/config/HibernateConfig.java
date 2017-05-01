@@ -76,6 +76,7 @@ public class HibernateConfig {
 		Properties properties = new Properties();
 		/*properties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
 		properties.put("hibernate.hbm2ddl.auto","create");*/
+		properties.put("org.hibernate.envers.audit_table_suffix","_history");
 		properties.put("hibernate.dialect","org.hibernate.dialect.HANARowStoreDialect");
 		properties.put("hibernate.hbm2ddl.auto","create");
 		properties.put("hibernate.default_schema","JBSUSER");
