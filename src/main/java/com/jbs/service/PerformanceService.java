@@ -3,6 +3,7 @@ package com.jbs.service;
 import com.jbs.entity.Performance;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -13,4 +14,6 @@ public interface PerformanceService {
     Performance save(Performance performance, List<MultipartFile> files) throws Exception;
 
     void removeAttachment(Long performanceId, Long attachmentId);
+
+    File generateLetterTemplate(Long letterTemplateId) throws Exception;
 }
