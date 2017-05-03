@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface PerformanceService {
 
-    public Performance save(Performance performance, List<MultipartFile> files) throws Exception;
+    Performance save(Performance performance, List<MultipartFile> files) throws Exception;
 
-    public void removeAttachment(Long performanceId, Long attachmentId);
+    void removeAttachment(Long performanceId, Long attachmentId);
 }

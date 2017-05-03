@@ -5,6 +5,6 @@ package com.jbs.service;
  */
 public interface SchedulerService {
 
-    public void employeeDetails() throws Exception;
+    void employeeDetails() throws Exception;
 
 }

@@ -18,7 +18,7 @@ public class PerformanceAction {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 2)
+    @Column(length = 2, unique = true)
     private String code;
 
     @Column(length = 100)

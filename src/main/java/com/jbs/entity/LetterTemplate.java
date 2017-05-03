@@ -18,7 +18,7 @@ public class LetterTemplate {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 3)
+    @Column(length = 3, unique = true)
     private String code;
 
     @Column(length = 100)

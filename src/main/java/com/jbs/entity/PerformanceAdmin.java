@@ -18,7 +18,7 @@ public class PerformanceAdmin {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 30)
+    @Column(length = 30, unique = true)
     private String code;
 
     @Column(length = 50)
@@ -29,9 +29,6 @@ public class PerformanceAdmin {
 
     @Column
     private Integer sequence;
-
-    @Column(name = "default_value")
-    private Boolean defaultValue;
 
     @Column
     private Boolean status;

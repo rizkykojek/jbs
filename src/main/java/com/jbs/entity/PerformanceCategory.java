@@ -18,7 +18,7 @@ public class PerformanceCategory {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 3)
+    @Column(length = 10, unique = true)
     private String code;
 
     @Column
