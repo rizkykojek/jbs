@@ -1,10 +1,8 @@
 package com.jbs.controller;
 
 import com.jbs.dto.PerformanceDto;
-import com.jbs.entity.Employee;
-import com.jbs.entity.Performance;
-import com.jbs.repository.EmployeeRepository;
-import com.jbs.repository.PerformanceRepository;
+import com.jbs.entity.*;
+import com.jbs.repository.*;
 import com.jbs.service.PerformanceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -22,6 +18,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -42,6 +39,15 @@ public class PerformanceController {
     @Autowired
     private PerformanceService performanceService;
 
+    @Autowired
+    private PerformanceCategoryRepository performanceCategoryRepository;
+
+    @Autowired
+    private PerformanceActionRepository performanceActionRepository;
+
+    @Autowired
+    private LetterTemplateRepository letterTemplateRepository;
+
     @RequestMapping(value = {"/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
         Employee employee = null;
@@ -60,6 +66,8 @@ public class PerformanceController {
         model.addAttribute(performanceDto);
         model.addAttribute(employee);
 
+        populateModelAttribute(model, performanceDto);
+
         return "performance";
     }
 
@@ -73,6 +81,9 @@ public class PerformanceController {
             performance = performanceService.save(performance, performanceDto.getFiles());
             model.addAttribute(convertToDto(performance));
         }
+
+        populateModelAttribute(model, performanceDto);
+
         return "performance";
     }
 
@@ -86,6 +97,8 @@ public class PerformanceController {
             performance = performanceService.save(performance, performanceDto.getFiles());
             model.addAttribute(convertToDto(performance));
         }
+
+        populateModelAttribute(model, performanceDto);
 
         return "performance";
     }
@@ -102,14 +115,32 @@ public class PerformanceController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
+    @RequestMapping(value = "/performance/categories", method = RequestMethod.GET)
+    public @ResponseBody List<PerformanceCategory> getCategories(@RequestParam Long parentCategoryId) {
+        return performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(parentCategoryId);
+    }
+
+    @RequestMapping(value = "/performance/actions", method = RequestMethod.GET)
+    public @ResponseBody List<PerformanceAction> getActions(@RequestParam Long parentCategoryId) {
+        return performanceActionRepository.findByCategoryId(parentCategoryId);
+    }
+
+    @RequestMapping(value = "/performance/letter_templates", method = RequestMethod.GET)
+    public @ResponseBody List<LetterTemplate> getLetterTemplates(@RequestParam Long actionId) {
+        return letterTemplateRepository.findByActionId(actionId);
+    }
+
+    private void populateModelAttribute(Model model, PerformanceDto performanceDto) {
+        model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
+        model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
+        model.addAttribute("listAction", performanceActionRepository.findByCategoryId(performanceDto.getParentCategoryId()));
+        model.addAttribute("listLetterTemplate", letterTemplateRepository.findByActionId(performanceDto.getActionId()));
+    }
+
     private Performance convertToEntity(PerformanceDto performanceDto, Optional<Long> performanceId) {
-        Performance performance = null;
+        Performance performance = modelMapper.map(performanceDto, Performance.class);;
         if (performanceId.isPresent()) {
-            performance = performanceRepository.findOne(performanceId.get());
-            modelMapper.map(performanceDto, performance);
             performance.setId(performanceId.get());
-        } else {
-            performance = modelMapper.map(performanceDto, Performance.class);
         }
 
         return performance;
@@ -117,6 +148,7 @@ public class PerformanceController {
 
     private PerformanceDto convertToDto(Performance performance) {
         PerformanceDto performanceDto = modelMapper.map(performance, PerformanceDto.class);
+        performanceDto.setParentCategoryId(performance.getCategory().getParentCategory().getId());
         return performanceDto;
     }
 

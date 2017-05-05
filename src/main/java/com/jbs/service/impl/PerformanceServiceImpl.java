@@ -4,8 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.jbs.entity.Attachment;
 import com.jbs.entity.Performance;
-import com.jbs.repository.AttachmentRepository;
-import com.jbs.repository.PerformanceRepository;
+import com.jbs.repository.*;
 import com.jbs.service.PerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -39,7 +38,7 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Transactional
     public Performance save(Performance performance, List<MultipartFile> files) throws Exception {
         for (MultipartFile file : files) {
-            if (!files.isEmpty()) {
+            if (!file.isEmpty()) {
                 Attachment attachment = new Attachment();
                 attachment.setDocumentName(file.getOriginalFilename());
                 attachment.setContentType(file.getContentType());

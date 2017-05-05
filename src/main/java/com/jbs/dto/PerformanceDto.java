@@ -21,7 +21,19 @@ public class PerformanceDto {
 
     private Long id;
 
+    @NotNull
     private Long employeeId;
+
+    @NotNull
+    private Long parentCategoryId;
+
+    @NotNull
+    private Long categoryId;
+
+    @NotNull
+    private Long actionId;
+
+    private Long letterTemplateId;
 
     @NotNull
     @DateTimeFormat(pattern = "dd MMM YYYY")
@@ -50,7 +62,8 @@ public class PerformanceDto {
     @NotEmpty
     private String supportPerson;
 
-    private Boolean isInterpreter;
+    @NotEmpty
+    private String interpreter;
 
     private Boolean isSupervisorReport;
 
@@ -59,7 +72,7 @@ public class PerformanceDto {
 
     private List<MultipartFile> files;
 
-    public Boolean isExist(){
+    public Boolean isUpdate(){
         return id != null && id != 0;
     }
 

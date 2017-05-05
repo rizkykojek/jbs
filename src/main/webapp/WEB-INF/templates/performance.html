@@ -24,7 +24,10 @@
                 </tr>
             </table>
         </div>
-        <form action="#" th:action="${performanceDto.isExist()} ? @{'/employee/' + ${employee.id} + '/performance/update/' + ${performanceDto.id}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} : @{'/employee/' + ${employee.id} + '/performance/create'} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} " th:object="${performanceDto}" method="post" enctype="multipart/form-data">
+        <form action="#" th:action="${performanceDto.isUpdate()} ?
+                @{'/employee/' + ${employee.id} + '/performance/update/' + ${performanceDto.id}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} :
+                @{'/employee/' + ${employee.id} + '/performance/create'} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} " th:object="${performanceDto}"
+              method="post" enctype="multipart/form-data">
             <div class="panel-body body-background">
                 <div class="row">
                     <div class="col-md-12">
@@ -71,32 +74,26 @@
                             </div>
                             <div class="row text-left">
                                 <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Add
-                                    Leave</a>
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Event
-                                    Report</a>
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Event Report</a>
                                 </div>
                             </div>
                             <div class="row text-left">
                                 <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" th:href="@{/event}"
-                                                                                  style="color: black">Add Event</a>
+                                    <label style="color: black">&bull;</label> <a href="#" th:href="@{/event}" style="color: black">Add Event</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">PM
-                                    Report</a>
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">PM Report</a>
                                 </div>
                             </div>
                             <div class="row text-left">
                                 <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" th:href="@{/performance}"
-                                                                                  style="color: black">Add PM</a>
+                                    <label style="color: black">&bull;</label> <a href="#" th:href="@{/performance}" style="color: black">Add PM</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Employee
-                                    Central</a>
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Employee Central</a>
                                 </div>
                             </div>
                             <div class="row text-left">
@@ -107,57 +104,29 @@
                 </div>
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Action :</label>
-                            <select class="form-control">
-                                <option value="">Abandonment of employment</option>
-                                <option value="">Warning in lieu of termination</option>
-                                <option value="">Re-confirmation of final</option>
-                                <option value="">Supervisor&rsquo;s report</option>
-                                <option value="">Counselling session</option>
-                                <option value="">Written counselling</option>
-                                <option value="">Suspension</option>
-                                <option value="">1st warming</option>
-                                <option value="">2nd warning</option>
-                                <option value="">Final warning</option>
-                                <option value="">Attendance monitoring</option>
-                                <option value="">Written response</option>
-                                <option value="">Stood Aside</option>
+                        <div class="input-group" th:class="${#fields.hasErrors('parentCategoryId')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Category :</label>
+                            <select id="parentCategoryId" class="form-control" th:field="*{parentCategoryId}">
+                                <option value="">-- Please Select --</option>
+                                <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">Category :</label>
-                            <select class="form-control">
-                                <option value="">Complaints Policy</option>
-                                <option value="">OCP – Communication Policy</option>
-                                <option value="">OFS – Food Safety Policy</option>
-                                <option value="">OPP – Privacy Policy</option>
-                                <option value="">OTP – Training Policy</option>
-                                <option value="">ODP – Discrimination Policy</option>
-                                <option value="">OWS – Workspace Safety Policy</option>
-                                <option value="">OEP – Environment Policy</option>
-                                <option value="">OEC – Employment Contract</option>
-                                <option value="">Standard Terms and Conditions</option>
-                                <option value="">OHP – Harassment Policy</option>
-                                <option value="">Trade practices</option>
-                                <option value="">Code of conduct</option>
-                                <option value="">Contact of interest</option>
-                                <option value="">Alcohol and other drugs</option>
-                                <option value="">ID card policy</option>
-                                <option value="">Animal welfare</option>
-                                <option value="">Workplace rehab</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
+                        <div class="input-group" th:class="${#fields.hasErrors('categoryId')} ? 'input-group has-error' : 'input-group'">
                             <label class="input-group-addon borderless no-background">Sub Category :</label>
-                            <select class="form-control">
-                                <option value="">Throwing Food</option>
-                                <option value="">Physical Violence</option>
-                                <option value="">Other</option>
+                            <select id="categoryId" class="form-control" th:field="*{categoryId}">
+                                <option value="">-- Please Select --</option>
+                                <option th:each="category : ${listSubCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group" th:class="${#fields.hasErrors('actionId')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background">Action :</label>
+                            <select id="actionId" class="form-control" th:field="*{actionId}">
+                                <option value="">-- Please Select --</option>
+                                <option th:each="action : ${listAction}" th:value="${action.id}" th:text="${action.name}"></option>
                             </select>
                         </div>
                     </div>
@@ -166,22 +135,9 @@
                     <div class="col-md-3">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Template :</label>
-                            <select class="form-control">
-                                <option value="">Abandonment of employment</option>
-                                <option value="">Warning in lieu of termination</option>
-                                <option value="">Warning in lieu of termination – Letter 1</option>
-                                <option value="">Warning in lieu of termination – Letter 2</option>
-                                <option value="">Warning in lieu of termination – Letter 3</option>
-                                <option value="">Re-confirmation of final</option>
-                                <option value="">Supervisor�s report</option>
-                                <option value="">Counselling session</option>
-                                <option value="">Written counselling</option>
-                                <option value="">Suspension</option>
-                                <option value="">1st warming</option>
-                                <option value="">2nd warning</option>
-                                <option value="">Final warning</option>
-                                <option value="">Attendance monitoring</option>
-                                <option value="">Written response</option>
+                            <select id="letterTemplateId" class="form-control" th:field="*{letterTemplateId}">
+                                <option value="">-- Please Select --</option>
+                                <option th:each="template : ${listLetterTemplate}" th:value="${template.id}" th:text="${template.name}"></option>
                             </select>
                         </div>
                     </div>
@@ -255,9 +211,9 @@
                     <div class="col-md-4">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background">Interpreter :</label>
-                            <select class="form-control">
-                                <option value="">Yes</option>
-                                <option value="">No</option>
+                            <select class="form-control" th:field="*{interpreter}">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
                             </select>
                         </div>
                     </div>
@@ -514,6 +470,58 @@
                 } else {
                     if (log) alert(log);
                 }
+            });
+
+            $('#parentCategoryId').change( function() {
+                $.getJSON('/performance/categories', {
+                    parentCategoryId : $(this).val(),
+                    ajax : 'true'
+                }, function(data) {
+                    var html = '<option value="">-- Please Select --</option>';
+                    var len = data.length;
+                    for ( var i = 0; i < len; i++) {
+                        html += '<option value="' + data[i].id + '">'
+                                + data[i].name + '</option>';
+                    }
+                    html += '</option>';
+
+                    $('#categoryId').html(html);
+                });
+
+                $.getJSON('/performance/actions', {
+                    parentCategoryId : $(this).val(),
+                    ajax : 'true'
+                }, function(data) {
+                    var html = '<option value="">-- Please Select --</option>';
+                    var len = data.length;
+                    for ( var i = 0; i < len; i++) {
+                        html += '<option value="' + data[i].id + '">'
+                                + data[i].name + '</option>';
+                    }
+                    html += '</option>';
+
+                    $('#actionId').html(html);
+                });
+
+                $('#letterTemplateIdId').html('<option value="">-- Please Select --</option>');
+            });
+
+            $('#actionId').change( function() {
+                $.getJSON('/performance/letter_templates', {
+                    actionId : $(this).val(),
+                    ajax : 'true'
+                }, function(data) {
+                    var html = '<option value="">-- Please Select --</option>';
+                    var len = data.length;
+                    var len = data.length;
+                    for ( var i = 0; i < len; i++) {
+                        html += '<option value="' + data[i].id + '">'
+                                + data[i].name + '</option>';
+                    }
+                    html += '</option>';
+
+                    $('#letterTemplateId').html(html);
+                });
             });
         });
 

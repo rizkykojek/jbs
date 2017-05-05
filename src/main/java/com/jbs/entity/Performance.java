@@ -26,6 +26,18 @@ public class Performance {
     @JoinColumn(name="employee_id", nullable=false)
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name="performance_category_id", nullable=false)
+    private PerformanceCategory category;
+
+    @ManyToOne
+    @JoinColumn(name="performance_action_id", nullable=false)
+    private PerformanceAction action;
+
+    @ManyToOne
+    @JoinColumn(name="letter_template_id")
+    private LetterTemplate letterTemplate;
+
     @Column(name = "start_date")
     private Date startDate;
 
@@ -51,8 +63,8 @@ public class Performance {
     @Column(name = "support_person")
     private String supportPerson;
 
-    @Column(name = "is_interpreter")
-    private Boolean isInterpreter;
+    @Column(name = "interpreter")
+    private String interpreter;
 
     @Column(name = "is_supervisor_report")
     private Boolean isSupervisorReport;

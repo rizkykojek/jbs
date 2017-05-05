@@ -35,8 +35,8 @@ INSERT INTO letter_template(id, code, name, template_file, action_id, status) VA
 INSERT INTO letter_template(id, code, name, template_file, action_id, status) VALUES (2, '002', 'Abandonment of employement letter 2', 'letter.docx', 1, true);
 INSERT INTO letter_template(id, code, name, template_file, action_id, status) VALUES (3, '003', 'Abandonment of employement letter 3', 'letter.docx', 1, true);
 INSERT INTO letter_template(id, code, name, template_file, action_id, status) VALUES (4, '004', 'Failure to notify of Absence (1)', 'letter.docx', 2, true);
-INSERT INTO letter_template(id, code, name, template_file, action_id, status) VALUES (5, '005', 'Failure to notify of Absence (1)', 'letter.docx', 2, true);
-INSERT INTO letter_template(id, code, name, template_file, action_id, status) VALUES (6, '006', 'Failure to notify of Absence (1)', 'letter.docx', 2, true);
+INSERT INTO letter_template(id, code, name, template_file, action_id, status) VALUES (5, '005', 'Failure to notify of Absence (2)', 'letter.docx', 2, true);
+INSERT INTO letter_template(id, code, name, template_file, action_id, status) VALUES (6, '006', 'Failure to notify of Absence (3)', 'letter.docx', 2, true);
 
 INSERT INTO department(id, code, name) VALUES (1,'department_1', 'ADELAIDE');
 INSERT INTO department(id, code, name) VALUES (2,'department_2', 'BEEF BUYERS');
