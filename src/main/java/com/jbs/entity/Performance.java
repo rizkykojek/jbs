@@ -1,10 +1,13 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.jbs.util.UserSessionUtil;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 import org.joda.time.DateTime;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +25,7 @@ public class Performance {
 
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private Long id;
 
     @ManyToOne
@@ -34,6 +38,7 @@ public class Performance {
 
     @ManyToOne
     @JoinColumn(name="performance_action_id", nullable=false)
+    @JsonView(DataTablesOutput.View.class)
     private PerformanceAction action;
 
     @ManyToOne
@@ -41,13 +46,19 @@ public class Performance {
     private LetterTemplate letterTemplate;
 
     @Column(name = "start_date")
+    @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
     private Date startDate;
 
     @Column(name = "end_date")
+    @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
     private Date endDate;
 
     @Temporal(TemporalType.TIME)
     @Column(name = "start_time")
+    @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
     private Date startTime;
 
     @Column(name = "issued_by")
@@ -95,9 +106,12 @@ public class Performance {
     private Attachment attachment5;
 
     @Column(name = "last_update_at")
+    @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
     private Date lastUpdateAt;
 
     @Column(name = "last_update_by")
+    @JsonView(DataTablesOutput.View.class)
     private Long lastUpdateBy;
 
     @PrePersist

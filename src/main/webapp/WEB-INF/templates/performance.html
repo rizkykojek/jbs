@@ -340,46 +340,19 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-hover">
+                            <table id="historyTable" class="table table-bordered table-condensed table-hover">
                                 <thead>
                                     <tr class="success">
-                                        <td class="text-center">Date &amp; Time</td>
-                                        <td class="text-center">Action ID</td>
+                                        <td class="text-center">PM ID</td>
                                         <td class="text-center">Action</td>
                                         <td class="text-center">Start Date</td>
+                                        <td class="text-center">Time</td>
                                         <td class="text-center">End Date</td>
-                                        <td class="text-center">Comments</td>
-                                        <td class="text-center">By</td>
+                                        <td class="text-center">Last Modified Date</td>
+                                        <td class="text-center">Last Modified By</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="info">
-                                        <td class="text-center success">4 feb 2017 16&#58;10PM</td>
-                                        <td class="text-center success">2044</td>
-                                        <td class="text-center success">2nd Warning</td>
-                                        <td class="text-center success">1 feb 2017</td>
-                                        <td class="text-center success">4 feb 2017</td>
-                                        <td class="text-center success">Issued 2nd Warning Letter</td>
-                                        <td class="text-center success">Yong Hull Lee</td>
-                                    </tr>
-                                    <tr class="info">
-                                        <td class="text-center success">4 feb 2017 16&#58;10PM</td>
-                                        <td class="text-center success">2044</td>
-                                        <td class="text-center success">1st Warning</td>
-                                        <td class="text-center success">1 feb 2017</td>
-                                        <td class="text-center success">4 feb 2017</td>
-                                        <td class="text-center success">Issued 1st Warning Letter</td>
-                                        <td class="text-center success">Sarah Wong</td>
-                                    </tr>
-                                    <tr class="info">
-                                        <td class="text-center success">&nbsp;</td>
-                                        <td class="text-center success"></td>
-                                        <td class="text-center success"></td>
-                                        <td class="text-center success"></td>
-                                        <td class="text-center success"></td>
-                                        <td class="text-center success"></td>
-                                        <td class="text-center success"></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -431,8 +404,53 @@
 
 <footer th:replace="fragments/footer :: footer"/>
 
-<script type="text/javascript">
-    $(function () {
+<script th:inline="javascript">
+    $(document).ready(function(){
+        var _ctx = /*[[@{/}]]*/ 'context';
+
+        var historyTable = $('#historyTable').DataTable({
+            "ajax":         _ctx + "performance/history",
+            "serverSide":   true,
+            "processing": true,
+            "pagingType":   "simple",
+            "searching":    false,
+            "lengthChange": false,
+            "language": {
+                "info":         "",
+                "infoFiltered": "",
+                "infoEmpty":    "",
+                "infoPostFix":  "",
+                "processing": "<div class='loader'></div>"
+            },
+            "columnDefs": [{
+                "targets": [0,1,2,3,4,5,6],
+                "searchable": false,
+                "orderable": false
+            }],
+            "columns": [
+                { "data": "id", render: function(data, type, row)
+                    {
+                        return '<a href="' + _ctx + 'performance/'+ row.id +'">' + row.id + '</a>';
+                    }
+                },
+                { "data": "action.name", render: function(data, type, row)
+                    {
+                        return row.action.name + ' (' + row.action.code + ')';
+                    }
+                },
+                { "data": "startDate" },
+                { "data": "startTime" },
+                { "data": "endDate" },
+                { "data": "lastUpdateAt" },
+                { "data": "lastUpdateBy" }
+            ],
+            "rowCallback": function( row, data, index ) {
+                    $(row).addClass('info');
+            }
+        });
+
+        $("#historyTable_paginate").hide();
+
         $('#datetimepicker1').datetimepicker({
             format: 'DD MMM YYYY'
         });
@@ -447,6 +465,58 @@
         });
         $('#datetimepicker5').datetimepicker({
             format: 'DD MMM YYYY'
+        });
+
+        $('#parentCategoryId').change( function() {
+            $.getJSON('/performance/categories', {
+                parentCategoryId : $(this).val(),
+                ajax : 'true'
+            }, function(data) {
+                var html = '<option value="">-- Please Select --</option>';
+                var len = data.length;
+                for ( var i = 0; i < len; i++) {
+                    html += '<option value="' + data[i].id + '">'
+                            + data[i].name + '</option>';
+                }
+                html += '</option>';
+
+                $('#categoryId').html(html);
+            });
+
+            $.getJSON('/performance/actions', {
+                parentCategoryId : $(this).val(),
+                ajax : 'true'
+            }, function(data) {
+                var html = '<option value="">-- Please Select --</option>';
+                var len = data.length;
+                for ( var i = 0; i < len; i++) {
+                    html += '<option value="' + data[i].id + '">'
+                            + data[i].name + '</option>';
+                }
+                html += '</option>';
+
+                $('#actionId').html(html);
+            });
+
+            $('#letterTemplateIdId').html('<option value="">-- Please Select --</option>');
+        });
+
+        $('#actionId').change( function() {
+            $.getJSON('/performance/letter_templates', {
+                actionId : $(this).val(),
+                ajax : 'true'
+            }, function(data) {
+                var html = '<option value="">-- Please Select --</option>';
+                var len = data.length;
+                var len = data.length;
+                for ( var i = 0; i < len; i++) {
+                    html += '<option value="' + data[i].id + '">'
+                            + data[i].name + '</option>';
+                }
+                html += '</option>';
+
+                $('#letterTemplateId').html(html);
+            });
         });
     });
 
@@ -470,58 +540,6 @@
                 } else {
                     if (log) alert(log);
                 }
-            });
-
-            $('#parentCategoryId').change( function() {
-                $.getJSON('/performance/categories', {
-                    parentCategoryId : $(this).val(),
-                    ajax : 'true'
-                }, function(data) {
-                    var html = '<option value="">-- Please Select --</option>';
-                    var len = data.length;
-                    for ( var i = 0; i < len; i++) {
-                        html += '<option value="' + data[i].id + '">'
-                                + data[i].name + '</option>';
-                    }
-                    html += '</option>';
-
-                    $('#categoryId').html(html);
-                });
-
-                $.getJSON('/performance/actions', {
-                    parentCategoryId : $(this).val(),
-                    ajax : 'true'
-                }, function(data) {
-                    var html = '<option value="">-- Please Select --</option>';
-                    var len = data.length;
-                    for ( var i = 0; i < len; i++) {
-                        html += '<option value="' + data[i].id + '">'
-                                + data[i].name + '</option>';
-                    }
-                    html += '</option>';
-
-                    $('#actionId').html(html);
-                });
-
-                $('#letterTemplateIdId').html('<option value="">-- Please Select --</option>');
-            });
-
-            $('#actionId').change( function() {
-                $.getJSON('/performance/letter_templates', {
-                    actionId : $(this).val(),
-                    ajax : 'true'
-                }, function(data) {
-                    var html = '<option value="">-- Please Select --</option>';
-                    var len = data.length;
-                    var len = data.length;
-                    for ( var i = 0; i < len; i++) {
-                        html += '<option value="' + data[i].id + '">'
-                                + data[i].name + '</option>';
-                    }
-                    html += '</option>';
-
-                    $('#letterTemplateId').html(html);
-                });
             });
         });
 

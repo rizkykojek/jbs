@@ -85,8 +85,7 @@ public class EmployeeController {
 
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/hrClearanceTable", method = RequestMethod.GET)
-    public @ResponseBody
-    DataTablesOutput getHrClearanceTable(@Valid DataTablesInput request) {
+    public @ResponseBody DataTablesOutput getHrClearanceTable(@Valid DataTablesInput request) {
         AtomicInteger atomicInteger = new AtomicInteger(request.getStart() + 1);
         DataTablesOutput<EmployeeEvent> results = employeeEventTableRepository.findAll(request);
         results.getData().stream().forEach(s -> s.setCounterNumber(atomicInteger.getAndIncrement()));
@@ -95,8 +94,7 @@ public class EmployeeController {
 
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/absentTable", method = RequestMethod.GET)
-    public @ResponseBody
-    DataTablesOutput getAbsentTable(@Valid DataTablesInput request) {
+    public @ResponseBody DataTablesOutput getAbsentTable(@Valid DataTablesInput request) {
         AtomicInteger atomicInteger = new AtomicInteger(request.getStart() + 1);
         DataTablesOutput<EmployeeEvent> results = employeeEventTableRepository.findAll(request);
         results.getData().stream().forEach(s -> s.setCounterNumber(atomicInteger.getAndIncrement()));

@@ -1,6 +1,8 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
 
@@ -19,9 +21,11 @@ public class PerformanceAction {
     private Long id;
 
     @Column(length = 2, unique = true)
+    @JsonView(DataTablesOutput.View.class)
     private String code;
 
     @Column(length = 100)
+    @JsonView(DataTablesOutput.View.class)
     private String name;
 
     @Column

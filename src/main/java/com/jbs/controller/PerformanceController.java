@@ -1,11 +1,14 @@
 package com.jbs.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.jbs.dto.PerformanceDto;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
 import com.jbs.service.PerformanceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -47,6 +50,9 @@ public class PerformanceController {
 
     @Autowired
     private LetterTemplateRepository letterTemplateRepository;
+
+    @Autowired
+    private PerformanceTableRepository performanceTableRepository;
 
     @RequestMapping(value = {"/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
@@ -130,11 +136,21 @@ public class PerformanceController {
         return letterTemplateRepository.findByActionId(actionId);
     }
 
+    @JsonView(DataTablesOutput.View.class)
+    @RequestMapping(value = "/performance/history", method = RequestMethod.GET)
+    public @ResponseBody DataTablesOutput getPerformanceHistory(@Valid DataTablesInput request) {
+        DataTablesOutput<Performance> results = performanceTableRepository.findAll(request);
+        return results;
+    }
+
     private void populateModelAttribute(Model model, PerformanceDto performanceDto) {
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
         model.addAttribute("listAction", performanceActionRepository.findByCategoryId(performanceDto.getParentCategoryId()));
         model.addAttribute("listLetterTemplate", letterTemplateRepository.findByActionId(performanceDto.getActionId()));
+
+        /** should revisit, based on performance history */
+        model.addAttribute("listActionBasedHistory", performanceActionRepository.findAll());
     }
 
     private Performance convertToEntity(PerformanceDto performanceDto, Optional<Long> performanceId) {
