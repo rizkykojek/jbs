@@ -1,8 +1,10 @@
 package com.jbs.entity;
 
+import com.jbs.util.UserSessionUtil;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -91,6 +93,24 @@ public class Performance {
     @ManyToOne
     @JoinColumn(name="attachment_5")
     private Attachment attachment5;
+
+    @Column(name = "last_update_at")
+    private Date lastUpdateAt;
+
+    @Column(name = "last_update_by")
+    private Long lastUpdateBy;
+
+    @PrePersist
+    public void prePersist() {
+        this.lastUpdateAt = DateTime.now().toDate();
+        this.lastUpdateBy = UserSessionUtil.getEmployeeId();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.lastUpdateAt = DateTime.now().toDate();
+        this.lastUpdateBy = UserSessionUtil.getEmployeeId();
+    }
 
     public void addAttachment(Attachment attachment) {
         if (attachment1 == null) {

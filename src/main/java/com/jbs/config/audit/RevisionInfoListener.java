@@ -1,12 +1,8 @@
 package com.jbs.config.audit;
 
-import com.jbs.config.security.UserApplication;
+import com.jbs.util.UserSessionUtil;
 import org.hibernate.envers.RevisionListener;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 /**
  * Created by rizkykojek on 5/1/17.
@@ -16,11 +12,7 @@ public class RevisionInfoListener implements RevisionListener {
 
     @Override
     public void newRevision(Object revisionEntity) {
-        Optional<Authentication> authentication = Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication());
-        if (authentication.isPresent()) {
-            Long employeeId = ((UserApplication) authentication.get().getPrincipal()).getEmployeeId();
-            RevisionInfo audit = (RevisionInfo) revisionEntity;
-            audit.setUpdatedBy(employeeId);
-        }
+        RevisionInfo audit = (RevisionInfo) revisionEntity;
+        audit.setUpdatedBy(UserSessionUtil.getEmployeeId());
     }
 }
