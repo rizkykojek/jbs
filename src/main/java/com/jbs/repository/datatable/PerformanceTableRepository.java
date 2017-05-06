@@ -1,4 +1,4 @@
-package com.jbs.repository;
+package com.jbs.repository.datatable;
 
 import com.jbs.entity.Performance;
 import org.springframework.data.jpa.datatables.repository.DataTablesRepository;

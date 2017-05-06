@@ -4,17 +4,25 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.jbs.dto.PerformanceDto;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
+import com.jbs.repository.datatable.PerformanceTableRepository;
 import com.jbs.service.PerformanceService;
+import com.jbs.util.ApplicationUtil;
+import org.joda.time.DateTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.BufferedInputStream;
@@ -139,8 +147,27 @@ public class PerformanceController {
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/performance/history", method = RequestMethod.GET)
     public @ResponseBody DataTablesOutput getPerformanceHistory(@Valid DataTablesInput request) {
-        DataTablesOutput<Performance> results = performanceTableRepository.findAll(request);
+        DataTablesOutput<Performance> results = performanceTableRepository.findAll(request, historySpecification(request));
         return results;
+    }
+
+    public static Specification<Performance> historySpecification(DataTablesInput request) {
+        return (root, query, builder) -> {
+            DateTime endFilter = DateTime.now().withTimeAtStartOfDay();
+            DateTime startFilter = endFilter.minusMonths(ApplicationUtil.DEFAULT_FILTER_DATE_MONTH);
+            Predicate startFilterBetweenDate = builder.and(
+                    builder.lessThanOrEqualTo(root.get("startDate"), startFilter.toDate()),
+                    builder.greaterThanOrEqualTo(root.get("endDate"), startFilter.toDate())
+            );
+            Predicate endFilterBetweenDate = builder.and(
+                    builder.lessThanOrEqualTo(root.get("startDate"), endFilter.toDate()),
+                    builder.greaterThanOrEqualTo(root.get("endDate"), endFilter.toDate())
+            );
+            Predicate startDateBetweenFilter = builder.between(root.get("startDate"), startFilter.toDate(), endFilter.toDate());
+            Predicate endDateBetweenFilter = builder.between(root.get("endDate"), startFilter.toDate(), endFilter.toDate());
+
+            return  builder.or(startFilterBetweenDate, endFilterBetweenDate, startDateBetweenFilter, endDateBetweenFilter);
+        };
     }
 
     private void populateModelAttribute(Model model, PerformanceDto performanceDto) {

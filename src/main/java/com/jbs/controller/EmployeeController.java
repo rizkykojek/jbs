@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
+import com.jbs.repository.datatable.EmployeeEventTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
