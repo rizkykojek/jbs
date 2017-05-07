@@ -346,14 +346,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div th:class="${performanceDto.isUpdate()} ? 'row' : 'hide'">
                     <div class="col-md-12">
                         <label>
                             <a href="#"><u>&lt;Audit&gt;</u></a>
                         </label>
                     </div>
                 </div>
-                <div class="row">
+                <div th:class="${performanceDto.isUpdate()} ? 'row' : 'hide'">
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-condensed table-hover">
@@ -442,7 +442,7 @@
         });
 
         $('#parentCategoryId').change( function() {
-            $.getJSON('/performance/categories', {
+            $.getJSON('' + _ctx + 'performance/categories', {
                 parentCategoryId : $(this).val(),
                 ajax : 'true'
             }, function(data) {
@@ -457,7 +457,7 @@
                 $('#categoryId').html(html);
             });
 
-            $.getJSON('/performance/actions', {
+            $.getJSON(_ctx + 'performance/actions', {
                 parentCategoryId : $(this).val(),
                 ajax : 'true'
             }, function(data) {
@@ -476,7 +476,7 @@
         });
 
         $('#actionId').change( function() {
-            $.getJSON('/performance/letter_templates', {
+            $.getJSON(_ctx + 'performance/letter_templates', {
                 actionId : $(this).val(),
                 ajax : 'true'
             }, function(data) {
