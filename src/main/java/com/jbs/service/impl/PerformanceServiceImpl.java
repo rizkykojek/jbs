@@ -4,8 +4,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.jbs.entity.Attachment;
 import com.jbs.entity.Performance;
-import com.jbs.repository.*;
+import com.jbs.repository.AttachmentRepository;
+import com.jbs.repository.PerformanceRepository;
 import com.jbs.service.PerformanceService;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,8 @@ import pl.jsolve.templ4docx.core.VariablePattern;
 import pl.jsolve.templ4docx.variable.TextVariable;
 import pl.jsolve.templ4docx.variable.Variables;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
@@ -28,6 +35,9 @@ import java.util.List;
  */
 @Service
 public class PerformanceServiceImpl implements PerformanceService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private PerformanceRepository performanceRepository;
@@ -78,6 +88,16 @@ public class PerformanceServiceImpl implements PerformanceService {
         docx.save(new FileOutputStream(tempFile, false));
 
         return tempFile;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Performance> getAllPerformanceRevisions(Long performanceId) {
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        AuditQuery q = auditReader.createQuery().forRevisionsOfEntity(Performance.class, true, true);
+        q.add(AuditEntity.id().eq(performanceId));
+        List<Performance> audits = q.getResultList();
+
+        return audits;
     }
 
     private Variables preparingVariablesOnLetter() {

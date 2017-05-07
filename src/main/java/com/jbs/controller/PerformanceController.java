@@ -64,56 +64,37 @@ public class PerformanceController {
 
     @RequestMapping(value = {"/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
-        Employee employee = null;
-        PerformanceDto performanceDto = null;
-
+        PerformanceDto performanceDto = new PerformanceDto();
         if (performanceId.isPresent()) {
             Performance performance = performanceRepository.findOne(performanceId.get());
-            employee = performance.getEmployee();
             performanceDto = convertToDto(performance);
-
-        } else if (employeeId.isPresent()) {
-            employee = employeeRepository.findOne(employeeId.get());
-            performanceDto = new PerformanceDto();
         }
 
-        model.addAttribute(performanceDto);
-        model.addAttribute(employee);
-
-        populateModelAttribute(model, performanceDto);
-
+        populateModelAttribute(model, performanceDto, employeeId.isPresent() ? employeeId.get() : performanceDto.getEmployeeId());
         return "performance";
     }
 
     @RequestMapping(value = "/employee/{employeeId}/performance/create", method = RequestMethod.POST)
     public String create(@PathVariable Long employeeId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws Exception {
-        Employee employee = employeeRepository.findOne(employeeId);
-        model.addAttribute(employee);
-
         if (!bindingResult.hasErrors()) {
             Performance performance = convertToEntity(performanceDto, Optional.empty());
             performance = performanceService.save(performance, performanceDto.getFiles());
-            model.addAttribute(convertToDto(performance));
+            performanceDto = convertToDto(performance);
         }
 
-        populateModelAttribute(model, performanceDto);
-
+        populateModelAttribute(model, performanceDto, employeeId);
         return "performance";
     }
 
     @RequestMapping(value = "/employee/{employeeId}/performance/update/{performanceId}", method = RequestMethod.POST)
     public String update(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws Exception {
-        Employee employee = employeeRepository.findOne(employeeId);
-        model.addAttribute(employee);
-
         if (!bindingResult.hasErrors()) {
             Performance performance = convertToEntity(performanceDto, performanceId);
             performance = performanceService.save(performance, performanceDto.getFiles());
-            model.addAttribute(convertToDto(performance));
+            performanceDto = convertToDto(performance);
         }
 
-        populateModelAttribute(model, performanceDto);
-
+        populateModelAttribute(model, performanceDto, employeeId);
         return "performance";
     }
 
@@ -188,7 +169,16 @@ public class PerformanceController {
         };
     }
 
-    private void populateModelAttribute(Model model, PerformanceDto performanceDto) {
+    private void populateModelAttribute(Model model, PerformanceDto performanceDto, Long employeeId) {
+        Employee employee = employeeRepository.findOne(employeeId);
+        model.addAttribute("employee", employee);
+        model.addAttribute("performanceDto", performanceDto);
+
+        if (performanceDto.isUpdate()) {
+            List<Performance> performanceRevisions = performanceService.getAllPerformanceRevisions(performanceDto.getId());
+            model.addAttribute("performanceRevisions", performanceRevisions);
+        }
+
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
         model.addAttribute("listAction", performanceActionRepository.findByCategoryId(performanceDto.getParentCategoryId()));
@@ -209,7 +199,8 @@ public class PerformanceController {
 
     private PerformanceDto convertToDto(Performance performance) {
         PerformanceDto performanceDto = modelMapper.map(performance, PerformanceDto.class);
-        performanceDto.setParentCategoryId(performance.getCategory().getParentCategory().getId());
+        PerformanceCategory category = performanceCategoryRepository.findOne(performance.getCategory().getId());
+        performanceDto.setParentCategoryId(category.getParentCategory().getId());
         return performanceDto;
     }
 

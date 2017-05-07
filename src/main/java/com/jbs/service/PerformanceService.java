@@ -16,4 +16,6 @@ public interface PerformanceService {
     void removeAttachment(Long performanceId, Long attachmentId);
 
     File generateLetterTemplate(Long letterTemplateId) throws Exception;
+
+    List<Performance> getAllPerformanceRevisions(Long performanceId);
 }

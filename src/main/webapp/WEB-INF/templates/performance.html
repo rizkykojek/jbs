@@ -359,27 +359,27 @@
                             <table class="table table-bordered table-condensed table-hover">
                                 <thead>
                                     <tr class="success">
-                                        <td class="text-center">Date &amp; Time</td>
-                                        <td class="text-center">Fields Updated</td>
-                                        <td class="text-center">Comments</td>
-                                        <td class="text-center">By</td>
+                                        <td class="text-center">#</td>
+                                        <td class="text-center">PM ID</td>
+                                        <td class="text-center">Action</td>
+                                        <td class="text-center">Start Date</td>
+                                        <td class="text-center">Time</td>
+                                        <td class="text-center">End Date</td>
+                                        <td class="text-center">Last Modified Date</td>
+                                        <td class="text-center">Last Modified By</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="info">
-                                        <td class="text-center success">3 Mar 2017 16&#58;10PM</td>
-                                        <td class="text-left success">Attendees Updated. Interpreter changed to Yes</td>
-                                        <td class="text-left success">First written warning</td>
-                                        <td class="text-left success">Brenda Wong</td>
-                                    </tr>
-                                    <tr class="info">
-                                        <td class="text-center success">2 Mar 2017 09&#58;05AM</td>
-                                        <td class="text-left success">Action: First warning. Category: Discipline</td>
-                                        <td class="text-left success">Called in absent, will be back 4 Feb. Sick with yellow
-                                            fever.
-                                        </td>
-                                        <td class="text-left success">Carol Lee</td>
-                                    </tr>
+                                <tr th:each="revision,iterationStatus  : ${performanceRevisions}" class="info">
+                                    <td th:text="${iterationStatus.count}"></td>
+                                    <td th:text="${revision.id}"></td>
+                                    <td th:text="${revision.action.name} + ' (' +${revision.action.code} + ')'"></td>
+                                    <td th:text="${revision.startDate}"></td>
+                                    <td th:text="${revision.startTime}"></td>
+                                    <td th:text="${revision.endDate}"></td>
+                                    <td th:text="${revision.lastUpdateAt}"></td>
+                                    <td th:text="${revision.lastUpdateBy}"></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -482,7 +482,6 @@
             }, function(data) {
                 var html = '<option value="">-- Please Select --</option>';
                 var len = data.length;
-                var len = data.length;
                 for ( var i = 0; i < len; i++) {
                     html += '<option value="' + data[i].id + '">'
                             + data[i].name + '</option>';
@@ -504,18 +503,22 @@
         $('#datetimepicker1').datetimepicker({
             format: 'DD MMM YYYY'
         });
+
         $('#datetimepicker2').datetimepicker({
             format: 'DD MMM YYYY'
         });
+
         $('#datetimepicker3').datetimepicker({
             format: 'LT'
         });
+
         $('#historyStartDatePicker').datetimepicker({
             format: 'DD MMM YYYY'
         }).on("dp.change", function (e) {
             $('#historyMonthId').val("");
             historyTable.draw();
         });
+
         $('#historyEndDatePicker').datetimepicker({
             format: 'DD MMM YYYY'
         }).on("dp.change", function (e) {
