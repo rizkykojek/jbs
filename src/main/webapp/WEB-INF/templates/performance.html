@@ -286,29 +286,17 @@
                     <div class="col-md-3">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Action :</label>
-                            <select class="form-control">
-                                <option value=""></option>
-                                <option value="">Abandonment of employment</option>
-                                <option value="">Warning in lieu of termination</option>
-                                <option value="">Re-confirmation of final</option>
-                                <option value="">Supervisor&rsquo;s report</option>
-                                <option value="">Counselling session</option>
-                                <option value="">Written counselling</option>
-                                <option value="">Suspension</option>
-                                <option value="">1st warming</option>
-                                <option value="">2nd warning</option>
-                                <option value="">Final warning</option>
-                                <option value="">Attendance monitoring</option>
-                                <option value="">Written response</option>
-                                <option value="">Stood Aside</option>
+                            <select id="historyActionId" class="form-control">
+                                <option value="">-- Please Select --</option>
+                                <option th:each="action : ${listActionBasedHistory}" th:value="${action.id}" th:text="${action.name}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background">Start :</label>
-                            <div class='input-group date' id='datetimepicker4'>
-                                <input type='text' class="form-control"/>
+                            <div class='input-group date'>
+                                <input id='historyStartDatePicker' type='text' class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -318,8 +306,8 @@
                     <div class="col-md-3">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background">End :</label>
-                            <div class='input-group date' id='datetimepicker5'>
-                                <input type='text' class="form-control"/>
+                            <div class='input-group date'>
+                                <input id='historyEndDatePicker' type='text' class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -327,13 +315,13 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <select class="form-control">
+                        <select id="historyMonthId" class="form-control">
                             <option value="">Months</option>
-                            <option value="">3 Months</option>
-                            <option value="">6 Months</option>
-                            <option value="">9 Months</option>
-                            <option value="">12 Months</option>
-                            <option value="">18 Months</option>
+                            <option value="3">3 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="9">9 Months</option>
+                            <option value="12">12 Months</option>
+                            <option value="18">18 Months</option>
                         </select>
                     </div>
                 </div>
@@ -407,13 +395,18 @@
 <script th:inline="javascript">
     $(document).ready(function(){
         var _ctx = /*[[@{/}]]*/ 'context';
+        var employeeId = [[${employee.id}]];
 
-        var historyTable = $('#historyTable').DataTable({
-            "ajax":         _ctx + "performance/history",
+        var historyTable = $('#historyTable').on('preXhr.dt', function(e,settings,data){
+            data.startDateFilter = $("#historyStartDatePicker").val();
+            data.endDateFilter = $("#historyEndDatePicker").val();
+            data.monthFilter = $("#historyMonthId").val();
+        }).DataTable({
+            "ajax":         _ctx + "performance/history/" + employeeId,
             "serverSide":   true,
             "processing": true,
             "pagingType":   "simple",
-            "searching":    false,
+            "searching":    true,
             "lengthChange": false,
             "language": {
                 "info":         "",
@@ -424,7 +417,6 @@
             },
             "columnDefs": [{
                 "targets": [0,1,2,3,4,5,6],
-                "searchable": false,
                 "orderable": false
             }],
             "columns": [
@@ -433,7 +425,7 @@
                         return '<a href="' + _ctx + 'performance/'+ row.id +'">' + row.id + '</a>';
                     }
                 },
-                { "data": "action.name", render: function(data, type, row)
+                { "data": "action.id", render: function(data, type, row)
                     {
                         return row.action.name + ' (' + row.action.code + ')';
                     }
@@ -447,24 +439,6 @@
             "rowCallback": function( row, data, index ) {
                     $(row).addClass('info');
             }
-        });
-
-        $("#historyTable_paginate").hide();
-
-        $('#datetimepicker1').datetimepicker({
-            format: 'DD MMM YYYY'
-        });
-        $('#datetimepicker2').datetimepicker({
-            format: 'DD MMM YYYY'
-        });
-        $('#datetimepicker3').datetimepicker({
-            format: 'LT'
-        });
-        $('#datetimepicker4').datetimepicker({
-            format: 'DD MMM YYYY'
-        });
-        $('#datetimepicker5').datetimepicker({
-            format: 'DD MMM YYYY'
         });
 
         $('#parentCategoryId').change( function() {
@@ -517,6 +491,43 @@
 
                 $('#letterTemplateId').html(html);
             });
+        });
+
+        $("#historyActionId").change(function() {
+            if ($("#historyActionId").val() != "") {
+                historyTable.columns(1).search($("#historyActionId").val()).draw();
+            } else {
+                historyTable.columns(1).search("").draw();
+            }
+        });
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD MMM YYYY'
+        });
+        $('#datetimepicker2').datetimepicker({
+            format: 'DD MMM YYYY'
+        });
+        $('#datetimepicker3').datetimepicker({
+            format: 'LT'
+        });
+        $('#historyStartDatePicker').datetimepicker({
+            format: 'DD MMM YYYY'
+        }).on("dp.change", function (e) {
+            $('#historyMonthId').val("");
+            historyTable.draw();
+        });
+        $('#historyEndDatePicker').datetimepicker({
+            format: 'DD MMM YYYY'
+        }).on("dp.change", function (e) {
+            $('#historyMonthId').val("");
+            historyTable.draw();
+        });
+
+        $("#historyTable_paginate, #historyTable_filter").hide();
+
+        $("#historyMonthId").change(function() {
+            $('#historyStartDatePicker, #historyEndDatePicker').val("");
+            historyTable.draw();
         });
     });
 

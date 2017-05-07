@@ -18,6 +18,7 @@ public class PerformanceAction {
 
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private Long id;
 
     @Column(length = 2, unique = true)

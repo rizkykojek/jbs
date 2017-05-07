@@ -47,18 +47,18 @@ public class Performance {
 
     @Column(name = "start_date")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Asia/Jakarta") //should revisit, use timezone default as datetimeformat Spring
     private Date startDate;
 
     @Column(name = "end_date")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Asia/Jakarta")
     private Date endDate;
 
     @Temporal(TemporalType.TIME)
     @Column(name = "start_time")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm", timezone = "Asia/Jakarta")
     private Date startTime;
 
     @Column(name = "issued_by")

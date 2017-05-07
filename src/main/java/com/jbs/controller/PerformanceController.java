@@ -7,7 +7,10 @@ import com.jbs.repository.*;
 import com.jbs.repository.datatable.PerformanceTableRepository;
 import com.jbs.service.PerformanceService;
 import com.jbs.util.ApplicationUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -19,10 +22,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.BufferedInputStream;
@@ -145,16 +145,29 @@ public class PerformanceController {
     }
 
     @JsonView(DataTablesOutput.View.class)
-    @RequestMapping(value = "/performance/history", method = RequestMethod.GET)
-    public @ResponseBody DataTablesOutput getPerformanceHistory(@Valid DataTablesInput request) {
-        DataTablesOutput<Performance> results = performanceTableRepository.findAll(request, historySpecification(request));
+    @RequestMapping(value = "/performance/history/{employeeId}", method = RequestMethod.GET)
+    public @ResponseBody DataTablesOutput getPerformanceHistory(@PathVariable Long employeeId, @RequestParam Optional<String> startDateFilter, @RequestParam Optional<String> endDateFilter,
+                                                                @RequestParam Optional<Integer> monthFilter, @Valid DataTablesInput request) {
+        DataTablesOutput<Performance> results = performanceTableRepository.findAll(request, historySpecification(employeeId, startDateFilter, endDateFilter, monthFilter));
         return results;
     }
 
-    public static Specification<Performance> historySpecification(DataTablesInput request) {
-        return (root, query, builder) -> {
-            DateTime endFilter = DateTime.now().withTimeAtStartOfDay();
-            DateTime startFilter = endFilter.minusMonths(ApplicationUtil.DEFAULT_FILTER_DATE_MONTH);
+    public static Specification<Performance> historySpecification(Long employeeId, Optional<String> startDate, Optional<String> endDate, Optional<Integer> month) {
+        return (Root<Performance> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd MMM YYYY");
+            DateTime currentDate  = DateTime.now().withTimeAtStartOfDay();
+            DateTime endFilter;
+            DateTime startFilter;
+
+            if(month.isPresent()) {
+                endFilter = currentDate;
+                startFilter = currentDate.minusMonths(month.get());
+            } else {
+                endFilter = StringUtils.isNotEmpty(endDate.get()) ? formatter.parseDateTime(endDate.get()) : currentDate;
+                startFilter = StringUtils.isNotEmpty(startDate.get()) ? formatter.parseDateTime(startDate.get()) : currentDate.minusMonths(ApplicationUtil.DEFAULT_FILTER_DATE_MONTH);
+            }
+
+            /** start or end date filter */
             Predicate startFilterBetweenDate = builder.and(
                     builder.lessThanOrEqualTo(root.get("startDate"), startFilter.toDate()),
                     builder.greaterThanOrEqualTo(root.get("endDate"), startFilter.toDate())
@@ -165,8 +178,13 @@ public class PerformanceController {
             );
             Predicate startDateBetweenFilter = builder.between(root.get("startDate"), startFilter.toDate(), endFilter.toDate());
             Predicate endDateBetweenFilter = builder.between(root.get("endDate"), startFilter.toDate(), endFilter.toDate());
+            Predicate dateFilter = builder.or(startFilterBetweenDate, endFilterBetweenDate, startDateBetweenFilter, endDateBetweenFilter);
 
-            return  builder.or(startFilterBetweenDate, endFilterBetweenDate, startDateBetweenFilter, endDateBetweenFilter);
+            /** employee filter */
+            Join<Performance, Employee> employeeJoin = root.join("employee");
+            Predicate employeeFilter = builder.equal(employeeJoin.get("id"), employeeId);
+
+            return  builder.and(dateFilter, employeeFilter);
         };
     }
 
