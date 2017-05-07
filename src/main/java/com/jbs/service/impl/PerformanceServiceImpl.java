@@ -92,10 +92,14 @@ public class PerformanceServiceImpl implements PerformanceService {
 
     @Transactional(readOnly = true)
     public List<Performance> getAllPerformanceRevisions(Long performanceId) {
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
-        AuditQuery q = auditReader.createQuery().forRevisionsOfEntity(Performance.class, true, true);
-        q.add(AuditEntity.id().eq(performanceId));
-        List<Performance> audits = q.getResultList();
+        AuditReader reader = AuditReaderFactory.get(entityManager);
+        AuditQuery query = reader.createQuery().forRevisionsOfEntity(Performance.class, true, true);
+        query.add(AuditEntity.id().eq(performanceId));
+        query.addOrder(AuditEntity.revisionNumber().asc());
+        List<Performance> audits = query.getResultList();
+        for (Performance performance: audits) {
+            performance.getAction().getName(); //by default oneToMany is lazy on auditreader
+        }
 
         return audits;
     }
