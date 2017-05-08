@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by rizkykojek on 5/1/17.
@@ -102,6 +103,14 @@ public class PerformanceServiceImpl implements PerformanceService {
         }
 
         return audits;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Attachment> getAllAttachment(Long performanceId) {
+        Performance performance = performanceRepository.findOne(performanceId);
+        return performance.getAllAttachment()
+                .stream().filter(attachment -> attachment != null)
+                .collect(Collectors.toList());
     }
 
     private Variables preparingVariablesOnLetter() {

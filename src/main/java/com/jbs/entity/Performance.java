@@ -2,6 +2,7 @@ package com.jbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.collect.Lists;
 import com.jbs.util.UserSessionUtil;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rizkykojek on 4/15/17.
@@ -124,6 +126,10 @@ public class Performance {
     public void preUpdate() {
         this.lastUpdateAt = DateTime.now().toDate();
         this.lastUpdateBy = UserSessionUtil.getEmployeeId();
+    }
+
+    public List<Attachment> getAllAttachment() {
+        return Lists.newArrayList(attachment1, attachment2, attachment3, attachment4, attachment5);
     }
 
     public void addAttachment(Attachment attachment) {

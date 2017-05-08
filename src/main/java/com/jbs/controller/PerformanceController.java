@@ -7,6 +7,10 @@ import com.jbs.repository.*;
 import com.jbs.repository.datatable.PerformanceTableRepository;
 import com.jbs.service.PerformanceService;
 import com.jbs.util.ApplicationUtil;
+import com.jbs.util.OpenCmisUtil;
+import org.apache.chemistry.opencmis.client.api.Document;
+import org.apache.chemistry.opencmis.client.api.Session;
+import org.apache.chemistry.opencmis.commons.data.ContentStream;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -62,6 +66,9 @@ public class PerformanceController {
     @Autowired
     private PerformanceTableRepository performanceTableRepository;
 
+    @Autowired
+    private AttachmentRepository attachmentRepository;
+
     @RequestMapping(value = {"/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
         PerformanceDto performanceDto = new PerformanceDto();
@@ -106,6 +113,23 @@ public class PerformanceController {
         response.setHeader("Content-Disposition", "attachment;filename=letter.docx");
         response.setContentLength((int) tempFile.length());
         InputStream inputStream = new BufferedInputStream(new FileInputStream(tempFile));
+
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
+
+    @RequestMapping(value = "/performance/download_attachment/{attachmentId}", method = RequestMethod.GET)
+    public void downloadAttachment(HttpServletResponse response, @PathVariable Long attachmentId) throws Exception {
+        Attachment attachment = attachmentRepository.findOne(attachmentId);
+
+        Session session = OpenCmisUtil.openSession(OpenCmisUtil.ecmService());
+        Document doc = (Document) session.getObject(attachment.getDocumentId());
+        ContentStream contentStream = doc.getContentStream();
+
+
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=" + attachment.getDocumentName());
+        response.setContentLength((int) doc.getContentStreamLength());
+        InputStream inputStream = contentStream.getStream();
 
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
@@ -177,6 +201,9 @@ public class PerformanceController {
         if (performanceDto.isUpdate()) {
             List<Performance> performanceRevisions = performanceService.getAllPerformanceRevisions(performanceDto.getId());
             model.addAttribute("performanceRevisions", performanceRevisions);
+
+            List<Attachment> attachments = performanceService.getAllAttachment(performanceDto.getId());
+            model.addAttribute("attachments", attachments);
         }
 
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());

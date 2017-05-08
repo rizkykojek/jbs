@@ -245,7 +245,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 20px">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment :</label>
@@ -258,6 +258,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-6">
+                        <ul>
+                            <li th:each="attachment : ${attachments}">
+                                <a href="#" th:href="@{/performance/download_attachment/} + ${attachment.id}" th:target="_blank" th:text="${attachment.documentName}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c; color: white">

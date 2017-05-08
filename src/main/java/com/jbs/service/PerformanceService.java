@@ -1,5 +1,6 @@
 package com.jbs.service;
 
+import com.jbs.entity.Attachment;
 import com.jbs.entity.Performance;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,4 +19,6 @@ public interface PerformanceService {
     File generateLetterTemplate(Long letterTemplateId) throws Exception;
 
     List<Performance> getAllPerformanceRevisions(Long performanceId);
+
+    List<Attachment> getAllAttachment(Long performanceId);
 }
