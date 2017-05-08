@@ -45,7 +45,7 @@ public class PerformanceDto {
 
     @NotNull
     @DateTimeFormat(pattern = "HH:mm a")
-    private Date time;
+    private Date startTime;
 
     @NotEmpty
     private String issuedBy;

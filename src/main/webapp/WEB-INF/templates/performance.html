@@ -164,10 +164,10 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('time')} ? 'input-group has-error' : 'input-group'">
+                        <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startTime')} ? 'input-group has-error' : 'input-group'">
                             <label class="input-group-addon borderless no-background ">Time :</label>
                             <div class='input-group date' id='datetimepicker3'>
-                                <input type='text' class="form-control" th:field="*{time}"/>
+                                <input type='text' class="form-control" th:field="*{startTime}"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
