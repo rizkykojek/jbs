@@ -201,9 +201,6 @@ public class PerformanceController {
         if (performanceDto.isUpdate()) {
             List<Performance> performanceRevisions = performanceService.getAllPerformanceRevisions(performanceDto.getId());
             model.addAttribute("performanceRevisions", performanceRevisions);
-
-            List<Attachment> attachments = performanceService.getAllAttachment(performanceDto.getId());
-            model.addAttribute("attachments", attachments);
         }
 
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
@@ -228,6 +225,7 @@ public class PerformanceController {
         PerformanceDto performanceDto = modelMapper.map(performance, PerformanceDto.class);
         PerformanceCategory category = performanceCategoryRepository.findOne(performance.getCategory().getId());
         performanceDto.setParentCategoryId(category.getParentCategory().getId());
+        performanceDto.setAttachments(performance.getAllAttachment());
         return performanceDto;
     }
 

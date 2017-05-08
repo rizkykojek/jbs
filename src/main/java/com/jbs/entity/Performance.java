@@ -13,6 +13,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by rizkykojek on 4/15/17.
@@ -129,7 +130,10 @@ public class Performance {
     }
 
     public List<Attachment> getAllAttachment() {
-        return Lists.newArrayList(attachment1, attachment2, attachment3, attachment4, attachment5);
+        List<Attachment> attachments = Lists.newArrayList(attachment1, attachment2, attachment3, attachment4, attachment5);
+        return attachments.stream()
+                .filter(attachment -> attachment != null)
+                .collect(Collectors.toList());
     }
 
     public void addAttachment(Attachment attachment) {

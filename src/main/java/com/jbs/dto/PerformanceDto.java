@@ -1,5 +1,6 @@
 package com.jbs.dto;
 
+import com.jbs.entity.Attachment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -71,6 +72,8 @@ public class PerformanceDto {
     private String comment;
 
     private List<MultipartFile> files;
+
+    private List<Attachment> attachments;
 
     public Boolean isUpdate(){
         return id != null && id != 0;

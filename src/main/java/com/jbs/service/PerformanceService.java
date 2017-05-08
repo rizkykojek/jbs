@@ -20,5 +20,4 @@ public interface PerformanceService {
 
     List<Performance> getAllPerformanceRevisions(Long performanceId);
 
-    List<Attachment> getAllAttachment(Long performanceId);
 }

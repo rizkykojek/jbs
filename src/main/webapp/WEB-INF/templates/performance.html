@@ -261,7 +261,7 @@
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col-md-6">
                         <ul>
-                            <li th:each="attachment : ${attachments}">
+                            <li th:each="attachment : ${performanceDto.getAttachments()}">
                                 <a href="#" th:href="@{/performance/download_attachment/} + ${attachment.id}" th:target="_blank" th:text="${attachment.documentName}"></a>
                             </li>
                         </ul>

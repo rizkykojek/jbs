@@ -105,14 +105,6 @@ public class PerformanceServiceImpl implements PerformanceService {
         return audits;
     }
 
-    @Transactional(readOnly = true)
-    public List<Attachment> getAllAttachment(Long performanceId) {
-        Performance performance = performanceRepository.findOne(performanceId);
-        return performance.getAllAttachment()
-                .stream().filter(attachment -> attachment != null)
-                .collect(Collectors.toList());
-    }
-
     private Variables preparingVariablesOnLetter() {
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
         Variables variables = new Variables();
