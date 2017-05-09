@@ -216,6 +216,7 @@ public class PerformanceController {
         Performance performance = modelMapper.map(performanceDto, Performance.class);;
         if (performanceId.isPresent()) {
             performance.setId(performanceId.get());
+            performance.copyAttachments(performanceRepository.findOne(performanceId.get()));
         }
 
         return performance;

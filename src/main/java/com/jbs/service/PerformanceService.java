@@ -1,6 +1,5 @@
 package com.jbs.service;
 
-import com.jbs.entity.Attachment;
 import com.jbs.entity.Performance;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -164,4 +164,12 @@ public class Performance {
         }
     }
 
+    public void copyAttachments(Performance old) {
+        this.attachment1 = old.attachment1;
+        this.attachment2 = old.attachment2;
+        this.attachment3 = old.attachment3;
+        this.attachment4 = old.attachment4;
+        this.attachment5 = old.attachment5;
+    }
+
 }
