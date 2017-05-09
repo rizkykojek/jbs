@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"/>
+
+<body>
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <table border="0" width="100%">
+                <tr>
+                    <td width="10%">
+                        <img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel-body body-background">
+        <h2 th:text="${errorMsg}"></h2>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"/>
+</body>
+</html>

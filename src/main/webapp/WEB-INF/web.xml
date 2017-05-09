@@ -10,4 +10,7 @@
     <res-ref-name>EcmService</res-ref-name>
     <res-type>com.sap.ecm.api.EcmService</res-type>
   </resource-ref>
+  <error-page>
+    <location>/errors</location>
+  </error-page>
 </web-app>

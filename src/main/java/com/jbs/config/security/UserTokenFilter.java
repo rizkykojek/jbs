@@ -43,6 +43,8 @@ public class UserTokenFilter extends GenericFilterBean {
                     UserApplication userApplication = new UserApplication(httpRequest.getParameter("user"), "password", new ArrayList<>(), employee.get().getId(), employee.get().getFullName());
                     SecurityContextHolder.getContext()
                             .setAuthentication(new UsernamePasswordAuthenticationToken(userApplication, "password", new ArrayList<>()));
+                } else if (SecurityContextHolder.getContext().getAuthentication() != null) {
+                    SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
                 }
             }
         }
