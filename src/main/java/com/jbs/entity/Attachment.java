@@ -48,14 +48,14 @@ public class Attachment {
     @Transient
     private byte[] file;
 
-    @PrePersist
+    @PostPersist
     public void prePersist() throws NamingException {
         Session session = OpenCmisUtil.openSession(OpenCmisUtil.ecmService());
         Folder root = session.getRootFolder();
 
         Map<String, Object> properties = new HashMap<>();
         properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
-        properties.put(PropertyIds.NAME, this.getDocumentName());
+        properties.put(PropertyIds.NAME, this.id + "." + this.extension);
 
         /** save file to HANA Document Storage */
         byte[] content = this.getFile();
