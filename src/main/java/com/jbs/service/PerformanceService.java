@@ -11,9 +11,7 @@ import java.util.List;
  */
 public interface PerformanceService {
 
-    Performance save(Performance performance, List<MultipartFile> files) throws Exception;
-
-    Boolean removeAttachment(Long performanceId, Long attachmentId);
+    Performance save(Performance performance, List<MultipartFile> files, Long[] removedAttachmentIds) throws Exception;
 
     File generateLetterTemplate(Long letterTemplateId) throws Exception;
 

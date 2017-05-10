@@ -47,7 +47,11 @@ public class PerformanceServiceImpl implements PerformanceService {
     private AttachmentRepository attachmentRepository;
 
     @Transactional
-    public Performance save(Performance performance, List<MultipartFile> files) throws Exception {
+    public Performance save(Performance performance, List<MultipartFile> files, Long[] removedAttachmentIds) throws Exception {
+        for (Long attachmentId : removedAttachmentIds){
+            performance.removeAttachment(attachmentId);
+        }
+
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 Attachment attachment = new Attachment();
@@ -64,14 +68,6 @@ public class PerformanceServiceImpl implements PerformanceService {
 
         performance = performanceRepository.save(performance);
         return performance;
-    }
-
-    @Transactional
-    public Boolean removeAttachment(Long performanceId, Long attachmentId) {
-        Performance performance = performanceRepository.findOne(performanceId);
-        performance.removeAttachment(attachmentId);
-        performanceRepository.save(performance);
-        return true;
     }
 
     @Transactional(readOnly = true)

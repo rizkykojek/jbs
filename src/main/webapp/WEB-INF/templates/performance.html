@@ -28,6 +28,7 @@
                 @{'/employee/' + ${employee.id} + '/performance/update/' + ${performanceDto.id}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} :
                 @{'/employee/' + ${employee.id} + '/performance/create'} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} " th:object="${performanceDto}"
               method="post" enctype="multipart/form-data">
+            <input id="removedAttachmentsId" th:type="hidden" th:field="*{removedAttachments}"/>
             <div class="panel-body body-background">
                 <div class="row">
                     <div class="col-md-12">
@@ -262,7 +263,7 @@
                     <div class="col-md-4">
                         <div class="input-group" style="margin-top: 15px" >
                             <a class="input-group-addon borderless no-background" href="#" th:href="@{/performance/download_attachment/} + ${attachment.id}" th:target="_blank" th:text="${attachment.documentName}"></a>
-                            <button type="button" class="btn btn-info btn-sm" style="width: 35px;" th:onclick="'javascript:removeAttachment(' + ${performanceDto.id} + ',' + ${attachment.id} +  ',attachment'+${attachment.id} + ')'">
+                            <button type="button" class="btn btn-info btn-sm" style="width: 35px;" th:onclick="'javascript:removeAttachment(' + ${attachment.id} +  ',attachment'+${attachment.id} + ')'">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -405,34 +406,18 @@
 <footer th:replace="fragments/footer :: footer"/>
 
 <script th:inline="javascript">
-    function removeAttachment(performanceId, attachmentId, element){
-        var _ctx = /*[[@{/}]]*/ 'context';
-        var csrf_token = /*[[${_csrf.token}]]*/ 'context';
-        var csrf_name = /*[[${_csrf.parameterName}]]*/ 'context';
-        var url = _ctx + "performance/remove_attachment?" + csrf_name + "=" + csrf_token;
+    function removeAttachment(attachmentId, element){
+        var attachmentIds = [];
 
-        var data = {};
-        data["performanceId"] = performanceId;
-        data["attachmentId"] = attachmentId;
+        var arrayIds = $("#removedAttachmentsId").val();
+        if (arrayIds == "") {
+            attachmentIds.push(attachmentId);
+        } else {
+            attachmentIds.push(arrayIds,attachmentId);
+        }
 
-        var target = this;
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: url,
-            data: JSON.stringify(data),
-            dataType: 'json',
-            cache: false,
-            timeout: 600000,
-            context: this,
-            success: function (data) {
-                element.parentNode.removeChild(element);
-
-            },
-            error: function (e) {
-
-            }
-        });
+        $("#removedAttachmentsId").val(attachmentIds);
+        element.parentNode.removeChild(element);
     }
 
     $(document).ready(function(){

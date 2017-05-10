@@ -75,6 +75,8 @@ public class PerformanceDto {
 
     private List<Attachment> attachments;
 
+    private Long[] removedAttachments;
+
     public Boolean isUpdate(){
         return id != null && id != 0;
     }

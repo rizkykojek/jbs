@@ -1,7 +1,6 @@
 package com.jbs.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.jbs.dto.CommandDto;
 import com.jbs.dto.PerformanceDto;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
@@ -86,7 +85,7 @@ public class PerformanceController {
     public String create(@PathVariable Long employeeId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws Exception {
         if (!bindingResult.hasErrors()) {
             Performance performance = convertToEntity(performanceDto, Optional.empty());
-            performance = performanceService.save(performance, performanceDto.getFiles());
+            performance = performanceService.save(performance, performanceDto.getFiles(), performanceDto.getRemovedAttachments());
             performanceDto = convertToDto(performance);
         }
 
@@ -98,7 +97,7 @@ public class PerformanceController {
     public String update(@PathVariable Long employeeId, @PathVariable Optional<Long> performanceId, @Valid PerformanceDto performanceDto, BindingResult bindingResult, Model model) throws Exception {
         if (!bindingResult.hasErrors()) {
             Performance performance = convertToEntity(performanceDto, performanceId);
-            performance = performanceService.save(performance, performanceDto.getFiles());
+            performance = performanceService.save(performance, performanceDto.getFiles(), performanceDto.getRemovedAttachments());
             performanceDto = convertToDto(performance);
         }
 
@@ -156,11 +155,6 @@ public class PerformanceController {
                                                                 @RequestParam Optional<Integer> monthFilter, @Valid DataTablesInput request) {
         DataTablesOutput<Performance> results = performanceTableRepository.findAll(request, historySpecification(employeeId, startDateFilter, endDateFilter, monthFilter));
         return results;
-    }
-
-    @RequestMapping(value = "/performance/remove_attachment", method = RequestMethod.POST)
-    public @ResponseBody Boolean removeAttachment(@RequestBody CommandDto commandDto) {
-        return performanceService.removeAttachment(commandDto.getPerformanceId(), commandDto.getAttachmentId());
     }
 
     public static Specification<Performance> historySpecification(Long employeeId, Optional<String> startDate, Optional<String> endDate, Optional<Integer> month) {
