@@ -406,9 +406,10 @@
 
 <script th:inline="javascript">
     function removeAttachment(performanceId, attachmentId, element){
+        var _ctx = /*[[@{/}]]*/ 'context';
         var csrf_token = /*[[${_csrf.token}]]*/ 'context';
         var csrf_name = /*[[${_csrf.parameterName}]]*/ 'context';
-        var url = "/performance/remove_attachment?" + csrf_name + "=" + csrf_token;
+        var url = _ctx + "performance/remove_attachment?" + csrf_name + "=" + csrf_token;
 
         var data = {};
         data["performanceId"] = performanceId;
