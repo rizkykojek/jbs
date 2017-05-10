@@ -67,10 +67,11 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Transactional
-    public void removeAttachment(Long performanceId, Long attachmentId) {
+    public Boolean removeAttachment(Long performanceId, Long attachmentId) {
         Performance performance = performanceRepository.findOne(performanceId);
         performance.removeAttachment(attachmentId);
         performanceRepository.save(performance);
+        return true;
     }
 
     @Transactional(readOnly = true)
