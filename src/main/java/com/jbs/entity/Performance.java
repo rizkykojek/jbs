@@ -112,6 +112,26 @@ public class Performance {
     @JoinColumn(name="attachment_5")
     private Attachment attachment5;
 
+    @ManyToOne
+    @JoinColumn(name="attachment_6")
+    private Attachment attachment6;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_7")
+    private Attachment attachment7;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_8")
+    private Attachment attachment8;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_9")
+    private Attachment attachment9;
+
+    @ManyToOne
+    @JoinColumn(name="attachment_10")
+    private Attachment attachment10;
+
     @Column(name = "last_update_at")
     @JsonView(DataTablesOutput.View.class)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy HH:mm a")
@@ -135,7 +155,8 @@ public class Performance {
     }
 
     public List<Attachment> getAllAttachment() {
-        List<Attachment> attachments = Lists.newArrayList(attachment1, attachment2, attachment3, attachment4, attachment5);
+        List<Attachment> attachments = Lists.newArrayList(attachment1, attachment2, attachment3, attachment4, attachment5,
+                attachment6, attachment7, attachment8, attachment9, attachment10);
         return attachments.stream()
                 .filter(attachment -> attachment != null)
                 .collect(Collectors.toList());
@@ -152,6 +173,16 @@ public class Performance {
             attachment4 = attachment;
         } else if (attachment5 == null) {
             attachment5 = attachment;
+        } else if (attachment6 == null) {
+            attachment6 = attachment;
+        } else if (attachment7 == null) {
+            attachment7 = attachment;
+        } else if (attachment8 == null) {
+            attachment8 = attachment;
+        } else if (attachment9 == null) {
+            attachment9 = attachment;
+        } else if (attachment10 == null) {
+            attachment10 = attachment;
         }
     }
 
@@ -166,6 +197,16 @@ public class Performance {
             attachment4 = null;
         } else if (attachment5 != null && attachment5.getId() == attachmentId) {
             attachment5 = null;
+        } else if (attachment6 != null && attachment6.getId() == attachmentId) {
+            attachment6 = null;
+        } else if (attachment7 != null && attachment7.getId() == attachmentId) {
+            attachment7 = null;
+        } else if (attachment8 != null && attachment8.getId() == attachmentId) {
+            attachment8 = null;
+        } else if (attachment9 != null && attachment9.getId() == attachmentId) {
+            attachment9 = null;
+        } else if (attachment10 != null && attachment10.getId() == attachmentId) {
+            attachment10 = null;
         }
     }
 
@@ -175,6 +216,11 @@ public class Performance {
         this.attachment3 = old.attachment3;
         this.attachment4 = old.attachment4;
         this.attachment5 = old.attachment5;
+        this.attachment6 = old.attachment6;
+        this.attachment7 = old.attachment7;
+        this.attachment8 = old.attachment8;
+        this.attachment9 = old.attachment9;
+        this.attachment10 = old.attachment10;
     }
 
     public void initializeLazyConnection(){
@@ -187,6 +233,11 @@ public class Performance {
         Hibernate.initialize(this.getAttachment3());
         Hibernate.initialize(this.getAttachment4());
         Hibernate.initialize(this.getAttachment5());
+        Hibernate.initialize(this.getAttachment6());
+        Hibernate.initialize(this.getAttachment7());
+        Hibernate.initialize(this.getAttachment8());
+        Hibernate.initialize(this.getAttachment9());
+        Hibernate.initialize(this.getAttachment10());
         Hibernate.initialize(this.getLastUpdateBy());
     }
 
