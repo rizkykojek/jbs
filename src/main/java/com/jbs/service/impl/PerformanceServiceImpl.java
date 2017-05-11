@@ -31,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by rizkykojek on 5/1/17.
@@ -108,11 +107,14 @@ public class PerformanceServiceImpl implements PerformanceService {
         return audits;
     }
 
+    @Transactional(readOnly = true)
     public Performance findPerformanceRevision(Long performanceId, Integer revisionNumber) {
         AuditReader reader = AuditReaderFactory.get(entityManager);
         AuditQuery query = reader.createQuery().forEntitiesAtRevision(Performance.class, revisionNumber);
         query.add(AuditEntity.id().eq(performanceId));
-        return (Performance) query.getSingleResult();
+        Performance performance = (Performance) query.getSingleResult();
+        performance.initializeLazyConnection();
+        return performance;
     }
 
     private Variables preparingVariablesOnLetter() {

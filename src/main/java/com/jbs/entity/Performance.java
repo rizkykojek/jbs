@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
 import com.jbs.util.UserSessionUtil;
 import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 import org.joda.time.DateTime;
@@ -173,6 +174,19 @@ public class Performance {
         this.attachment3 = old.attachment3;
         this.attachment4 = old.attachment4;
         this.attachment5 = old.attachment5;
+    }
+
+    public void initializeLazyConnection(){
+        Hibernate.initialize(this.getAction());
+        Hibernate.initialize(this.getCategory());
+        Hibernate.initialize(this.getEmployee());
+        Hibernate.initialize(this.getLetterTemplate());
+        Hibernate.initialize(this.getLetterTemplate());
+        Hibernate.initialize(this.getAttachment1());
+        Hibernate.initialize(this.getAttachment2());
+        Hibernate.initialize(this.getAttachment3());
+        Hibernate.initialize(this.getAttachment4());
+        Hibernate.initialize(this.getAttachment5());
     }
 
 }
