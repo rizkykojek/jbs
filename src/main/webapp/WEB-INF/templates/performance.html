@@ -239,7 +239,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="#" th:href="@{/performance/generate_letter}">
+                                <a href="#" th:onclick="'javascript:generateTemplate()'">
                                     <button type="button" class="btn btn-info">Generate Letter</button>
                                 </a>
                             </div>
@@ -418,6 +418,13 @@
 
         $("#removedAttachmentsId").val(attachmentIds);
         element.parentNode.removeChild(element);
+    }
+
+    function generateTemplate() {
+        if ($("#letterTemplateId").val() != "") {
+            var _ctx = /*[[@{/}]]*/ 'context';
+            window.location.replace(_ctx + "performance/generate_letter/" + $("#letterTemplateId").val());
+        }
     }
 
     $(document).ready(function(){

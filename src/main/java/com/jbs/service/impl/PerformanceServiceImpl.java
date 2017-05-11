@@ -4,10 +4,17 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.jbs.config.audit.RevisionInfo;
 import com.jbs.entity.Attachment;
+import com.jbs.entity.LetterTemplate;
 import com.jbs.entity.Performance;
 import com.jbs.repository.AttachmentRepository;
+import com.jbs.repository.LetterTemplateRepository;
 import com.jbs.repository.PerformanceRepository;
 import com.jbs.service.PerformanceService;
+import com.jbs.util.ApplicationUtil;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
@@ -27,6 +34,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,6 +54,9 @@ public class PerformanceServiceImpl implements PerformanceService {
 
     @Autowired
     private AttachmentRepository attachmentRepository;
+
+    @Autowired
+    private LetterTemplateRepository letterTemplateRepository;
 
     @Transactional
     public Performance save(Performance performance, List<MultipartFile> files, Long[] removedAttachmentIds) throws Exception {
@@ -89,6 +100,34 @@ public class PerformanceServiceImpl implements PerformanceService {
         return tempFile;
     }
 
+    /*@Transactional(readOnly = true)
+    public File generateLetterTemplate(Long letterTemplateId) throws Exception {
+        File file = null;
+        LetterTemplate letterTemplate = letterTemplateRepository.findOne(letterTemplateId);
+        JSch jsch = new JSch();
+        Session session = null;
+        try {
+
+            session = jsch.getSession(ApplicationUtil.FTP_SERVER_USER, ApplicationUtil.FTP_SERVER_URL);
+            session.setConfig("StrictHostKeyChecking", "no");
+            session.setPassword(ApplicationUtil.FTP_SERVER_PASSWORD);
+            session.connect();
+
+            Channel channel = session.openChannel("sftp");
+            channel.connect();
+            ChannelSftp sftpChannel = (ChannelSftp) channel;
+
+            //=file = filledTemplatefile(inputStream);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            session.disconnect();
+        }
+
+        return file;
+    }*/
+
     @Transactional(readOnly = true)
     public List<Performance> findAllPerformanceRevisions(Long performanceId) {
         AuditReader reader = AuditReaderFactory.get(entityManager);
@@ -115,6 +154,22 @@ public class PerformanceServiceImpl implements PerformanceService {
         Performance performance = (Performance) query.getSingleResult();
         performance.initializeLazyConnection();
         return performance;
+    }
+
+    private File filledTemplatefile(InputStream is) throws Exception {
+        DefaultResourceLoader loader = new DefaultResourceLoader();
+        Docx docx = new Docx(is);
+        docx.setVariablePattern(new VariablePattern("${", "}"));
+
+        // fill template
+        Variables variables = preparingVariablesOnLetter();
+        docx.fillTemplate(variables);
+
+        // save filled .docx file
+        File tempFile = File.createTempFile("tmp", ".docx", new File(loader.getClassLoader().getResource("com/jbs/doc/").getPath()));
+        docx.save(new FileOutputStream(tempFile, false));
+
+        return tempFile;
     }
 
     private Variables preparingVariablesOnLetter() {
