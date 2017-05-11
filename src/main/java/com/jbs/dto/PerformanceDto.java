@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ScriptAssert(lang = "javascript", script = "_this.startDate <= _this.endDate", message = "Start date should not greater than End date")
 public class PerformanceDto {
 
     private Long id;
