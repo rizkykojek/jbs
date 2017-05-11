@@ -181,7 +181,6 @@ public class Performance {
         Hibernate.initialize(this.getCategory());
         Hibernate.initialize(this.getEmployee());
         Hibernate.initialize(this.getLetterTemplate());
-        Hibernate.initialize(this.getLetterTemplate());
         Hibernate.initialize(this.getAttachment1());
         Hibernate.initialize(this.getAttachment2());
         Hibernate.initialize(this.getAttachment3());
