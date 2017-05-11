@@ -393,7 +393,7 @@
                                     <td th:text="${#dates.format(revision.startDate, 'dd MMM yyyy')}"></td>
                                     <td th:text="${#dates.format(revision.startTime, 'HH:mm')}"></td>
                                     <td th:text="${#dates.format(revision.endDate, 'dd MMM yyyy')}"></td>
-                                    <td th:text="${#dates.format(revision.lastUpdateAt, 'dd MMM yyyy')}"></td>
+                                    <td th:text="${#dates.format(revision.lastUpdateAt, 'dd MMM yyyy HH:mm a')}"></td>
                                     <td th:text="${revision.lastUpdateBy}"></td>
                                 </tr>
                                 </tbody>

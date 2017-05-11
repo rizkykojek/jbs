@@ -114,7 +114,7 @@ public class Performance {
 
     @Column(name = "last_update_at")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy HH:mm a")
     private Date lastUpdateAt;
 
     @Column(name = "last_update_by")
