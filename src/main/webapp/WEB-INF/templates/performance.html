@@ -385,7 +385,7 @@
                                 <tbody>
                                 <tr th:each="revision,iterationStatus  : ${performanceRevisions}" class="info">
                                     <td th:text="${iterationStatus.count}"></td>
-                                    <td><a th:href="'/performance/'+ ${revision.id} +'/revision/' + ${revision.revisionNumber}" th:text="${revision.id}" target="_blank"> </a></td>
+                                    <td><a th:href="@{/} + '/performance/'+ ${revision.id} +'/revision/' + ${revision.revisionNumber}" th:text="${revision.id}" target="_blank"> </a></td>
                                     <td th:text="${revision.action.name} + ' (' +${revision.action.code} + ')'"></td>
                                     <td th:text="${#dates.format(revision.startDate, 'dd MMM yyyy')}"></td>
                                     <td th:text="${#dates.format(revision.startTime, 'HH:mm')}"></td>
