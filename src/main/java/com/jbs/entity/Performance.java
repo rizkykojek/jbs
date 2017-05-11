@@ -31,6 +31,9 @@ public class Performance {
     @JsonView(DataTablesOutput.View.class)
     private Long id;
 
+    @Transient
+    private Integer revisionNumber;
+
     @ManyToOne
     @JoinColumn(name="employee_id", nullable=false)
     private Employee employee;

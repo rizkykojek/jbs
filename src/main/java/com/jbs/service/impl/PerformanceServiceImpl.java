@@ -2,6 +2,7 @@ package com.jbs.service.impl;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.jbs.config.audit.RevisionInfo;
 import com.jbs.entity.Attachment;
 import com.jbs.entity.Performance;
 import com.jbs.repository.AttachmentRepository;
@@ -27,6 +28,7 @@ import javax.persistence.PersistenceContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,17 +91,28 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Performance> getAllPerformanceRevisions(Long performanceId) {
+    public List<Performance> findAllPerformanceRevisions(Long performanceId) {
         AuditReader reader = AuditReaderFactory.get(entityManager);
-        AuditQuery query = reader.createQuery().forRevisionsOfEntity(Performance.class, true, true);
+        AuditQuery query = reader.createQuery().forRevisionsOfEntity(Performance.class, false, true);
         query.add(AuditEntity.id().eq(performanceId));
         query.addOrder(AuditEntity.revisionNumber().asc());
-        List<Performance> audits = query.getResultList();
-        for (Performance performance: audits) {
+        List<Performance> audits = new ArrayList<>();
+        List<Object[]> objects = query.getResultList();
+        for (Object[] object: objects) {
+            Performance performance = (Performance) object[0];
+            performance.setRevisionNumber(((RevisionInfo) object[1]).getId());
             performance.getAction().getName(); //by default oneToMany is lazy on auditreader
+            audits.add(performance);
         }
 
         return audits;
+    }
+
+    public Performance findPerformanceRevision(Long performanceId, Integer revisionNumber) {
+        AuditReader reader = AuditReaderFactory.get(entityManager);
+        AuditQuery query = reader.createQuery().forEntitiesAtRevision(Performance.class, revisionNumber);
+        query.add(AuditEntity.id().eq(performanceId));
+        return (Performance) query.getSingleResult();
     }
 
     private Variables preparingVariablesOnLetter() {

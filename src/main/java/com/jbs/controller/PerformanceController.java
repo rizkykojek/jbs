@@ -69,10 +69,14 @@ public class PerformanceController {
     @Autowired
     private AttachmentRepository attachmentRepository;
 
-    @RequestMapping(value = {"/performance/{performanceId}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
-    public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, final Model model) {
+    @RequestMapping(value = {"/performance/{performanceId}", "/performance/{performanceId}/revision/{revisionNumber}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
+    public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, @PathVariable Optional<Integer> revisionNumber, final Model model) {
         PerformanceDto performanceDto = new PerformanceDto();
-        if (performanceId.isPresent()) {
+        if (performanceId.isPresent() && revisionNumber.isPresent()) {
+            Performance performance = performanceService.findPerformanceRevision(performanceId.get(),revisionNumber.get());
+            performanceDto = convertToDto(performance);
+            performanceDto.setRevisionNumber(revisionNumber.get());
+        } else if (performanceId.isPresent()) {
             Performance performance = performanceRepository.findOne(performanceId.get());
             performanceDto = convertToDto(performance);
         }
@@ -199,7 +203,7 @@ public class PerformanceController {
         model.addAttribute("performanceDto", performanceDto);
 
         if (performanceDto.isUpdate()) {
-            List<Performance> performanceRevisions = performanceService.getAllPerformanceRevisions(performanceDto.getId());
+            List<Performance> performanceRevisions = performanceService.findAllPerformanceRevisions(performanceDto.getId());
             model.addAttribute("performanceRevisions", performanceRevisions);
         }
 

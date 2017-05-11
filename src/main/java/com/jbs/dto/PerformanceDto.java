@@ -22,6 +22,8 @@ public class PerformanceDto {
 
     private Long id;
 
+    private Integer revisionNumber;
+
     @NotNull
     private Long employeeId;
 
@@ -79,6 +81,10 @@ public class PerformanceDto {
 
     public Boolean isUpdate(){
         return id != null && id != 0;
+    }
+
+    public Boolean isAuditVersion(){
+        return isUpdate() && revisionNumber != null && revisionNumber != 0;
     }
 
 }
