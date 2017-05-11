@@ -117,20 +117,21 @@ public class Performance {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy HH:mm a")
     private Date lastUpdateAt;
 
-    @Column(name = "last_update_by")
+    @ManyToOne
+    @JoinColumn(name="last_update_by", nullable=false)
     @JsonView(DataTablesOutput.View.class)
-    private Long lastUpdateBy;
+    private Employee lastUpdateBy;
 
     @PrePersist
     public void prePersist() {
         this.lastUpdateAt = DateTime.now().toDate();
-        this.lastUpdateBy = UserSessionUtil.getEmployeeId();
+        this.lastUpdateBy = new Employee(UserSessionUtil.getEmployeeId());
     }
 
     @PreUpdate
     public void preUpdate() {
         this.lastUpdateAt = DateTime.now().toDate();
-        this.lastUpdateBy = UserSessionUtil.getEmployeeId();
+        this.lastUpdateBy = new Employee(UserSessionUtil.getEmployeeId());
     }
 
     public List<Attachment> getAllAttachment() {

@@ -394,7 +394,7 @@
                                     <td th:text="${#dates.format(revision.startTime, 'HH:mm')}"></td>
                                     <td th:text="${#dates.format(revision.endDate, 'dd MMM yyyy')}"></td>
                                     <td th:text="${#dates.format(revision.lastUpdateAt, 'dd MMM yyyy HH:mm a')}"></td>
-                                    <td th:text="${revision.lastUpdateBy}"></td>
+                                    <td th:text="${revision.lastUpdateBy.fullName}"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -471,7 +471,7 @@
                 { "data": "startTime" },
                 { "data": "endDate" },
                 { "data": "lastUpdateAt" },
-                { "data": "lastUpdateBy" }
+                { "data": "lastUpdateBy.fullName" }
             ],
             "rowCallback": function( row, data, index ) {
                     $(row).addClass('info');
