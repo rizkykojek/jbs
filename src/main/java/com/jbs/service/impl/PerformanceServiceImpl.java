@@ -139,7 +139,7 @@ public class PerformanceServiceImpl implements PerformanceService {
         for (Object[] object: objects) {
             Performance performance = (Performance) object[0];
             performance.setRevisionNumber(((RevisionInfo) object[1]).getId());
-            performance.getAction().getName(); //by default oneToMany is lazy on auditreader
+            performance.initializeLazyConnection();
             audits.add(performance);
         }
 

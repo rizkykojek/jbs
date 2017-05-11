@@ -187,6 +187,7 @@ public class Performance {
         Hibernate.initialize(this.getAttachment3());
         Hibernate.initialize(this.getAttachment4());
         Hibernate.initialize(this.getAttachment5());
+        Hibernate.initialize(this.getLastUpdateBy());
     }
 
 }

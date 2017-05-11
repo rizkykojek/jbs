@@ -17,5 +17,7 @@ public final class ApplicationUtil {
 
     public static final String FTP_SERVER_FOLDER = "/incoming/HCP/templates/";
 
+    public static final Long MAX_UPLOAD_SIZE_PER_FILE = 5000000l;
+
 
 }

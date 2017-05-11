@@ -91,6 +91,8 @@ public class PerformanceController {
             Performance performance = convertToEntity(performanceDto, Optional.empty());
             performance = performanceService.save(performance, performanceDto.getFiles(), performanceDto.getRemovedAttachments());
             performanceDto = convertToDto(performance);
+        } else {
+            this.setAttachmentsView(Optional.empty(), performanceDto);
         }
 
         populateModelAttribute(model, performanceDto, employeeId);
@@ -103,6 +105,8 @@ public class PerformanceController {
             Performance performance = convertToEntity(performanceDto, performanceId);
             performance = performanceService.save(performance, performanceDto.getFiles(), performanceDto.getRemovedAttachments());
             performanceDto = convertToDto(performance);
+        } else {
+            this.setAttachmentsView(Optional.empty(), performanceDto);
         }
 
         populateModelAttribute(model, performanceDto, employeeId);
@@ -230,8 +234,16 @@ public class PerformanceController {
         PerformanceDto performanceDto = modelMapper.map(performance, PerformanceDto.class);
         PerformanceCategory category = performanceCategoryRepository.findOne(performance.getCategory().getId());
         performanceDto.setParentCategoryId(category.getParentCategory().getId());
-        performanceDto.setAttachments(performance.getAllAttachment());
+        this.setAttachmentsView(Optional.ofNullable(performance), performanceDto);
         return performanceDto;
+    }
+
+    private void setAttachmentsView(Optional<Performance> performance, PerformanceDto performanceDto){
+        if (performance.isPresent()) {
+            performanceDto.setAttachments(performance.get().getAllAttachment());
+        } else {
+            performanceDto.setAttachments(performanceRepository.findOne(performanceDto.getId()).getAllAttachment());
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package com.jbs.config;
 
 import com.google.common.collect.Sets;
+import com.jbs.util.ApplicationUtil;
 import com.jbs.util.ODataUtil;
 import com.jbs.util.OpenCmisUtil;
 import com.sap.ecm.api.EcmService;
@@ -84,7 +85,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Bean
     public MultipartResolver multipartResolver(){
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(1000000);
+        //multipartResolver.setMaxUploadSizePerFile(ApplicationUtil.MAX_UPLOAD_SIZE_PER_FILE);
         return  multipartResolver;
     }
 

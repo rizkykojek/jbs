@@ -1,6 +1,7 @@
 package com.jbs.dto;
 
 import com.jbs.entity.Attachment;
+import com.jbs.util.ApplicationUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -87,6 +89,18 @@ public class PerformanceDto {
 
     public Boolean isAuditVersion(){
         return isUpdate() && revisionNumber != null && revisionNumber != 0;
+    }
+
+    @AssertTrue(message = "Maximum size per file should not more than 5 Mb ")
+    public boolean isFileSizeBelow() {
+        if (files != null) {
+            for (MultipartFile file : files) {
+                if (file.getSize() > ApplicationUtil.MAX_UPLOAD_SIZE_PER_FILE) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

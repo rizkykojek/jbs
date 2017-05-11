@@ -69,4 +69,8 @@ public class Employee {
         this.fullName = this.firstName + " " + this.lastName;
     }
 
+    public Employee(Long id) {
+        this.id = id;
+    }
+
 }
