@@ -247,10 +247,13 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment :</label>
                             <label class="input-group-btn">
                                 <span class="btn btn-primary">
-                                    Browse&hellip; <input type="file" style="display: none;" multiple="true" th:field="*{files}"/>
+                                    Browse&hellip; <input id="fileId" type="file" style="display: none;" multiple="true" th:field="*{files}"/>
                                 </span>
                             </label>
-                            <input type="text" class="form-control" readonly="true"/>
+                            <input id="fileNameId" type="text" class="form-control" readonly="true"/>
+                            <a href="#" th:onclick="'javascript:clearFile()'" class="input-group-btn">
+                                <button type="button" class="btn btn-info">Clear</button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -421,6 +424,11 @@
             var _ctx = /*[[@{/}]]*/ 'context';
             window.location.replace(_ctx + "performance/generate_letter/" + $("#letterTemplateId").val());
         }
+    }
+
+    function clearFile() {
+        document.getElementById('fileId').value= null;
+        document.getElementById('fileNameId').value= '';
     }
 
     $(document).ready(function(){
