@@ -71,7 +71,7 @@ public class PerformanceController {
 
     @RequestMapping(value = {"/performance/{performanceId}", "/performance/{performanceId}/revision/{revisionNumber}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, @PathVariable Optional<Integer> revisionNumber, final Model model) {
-        PerformanceDto performanceDto = new PerformanceDto();
+        PerformanceDto performanceDto = new PerformanceDto(DateTime.now().toDate());
         if (performanceId.isPresent() && revisionNumber.isPresent()) {
             Performance performance = performanceService.findPerformanceRevision(performanceId.get(),revisionNumber.get());
             performanceDto = convertToDto(performance);

@@ -21,7 +21,7 @@ public class PerformanceAction {
     @JsonView(DataTablesOutput.View.class)
     private Long id;
 
-    @Column(length = 2, unique = true)
+    @Column(length = 3)
     @JsonView(DataTablesOutput.View.class)
     private String code;
 

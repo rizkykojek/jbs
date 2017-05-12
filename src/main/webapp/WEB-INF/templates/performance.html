@@ -236,7 +236,7 @@
                         <div class="row" style="margin-bottom: 10px">
                             <div class="col-md-12">
                                 <div class="checkbox">
-                                    <input type="checkbox" value=""/><label>Supervisor Report</label>
+                                    <input type="checkbox" th:field="*{isSupervisorReport}"/><label>Supervisor Report</label>
                                 </div>
                             </div>
                         </div>
@@ -282,13 +282,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2  col-md-offset-4">
-                        <button type="submit" class="btn btn-info" th:if="${!performanceDto.isAuditVersion()}">Save</button>
-                    </div>
-                    <div class="col-md-2">
-                        <a href="#" th:href="@{/}">
+                    <div class="col-md-2 col-md-offset-4">
+                        <a href="#" th:href="@{/}" th:if="${!performanceDto.isAuditVersion()}">
                             <button type="button" class="btn btn-info">Close</button>
                         </a>
+                        <button type="button" class="btn btn-info" onclick="self.close()" th:if="${performanceDto.isAuditVersion()}">Close</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-info" th:if="${!performanceDto.isAuditVersion()}">Save</button>
                     </div>
                 </div>
                 <div class="row">

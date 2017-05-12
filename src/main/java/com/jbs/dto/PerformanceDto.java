@@ -24,6 +24,12 @@ import java.util.List;
 @ScriptAssert(lang = "javascript", script = "_this.startDate <= _this.endDate", message = "Start date should not greater than End date")
 public class PerformanceDto {
 
+    public PerformanceDto(Date current) {
+        this.startDate = current;
+        this.endDate = current;
+        this.startTime = current;
+    }
+
     private Long id;
 
     private Integer revisionNumber;
