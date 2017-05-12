@@ -6,23 +6,74 @@
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <table border="0" width="100%">
-                <tr>
-                    <td width="10%">
-                        <img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/>
-                    </td>
-                    <td align="center"><h3 class="panel-title"><b>Add Performance Management</b></h3></td>
-                    <td width="20%">
-                        <form class="form-inline" style="margin-top: 1px">
-                            <div class="form-group">
-                                <label>Search:</label>
-                                <input type="text" class="form-control" style="width: 50%"/>
-                                <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/>
+                        </div>
+                        <div class="col-md-10" style="margin-top: 10px;">
+                            <h3 class="panel-title"><b>Add Performance Management</b></h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <b>Name&nbsp;&nbsp;</b>
+                            <label class="normal" th:text="${employee.fullName}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <b>Employee ID&nbsp;&nbsp;</b>
+                            <label class="normal" th:text="${employee.employeeNumber}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <b>Plan/Site&nbsp;&nbsp;</b>
+                            <label class="normal">Beef City</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="well" style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white;margin-bottom: 5px;margin-top: -5px">
+                        <div class="row text-center" style="margin-top: -15px">
+                            <label style="color: black"><u>Quick Links</u></label>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-md-6">
+                                <label style="color: black">&bull;</label> <a href="#" style="color: black">Add Event</a>
                             </div>
-                        </form>
-                    </td>
-                </tr>
-            </table>
+                            <div class="col-md-6">
+                                <label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave</a>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-md-6">
+                                <label style="color: black">&bull;</label> <a href="#" style="color: black">View Employee Summary</a>
+                            </div>
+                            <div class="col-md-6">
+                                <label style="color: black">&bull;</label> <a href="#" style="color: black">Add Historical Leave</a>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-md-6">
+                                <label style="color: black">&bull;</label> <a href="#" style="color: black">View Employee Record</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <form class="form-inline" style="margin-top: 1px">
+                        <label>Search:</label>
+                        <div class="form-group">
+                            <input id="searchNameId" type="text" class="form-control" style="width: 140px;"/>
+                            <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <form action="#" th:action="${performanceDto.isUpdate()} ?
                 @{'/employee/' + ${employee.id} + '/performance/update/' + ${performanceDto.id}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} :
@@ -40,69 +91,6 @@
                             <ul>
                                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
                             </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="col-md-2">
-                            <b>Name</b>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="normal" th:text="${employee.fullName}"/>
-                        </div>
-                        <div class="col-md-2">
-                            <b>Employee ID</b>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="normal" th:text="${employee.employeeNumber}"/>
-                        </div>
-                        <div class="col-md-2">
-                            <b>Department</b>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="normal" th:text="${employee.department.name}"/>
-                        </div>
-                        <div class="col-md-2">
-                            <b>Position</b>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="normal" th:text="${employee.position.name}"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="well"
-                             style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white">
-                            <div class="row text-center">
-                                <label style="color: black"><u>Quick Links</u></label>
-                            </div>
-                            <div class="row text-left">
-                                <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Event Report</a>
-                                </div>
-                            </div>
-                            <div class="row text-left">
-                                <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" th:href="@{/event}" style="color: black">Add Event</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">PM Report</a>
-                                </div>
-                            </div>
-                            <div class="row text-left">
-                                <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" th:href="@{/performance}" style="color: black">Add PM</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Employee Central</a>
-                                </div>
-                            </div>
-                            <div class="row text-left">
-                                &nbsp;
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -233,10 +221,11 @@
                         <div class="row">
                             <div class="col-md-12">&nbsp;</div>
                         </div>
-                        <div class="row" style="margin-bottom: 10px">
+                        <div class="row" style="margin-bottom: 10px;margin-left: 10px;">
                             <div class="col-md-12">
                                 <div class="checkbox">
-                                    <input type="checkbox" th:field="*{isSupervisorReport}"/><label>Supervisor Report</label>
+                                    <input type="checkbox" th:field="*{isSupervisorReport}"/>
+                                    <label style="margin-left: -15px">Supervisor Report</label>
                                 </div>
                             </div>
                         </div>
