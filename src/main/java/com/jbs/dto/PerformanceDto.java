@@ -21,7 +21,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ScriptAssert(lang = "javascript", script = "_this.startDate <= _this.endDate", message = "Start date should not greater than End date")
 public class PerformanceDto {
 
     public PerformanceDto(Date current) {
@@ -107,6 +106,11 @@ public class PerformanceDto {
             }
         }
         return true;
+    }
+
+    @AssertTrue(message = "Start date should not greater than End date")
+    public boolean isStartDateBelowEndDate() {
+        return startDate.before(endDate) || startDate.equals(endDate);
     }
 
 }
