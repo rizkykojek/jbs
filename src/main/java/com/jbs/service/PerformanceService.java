@@ -13,7 +13,7 @@ public interface PerformanceService {
 
     Performance save(Performance performance, List<MultipartFile> files, Long[] removedAttachmentIds) throws Exception;
 
-    File generateLetterTemplate(Long letterTemplateId) throws Exception;
+    File generateLetterTemplate(Long letterTemplateId, Long employeeId) throws Exception;
 
     List<Performance> findAllPerformanceRevisions(Long performanceId);
 

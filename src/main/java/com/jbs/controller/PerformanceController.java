@@ -116,9 +116,9 @@ public class PerformanceController {
         return "performance";
     }
 
-    @RequestMapping(value = "/performance/generate_letter/{letterTemplateId}", method = RequestMethod.GET)
-    public void generateLetter(@PathVariable Long letterTemplateId, HttpServletResponse response) throws Exception {
-        File tempFile = performanceService.generateLetterTemplate(letterTemplateId);
+    @RequestMapping(value = "/employee/{employeeId}/performance/generate_letter/{letterTemplateId}", method = RequestMethod.GET)
+    public void generateLetter(@PathVariable Long letterTemplateId, @PathVariable Long employeeId, HttpServletResponse response) throws Exception {
+        File tempFile = performanceService.generateLetterTemplate(letterTemplateId, employeeId);
 
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;filename=letter.docx");

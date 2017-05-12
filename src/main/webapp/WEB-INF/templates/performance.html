@@ -422,7 +422,8 @@
     function generateTemplate() {
         if ($("#letterTemplateId").val() != "") {
             var _ctx = /*[[@{/}]]*/ 'context';
-            window.location.replace(_ctx + "performance/generate_letter/" + $("#letterTemplateId").val());
+            var employeeId = [[${employee.id}]];
+            window.location.replace(_ctx + "employee/" + employeeId + "/performance/generate_letter/" + $("#letterTemplateId").val());
         }
     }
 

@@ -15,7 +15,7 @@ public final class ApplicationUtil {
 
     public static final String FTP_SERVER_PASSWORD = "n6tA0Q45n";
 
-    public static final String FTP_SERVER_FOLDER = "/incoming/HCP/templates/";
+    public static final String FTP_SERVER_FOLDER = "/HCP_Shift_Summary_App/PM_Event_Man/Letter_Templates/";
 
     public static final Long MAX_UPLOAD_SIZE_PER_FILE = 5000000l;
 

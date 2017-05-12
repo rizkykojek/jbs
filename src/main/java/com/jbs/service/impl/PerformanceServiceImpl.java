@@ -4,9 +4,11 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.jbs.config.audit.RevisionInfo;
 import com.jbs.entity.Attachment;
+import com.jbs.entity.Employee;
 import com.jbs.entity.LetterTemplate;
 import com.jbs.entity.Performance;
 import com.jbs.repository.AttachmentRepository;
+import com.jbs.repository.EmployeeRepository;
 import com.jbs.repository.LetterTemplateRepository;
 import com.jbs.repository.PerformanceRepository;
 import com.jbs.service.PerformanceService;
@@ -58,6 +60,9 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Autowired
     private LetterTemplateRepository letterTemplateRepository;
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
     @Transactional
     public Performance save(Performance performance, List<MultipartFile> files, Long[] removedAttachmentIds) throws Exception {
         for (Long attachmentId : removedAttachmentIds){
@@ -82,51 +87,45 @@ public class PerformanceServiceImpl implements PerformanceService {
         return performance;
     }
 
-    @Transactional(readOnly = true)
-    public File generateLetterTemplate(Long letterTemplateId) throws Exception {
-        DefaultResourceLoader loader = new DefaultResourceLoader();
-
-        Docx docx = new Docx(loader.getResource("classpath:com/jbs/doc/letter.docx").getInputStream());
-        docx.setVariablePattern(new VariablePattern("${", "}"));
-
-        // fill template
-        Variables variables = preparingVariablesOnLetter();
-        docx.fillTemplate(variables);
-
-        // save filled .docx file
-        File tempFile = File.createTempFile("tmp", ".docx", new File(loader.getClassLoader().getResource("com/jbs/doc/").getPath()));
-        docx.save(new FileOutputStream(tempFile, false));
-
-        return tempFile;
-    }
-
     /*@Transactional(readOnly = true)
-    public File generateLetterTemplate(Long letterTemplateId) throws Exception {
+    public File generateLetterTemplate(Long letterTemplateId, Long employeeId) throws Exception {
+        DefaultResourceLoader loader = new DefaultResourceLoader();
+        File tempFile = filledTemplatefile(loader.getResource("classpath:com/jbs/doc/letter.docx").getInputStream(), employeeRepository.findOne(employeeId));
+        return tempFile;
+    }*/
+
+    @Transactional(readOnly = true)
+    public File generateLetterTemplate(Long letterTemplateId, Long employeeId) throws Exception {
         File file = null;
-        LetterTemplate letterTemplate = letterTemplateRepository.findOne(letterTemplateId);
         JSch jsch = new JSch();
         Session session = null;
-        try {
+        ChannelSftp sftpChannel = null;
 
-            session = jsch.getSession(ApplicationUtil.FTP_SERVER_USER, ApplicationUtil.FTP_SERVER_URL);
+        try {
+            LetterTemplate letterTemplate = letterTemplateRepository.findOne(letterTemplateId);
+            Employee employee = employeeRepository.findOne(employeeId);
+
+            session = jsch.getSession(ApplicationUtil.FTP_SERVER_USER, ApplicationUtil.FTP_SERVER_URL, ApplicationUtil.FTP_SERVER_PORT);
             session.setConfig("StrictHostKeyChecking", "no");
             session.setPassword(ApplicationUtil.FTP_SERVER_PASSWORD);
             session.connect();
 
             Channel channel = session.openChannel("sftp");
             channel.connect();
-            ChannelSftp sftpChannel = (ChannelSftp) channel;
+            sftpChannel = (ChannelSftp) channel;
+            String remotePath = ApplicationUtil.FTP_SERVER_FOLDER + letterTemplate.getTemplateFile();
+            InputStream inputStream = sftpChannel.get(remotePath);
 
-            //=file = filledTemplatefile(inputStream);
+            file = filledTemplatefile(inputStream, employee);
         } catch (Exception ex) {
-            System.out.println("Error: " + ex.getMessage());
             ex.printStackTrace();
         } finally {
             session.disconnect();
+            sftpChannel.disconnect();
         }
 
         return file;
-    }*/
+    }
 
     @Transactional(readOnly = true)
     public List<Performance> findAllPerformanceRevisions(Long performanceId) {
@@ -156,13 +155,13 @@ public class PerformanceServiceImpl implements PerformanceService {
         return performance;
     }
 
-    private File filledTemplatefile(InputStream is) throws Exception {
+    private File filledTemplatefile(InputStream is, Employee employee) throws Exception {
         DefaultResourceLoader loader = new DefaultResourceLoader();
         Docx docx = new Docx(is);
         docx.setVariablePattern(new VariablePattern("${", "}"));
 
         // fill template
-        Variables variables = preparingVariablesOnLetter();
+        Variables variables = preparingVariablesOnLetter(employee);
         docx.fillTemplate(variables);
 
         // save filled .docx file
@@ -172,7 +171,7 @@ public class PerformanceServiceImpl implements PerformanceService {
         return tempFile;
     }
 
-    private Variables preparingVariablesOnLetter() {
+    private Variables preparingVariablesOnLetter(Employee employee) {
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
         Variables variables = new Variables();
         variables.addTextVariable(new TextVariable("${employee_id}", "1111222"));
