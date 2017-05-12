@@ -54,18 +54,18 @@ public class Performance {
 
     @Column(name = "start_date")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Asia/Jakarta") //should revisit, use timezone default as datetimeformat Spring
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Australia/Sydney") //should revisit, use timezone default as datetimeformat Spring
     private Date startDate;
 
     @Column(name = "end_date")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Asia/Jakarta")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Australia/Sydney")
     private Date endDate;
 
     @Temporal(TemporalType.TIME)
     @Column(name = "start_time")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm", timezone = "Asia/Jakarta")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm", timezone = "Australia/Sydney")
     private Date startTime;
 
     @Column(name = "issued_by")
@@ -232,6 +232,7 @@ public class Performance {
         Hibernate.initialize(this.getLetterTemplate());
         Hibernate.initialize(this.getInterpreter());
         Hibernate.initialize(this.getSupportResponse());
+        Hibernate.initialize(this.getAttachment1());
         Hibernate.initialize(this.getAttachment2());
         Hibernate.initialize(this.getAttachment3());
         Hibernate.initialize(this.getAttachment4());
