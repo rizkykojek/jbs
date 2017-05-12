@@ -77,14 +77,16 @@ public class Performance {
     @Column(name = "attendee")
     private String attendee;
 
-    @Column(name = "support_response")
-    private String supportResponse;
-
     @Column(name = "support_person")
     private String supportPerson;
 
-    @Column(name = "interpreter")
-    private String interpreter;
+    @ManyToOne
+    @JoinColumn(name="interpreter_id", nullable=false)
+    private PerformanceAdmin interpreter;
+
+    @ManyToOne
+    @JoinColumn(name="support_response_id", nullable=false)
+    private PerformanceAdmin supportResponse;
 
     @Column(name = "is_supervisor_report")
     private Boolean isSupervisorReport;
@@ -228,7 +230,8 @@ public class Performance {
         Hibernate.initialize(this.getCategory());
         Hibernate.initialize(this.getEmployee());
         Hibernate.initialize(this.getLetterTemplate());
-        Hibernate.initialize(this.getAttachment1());
+        Hibernate.initialize(this.getInterpreter());
+        Hibernate.initialize(this.getSupportResponse());
         Hibernate.initialize(this.getAttachment2());
         Hibernate.initialize(this.getAttachment3());
         Hibernate.initialize(this.getAttachment4());

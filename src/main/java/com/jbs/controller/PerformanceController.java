@@ -69,6 +69,9 @@ public class PerformanceController {
     @Autowired
     private AttachmentRepository attachmentRepository;
 
+    @Autowired
+    private PerformanceAdminRepository performanceAdminRepository;
+
     @RequestMapping(value = {"/performance/{performanceId}", "/performance/{performanceId}/revision/{revisionNumber}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, @PathVariable Optional<Integer> revisionNumber, final Model model) {
         PerformanceDto performanceDto = new PerformanceDto(DateTime.now().toDate());
@@ -215,6 +218,8 @@ public class PerformanceController {
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
         model.addAttribute("listAction", performanceActionRepository.findByCategoryId(performanceDto.getParentCategoryId()));
         model.addAttribute("listLetterTemplate", letterTemplateRepository.findByActionId(performanceDto.getActionId()));
+        model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndType(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
+        model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndType(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
 
         /** should revisit, based on performance history */
         model.addAttribute("listActionBasedHistory", performanceActionRepository.findAll());
@@ -241,7 +246,7 @@ public class PerformanceController {
     private void setAttachmentsView(Optional<Performance> performance, PerformanceDto performanceDto){
         if (performance.isPresent()) {
             performanceDto.setAttachments(performance.get().getAllAttachment());
-        } else {
+        } else if (performanceDto.getId() != null){
             performanceDto.setAttachments(performanceRepository.findOne(performanceDto.getId()).getAllAttachment());
         }
     }

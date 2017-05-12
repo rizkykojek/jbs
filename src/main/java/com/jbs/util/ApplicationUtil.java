@@ -19,5 +19,9 @@ public final class ApplicationUtil {
 
     public static final Long MAX_UPLOAD_SIZE_PER_FILE = 5000000l;
 
+    public static final String SUPPORT_RESPONSE_TYPE = "Support_Response";
+
+    public static final String INTERPRETER_TYPE = "Interpreter";
+
 
 }

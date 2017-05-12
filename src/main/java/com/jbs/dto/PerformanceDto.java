@@ -69,14 +69,14 @@ public class PerformanceDto {
     @NotEmpty
     private String attendee;
 
-    @NotEmpty
-    private String supportResponse;
+    @NotNull
+    private Long supportResponseId;
 
     @NotEmpty
     private String supportPerson;
 
-    @NotEmpty
-    private String interpreter;
+    @NotNull
+    private Long interpreterId;
 
     private Boolean isSupervisorReport;
 
