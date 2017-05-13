@@ -290,110 +290,114 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label>
-                            <a href="#"><u>&lt;PM History&gt;</u></a>
+                            <a id="pmHistoryHead"><u>&lt;PM History&gt;</u></a>
                         </label>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 10px">
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Action :</label>
-                            <select id="historyActionId" class="form-control">
-                                <option value="">-- Please Select --</option>
-                                <option th:each="action : ${listActionBasedHistory}" th:value="${action.id}" th:text="${action.name}"></option>
+                <div id="pmHistoryBody">
+                    <div class="row" style="margin-bottom: 10px">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label class="input-group-addon borderless no-background" style="padding-left: 0px">Action :</label>
+                                <select id="historyActionId" class="form-control">
+                                    <option value="">-- Please Select --</option>
+                                    <option th:each="action : ${listActionBasedHistory}" th:value="${action.id}" th:text="${action.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label class="input-group-addon borderless no-background">Start :</label>
+                                <div class='input-group date'>
+                                    <input id='historyStartDatePicker' type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label class="input-group-addon borderless no-background">End :</label>
+                                <div class='input-group date'>
+                                    <input id='historyEndDatePicker' type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="historyMonthId" class="form-control">
+                                <option value="">Months</option>
+                                <option value="3">3 Months</option>
+                                <option value="6">6 Months</option>
+                                <option value="9">9 Months</option>
+                                <option value="12">12 Months</option>
+                                <option value="18">18 Months</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">Start :</label>
-                            <div class='input-group date'>
-                                <input id='historyStartDatePicker' type='text' class="form-control"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table id="historyTable" class="table table-bordered table-condensed table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <td class="text-center">PM ID</td>
+                                            <td class="text-center">Action</td>
+                                            <td class="text-center">Start Date</td>
+                                            <td class="text-center">Time</td>
+                                            <td class="text-center">End Date</td>
+                                            <td class="text-center">Last Modified Date</td>
+                                            <td class="text-center">Last Modified By</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">End :</label>
-                            <div class='input-group date'>
-                                <input id='historyEndDatePicker' type='text' class="form-control"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <select id="historyMonthId" class="form-control">
-                            <option value="">Months</option>
-                            <option value="3">3 Months</option>
-                            <option value="6">6 Months</option>
-                            <option value="9">9 Months</option>
-                            <option value="12">12 Months</option>
-                            <option value="18">18 Months</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table id="historyTable" class="table table-bordered table-condensed table-hover">
-                                <thead>
-                                    <tr class="success">
-                                        <td class="text-center">PM ID</td>
-                                        <td class="text-center">Action</td>
-                                        <td class="text-center">Start Date</td>
-                                        <td class="text-center">Time</td>
-                                        <td class="text-center">End Date</td>
-                                        <td class="text-center">Last Modified Date</td>
-                                        <td class="text-center">Last Modified By</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
                 <div th:class="${performanceDto.isUpdate()} ? 'row' : 'hide'">
                     <div class="col-md-12">
                         <label>
-                            <a href="#"><u>&lt;Audit&gt;</u></a>
+                            <a id="pmAuditHead"><u>&lt;Audit&gt;</u></a>
                         </label>
                     </div>
                 </div>
-                <div th:class="${performanceDto.isUpdate()} ? 'row' : 'hide'">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-hover">
-                                <thead>
-                                    <tr class="success">
-                                        <td class="text-center">#</td>
-                                        <td class="text-center">PM ID</td>
-                                        <td class="text-center">Action</td>
-                                        <td class="text-center">Start Date</td>
-                                        <td class="text-center">Time</td>
-                                        <td class="text-center">End Date</td>
-                                        <td class="text-center">Last Modified Date</td>
-                                        <td class="text-center">Last Modified By</td>
+                <div id="pmAuditBody">
+                    <div th:class="${performanceDto.isUpdate()} ? 'row' : 'hide'">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-hover">
+                                    <thead>
+                                        <tr class="success">
+                                            <td class="text-center">#</td>
+                                            <td class="text-center">PM ID</td>
+                                            <td class="text-center">Action</td>
+                                            <td class="text-center">Start Date</td>
+                                            <td class="text-center">Time</td>
+                                            <td class="text-center">End Date</td>
+                                            <td class="text-center">Last Modified Date</td>
+                                            <td class="text-center">Last Modified By</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="revision,iterationStatus  : ${performanceRevisions}" class="info">
+                                        <td th:text="${iterationStatus.count}"></td>
+                                        <td><a th:href="@{/} + 'performance/'+ ${revision.id} +'/revision/' + ${revision.revisionNumber}" th:text="${revision.id}" target="_blank"> </a></td>
+                                        <td th:text="${revision.action.name} + ' (' +${revision.action.code} + ')'"></td>
+                                        <td th:text="${#dates.format(revision.startDate, 'dd MMM yyyy')}"></td>
+                                        <td th:text="${#dates.format(revision.startTime, 'HH:mm')}"></td>
+                                        <td th:text="${#dates.format(revision.endDate, 'dd MMM yyyy')}"></td>
+                                        <td th:text="${#dates.format(revision.lastUpdateAt, 'dd MMM yyyy HH:mm a')}"></td>
+                                        <td th:text="${revision.lastUpdateBy.fullName}"></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="revision,iterationStatus  : ${performanceRevisions}" class="info">
-                                    <td th:text="${iterationStatus.count}"></td>
-                                    <td><a th:href="@{/} + 'performance/'+ ${revision.id} +'/revision/' + ${revision.revisionNumber}" th:text="${revision.id}" target="_blank"> </a></td>
-                                    <td th:text="${revision.action.name} + ' (' +${revision.action.code} + ')'"></td>
-                                    <td th:text="${#dates.format(revision.startDate, 'dd MMM yyyy')}"></td>
-                                    <td th:text="${#dates.format(revision.startTime, 'HH:mm')}"></td>
-                                    <td th:text="${#dates.format(revision.endDate, 'dd MMM yyyy')}"></td>
-                                    <td th:text="${#dates.format(revision.lastUpdateAt, 'dd MMM yyyy HH:mm a')}"></td>
-                                    <td th:text="${revision.lastUpdateBy.fullName}"></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -570,6 +574,13 @@
         $("#historyMonthId").change(function() {
             $('#historyStartDatePicker, #historyEndDatePicker').val("");
             historyTable.draw();
+        });
+
+        $("#pmHistoryHead").click(function(){
+            $("#pmHistoryBody").toggle("slide");
+        });
+        $("#pmAuditHead").click(function(){
+            $("#pmAuditBody").toggle("slide");
         });
     });
 
