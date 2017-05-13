@@ -1,10 +1,13 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by rizkykojek on 5/1/17.
@@ -32,8 +35,8 @@ public class PerformanceAction {
     @Column
     private Boolean status;
 
-    @ManyToOne
-    @JoinColumn(name="category_id")
-    private PerformanceCategory category;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "actions")
+    private Set<PerformanceCategory> categories;
 
 }

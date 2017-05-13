@@ -1,6 +1,7 @@
 package com.jbs.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.collect.Lists;
 import com.jbs.dto.PerformanceDto;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
@@ -33,8 +34,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by rizkykojek on 3/5/17.
@@ -152,7 +152,7 @@ public class PerformanceController {
 
     @RequestMapping(value = "/performance/actions", method = RequestMethod.GET)
     public @ResponseBody List<PerformanceAction> getActions(@RequestParam Long parentCategoryId) {
-        return performanceActionRepository.findByCategoryId(parentCategoryId);
+        return Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions());
     }
 
     @RequestMapping(value = "/performance/letter_templates", method = RequestMethod.GET)
@@ -216,7 +216,8 @@ public class PerformanceController {
 
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
-        model.addAttribute("listAction", performanceActionRepository.findByCategoryId(performanceDto.getParentCategoryId()));
+        Long parentCategoryId = performanceDto.getParentCategoryId();
+        model.addAttribute("listAction", parentCategoryId != null ?  Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions()) : Lists.newArrayList());
         model.addAttribute("listLetterTemplate", letterTemplateRepository.findByActionId(performanceDto.getActionId()));
         model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndType(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
         model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndType(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
