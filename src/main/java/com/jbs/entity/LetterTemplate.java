@@ -1,8 +1,10 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by rizkykojek on 5/1/17.
@@ -33,5 +35,9 @@ public class LetterTemplate {
     @ManyToOne
     @JoinColumn(name="action_id")
     private PerformanceAction action;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "templates")
+    private Set<PerformanceAction> actions;
 
 }

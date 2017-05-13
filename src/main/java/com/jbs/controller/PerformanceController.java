@@ -34,7 +34,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by rizkykojek on 3/5/17.
@@ -59,9 +60,6 @@ public class PerformanceController {
 
     @Autowired
     private PerformanceActionRepository performanceActionRepository;
-
-    @Autowired
-    private LetterTemplateRepository letterTemplateRepository;
 
     @Autowired
     private PerformanceTableRepository performanceTableRepository;
@@ -157,7 +155,7 @@ public class PerformanceController {
 
     @RequestMapping(value = "/performance/letter_templates", method = RequestMethod.GET)
     public @ResponseBody List<LetterTemplate> getLetterTemplates(@RequestParam Long actionId) {
-        return letterTemplateRepository.findByActionId(actionId);
+        return Lists.newArrayList(performanceActionRepository.findById(actionId).getTemplates());
     }
 
     @JsonView(DataTablesOutput.View.class)
@@ -215,10 +213,11 @@ public class PerformanceController {
         }
 
         Long parentCategoryId = performanceDto.getParentCategoryId();
+        Long actionId = performanceDto.getActionId();
         model.addAttribute("listAction", parentCategoryId != null ?  Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions()) : Lists.newArrayList());
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
-        model.addAttribute("listLetterTemplate", letterTemplateRepository.findByActionId(performanceDto.getActionId()));
+        model.addAttribute("listLetterTemplate", actionId != null ?  Lists.newArrayList(performanceActionRepository.findById(actionId).getTemplates()) : Lists.newArrayList());
         model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
         model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
         model.addAttribute("listActionBasedHistory", performanceActionRepository.findAll());
