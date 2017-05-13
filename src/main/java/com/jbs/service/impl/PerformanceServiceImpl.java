@@ -142,7 +142,7 @@ public class PerformanceServiceImpl implements PerformanceService {
             audits.add(performance);
         }
 
-        return audits;
+        return Lists.reverse(audits);
     }
 
     @Transactional(readOnly = true)

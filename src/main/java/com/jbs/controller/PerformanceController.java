@@ -214,15 +214,13 @@ public class PerformanceController {
             model.addAttribute("performanceRevisions", performanceRevisions);
         }
 
-        model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
-        model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
         Long parentCategoryId = performanceDto.getParentCategoryId();
         model.addAttribute("listAction", parentCategoryId != null ?  Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions()) : Lists.newArrayList());
+        model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
+        model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
         model.addAttribute("listLetterTemplate", letterTemplateRepository.findByActionId(performanceDto.getActionId()));
-        model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndType(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
-        model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndType(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
-
-        /** should revisit, based on performance history */
+        model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
+        model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
         model.addAttribute("listActionBasedHistory", performanceActionRepository.findAll());
     }
 

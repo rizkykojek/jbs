@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface PerformanceAdminRepository extends CrudRepository<PerformanceAdmin, Long> {
 
-    List<PerformanceAdmin> findByStatusAndType(Boolean status, String type);
+    List<PerformanceAdmin> findByStatusAndTypeOrderBySequenceAsc(Boolean status, String type);
 
 }
