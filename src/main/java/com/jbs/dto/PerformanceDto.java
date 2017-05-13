@@ -56,25 +56,19 @@ public class PerformanceDto {
     private Date endDate;
 
     @NotNull
-    @DateTimeFormat(pattern = "HH:mm a")
+    @DateTimeFormat(pattern = "hh:mm aa")
     private Date startTime;
 
-    @NotEmpty
     private String issuedBy;
 
-    @NotEmpty
     private String place;
 
-    @NotEmpty
     private String attendee;
 
-    @NotNull
     private Long supportResponseId;
 
-    @NotEmpty
     private String supportPerson;
 
-    @NotNull
     private Long interpreterId;
 
     private Boolean isSupervisorReport;
@@ -110,7 +104,10 @@ public class PerformanceDto {
 
     @AssertTrue(message = "Start date should not greater than End date")
     public boolean isStartDateBelowEndDate() {
-        return startDate.before(endDate) || startDate.equals(endDate);
+        if (startDate != null && endDate != null) {
+            return startDate.before(endDate) || startDate.equals(endDate);
+        }
+        return true;
     }
 
 }

@@ -52,18 +52,18 @@ public class Performance {
     @JoinColumn(name="letter_template_id")
     private LetterTemplate letterTemplate;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Australia/Sydney") //should revisit, use timezone default as datetimeformat Spring
     private Date startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone = "Australia/Sydney")
     private Date endDate;
 
     @Temporal(TemporalType.TIME)
-    @Column(name = "start_time")
+    @Column(name = "start_time", nullable = false)
     @JsonView(DataTablesOutput.View.class)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm", timezone = "Australia/Sydney")
     private Date startTime;
@@ -81,17 +81,17 @@ public class Performance {
     private String supportPerson;
 
     @ManyToOne
-    @JoinColumn(name="interpreter_id", nullable=false)
+    @JoinColumn(name="interpreter_id")
     private PerformanceAdmin interpreter;
 
     @ManyToOne
-    @JoinColumn(name="support_response_id", nullable=false)
+    @JoinColumn(name="support_response_id")
     private PerformanceAdmin supportResponse;
 
     @Column(name = "is_supervisor_report")
     private Boolean isSupervisorReport;
 
-    @Column(name = "comment", length = 4000)
+    @Column(name = "comment", length = 4000, nullable = false)
     private String comment;
 
     @ManyToOne
