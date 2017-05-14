@@ -1,3 +1,52 @@
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (1, 'Stat_001', 'Status', 'Unresolved', 1, 1);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (2, 'Stat_002', 'Status', 'Resolved', 1, 2);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (3, 'EAP_001', 'EAP', 'Not Applicable', 1, 1);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (4, 'EAP_002', 'EAP', 'Yes, Referred', 1, 2);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (5, 'EAP_003', 'EAP', 'Yes, JBS EAP', 1, 3);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (6, 'EAP_004', 'EAP', 'No, Declined', 1, 4);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (7, 'RD_AT_001', 'Request_Doc_Attach_Type', 'Medical Certificate', 1, 1);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (8, 'RD_AT_002', 'Request_Doc_Attach_Type', 'Specialist Clearance', 1, 2);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (9, 'RD_AT_003', 'Request_Doc_Attach_Type', 'Stat declaration', 1, 3);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (10, 'RD_AT_004', 'Request_Doc_Attach_Type', 'Receipt', 1, 4);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (11, 'RD_AT_005', 'Request_Doc_Attach_Type', 'Funeral notice', 1, 5);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (12, 'RD_AT_006', 'Request_Doc_Attach_Type', 'Penalty notice', 1, 6);
+INSERT INTO event_admin(id, code, type, value, status, sequence) VALUES (13, 'RD_AT_007', 'Request_Doc_Attach_Type', 'Other', 1, 7);
+
+INSERT INTO event_category(id, code, name, status, sequence) VALUES (1, 'Cat_001', 'Attendance', 1, 1);
+INSERT INTO event_category(id, code, name, status, sequence) VALUES (2, 'Cat_002', 'Other', 1, 2);
+
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (1, 'AC', 'Absent Call In', 1, 1, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (2, 'AB', 'Absent', 1, 2, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (3, 'AA', 'Authorised Absence', 1, 3, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (4, 'LA', 'Leave of Absence', 1, 4, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (5, 'MS', 'Missed Swipe', 1, 5, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (6, 'SD', 'Stood Down', 1, 6, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (7, 'SL', 'Started Late', 1, 7, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (8, 'UA', 'Unauthorised Absence', 1, 8, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (9, 'WH', 'Went Home', 1, 9, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (10, 'CL', 'Compassionate Leave', 1, 10, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (11, 'AL', 'Annual Leave', 1, 11, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (12, 'LM', 'Leave Maternity', 1, 12, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (13, 'LP', 'Leave Paternity', 1, 13, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (14, 'LS', 'Long Service Leave', 1, 14, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (15, 'PC', 'Personal/Carer Leave - with cert', 1, 15, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (16, 'PCN', 'Personal/Carer Leave - without cert', 1, 16, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (17, 'WC', 'Workers Comp', 1, 17, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (18, 'UN', 'Not Actioned', 1, 18, 1);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (19, 'MC', 'Medical Certificate', 1, 1, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (20, 'LC', 'Lost Card', 1, 2, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (21, 'BTC', 'Breathalyser Test - All Clear (Less than 0.05%)', 1, 3, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (22, 'BTP', 'Breathalyser Test - Positive (0.05% or greater)', 1, 4, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (23, 'DAC', 'Drug Test - All Clear', 1, 5, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (24, 'DCP', 'Drug Test - Confirmed Positive', 1, 6, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (25, 'DNN', 'Drug Test - Non Negative', 1, 7, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (26, 'SI', 'Suitable Duties in the Team', 1, 8, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (27, 'SO', 'Suitable Duties Above the Team', 1, 9, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (28, 'GR', 'Grievance', 1, 10, 2);
+INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (29, 'FN', 'File Note', 1, 11, 2);
+
+
+
 INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (1, 'Resp_001', 'Support_Response', 'Yes', 1, 2);
 INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (2, 'Resp_002', 'Support_Response', 'No', 1, 1);
 INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (3, 'Resp_003', 'Support_Response', 'Declined', 1, 3);
