@@ -59,6 +59,10 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private Shift shift;
 
+    @ManyToOne
+    @JoinColumn(name="site_id", nullable=false)
+    private Site site;
+
     @PrePersist
     public void prePersist() {
         this.fullName = this.firstName + " " + this.lastName;
