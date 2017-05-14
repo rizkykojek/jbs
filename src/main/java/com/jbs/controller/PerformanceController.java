@@ -247,6 +247,8 @@ public class PerformanceController {
         } else if (performanceDto.getId() != null){
             performanceDto.setAttachments(performanceRepository.findOne(performanceDto.getId()).getAllAttachment());
         }
+
+        performanceDto.setTotalAttachmentsPersisted(performanceDto.getAttachments().size());
     }
 
 }

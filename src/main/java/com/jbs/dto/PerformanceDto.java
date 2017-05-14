@@ -1,12 +1,11 @@
 package com.jbs.dto;
 
+import com.google.common.collect.Lists;
 import com.jbs.entity.Attachment;
 import com.jbs.util.ApplicationUtil;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,13 +19,12 @@ import java.util.List;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class PerformanceDto {
 
-    public PerformanceDto(Date current) {
-        this.startDate = current;
-        this.endDate = current;
-        this.startTime = current;
+    public PerformanceDto(){
+        this.attachments = Lists.newArrayList();
+        this.files = Lists.newArrayList();
+        totalAttachmentsPersisted = 0;
     }
 
     private Long id;
@@ -80,6 +78,8 @@ public class PerformanceDto {
 
     private List<Attachment> attachments;
 
+    private Integer totalAttachmentsPersisted;
+
     private Long[] removedAttachments;
 
     public Boolean isUpdate(){
@@ -91,7 +91,7 @@ public class PerformanceDto {
     }
 
     @AssertTrue(message = "Maximum size per file should not more than 5 Mb ")
-    public boolean isFileSizeBelow() {
+    public boolean isUploadSizeBelowMaximum() {
         if (files != null) {
             for (MultipartFile file : files) {
                 if (file.getSize() > ApplicationUtil.MAX_UPLOAD_SIZE_PER_FILE) {
@@ -106,6 +106,14 @@ public class PerformanceDto {
     public boolean isStartDateBelowEndDate() {
         if (startDate != null && endDate != null) {
             return startDate.before(endDate) || startDate.equals(endDate);
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "Total attachment file is should not greater than 10 file")
+    public boolean isTotalUploadFileBelowMaximum() {
+        if (files.stream().filter(f -> !f.isEmpty()).toArray().length - removedAttachments.length + totalAttachmentsPersisted > 10) {
+            return false;
         }
         return true;
     }
