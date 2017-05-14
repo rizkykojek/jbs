@@ -54,17 +54,17 @@ public class Performance {
 
     @Column(name = "start_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone="Australia/Perth")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone="Australia/Sydney")
     private Date startDate;
 
     @Column(name = "end_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone="Australia/Perth")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone="Australia/Sydney")
     private Date endDate;
 
     @Column(name = "start_time", nullable = false)
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm a", timezone="Australia/Perth")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm a", timezone="Australia/Sydney")
     private Date startTime;
 
     @Column(name = "issued_by")
@@ -135,7 +135,7 @@ public class Performance {
 
     @Column(name = "last_update_at")
     @JsonView(DataTablesOutput.View.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy hh:mm a", timezone="Australia/Perth")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy hh:mm a", timezone="Australia/Sydney")
     private Date lastUpdateAt;
 
     @ManyToOne
