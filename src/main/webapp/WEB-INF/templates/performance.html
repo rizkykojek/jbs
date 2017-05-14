@@ -473,17 +473,17 @@
                 },
                 { "data": "endDate", render: function (data) {
                         var date = new Date(data);
-                        return dateFormat(date, "dd mmm yyyy");;
+                        return dateFormat(date, "dd mmm yyyy");
                     }
                 },
                 { "data": "startTime", render: function (data) {
                         var date = new Date(data);
-                        return dateFormat(date, "hh:MM TT");;
+                        return dateFormat(date, "hh:MM TT");
                     }
                 },
                 { "data": "lastUpdateAt", render: function (data) {
                         var date = new Date(data);
-                        return dateFormat(date, "dd mmm yyyy hh:MM TT");;
+                        return dateFormat(date, "dd mmm yyyy hh:MM TT");
                     }
                 },
                 { "data": "lastUpdateBy.fullName" }
@@ -553,14 +553,17 @@
         });
 
         $('#datetimepicker1').datetimepicker({
+            defaultDate: new Date(),
             format: 'DD MMM YYYY'
         });
 
         $('#datetimepicker2').datetimepicker({
+            defaultDate: new Date(),
             format: 'DD MMM YYYY'
         });
 
         $('#datetimepicker3').datetimepicker({
+            defaultDate: new Date(),
             format: 'LT'
         });
 
