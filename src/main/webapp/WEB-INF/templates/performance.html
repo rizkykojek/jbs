@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5" th:if="${!performanceDto.isAuditVersion()}">
                     <div class="well" style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white;margin-bottom: 5px;margin-top: -5px">
                         <div class="row text-center" style="margin-top: -15px">
                             <label style="color: black"><u>Quick Links</u></label>
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" th:if="${!performanceDto.isAuditVersion()}">
                     <form class="form-inline" style="margin-top: 1px">
                         <label>Search:</label>
                         <div class="form-group">
@@ -94,7 +94,7 @@
                     <div class="col-md-4">
                         <div class="input-group" th:class="${#fields.hasErrors('parentCategoryId')} ? 'input-group has-error' : 'input-group'">
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">*Category:</label>
-                            <select id="parentCategoryId" class="form-control" th:field="*{parentCategoryId}">
+                            <select id="parentCategoryId" class="form-control" th:field="*{parentCategoryId}" th:disabled="${performanceDto.isAuditVersion()}">
                                 <option value="">-- Please Select --</option>
                                 <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
                             </select>
@@ -103,7 +103,7 @@
                     <div class="col-md-4">
                         <div class="input-group" th:class="${#fields.hasErrors('categoryId')} ? 'input-group has-error' : 'input-group'">
                             <label class="input-group-addon borderless no-background">*Sub Category:</label>
-                            <select id="categoryId" class="form-control" th:field="*{categoryId}">
+                            <select id="categoryId" class="form-control" th:field="*{categoryId}" th:disabled="${performanceDto.isAuditVersion()}">
                                 <option value="">-- Please Select --</option>
                                 <option th:each="category : ${listSubCategory}" th:value="${category.id}" th:text="${category.name}"></option>
                             </select>
@@ -112,7 +112,7 @@
                     <div class="col-md-4">
                         <div class="input-group" th:class="${#fields.hasErrors('actionId')} ? 'input-group has-error' : 'input-group'">
                             <label class="input-group-addon borderless no-background">*Action:</label>
-                            <select id="actionId" class="form-control" th:field="*{actionId}">
+                            <select id="actionId" class="form-control" th:field="*{actionId}" th:disabled="${performanceDto.isAuditVersion()}">
                                 <option value="">-- Please Select --</option>
                                 <option th:each="action : ${listAction}" th:value="${action.id}" th:text="${action.name}"></option>
                             </select>
@@ -123,7 +123,7 @@
                     <div class="col-md-3">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Template:</label>
-                            <select id="letterTemplateId" class="form-control" th:field="*{letterTemplateId}">
+                            <select id="letterTemplateId" class="form-control" th:field="*{letterTemplateId}" th:disabled="${performanceDto.isAuditVersion()}">
                                 <option value="">-- Please Select --</option>
                                 <option th:each="template : ${listLetterTemplate}" th:value="${template.id}" th:text="${template.name}"></option>
                             </select>
@@ -133,7 +133,7 @@
                         <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startDate')} ? 'input-group has-error' : 'input-group'">
                             <label class="input-group-addon borderless no-background ">*Start Date:</label>
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" th:field="*{startDate}"/>
+                                <input type='text' class="form-control" th:field="*{startDate}" th:disabled="${performanceDto.isAuditVersion()}"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -142,9 +142,9 @@
                     </div>
                     <div class="col-md-3">
                         <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('endDate')} ? 'input-group has-error' : 'input-group'">
-                            <label class="input-group-addon borderless no-background ">*End Date:</label>
+                            <label class="input-group-addon borderless no-background">*End Date:</label>
                             <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" th:field="*{endDate}"/>
+                                <input type='text' class="form-control" th:field="*{endDate}" th:disabled="${performanceDto.isAuditVersion()}"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -155,7 +155,7 @@
                         <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startTime')} ? 'input-group has-error' : 'input-group'">
                             <label class="input-group-addon borderless no-background ">*Time:</label>
                             <div class='input-group date' id='datetimepicker3'>
-                                <input type='text' class="form-control" th:field="*{startTime}"/>
+                                <input type='text' class="form-control" th:field="*{startTime}" th:disabled="${performanceDto.isAuditVersion()}"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -167,19 +167,19 @@
                     <div class="col-md-4">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background " style="padding-left: 0px">Issued By:</label>
-                            <input type="text" class="form-control" th:field="*{issuedBy}"/>
+                            <input type="text" class="form-control" th:field="*{issuedBy}" th:disabled="${performanceDto.isAuditVersion()}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background ">Place:</label>
-                            <input type="text" class="form-control" th:field="*{place}"/>
+                            <input type="text" class="form-control" th:field="*{place}" th:disabled="${performanceDto.isAuditVersion()}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background ">Attendees:</label>
-                            <input type="text" class="form-control" th:field="*{attendee}"/>
+                            <input type="text" class="form-control" th:field="*{attendee}" th:disabled="${performanceDto.isAuditVersion()}"/>
                         </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                     <div class="col-md-4">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background " style="padding-left: 0px">Support Response:</label>
-                            <select class="form-control" th:field="*{supportResponseId}">
+                            <select class="form-control" th:field="*{supportResponseId}" th:disabled="${performanceDto.isAuditVersion()}">
                                 <option th:each="obj : ${listSupportResponse}" th:value="${obj.id}" th:text="${obj.value}"></option>
                             </select>
                         </div>
@@ -195,13 +195,13 @@
                     <div class="col-md-4">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background ">Support Person:</label>
-                            <input type="text" class="form-control" th:field="*{supportPerson}"/>
+                            <input type="text" class="form-control" th:field="*{supportPerson}" th:disabled="${performanceDto.isAuditVersion()}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background">Interpreter:</label>
-                            <select class="form-control" th:field="*{interpreterId}">
+                            <select class="form-control" th:field="*{interpreterId}" th:disabled="${performanceDto.isAuditVersion()}">
                                 <option th:each="obj : ${listInterpreter}" th:value="${obj.id}" th:text="${obj.value}"></option>
                             </select>
                         </div>
@@ -211,7 +211,7 @@
                     <div class="col-md-8">
                         <div class="form-group" th:class="${#fields.hasErrors('comment')} ? 'form-group has-error' : 'form-group'">
                             <label class="normal">*Comments:</label>
-                            <textarea class="form-control" rows="6" th:field="*{comment}"></textarea>
+                            <textarea class="form-control" rows="6" th:field="*{comment}" th:disabled="${performanceDto.isAuditVersion()}"></textarea>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -221,7 +221,7 @@
                         <div class="row" style="margin-bottom: 10px;margin-left: 10px;">
                             <div class="col-md-12">
                                 <div class="checkbox">
-                                    <input type="checkbox" th:field="*{isSupervisorReport}"/>
+                                    <input type="checkbox" th:field="*{isSupervisorReport}" th:disabled="${performanceDto.isAuditVersion()}"/>
                                     <label style="margin-left: -15px">Supervisor Report</label>
                                 </div>
                             </div>
@@ -229,7 +229,7 @@
                         <div class="row">
                             <div class="col-md-12">&nbsp;</div>
                         </div>
-                        <div class="row">
+                        <div class="row" th:if="${!performanceDto.isAuditVersion()}">
                             <div class="col-md-12">
                                 <a href="#" th:onclick="'javascript:generateTemplate()'">
                                     <button type="button" class="btn btn-success">Generate Letter</button>
@@ -238,7 +238,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" th:if="${!performanceDto.isAuditVersion()}">
                     <div class="col-md-6">
                         <div class="input-group">
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment :</label>
@@ -257,8 +257,8 @@
                 <div th:id="'attachment'+${attachment.id}" class="row" th:each="attachment : ${performanceDto.getAttachments()}">
                     <div class="col-md-4">
                         <div class="input-group" style="margin-top: 15px" >
-                            <a class="input-group-addon borderless no-background" href="#" th:href="@{/performance/download_attachment/} + ${attachment.id}" th:target="_blank" th:text="${attachment.documentName}"></a>
-                            <button type="button" class="btn btn-info btn-sm" style="width: 35px;" th:onclick="'javascript:removeAttachment(' + ${attachment.id} +  ',attachment'+${attachment.id} + ')'">
+                            <a class="input-group-addon borderless no-background" style="text-align: left" href="#" th:href="@{/performance/download_attachment/} + ${attachment.id}" th:target="_blank" th:text="${attachment.documentName}"></a>
+                            <button type="button" class="btn btn-info btn-sm" style="width: 35px;" th:if="${!performanceDto.isAuditVersion()}" th:onclick="'javascript:removeAttachment(' + ${attachment.id} +  ',attachment'+${attachment.id} + ')'">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -266,7 +266,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="margin-top: 20px">
+                <div class="row" th:if="${!performanceDto.isAuditVersion()}" style="margin-top: 20px">
                     <div class="col-md-4">
                         <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c; color: white">
                             <div class="row text-center">
@@ -281,14 +281,14 @@
                         <button type="submit" class="btn btn-info" th:if="${!performanceDto.isAuditVersion()}">Save</button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" th:if="${!performanceDto.isAuditVersion()}">
                     <div class="col-md-12">
                         <label>
                             <a id="pmHistoryHead"><u>&lt;PM History&gt;</u></a>
                         </label>
                     </div>
                 </div>
-                <div id="pmHistoryBody">
+                <div id="pmHistoryBody" th:if="${!performanceDto.isAuditVersion()}">
                     <div class="row" style="margin-bottom: 10px">
                         <div class="col-md-3">
                             <div class="input-group">
@@ -354,15 +354,15 @@
                         </div>
                     </div>
                 </div>
-                <div th:class="${performanceDto.isUpdate()} ? 'row' : 'hide'">
+                <div th:if="${!performanceDto.isAuditVersion() && performanceDto.isUpdate()}">
                     <div class="col-md-12">
                         <label>
                             <a id="pmAuditHead"><u>&lt;Audit&gt;</u></a>
                         </label>
                     </div>
                 </div>
-                <div id="pmAuditBody">
-                    <div th:class="${performanceDto.isUpdate()} ? 'row' : 'hide'">
+                <div id="pmAuditBody" th:if="${!performanceDto.isAuditVersion() && performanceDto.isUpdate()}">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-condensed table-hover">
