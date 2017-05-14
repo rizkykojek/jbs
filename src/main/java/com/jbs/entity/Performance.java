@@ -1,5 +1,6 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
 import com.jbs.util.UserSessionUtil;
@@ -53,14 +54,17 @@ public class Performance {
 
     @Column(name = "start_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone="Australia/Perth")
     private Date startDate;
 
     @Column(name = "end_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy", timezone="Australia/Perth")
     private Date endDate;
 
     @Column(name = "start_time", nullable = false)
     @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm a", timezone="Australia/Perth")
     private Date startTime;
 
     @Column(name = "issued_by")
@@ -131,6 +135,7 @@ public class Performance {
 
     @Column(name = "last_update_at")
     @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy hh:mm a", timezone="Australia/Perth")
     private Date lastUpdateAt;
 
     @ManyToOne

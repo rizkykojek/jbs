@@ -467,26 +467,10 @@
                         return row.action.name + ' (' + row.action.code + ')';
                     }
                 },
-                { "data": "startDate", render: function (data) {
-                        var date = new Date(data);
-                        return dateFormat(date, "dd mmm yyyy");;
-                    }
-                },
-                { "data": "endDate", render: function (data) {
-                        var date = new Date(data);
-                        return dateFormat(date, "dd mmm yyyy");
-                    }
-                },
-                { "data": "startTime", render: function (data) {
-                        var date = new Date(data);
-                        return dateFormat(date, "hh:MM TT");
-                    }
-                },
-                { "data": "lastUpdateAt", render: function (data) {
-                        var date = new Date(data);
-                        return dateFormat(date, "dd mmm yyyy hh:MM TT");
-                    }
-                },
+                { "data": "startDate" },
+                { "data": "endDate" },
+                { "data": "startTime" },
+                { "data": "lastUpdateAt" },
                 { "data": "lastUpdateBy.fullName" }
             ],
             "rowCallback": function( row, data, index ) {
