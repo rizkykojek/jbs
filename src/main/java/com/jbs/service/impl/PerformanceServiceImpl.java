@@ -174,8 +174,8 @@ public class PerformanceServiceImpl implements PerformanceService {
     private Variables preparingVariablesOnLetter(Employee employee) {
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
         Variables variables = new Variables();
-        variables.addTextVariable(new TextVariable("${employee_id}", "1111222"));
-        variables.addTextVariable(new TextVariable("${full_name}", "Derrick Stewart"));
+        variables.addTextVariable(new TextVariable("${employee_id}", employee.getEmployeeNumber()));
+        variables.addTextVariable(new TextVariable("${full_name}", employee.getFullName()));
         variables.addTextVariable(new TextVariable("${salutation}", "Mr."));
         variables.addTextVariable(new TextVariable("${title}", "Staff"));
         variables.addTextVariable(new TextVariable("${address1}", "6/10 Smith Street."));
