@@ -1,6 +1,5 @@
 package com.jbs.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
 import com.jbs.util.UserSessionUtil;
