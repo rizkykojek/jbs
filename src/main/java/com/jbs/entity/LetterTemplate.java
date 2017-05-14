@@ -2,6 +2,7 @@ package com.jbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -30,6 +31,7 @@ public class LetterTemplate {
     private String templateFile;
 
     @Column
+    @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean status;
 
     @ManyToOne

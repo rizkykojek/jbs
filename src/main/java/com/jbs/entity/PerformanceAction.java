@@ -3,6 +3,7 @@ package com.jbs.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class PerformanceAction {
     private String name;
 
     @Column
+    @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean status;
 
     @JsonIgnore

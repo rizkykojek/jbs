@@ -32,6 +32,7 @@ public class PerformanceCategory {
     private Integer sequence;
 
     @Column
+    @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean status;
 
     @ManyToOne

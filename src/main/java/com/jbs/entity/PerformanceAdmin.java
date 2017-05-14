@@ -1,6 +1,7 @@
 package com.jbs.entity;
 
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -31,6 +32,7 @@ public class PerformanceAdmin {
     private Integer sequence;
 
     @Column
+    @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean status;
 
 }
