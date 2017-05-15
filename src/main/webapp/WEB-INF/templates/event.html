@@ -3,469 +3,513 @@
 <head th:replace="fragments/head :: head"/>
 
 <body>
-    <!-- <nav th:replace="fragments/header :: header"/>-->
-
     <div class="container-fluid">
         <div class="panel panel-default">
-    	    <div class="panel-heading">
-    	    	<table border="0" width="100%">
-    	    		<tr><td width="10%"><img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/></td><td align="center"><h3 class="panel-title"><b>Add Event</b></h3></td>
-    	    		<td width="20%">                
-    	    		<form class="form-inline" style="margin-top: 1px">
-                    <div class="form-group">
-                        <label>Search:</label>
-                        <input type="text" class="form-control" style="width: 50%"/>
-                        <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
-                    </div>
-                </form>
-                </td></tr>
-    	    	</table>
-            </div>            
-            <div class="panel-body body-background">
-            
-               <div class="row">
-                    <div class="col-md-2">
-                        <label>Name : Joe Blog</label>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Employee ID : 123456</label>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Department : Finace</label>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Department : Finace</label>
-                    </div>
-                    <div class="col-md-4">
-
-				<div class="well" style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white">
-				<div class="row text-center">
-					<label style="color: black"><u>Quick Links</u></label>
-				</div>
-				<div class="row text-left">
-					<div class="col-md-6">
-						<label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave</a>
-					</div>
-					<div class="col-md-6">
-						<label style="color: black">&bull;</label> <a href="#" style="color: black">Event Report</a>
-					</div>
-				</div>
-				<div class="row text-left">
-					<div class="col-md-6">
-						<label style="color: black">&bull;</label> <a href="#" th:href="@{/event}" style="color: black">Add Event</a>
-					</div>
-					<div class="col-md-6">
-						<label style="color: black">&bull;</label> <a href="#" style="color: black">PM Report</a>
-					</div>
-				</div>
-				<div class="row text-left">
-					<div class="col-md-6">
-						<label style="color: black">&bull;</label> <a href="#" th:href="@{/performance}" style="color: black">Add PM</a>
-					</div>
-					<div class="col-md-6">
-						<label style="color: black">&bull;</label> <a href="#" style="color: black">Employee Central</a>
-					</div>
-				</div>
-				<div class="row text-left">
-					&nbsp;
-				</div>
-			</div>
-
-
-                    </div>
-                </div>    
-                <div class="row" style="margin-bottom: 20px">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Category :</label>
-                            <select class="form-control">
-                                <option value="">Attendance</option>
-                                <option value="">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">Event :</label>
-                            <select class="form-control">
-								<option value=""></option>
-                                <option value="">Absent Call In</option>
-                                <option value="">Absent</option>
-                                <option value="">Authorised Absence</option>
-                                <option value="">Leave of Absence</option>
-                                <option value="">Missed Swipe</option>
-                                <option value="">Stood Down</option>
-                                <option value="">Started Late</option>
-                                <option value="">Unauthorised Absence</option>
-                                <option value="">Went Home</option>
-                                <option value="">Compassionate Leave</option>
-                                <option value="">Annual Leave</option>
-                                <option value="">Leave Maternity</option>
-                                <option value="">Leave Paternity</option>
-                                <option value="">Long Service Leave</option>
-                                <option value="">Personal/Carer's Leave - with cert</option>
-                                <option value="">Personal/Carer's Leave - without cert</option>
-                                <option value="">Lost Card</option>
-                                <option value="">Breathalyser Test - All Clear (Less than 0.05%)</option>
-                                <option value="">Breathalyser Test - Positive (0.05% or greater)</option>
-                                <option value="">Drug Test - All Clear</option>
-                                <option value="">Drug Test - Confirmed Positive</option>
-                                <option value="">Drug Test - Non Negative</option>
-                                <option value="">Medical Certificate</option>
-                                <option value="">Suitable Duties in the Team</option>
-                                <option value="">Suitable Duties Above the Team</option>
-                                <option value="">Grievance</option>
-                                <option value="">File Note</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background">Status :</label>
-                            <select class="form-control">
-                                <option value="">Resolved</option>
-                                <option value="">Unresolved</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 20px">
-                    <div class="col-md-4">
-                        <div class="input-group" style="width: 100%">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Start Date :</label>
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control"/>
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group" style="width: 100%">
-                            <label class="input-group-addon borderless no-background">End Date :</label>
-                            <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control"/>
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group" style="width: 100%">
-                            <label class="input-group-addon borderless no-background">Time :</label>
-                            <div class='input-group date' id='datetimepicker3'>
-                                <input type='text' class="form-control"/>
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <label>Comments:</label>
-                            <textarea class="form-control" rows="6"></textarea>
-                        </div>
-                    </div>
                     <div class="col-md-5">
-                        <div class="row" style="margin-bottom: 20px">
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <label class="input-group-addon borderless no-background">EAP :</label>
-                                    <select class="form-control">
-                                        <option value="">Not Applicable</option>
-                                        <option value="">Yes, Referred</option>
-                                        <option value="">Yes, JBS EAP</option>
-                                        <option value="">No, Declined</option>
-                                    </select>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/>
+                            </div>
+                            <div class="col-md-10" style="margin-top: 10px;">
+                                <h3 class="panel-title"><b>Add Event</b></h3>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <b>Name:</b>
+                                <label class="normal" th:text="${employee.fullName}"/>
+                            </div>
+                            <div class="col-md-4">
+                                <b>Employee ID:</b>
+                                <label class="normal" th:text="${employee.employeeNumber}"/>
+                            </div>
+                            <div class="col-md-4">
+                                <b>Plant/Site:</b>
+                                <label class="normal" th:text="${employee.site.name}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" th:if="${!eventDto.isAuditVersion()}">
+                        <div class="well" style="font-size:14px;background-color: #c3dbef !important; border-color: #2aabd2; color: white;margin-bottom: 5px;margin-top: -5px">
+                            <div class="row text-center" style="margin-top: -15px">
+                                <label style="color: black"><u>Quick Links</u></label>
+                            </div>
+                            <div class="row text-left">
+                                <div class="col-md-6">
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Add PM</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave (Kronos)</a>
+                                </div>
+                            </div>
+                            <div class="row text-left">
+                                <div class="col-md-6">
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">View Employee Summary</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">View Employee Record (EC)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" th:if="${!eventDto.isAuditVersion()}">
+                        <form class="form-inline" style="margin-top: 1px">
+                            <label>Search:</label>
+                            <div class="form-group">
+                                <input id="searchNameId" type="text" class="form-control" style="width: 140px;"/>
+                                <span class="form-control glyphicon glyphicon-search input-sm borderless"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <form action="#" th:action="${eventDto.isUpdate()} ?
+                @{'/employee/' + ${employee.id} + '/event/update/' + ${eventDto.id}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} :
+                @{'/employee/' + ${employee.id} + '/event/create'} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token} " th:object="${eventDto}"
+                  method="post" enctype="multipart/form-data">
+
+                <input id="removedAttachmentsId" th:type="hidden" th:field="*{removedAttachments}"/>
+                <input th:type="hidden" th:field="*{id}"/>
+                <input th:type="hidden" th:field="*{totalAttachmentsPersisted}"/>
+
+                <div class="panel-body body-background">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <p>Please correct values in error below: </p>
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 20px">
+                        <div class="col-md-4">
+                            <div class="input-group" th:class="${#fields.hasErrors('categoryId')} ? 'input-group has-error' : 'input-group'">
+                                <label class="input-group-addon borderless no-background" style="padding-left: 0px">*Category:</label>
+                                <select id="categoryId" class="form-control" th:field="*{categoryId}" th:disabled="${eventDto.isAuditVersion()}">
+                                    <option value="">-- Please Select --</option>
+                                    <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group" th:class="${#fields.hasErrors('eventTypeId')} ? 'input-group has-error' : 'input-group'">
+                                <label class="input-group-addon borderless no-background">*Event:</label>
+                                <select id="eventTypeId" class="form-control" th:field="*{eventTypeId}" th:disabled="${eventDto.isAuditVersion()}">
+                                    <option value="">-- Please Select --</option>
+                                    <option th:each="type : ${listEventType}" th:value="${type.id}" th:text="${type.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group" th:class="${#fields.hasErrors('eventStatusId')} ? 'input-group has-error' : 'input-group'">
+                                <label class="input-group-addon borderless no-background">*Status:</label>
+                                <select class="form-control" th:field="*{eventStatusId}" th:disabled="${eventDto.isAuditVersion()}">
+                                    <option value="">-- Please Select --</option>
+                                    <option th:each="status : ${listEventStatus}" th:value="${status.id}" th:text="${status.value}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 20px">
+                        <div class="col-md-4">
+                            <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startDate')} ? 'input-group has-error' : 'input-group'">
+                                <label class="input-group-addon borderless no-background ">*Start Date:</label>
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' class="form-control" th:field="*{startDate}" th:disabled="${eventDto.isAuditVersion()}"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('endDate')} ? 'input-group has-error' : 'input-group'">
+                                <label class="input-group-addon borderless no-background">*End Date:</label>
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type='text' class="form-control" th:field="*{endDate}" th:disabled="${eventDto.isAuditVersion()}"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startTime')} ? 'input-group has-error' : 'input-group'">
+                                <label class="input-group-addon borderless no-background ">*Time:</label>
+                                <div class='input-group date' id='datetimepicker3'>
+                                    <input type='text' class="form-control" th:field="*{startTime}" th:disabled="${eventDto.isAuditVersion()}"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group" th:class="${#fields.hasErrors('comment')} ? 'form-group has-error' : 'form-group'">
+                                <label class="normal">*Comments:</label>
+                                <textarea class="form-control" rows="6" th:field="*{comment}" th:disabled="${eventDto.isAuditVersion()}"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row" style="margin-bottom: 20px">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <div class="input-group" th:class="${#fields.hasErrors('eapId')} ? 'input-group has-error' : 'input-group'">
+                                        <label class="input-group-addon borderless no-background">*EAP:</label>
+                                        <select class="form-control" th:field="*{eapId}" th:disabled="${eventDto.isAuditVersion()}">
+                                            <option value="">-- Please Select --</option>
+                                            <option th:each="eap : ${listEap}" th:value="${eap.id}" th:text="${eap.value}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" th:class="${#fields.hasErrors('eapComment')} ? 'form-group has-error' : 'form-group'">
+                                        <label class="normal">*EAP Comments:</label>
+                                        <textarea class="form-control" rows="3" th:field="*{eapComment}" th:disabled="${eventDto.isAuditVersion()}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Requested Documentation :</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="checkbox">
+                                <label><input type="checkbox" th:field="*{isMedicalCertificate}" th:disabled="${eventDto.isAuditVersion()}"/>MC</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <label><input type="checkbox" th:field="*{isSpecialistClearance}" th:disabled="${eventDto.isAuditVersion()}"/>Specialist Clearance</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <label><input type="checkbox" th:field="*{isStatDeclaration}" th:disabled="${eventDto.isAuditVersion()}"/>Start Declaration</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <label><input type="checkbox" th:field="*{isReceipt}" th:disabled="${eventDto.isAuditVersion()}"/>Receipt</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <label><input type="checkbox" th:field="*{isFuneralNotice}" th:disabled="${eventDto.isAuditVersion()}"/>Funeral Notice</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <label><input type="checkbox" th:field="*{isPenaltyNotice}" th:disabled="${eventDto.isAuditVersion()}"/>Penalty Notice</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="checkbox">
+                                <label><input type="checkbox" th:field="*{isOther}" th:disabled="${eventDto.isAuditVersion()}"/>Other</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 20px">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment Type :</label>
+                                <select class="form-control">
+                                    <option value="">Medical Certificate</option>
+                                    <option value="">Stat Declaration</option>
+                                    <option value="">Receipt</option>
+                                    <option value="">Funeral Notice</option>
+                                    <option value="">Penalty</option>
+                                    <option value="">Notice</option>
+                                    <option value="">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Browse&hellip; <input type="file" style="display: none;" multiple="true"/>
+                                </span>
+                                </label>
+                                <input type="text" class="form-control" readonly="true"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c; color: white">
+                                <div class="row text-center">
+                                    <label> UA(4)  |  AB(3)  |  PC(3)  |  PCN(2) </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-md-offset-4">
+                            <button type="button" class="btn btn-info" onclick="self.close()">Close</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-info" th:if="${!eventDto.isAuditVersion()}">Save</button>
+                        </div>
+
+                    </div>
+                    <div class="row" th:if="${!eventDto.isAuditVersion()}">
+                        <div class="col-md-12">
+                            <label>
+                                <a id="eventHistoryHead"><u>&lt;Event History&gt;</u></a>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="eventHistoryBody" th:if="${!eventDto.isAuditVersion()}">
+                        <div class="row" style="margin-bottom: 10px">
+                            <div class="col-md-3">
                                 <div class="input-group">
-                                    <label class="input-group-addon borderless no-background">EAP Comments:</label>
-                                    <textarea class="form-control" rows="3"></textarea>
+                                    <label class="input-group-addon borderless no-background" style="padding-left: 0px">Event :</label>
+                                    <select id="historyActionId" class="form-control">
+                                        <option value="">-- Please Select --</option>
+                                        <option th:each="type : ${listEventTypeBasedHistory}" th:value="${type.id}" th:text="${type.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label class="input-group-addon borderless no-background">Start :</label>
+                                    <div class='input-group date'>
+                                        <input id='historyStartDatePicker' type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label class="input-group-addon borderless no-background">End :</label>
+                                    <div class='input-group date'>
+                                        <input id='historyEndDatePicker' type='text' class="form-control"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <select id="historyMonthId" class="form-control">
+                                    <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Months</option>
+                                    <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 Months</option>
+                                    <option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 Months</option>
+                                    <option value="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 Months</option>
+                                    <option value="12">&nbsp;&nbsp;&nbsp;&nbsp;12 Months</option>
+                                    <option value="18">&nbsp;&nbsp;&nbsp;&nbsp;18 Months</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="historyTable" class="table table-bordered table-condensed table-hover">
+                                        <thead>
+                                        <tr class="success">
+                                            <td class="text-center">PM ID</td>
+                                            <td class="text-center">Event</td>
+                                            <td class="text-center">Status</td>
+                                            <td class="text-center">Start Date</td>
+                                            <td class="text-center">End Date</td>
+                                            <td class="text-center">Time</td>
+                                            <td class="text-center">Last Modified Date</td>
+                                            <td class="text-center">Last Modified By</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${!eventDto.isAuditVersion() && eventDto.isUpdate()}">
+                        <div class="col-md-12">
+                            <label>
+                                <a id="eventAuditHead"><u>&lt;Audit&gt;</u></a>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="eventAuditBody" th:if="${!eventDto.isAuditVersion() && eventDto.isUpdate()}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        <thead>
+                                        <tr class="success">
+                                            <td class="text-center">#</td>
+                                            <td class="text-center">PM ID</td>
+                                            <td class="text-center">Event</td>
+                                            <td class="text-center">Status</td>
+                                            <td class="text-center">Start Date</td>
+                                            <td class="text-center">End Date</td>
+                                            <td class="text-center">Time</td>
+                                            <td class="text-center">Last Modified Date</td>
+                                            <td class="text-center">Last Modified By</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="revision,iterationStatus  : ${eventRevisions}" class="info">
+                                            <td class="text-center" th:text="${iterationStatus.count}"></td>
+                                            <td class="text-center"><a th:href="@{/} + 'performance/'+ ${revision.id} +'/revision/' + ${revision.revisionNumber}" th:text="${revision.id}" target="_blank"> </a></td>
+                                            <td class="text-center"th:text="${revision.eventType.name} + ' (' +${revision.eventType.code} + ')'"></td>
+                                            <td class="text-center"th:text="${revision.eventStatus.value}"></td>
+                                            <td class="text-center"th:text="${#dates.format(revision.startDate, 'dd MMM yyyy')}"></td>
+                                            <td class="text-center"th:text="${#dates.format(revision.endDate, 'dd MMM yyyy')}"></td>
+                                            <td class="text-center"th:text="${#dates.format(revision.startTime, 'hh:mm aa')}"></td>
+                                            <td class="text-center"th:text="${#dates.format(revision.lastUpdateAt, 'dd MMM yyyy hh:mm aa')}"></td>
+                                            <td class="text-center"th:text="${revision.lastUpdateBy.fullName}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Requested Documentation :</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value=""/>MC</label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value=""/>Specialist Clearance</label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value=""/>Start Declaration</label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value=""/>Receipt</label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value=""/>Funeral Notice</label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value=""/>Penalty Notice</label>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value=""/>Other</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 20px">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment Type :</label>
-                            <select class="form-control">
-                                <option value="">Medical Certificate</option>
-                                <option value="">Stat Declaration</option>
-                                <option value="">Receipt</option>
-                                <option value="">Funeral Notice</option>
-                                <option value="">Penalty</option>
-                                <option value="">Notice</option>
-                                <option value="">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label class="input-group-btn">
-                                <span class="btn btn-primary">
-                                    Browse&hellip; <input type="file" style="display: none;" multiple="true"/>
-                                </span>
-                            </label>
-                            <input type="text" class="form-control" readonly="true"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c; color: white">
-                            <div class="row text-center">
-                                <label> UA(4)  |  AB(3)  |  PC(3)  |  PCN(2) </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2  col-md-offset-4">
-                        <button type="button" class="btn btn-info">Save</button>
-                    </div>
-                    <div class="col-md-2">
-                        <a href="#" th:href="@{/}"><button type="button" class="btn btn-info">Close</button></a>
-                    </div>
+            </form>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>
-                            <a href="#"><u>&lt;Event History&gt;</u></a>
-                        </label>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 10px">
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Event :</label>
-                            <select class="form-control">
-                                <option value="">Absent Call In</option>
-                                <option value="">Absent</option>
-                                <option value="">Authorised Absence</option>
-                                <option value="">Leave of Absence</option>
-                                <option value="">Missed Swipe</option>
-                                <option value="">Stood Down</option>
-                                <option value="">Started Late</option>
-                                <option value="">Unauthorised Absence</option>
-                                <option value="">Went Home</option>
-                                <option value="">Compassionate Leave</option>
-                                <option value="">Annual Leave</option>
-                                <option value="">Leave Maternity</option>
-                                <option value="">Leave Paternity</option>
-                                <option value="">Long Service Leave</option>
-                                <option value="">Personal/Carer's Leave - with cert</option>
-                                <option value="">Personal/Carer's Leave - without cert</option>
-                                <option value="">Lost Card</option>
-                                <option value="">Breathalyser Test - All Clear (Less than 0.05%)</option>
-                                <option value="">Breathalyser Test - Positive (0.05% or greater)</option>
-                                <option value="">Drug Test - All Clear</option>
-                                <option value="">Drug Test - Confirmed Positive</option>
-                                <option value="">Drug Test - Non Negative</option>
-                                <option value="">Medical Certificate</option>
-                                <option value="">Suitable Duties in the Team</option>
-                                <option value="">Suitable Duties Above the Team</option>
-                                <option value="">Grievance</option>
-                                <option value="">File Note</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" >Start :</label>
-                            <div class='input-group date' id='datetimepicker4'>
-                                <input type='text' class="form-control"/>
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" >End :</label>
-                            <div class='input-group date' id='datetimepicker5'>
-                                <input type='text' class="form-control"/>
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <select class="form-control">
-                            <option value="">Months</option>
-                            <option value="">3 Months</option>
-                            <option value="">6 Months</option>
-                            <option value="">9 Months</option>
-                            <option value="">12 Months</option>
-                            <option value="">18 Months</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-hover">
-                                <thead>
-                                <tr class="success">
-                                    <td class="text-center">Date &amp; Time</td>
-                                    <td class="text-center">Event ID</td>
-                                    <td class="text-center">Event</td>
-                                    <td class="text-center">Status</td>
-                                    <td class="text-center">Start Date</td>
-                                    <td class="text-center">End Date</td>
-                                    <td class="text-center">Comments</td>
-                                    <td class="text-center">By</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="info">
-                                    <td class="text-center success">4 feb 2017 16&#58;10PM</td>
-                                    <td class="text-center success">7678</td>
-                                    <td class="text-center success">Absent (AB)</td>
-                                    <td class="text-center success">Resolved</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
-                                    <td class="text-center success">Did not present documents</td>
-                                    <td class="text-center success">Yong Hull Lee</td>
-                                </tr>
-                                <tr class="info">
-                                    <td class="text-center success">1 feb 2017 13&#58;10PM</td>
-                                    <td class="text-center success">7679</td>
-                                    <td class="text-center success">Called In Absent (AC)</td>
-                                    <td class="text-center success">open</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">4 feb 2017</td>
-                                    <td class="text-center success">Called in Absent. Sickwith fever</td>
-                                    <td class="text-center success">Sarah Wong</td>
-                                </tr>
-                                <tr class="info">
-                                    <td class="text-center success">&nbsp;</td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>
-                            <a href="#"><u>&lt;Audit&gt;</u></a>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-hover">
-                                <thead>
-                                <tr class="success">
-                                    <td class="text-center">Date &amp; Time</td>
-                                    <td class="text-center">Fields Updated</td>
-                                    <td class="text-center">Comments</td>
-                                    <td class="text-center">By</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="info">
-                                    <td class="text-center success">3 Mar 2017 16&#58;10PM</td>
-                                    <td class="text-left success">Attendees Updated. Interpreter changed to Yes</td>
-                                    <td class="text-left success">First written warning</td>
-                                    <td class="text-left success">Brenda Wong</td>
-                                </tr>
-                                <tr class="info">
-                                    <td class="text-center success">2 Mar 2017 09&#58;05AM</td>
-                                    <td class="text-left success">Action: First warning. Category: Discipline</td>
-                                    <td class="text-left success">Called in absent, will be back 4 Feb. Sick with yellow fever.</td>
-                                    <td class="text-left success">Carol Lee</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
     <footer th:replace="fragments/footer :: footer"/>
 
-    <script type="text/javascript">
-        $(function () {
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            var _ctx = /*[[@{/}]]*/ 'context';
+            var employeeId = [[${employee.id}]];
+
+            var historyTable = $('#historyTable').on('preXhr.dt', function(e,settings,data){
+                data.startDateFilter = $("#historyStartDatePicker").val();
+                data.endDateFilter = $("#historyEndDatePicker").val();
+                data.monthFilter = $("#historyMonthId").val();
+            }).DataTable({
+                "ajax":         _ctx + "event/history/" + employeeId,
+                "serverSide":   true,
+                "processing": true,
+                "pagingType":   "simple",
+                "searching":    true,
+                "lengthChange": false,
+                "language": {
+                    "info":         "",
+                    "infoFiltered": "",
+                    "infoEmpty":    "",
+                    "infoPostFix":  "",
+                    "processing": "<div class='loader'></div>"
+                },
+                "columnDefs": [{
+                    "targets": [0,4,5,6],
+                    "orderable": false
+                }],
+                "columns": [
+                    { "data": "id", render: function(data, type, row)
+                    {
+                        return '<a href="' + _ctx + 'performance/'+ row.id +'">' + row.id + '</a>';
+                    }
+                    },
+                    { "data": "eventType.id", render: function(data, type, row)
+                    {
+                        return row.eventType.name + ' (' + row.eventType.code + ')';
+                    }
+                    },
+                    { "data": "eventStatus.id", render: function(data, type, row)
+                    {
+                        return row.eventStatus.value;
+                    }
+                    },
+                    { "data": "startDate" },
+                    { "data": "endDate" },
+                    { "data": "startTime" },
+                    { "data": "lastUpdateAt" },
+                    { "data": "lastUpdateBy.fullName" }
+                ],
+                "rowCallback": function( row, data, index ) {
+                    $(row).addClass('info text-center');
+                }
+            });
+
+            $("#historyEventTypeId").change(function() {
+                if ($("#historyEventTypeId").val() != "") {
+                    historyTable.columns(1).search($("#historyEventTypeId").val()).draw();
+                } else {
+                    historyTable.columns(1).search("").draw();
+                }
+            });
+
+            $('#categoryId').change( function() {
+                $.getJSON(_ctx + 'event/types', {
+                    categoryId : $(this).val(),
+                    ajax : 'true'
+                }, function(data) {
+                    var html = '<option value="">-- Please Select --</option>';
+                    var len = data.length;
+                    for ( var i = 0; i < len; i++) {
+                        html += '<option value="' + data[i].id + '">'
+                                + data[i].name + '</option>';
+                    }
+                    html += '</option>';
+
+                    $('#eventTypeId').html(html);
+                });
+            });
+
             $('#datetimepicker1').datetimepicker({
+                defaultDate: new Date(),
                 format: 'DD MMM YYYY'
             });
             $('#datetimepicker2').datetimepicker({
+                defaultDate: new Date(),
                 format: 'DD MMM YYYY'
             });
             $('#datetimepicker3').datetimepicker({
+                defaultDate: new Date(),
                 format: 'LT'
             });
-            $('#datetimepicker4').datetimepicker({
+
+            $('#historyStartDatePicker').datetimepicker({
                 format: 'DD MMM YYYY'
+            }).on("dp.change", function (e) {
+                $('#historyMonthId').val("");
+                historyTable.draw();
             });
-            $('#datetimepicker5').datetimepicker({
+
+            $('#historyEndDatePicker').datetimepicker({
                 format: 'DD MMM YYYY'
+            }).on("dp.change", function (e) {
+                $('#historyMonthId').val("");
+                historyTable.draw();
+            });
+
+            $("#historyTable_paginate, #historyTable_filter").hide();
+
+            $("#historyMonthId").change(function() {
+                $('#historyStartDatePicker, #historyEndDatePicker').val("");
+                historyTable.draw();
+            });
+
+            $("#eventHistoryHead").click(function(){
+                $("#eventHistoryBody").toggle("slide");
+            });
+            $("#eventAuditHead").click(function(){
+                $("#eventAuditBody").toggle("slide");
             });
         });
 

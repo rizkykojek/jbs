@@ -23,5 +23,11 @@ public final class ApplicationUtil {
 
     public static final String INTERPRETER_TYPE = "Interpreter";
 
+    public static final String STATUS_TYPE = "Status";
+
+    public static final String EAP_TYPE = "EAP";
+
+    public static final String ATTACHMENT_TYPE = "Request_Doc_Attach_Type";
+
 
 }

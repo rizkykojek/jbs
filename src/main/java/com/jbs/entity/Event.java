@@ -1,5 +1,6 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.ImmutableMap;
 import com.jbs.util.UserSessionUtil;
@@ -45,23 +46,27 @@ public class Event {
     @ManyToOne
     @JoinColumn(name="event_type_id", nullable=false)
     @JsonView(DataTablesOutput.View.class)
-    private EventType type;
+    private EventType eventType;
 
     @Column(name = "start_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
     private Date startDate;
 
     @Column(name = "end_date", nullable = false)
     @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
     private Date endDate;
 
     @Column(name = "start_time", nullable = false)
     @JsonView(DataTablesOutput.View.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm a")
     private Date startTime;
 
     @ManyToOne
-    @JoinColumn(name="status_id", nullable = false)
-    private EventAdmin status;
+    @JoinColumn(name="event_status_id", nullable = false)
+    @JsonView(DataTablesOutput.View.class)
+    private EventAdmin eventStatus;
 
     @ManyToOne
     @JoinColumn(name="eap_id", nullable = false)
@@ -310,8 +315,8 @@ public class Event {
     public void initializeLazyConnection(){
         Hibernate.initialize(this.getCategory());
         Hibernate.initialize(this.getEmployee());
-        Hibernate.initialize(this.getStatus());
-        Hibernate.initialize(this.getType());
+        Hibernate.initialize(this.getEventStatus());
+        Hibernate.initialize(this.getEventType());
         Hibernate.initialize(this.getLastUpdateBy());
         Hibernate.initialize(this.getEap());
 
