@@ -13,6 +13,7 @@ import com.jbs.repository.LetterTemplateRepository;
 import com.jbs.repository.PerformanceRepository;
 import com.jbs.service.PerformanceService;
 import com.jbs.util.ApplicationUtil;
+import com.jbs.util.UserSessionUtil;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
@@ -21,6 +22,9 @@ import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Service;
@@ -172,20 +176,33 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     private Variables preparingVariablesOnLetter(Employee employee) {
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+        DateTimeFormatter weekday = DateTimeFormat.forPattern("EEEE");
+        DateTimeFormatter day = DateTimeFormat.forPattern("dd");
+        DateTimeFormatter month = DateTimeFormat.forPattern("MMMM");
+        DateTimeFormatter year = DateTimeFormat.forPattern("yyyy");
+        DateTime dt = DateTime.now();
+
         Variables variables = new Variables();
-        variables.addTextVariable(new TextVariable("${employee_id}", employee.getEmployeeNumber()));
-        variables.addTextVariable(new TextVariable("${full_name}", employee.getFullName()));
-        variables.addTextVariable(new TextVariable("${salutation}", "Mr."));
+        variables.addTextVariable(new TextVariable("${given_name}", employee.getFirstName()));
+        variables.addTextVariable(new TextVariable("${middle_name}", "middle_name"));
+        variables.addTextVariable(new TextVariable("${surname}", employee.getLastName()));
         variables.addTextVariable(new TextVariable("${title}", "Staff"));
-        variables.addTextVariable(new TextVariable("${address1}", "6/10 Smith Street."));
-        variables.addTextVariable(new TextVariable("${address2}", "Neutral Bay"));
-        variables.addTextVariable(new TextVariable("${state}", "NSW"));
-        variables.addTextVariable(new TextVariable("${code}", "12345"));
-        variables.addTextVariable(new TextVariable("${date}", formatter.format(new Date())));
-        variables.addTextVariable(new TextVariable("${company_name}", "JBS Australia Pty Limited"));
-        variables.addTextVariable(new TextVariable("${officer_name}", "John Mckey"));
-        variables.addTextVariable(new TextVariable("${officer_title}", "General Manager"));
+        variables.addTextVariable(new TextVariable("${address_street}", "address_street"));
+        variables.addTextVariable(new TextVariable("${address_suburb}", "address_suburb"));
+        variables.addTextVariable(new TextVariable("${weekday}", weekday.print(dt)));
+        variables.addTextVariable(new TextVariable("${day}", day.print(dt)));
+        variables.addTextVariable(new TextVariable("${month}", month.print(dt)));
+        variables.addTextVariable(new TextVariable("${year}", year.print(dt)));
+        variables.addTextVariable(new TextVariable("${salut}", "Mr."));
+        variables.addTextVariable(new TextVariable("${OFFICER_NAME}", UserSessionUtil.getFullName()));
+        variables.addTextVariable(new TextVariable("${job_class}", "job_class"));
+        variables.addTextVariable(new TextVariable("${site}", "site"));
+        variables.addTextVariable(new TextVariable("${start_date}", "start_date"));
+        variables.addTextVariable(new TextVariable("${emp_address}", "emp_address"));
+        variables.addTextVariable(new TextVariable("${SAPId}", "SAPId"));
+        variables.addTextVariable(new TextVariable("${Section}", "Section"));
+        variables.addTextVariable(new TextVariable("${emp_phone}", "emp_phone"));
+        variables.addTextVariable(new TextVariable("${empID}", "empID"));
 
         return variables;
     }

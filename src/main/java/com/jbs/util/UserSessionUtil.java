@@ -11,4 +11,8 @@ public final class UserSessionUtil {
     public static Long getEmployeeId() {
         return ((UserApplication) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmployeeId();
     }
+
+    public static String getFullName() {
+        return ((UserApplication) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFullName();
+    }
 }

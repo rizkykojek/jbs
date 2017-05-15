@@ -3,6 +3,7 @@ package com.jbs.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.jbs.dto.EventDto;
 import com.jbs.entity.*;
+import com.jbs.mapper.EventMap;
 import com.jbs.repository.*;
 import com.jbs.repository.datatable.EventTableRepository;
 import com.jbs.service.EventService;
@@ -166,6 +167,7 @@ public class EventController {
     }
 
     private Event convertToEntity(EventDto eventDto, Optional<Long> eventId) {
+        modelMapper.addMappings(new EventMap());
         Event event = modelMapper.map(eventDto, Event.class);
         if (eventId.isPresent()) {
             event.setId(eventId.get());
