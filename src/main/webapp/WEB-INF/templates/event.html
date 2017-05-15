@@ -93,7 +93,7 @@
                     <div class="row" style="margin-bottom: 20px">
                         <div class="col-md-4">
                             <div class="input-group" th:class="${#fields.hasErrors('categoryId')} ? 'input-group has-error' : 'input-group'">
-                                <label class="input-group-addon borderless no-background" style="padding-left: 0px">*Category:</label>
+                                <label class="input-group-addon borderless no-background" style="padding-left: 0px"><label style="color: red">*</label> Category:</label>
                                 <select id="categoryId" class="form-control" th:field="*{categoryId}" th:disabled="${eventDto.isAuditVersion()}">
                                     <option value="">-- Please Select --</option>
                                     <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
@@ -102,7 +102,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="input-group" th:class="${#fields.hasErrors('eventTypeId')} ? 'input-group has-error' : 'input-group'">
-                                <label class="input-group-addon borderless no-background">*Event:</label>
+                                <label class="input-group-addon borderless no-background"><label style="color: red">*</label> Event:</label>
                                 <select id="eventTypeId" class="form-control" th:field="*{eventTypeId}" th:disabled="${eventDto.isAuditVersion()}">
                                     <option value="">-- Please Select --</option>
                                     <option th:each="type : ${listEventType}" th:value="${type.id}" th:text="${type.name}"></option>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="input-group" th:class="${#fields.hasErrors('eventStatusId')} ? 'input-group has-error' : 'input-group'">
-                                <label class="input-group-addon borderless no-background">*Status:</label>
+                                <label class="input-group-addon borderless no-background"><label style="color: red">*</label> Status:</label>
                                 <select class="form-control" th:field="*{eventStatusId}" th:disabled="${eventDto.isAuditVersion()}">
                                     <option value="">-- Please Select --</option>
                                     <option th:each="status : ${listEventStatus}" th:value="${status.id}" th:text="${status.value}"></option>
@@ -122,7 +122,7 @@
                     <div class="row" style="margin-bottom: 20px">
                         <div class="col-md-4">
                             <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startDate')} ? 'input-group has-error' : 'input-group'">
-                                <label class="input-group-addon borderless no-background ">*Start Date:</label>
+                                <label class="input-group-addon borderless no-background "><label style="color: red">*</label> Start Date:</label>
                                 <div class='input-group date' id='datetimepicker1'>
                                     <input type='text' class="form-control" th:field="*{startDate}" th:disabled="${eventDto.isAuditVersion()}"/>
                                     <span class="input-group-addon">
@@ -133,7 +133,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('endDate')} ? 'input-group has-error' : 'input-group'">
-                                <label class="input-group-addon borderless no-background">*End Date:</label>
+                                <label class="input-group-addon borderless no-background"><label style="color: red">*</label> End Date:</label>
                                 <div class='input-group date' id='datetimepicker2'>
                                     <input type='text' class="form-control" th:field="*{endDate}" th:disabled="${eventDto.isAuditVersion()}"/>
                                     <span class="input-group-addon">
@@ -144,7 +144,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startTime')} ? 'input-group has-error' : 'input-group'">
-                                <label class="input-group-addon borderless no-background ">*Time:</label>
+                                <label class="input-group-addon borderless no-background "><label style="color: red">*</label> Time:</label>
                                 <div class='input-group date' id='datetimepicker3'>
                                     <input type='text' class="form-control" th:field="*{startTime}" th:disabled="${eventDto.isAuditVersion()}"/>
                                     <span class="input-group-addon">
@@ -157,7 +157,7 @@
                     <div class="row">
                         <div class="col-md-7">
                             <div class="form-group" th:class="${#fields.hasErrors('comment')} ? 'form-group has-error' : 'form-group'">
-                                <label class="normal">*Comments:</label>
+                                <label class="normal"><label style="color: red">*</label> Comments:</label>
                                 <textarea class="form-control" rows="6" th:field="*{comment}" th:disabled="${eventDto.isAuditVersion()}"></textarea>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                             <div class="row" style="margin-bottom: 20px">
                                 <div class="col-md-8 col-md-offset-4">
                                     <div class="input-group" th:class="${#fields.hasErrors('eapId')} ? 'input-group has-error' : 'input-group'">
-                                        <label class="input-group-addon borderless no-background">*EAP:</label>
+                                        <label class="input-group-addon borderless no-background"><label style="color: red">*</label> EAP:</label>
                                         <select class="form-control" th:field="*{eapId}" th:disabled="${eventDto.isAuditVersion()}">
                                             <option value="">-- Please Select --</option>
                                             <option th:each="eap : ${listEap}" th:value="${eap.id}" th:text="${eap.value}"></option>
@@ -176,7 +176,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group" th:class="${#fields.hasErrors('eapComment')} ? 'form-group has-error' : 'form-group'">
-                                        <label class="normal">*EAP Comments:</label>
+                                        <label class="normal"><label style="color: red">*</label> EAP Comments:</label>
                                         <textarea class="form-control" rows="3" th:field="*{eapComment}" th:disabled="${eventDto.isAuditVersion()}"></textarea>
                                     </div>
                                 </div>
