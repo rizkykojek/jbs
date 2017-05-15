@@ -32,7 +32,6 @@ INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (14
 INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (15, 'PC', 'Personal/Carer Leave - with cert', 1, 15, 1);
 INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (16, 'PCN', 'Personal/Carer Leave - without cert', 1, 16, 1);
 INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (17, 'WC', 'Workers Comp', 1, 17, 1);
-INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (18, 'UN', 'Not Actioned', 1, 18, 1);
 INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (19, 'MC', 'Medical Certificate', 1, 1, 2);
 INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (20, 'LC', 'Lost Card', 1, 2, 2);
 INSERT INTO event_type(id, code, name, status, sequence, category_id) VALUES (21, 'BTC', 'Breathalyser Test - All Clear (Less than 0.05%)', 1, 3, 2);
