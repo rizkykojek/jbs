@@ -40,7 +40,7 @@ public class EventServiceImpl implements EventService {
             audits.add(event);
         }
 
-        return Lists.reverse(audits);
+        return audits;
     }
 
     @Transactional(readOnly = true)
