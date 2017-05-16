@@ -231,9 +231,7 @@
                         </div>
                         <div class="row" th:if="${!performanceDto.isAuditVersion()}">
                             <div class="col-md-12">
-                                <a href="#" th:onclick="'javascript:generateTemplate()'">
-                                    <button type="button" class="btn btn-success">Generate Letter</button>
-                                </a>
+                                <button id="generateLetterId" type="button" class="btn btn-success" th:onclick="'javascript:generateTemplate()'">Generate Letter</button>
                             </div>
                         </div>
                     </div>
@@ -354,7 +352,7 @@
                         </div>
                     </div>
                 </div>
-                <div th:if="${!performanceDto.isAuditVersion() && performanceDto.isUpdate()}">
+                <div class="row" th:if="${!performanceDto.isAuditVersion() && performanceDto.isUpdate()}">
                     <div class="col-md-12">
                         <label>
                             <a id="pmAuditHead"><u>&lt;Audit&gt;</u></a>
@@ -536,6 +534,18 @@
                 historyTable.columns(1).search($("#historyActionId").val()).draw();
             } else {
                 historyTable.columns(1).search("").draw();
+            }
+        });
+
+        if ($('#letterTemplateId').val() == '') {
+            $('#generateLetterId').attr("disabled","disabled");
+        }
+        $('#letterTemplateId').change( function() {
+            console.info()
+            if ($('#letterTemplateId').val() == '') {
+                $('#generateLetterId').attr("disabled","disabled");
+            } else {
+                $('#generateLetterId').removeAttr("disabled");
             }
         });
 
