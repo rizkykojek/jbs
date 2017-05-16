@@ -29,5 +29,6 @@ public final class ApplicationUtil {
 
     public static final String ATTACHMENT_TYPE = "Request_Doc_Attach_Type";
 
+    public static final String[] EXTENSION_TYPE_ACCEPTED = {"jpg", "jpeg", "gif", "png", "bmp", "pdf", "doc", "docx", "tiff"};
 
 }
