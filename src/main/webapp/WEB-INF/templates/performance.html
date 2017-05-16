@@ -242,7 +242,7 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment :</label>
                             <label class="input-group-btn">
                                 <span class="btn btn-primary">
-                                    Browse&hellip; <input id="fileId" type="file" style="display: none;" multiple="true" th:field="*{files}"/>
+                                    Browse&hellip; <input id="fileId" type="file" style="display: none;" multiple="true" th:field="*{files}" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
                                 </span>
                             </label>
                             <input id="fileNameId" type="text" class="form-control" readonly="true"/>

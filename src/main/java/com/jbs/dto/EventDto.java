@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.Column;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -119,6 +120,21 @@ public class EventDto {
     public boolean isTotalUploadFileBelowMaximum() {
         if (files.stream().filter(f -> !f.isEmpty()).toArray().length - removedAttachments.length + totalAttachmentsPersisted > 10) {
             return false;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "Attachment only support for this extension: .jpg .jpeg .gif .png .bmp .pdf .doc .docx .tiff")
+    public boolean isValidAttachmentFileType() {
+        if (files != null) {
+            for (MultipartFile file : files) {
+                String extension = file.getOriginalFilename().split("\\.")[1];
+                boolean matched = Arrays.stream(ApplicationUtil.EXTENSION_TYPE_ACCEPTED).anyMatch(extension::equals);
+                if (matched == false ) {
+                    return false;
+                }
+
+            }
         }
         return true;
     }
