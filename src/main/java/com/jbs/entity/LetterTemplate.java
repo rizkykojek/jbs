@@ -34,12 +34,4 @@ public class LetterTemplate {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean status;
 
-    @ManyToOne
-    @JoinColumn(name="action_id")
-    private PerformanceAction action;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "templates")
-    private Set<PerformanceAction> actions;
-
 }

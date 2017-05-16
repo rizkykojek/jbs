@@ -9,7 +9,4 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface PerformanceActionRepository extends CrudRepository<PerformanceAction, Long> {
 
-    @EntityGraph(value = "PerformanceAction.templates", type = EntityGraph.EntityGraphType.LOAD)
-    PerformanceAction findById(Long id);
-
 }

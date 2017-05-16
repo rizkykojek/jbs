@@ -159,7 +159,7 @@ public class PerformanceController {
 
     @RequestMapping(value = "/performance/letter_templates", method = RequestMethod.GET)
     public @ResponseBody List<LetterTemplate> getLetterTemplates(@RequestParam Long actionId) {
-        return Lists.newArrayList(performanceActionRepository.findById(actionId).getTemplates());
+        return Lists.newArrayList(letterTemplateRepository.findAll());
     }
 
     @JsonView(DataTablesOutput.View.class)
@@ -217,11 +217,10 @@ public class PerformanceController {
         }
 
         Long parentCategoryId = performanceDto.getParentCategoryId();
-        Long actionId = performanceDto.getActionId();
         model.addAttribute("listAction", parentCategoryId != null ?  Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions()) : Lists.newArrayList());
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
-        model.addAttribute("listLetterTemplate", actionId != null ?  Lists.newArrayList(performanceActionRepository.findById(actionId).getTemplates()) : Lists.newArrayList());
+        model.addAttribute("listLetterTemplate", letterTemplateRepository.findAll());
         model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
         model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
         model.addAttribute("listActionBasedHistory", performanceActionRepository.findAll());

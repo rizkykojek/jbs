@@ -10,6 +10,4 @@ import java.util.List;
  */
 public interface LetterTemplateRepository extends CrudRepository<LetterTemplate, Long> {
 
-    List<LetterTemplate> findByActionId(Long actionId);
-
 }
