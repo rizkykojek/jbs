@@ -123,12 +123,13 @@ public class PerformanceDto {
     public boolean isValidAttachmentFileType() {
         if (files != null) {
             for (MultipartFile file : files) {
-                String extension = file.getOriginalFilename().split("\\.")[1];
-                boolean matched = Arrays.stream(ApplicationUtil.EXTENSION_TYPE_ACCEPTED).anyMatch(extension::equals);
-                if (matched == false ) {
-                    return false;
+                if (file.getSize() > 0) {
+                    String extension = file.getOriginalFilename().split("\\.")[1];
+                    boolean matched = Arrays.stream(ApplicationUtil.EXTENSION_TYPE_ACCEPTED).anyMatch(extension::equals);
+                    if (matched == false) {
+                        return false;
+                    }
                 }
-
             }
         }
         return true;
