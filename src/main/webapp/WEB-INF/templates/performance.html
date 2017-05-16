@@ -31,7 +31,7 @@
                             <label class="normal" th:text="${employee.employeeNumber}"/>
                         </div>
                         <div class="col-md-4">
-                            <b>Plant/Site:</b>
+                            <b>Site:</b>
                             <label class="normal" th:text="${employee.site.name}"/>
                         </div>
                     </div>
@@ -422,6 +422,8 @@
             var _ctx = /*[[@{/}]]*/ 'context';
             var employeeId = [[${employee.id}]];
             window.location.replace(_ctx + "employee/" + employeeId + "/performance/generate_letter/" + $("#letterTemplateId").val());
+        } else {
+            alert("You have to select the template")
         }
     }
 
