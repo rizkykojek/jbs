@@ -34,7 +34,7 @@ public class HibernateConfig {
 
 		final DataSourceInitializer initializer = new DataSourceInitializer();
 		initializer.setDataSource(dataSource);
-		//initializer.setDatabasePopulator(populator);
+		initializer.setDatabasePopulator(populator);
 		return initializer;
 	}
 
@@ -78,7 +78,7 @@ public class HibernateConfig {
 		properties.put("hibernate.dialect","org.hibernate.dialect.HANARowStoreDialect");
 		//properties.put("hibernate.default_schema","JBSUSER");
 		properties.put("hibernate.default_schema","S0017067884");
-		//properties.put("hibernate.hbm2ddl.auto","create");
+		properties.put("hibernate.hbm2ddl.auto","create");
 		properties.put("org.hibernate.envers.audit_table_suffix","_audit");
 		return properties;
 	}
