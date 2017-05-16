@@ -36,6 +36,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by rizkykojek on 3/5/17.
@@ -167,6 +168,7 @@ public class PerformanceController {
     public @ResponseBody DataTablesOutput getPerformanceHistory(@PathVariable Long employeeId, @RequestParam Optional<String> startDateFilter, @RequestParam Optional<String> endDateFilter,
                                                                 @RequestParam Optional<Integer> monthFilter, @Valid DataTablesInput request) {
         DataTablesOutput<Performance> results = performanceTableRepository.findAll(request, historySpecification(employeeId, startDateFilter, endDateFilter, monthFilter));
+        results.setData(results.getData().stream().sorted((p1, p2) -> Long.compare(p2.getId(), p1.getId())).collect(Collectors.toList()));
         return results;
     }
 
