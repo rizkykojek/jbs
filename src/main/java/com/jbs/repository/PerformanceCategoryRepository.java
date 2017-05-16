@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface PerformanceCategoryRepository extends CrudRepository<PerformanceCategory, Long> {
 
-    List<PerformanceCategory> findByParentCategoryIsNull();
+    List<PerformanceCategory> findByParentCategoryIsNullOrderByName();
 
-    List<PerformanceCategory> findByParentCategoryNotNullAndParentCategoryId(Long parentCategoryId);
+    List<PerformanceCategory> findByParentCategoryNotNullAndParentCategoryIdOrderByName(Long parentCategoryId);
 
     @EntityGraph(value = "PerformanceCategory.actions", type = EntityGraph.EntityGraphType.LOAD)
     PerformanceCategory findById(Long id);

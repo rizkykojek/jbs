@@ -512,23 +512,6 @@
             $('#letterTemplateIdId').html('<option value="">-- Please Select --</option>');
         });
 
-        $('#actionId').change( function() {
-            $.getJSON(_ctx + 'performance/letter_templates', {
-                actionId : $(this).val(),
-                ajax : 'true'
-            }, function(data) {
-                var html = '<option value="">-- Please Select --</option>';
-                var len = data.length;
-                for ( var i = 0; i < len; i++) {
-                    html += '<option value="' + data[i].id + '">'
-                            + data[i].name + '</option>';
-                }
-                html += '</option>';
-
-                $('#letterTemplateId').html(html);
-            });
-        });
-
         $("#historyActionId").change(function() {
             if ($("#historyActionId").val() != "") {
                 historyTable.columns(1).search($("#historyActionId").val()).draw();

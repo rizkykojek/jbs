@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface EventTypeRepository extends CrudRepository<EventType, Long> {
 
-    List<EventType> findByCategoryId(Long categoryId);
+    List<EventType> findByCategoryIdOrderByName(Long categoryId);
+
+    List<EventType> findAllByOrderByName();
 
 }

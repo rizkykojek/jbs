@@ -150,17 +150,12 @@ public class PerformanceController {
 
     @RequestMapping(value = "/performance/categories", method = RequestMethod.GET)
     public @ResponseBody List<PerformanceCategory> getCategories(@RequestParam Long parentCategoryId) {
-        return performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(parentCategoryId);
+        return performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryIdOrderByName(parentCategoryId);
     }
 
     @RequestMapping(value = "/performance/actions", method = RequestMethod.GET)
     public @ResponseBody List<PerformanceAction> getActions(@RequestParam Long parentCategoryId) {
-        return Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions());
-    }
-
-    @RequestMapping(value = "/performance/letter_templates", method = RequestMethod.GET)
-    public @ResponseBody List<LetterTemplate> getLetterTemplates(@RequestParam Long actionId) {
-        return Lists.newArrayList(letterTemplateRepository.findAll());
+        return Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions().stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList()));
     }
 
     @JsonView(DataTablesOutput.View.class)
@@ -220,12 +215,12 @@ public class PerformanceController {
 
         Long parentCategoryId = performanceDto.getParentCategoryId();
         model.addAttribute("listAction", parentCategoryId != null ?  Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions()) : Lists.newArrayList());
-        model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNull());
-        model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryId(performanceDto.getParentCategoryId()));
-        model.addAttribute("listLetterTemplate", letterTemplateRepository.findAll());
+        model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNullOrderByName());
+        model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryIdOrderByName(performanceDto.getParentCategoryId()));
+        model.addAttribute("listLetterTemplate", letterTemplateRepository.findAllByOrderByName());
         model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
         model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
-        model.addAttribute("listActionBasedHistory", performanceActionRepository.findAll());
+        model.addAttribute("listActionBasedHistory", performanceActionRepository.findAllByOrderByName());
     }
 
     private Performance convertToEntity(PerformanceDto performanceDto, Optional<Long> performanceId) {

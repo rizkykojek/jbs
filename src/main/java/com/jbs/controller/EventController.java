@@ -101,7 +101,7 @@ public class EventController {
 
     @RequestMapping(value = "/event/types", method = RequestMethod.GET)
     public @ResponseBody List<EventType> getEventTypes(@RequestParam Long categoryId) {
-        return eventTypeRepository.findByCategoryId(categoryId);
+        return eventTypeRepository.findByCategoryIdOrderByName(categoryId);
     }
 
     @JsonView(DataTablesOutput.View.class)
@@ -160,12 +160,12 @@ public class EventController {
         }
 
 
-        model.addAttribute("listCategory", eventCategoryRepository.findAll());
-        model.addAttribute("listEventType", eventTypeRepository.findByCategoryId(eventDto.getCategoryId()));
+        model.addAttribute("listCategory", eventCategoryRepository.findAllByOrderByName());
+        model.addAttribute("listEventType", eventTypeRepository.findByCategoryIdOrderByName(eventDto.getCategoryId()));
         model.addAttribute("listEventStatus", eventAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.STATUS_TYPE));
         model.addAttribute("listEap", eventAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.EAP_TYPE));
         model.addAttribute("listAttachmentType", eventAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.ATTACHMENT_TYPE));
-        model.addAttribute("listEventTypeBasedHistory", eventTypeRepository.findAll());
+        model.addAttribute("listEventTypeBasedHistory", eventTypeRepository.findAllByOrderByName());
     }
 
     private Event convertToEntity(EventDto eventDto, Optional<Long> eventId) {
