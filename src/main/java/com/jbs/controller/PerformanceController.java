@@ -70,6 +70,9 @@ public class PerformanceController {
     @Autowired
     private PerformanceAdminRepository performanceAdminRepository;
 
+    @Autowired
+    private LetterTemplateRepository letterTemplateRepository;
+
     @RequestMapping(value = {"/performance/{performanceId}", "/performance/{performanceId}/revision/{revisionNumber}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, @PathVariable Optional<Integer> revisionNumber, final Model model) {
         PerformanceDto performanceDto = new PerformanceDto();
@@ -117,9 +120,10 @@ public class PerformanceController {
     @RequestMapping(value = "/employee/{employeeId}/performance/generate_letter/{letterTemplateId}", method = RequestMethod.GET)
     public void generateLetter(@PathVariable Long letterTemplateId, @PathVariable Long employeeId, HttpServletResponse response) throws Exception {
         File tempFile = performanceService.generateLetterTemplate(letterTemplateId, employeeId);
+        LetterTemplate letterTemplate = letterTemplateRepository.findOne(letterTemplateId);
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=letter.docx");
+        response.setHeader("Content-Disposition", "attachment;filename=" + letterTemplate.getTemplateFile());
         response.setContentLength((int) tempFile.length());
         InputStream inputStream = new BufferedInputStream(new FileInputStream(tempFile));
 
