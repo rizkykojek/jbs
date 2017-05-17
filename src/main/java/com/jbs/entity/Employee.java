@@ -45,6 +45,11 @@ public class Employee {
     private Position position;
 
     @ManyToOne
+    @JoinColumn(name="plant_id", nullable=false)
+    @JsonView(DataTablesOutput.View.class)
+    private Plant plant;
+
+    @ManyToOne
     @JoinColumn(name="department_id", nullable=false)
     @JsonView(DataTablesOutput.View.class)
     private Department department;

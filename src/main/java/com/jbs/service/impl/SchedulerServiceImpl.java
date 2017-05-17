@@ -48,6 +48,9 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Autowired
     private SiteRepository siteRepository;
 
+    @Autowired
+    private PlantRepository plantRepository;
+
     @Scheduled(fixedDelay = 1000000000, initialDelay = 1)
     @Transactional
     public void employeeDetails() throws Exception {
@@ -56,6 +59,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         List<Position> positions = Lists.newArrayList(positionRepository.findAll());
         List<Section> sections = Lists.newArrayList(sectionRepository.findAll());
         List<Shift> shifts = Lists.newArrayList(shiftRepository.findAll());
+        List<Plant> plants = Lists.newArrayList(plantRepository.findAll());
         Site site = siteRepository.findOne(50001l);
         Random randomizer = new Random();
         String hrClearance[] = new String[]{"FW","AM","WR","SA","SR"};
@@ -71,14 +75,17 @@ public class SchedulerServiceImpl implements SchedulerService {
                 employee.setPosition(positions.get(randomizer.nextInt(positions.size())));
                 employee.setSection(sections.get(randomizer.nextInt(sections.size())));
                 employee.setShift(shifts.get(randomizer.nextInt(shifts.size())));
+                employee.setPlant(plants.get(randomizer.nextInt(plants.size())));
                 employee.setSite(site);
                 employeeRepository.save(employee);
 
                 int eventType = (i % 2 == 0) ? 1 : 2;
                 EmployeeEvent event = new EmployeeEvent();
                 event.setEmployee(employee);
-                event.setEventType(eventType);
-                event.setEventName(eventType == 1 ? hrClearance[randomizer.nextInt(hrClearance.length)] : absent[randomizer.nextInt(absent.length)]);
+                //event.setEventType(eventType);
+                //event.setEventName(eventType == 1 ? hrClearance[randomizer.nextInt(hrClearance.length)] : absent[randomizer.nextInt(absent.length)]);
+                event.setEventType(1);
+                event.setEventName(hrClearance[randomizer.nextInt(hrClearance.length)]);
                 employeeEventRepository.save(event);
                 i++;
             }

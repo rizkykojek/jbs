@@ -33,16 +33,22 @@
              	<tr>
              		<td>
              		    <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>
                                     Welcome <span th:text="${#authentication.principal.fullName}"/> <br/>
                                     Date : <span th:text="${#dates.format(#dates.createNow(), 'dd MMMM yyyy')}"/>
                                 </label>
                             </div>
                             <div class="col-md-3">
-                                <select id="siteId" class="form-control">
+                                <select id="plantId" class="form-control">
                                     <option value="">Please Select Site</option>
-                                    <option th:each="site : ${listSite}" th:value="${site.id}" th:text="${site.name}"></option>
+                                    <option th:each="plant : ${listPlant}" th:value="${plant.id}" th:text="${plant.name}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="sectionId" class="form-control">
+                                    <option value="">Please Select Site</option>
+                                    <option th:each="section : ${listSection}" th:value="${section.id}" th:text="${section.name}"></option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -154,7 +160,7 @@
                     "orderable": false,
                     "targets": 0
                 }, {
-                    "targets": [6,7,8],
+                    "targets": [6,7,8,9],
                     "visible": false
                 }  ],
                 "order": [ [ 1, 'asc' ] ],
@@ -183,8 +189,17 @@
                     { "data": "eventName" },
                     { "data": "employee.section.id" },
                     { "data": "employee.shift.id" },
-                    { "data": "employee.fullName" }
+                    { "data": "employee.fullName" },
+                    { "data": "employee.plant.id" },
                 ]
+            });
+
+            $("#plantId").change(function() {
+                if ($("#plantId").val() != "") {
+                    hrClearanceTable.columns(9).search($("#plantId").val() + '+').draw();
+                } else {
+                    hrClearanceTable.columns(9).search("").draw();
+                }
             });
 
             $("#sectionId").change(function() {

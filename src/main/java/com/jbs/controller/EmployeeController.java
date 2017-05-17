@@ -37,7 +37,8 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Autowired SiteRepository siteRepository;
+    @Autowired
+    private PlantRepository plantRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndex() {
@@ -86,9 +87,9 @@ public class EmployeeController {
         return Lists.newArrayList(departmentRepository.findAll());
     }
 
-    @ModelAttribute("listSite")
-    public List<Site> getLisSite() {
-        return Lists.newArrayList(siteRepository.findAll());
+    @ModelAttribute("listPlant")
+    public List<Plant> getListPlant() {
+        return Lists.newArrayList(plantRepository.findAll());
     }
 
     @JsonView(DataTablesOutput.View.class)

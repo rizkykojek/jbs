@@ -496,16 +496,48 @@ INSERT INTO position(id, code, name) VALUES (10,'position_10', 'Engineering Supe
 
 INSERT INTO site(id, code, name) VALUES (50001,'site-1', 'Beef City');
 
-/*INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (1,'230945','Derrick','Stewart','Derrick Stewart',1,1,1,1,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (2,'610700','Alison','Bennett','Alison Bennett',2,2,2,2,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (3,'61368','Janice','Ferguson','Janice Ferguson',3,3,3,3,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (4,'231605','Sammy','Day','Sammy Day',4,4,4,1,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (5,'300110','Clifton','Ball','Clifton Ball',5,5,5,2,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (6,'230687','Brian','Huff','Brian Huff',6,6,6,3,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (7,'1001575','Josh','Newman','Josh Newman',7,7,7,1,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (8,'212812','Bradford','Montgomery','Bradford Montgomery',8,8,8,2,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (9,'300444','Rosa','Baldwin','Rosa Baldwin',9,9,9,3,50001);
-INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id) VALUES (10,'230935','Kurt','Grave','Kurt Grave',10,10,10,1,50001);
+INSERT INTO plant(id, code, name, status) VALUES (1,'ANM01', 'Andrews Meat', 1);
+INSERT INTO plant(id, code, name, status) VALUES (2,'BCF01', 'JBS Beef City Feedlot', 1);
+INSERT INTO plant(id, code, name, status) VALUES (3,'BCP01', 'JBS Beef City Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (4,'BCS01', 'Bremer Cold Store', 1);
+INSERT INTO plant(id, code, name, status) VALUES (5,'BOP01', 'JBS Bordertown Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (6,'BRP01', 'JBS Brooklyn Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (7,'CFL01', 'Caroona Feedlot', 1);
+INSERT INTO plant(id, code, name, status) VALUES (8,'COO01', 'JBS Corporate Office', 1);
+INSERT INTO plant(id, code, name, status) VALUES (9,'COP01', 'JBS Cobram Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (10,'CTL01', 'JBS Carriers (Transport & Logistics)', 1);
+INSERT INTO plant(id, code, name, status) VALUES (11,'DEP01', 'JBS Devonport Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (12,'DIP01', 'JBS Dinmore Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (13,'DRJ01', 'D.R. Johnston', 1);
+INSERT INTO plant(id, code, name, status) VALUES (14,'HCS01', 'Hemmant Cold Store', 1);
+INSERT INTO plant(id, code, name, status) VALUES (15,'KNI01', 'Knox International', 1);
+INSERT INTO plant(id, code, name, status) VALUES (16,'LIB01', 'Livestock Buyer', 1);
+INSERT INTO plant(id, code, name, status) VALUES (17,'LOP01', 'JBS Longford Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (18,'MUF01', 'Mungindi Feedlot', 1);
+INSERT INTO plant(id, code, name, status) VALUES (19,'PCF01', 'Prime City Feedlot', 1);
+INSERT INTO plant(id, code, name, status) VALUES (20,'PRC01', 'Primo - NSW Corporate Office', 1);
+INSERT INTO plant(id, code, name, status) VALUES (21,'PRF01', 'Primo - Foodpartners', 1);
+INSERT INTO plant(id, code, name, status) VALUES (22,'RBS01', 'Retail Butcher Shop', 1);
+INSERT INTO plant(id, code, name, status) VALUES (23,'RIF01', 'JBS Riverina Feedlot', 1);
+INSERT INTO plant(id, code, name, status) VALUES (24,'RIP01', 'JBS Riverina Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (25,'ROP01', 'JBS Rockhampton Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (26,'SCP01', 'JBS Scone Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (27,'SOO01', 'JBS Southern Operations Office', 1);
+INSERT INTO plant(id, code, name, status) VALUES (28,'STB01', 'Swift Trade Group - Byproducts', 1);
+INSERT INTO plant(id, code, name, status) VALUES (29,'STM01', 'JBS Townsville Plant', 1);
+INSERT INTO plant(id, code, name, status) VALUES (30,'TOP01', 'Andrews Meat', 1);
+INSERT INTO plant(id, code, name, status) VALUES (31,'YAF01', 'Yambinya Feedlott', 1);
+
+/*INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (1,'230945','Derrick','Stewart','Derrick Stewart',1,1,1,1,50001,1);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (2,'610700','Alison','Bennett','Alison Bennett',2,2,2,2,50001,2);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (3,'61368','Janice','Ferguson','Janice Ferguson',3,3,3,3,50001,3);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (4,'231605','Sammy','Day','Sammy Day',4,4,4,1,50001,4);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (5,'300110','Clifton','Ball','Clifton Ball',5,5,5,2,50001,5);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (6,'230687','Brian','Huff','Brian Huff',6,6,6,3,50001,6);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (7,'1001575','Josh','Newman','Josh Newman',7,7,7,1,50001,7);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (8,'212812','Bradford','Montgomery','Bradford Montgomery',8,8,8,2,50001,8);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (9,'300444','Rosa','Baldwin','Rosa Baldwin',9,9,9,3,50001,9);
+INSERT INTO employee(id, employee_number, first_name, last_name, full_name, position_id, department_id, section_id, shift_id, site_id, plant_id) VALUES (10,'230935','Kurt','Grave','Kurt Grave',10,10,10,1,50001,10);
 
 INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (1,1,'FW',1);
 INSERT INTO employee_event(id, employee_id, event_name, event_type) VALUES (2,2,'AM',1);
