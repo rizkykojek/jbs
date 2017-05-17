@@ -1,6 +1,5 @@
 package com.jbs.service.impl;
 
-import com.google.common.collect.Lists;
 import com.jbs.config.audit.RevisionInfo;
 import com.jbs.entity.Event;
 import com.jbs.service.EventService;
@@ -15,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by rizkykojek on 5/15/17.
@@ -33,9 +33,11 @@ public class EventServiceImpl implements EventService {
         query.addOrder(AuditEntity.revisionNumber().asc());
         List<Event> audits = new ArrayList<>();
         List<Object[]> objects = query.getResultList();
+        AtomicInteger atomicInteger = new AtomicInteger(1);
         for (Object[] object: objects) {
             Event event = (Event) object[0];
             event.setRevisionNumber(((RevisionInfo) object[1]).getId());
+            event.setCounterNumber(atomicInteger.getAndIncrement());
             event.initializeLazyConnection();
             audits.add(event);
         }

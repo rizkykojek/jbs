@@ -2,7 +2,9 @@ package com.jbs.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.jbs.dto.EventDto;
-import com.jbs.entity.*;
+import com.jbs.entity.Employee;
+import com.jbs.entity.Event;
+import com.jbs.entity.EventType;
 import com.jbs.mapper.EventMap;
 import com.jbs.repository.*;
 import com.jbs.repository.datatable.EventTableRepository;
@@ -105,6 +107,15 @@ public class EventController {
     }
 
     @JsonView(DataTablesOutput.View.class)
+    @RequestMapping(value = "/event/audit/{eventId}", method = RequestMethod.GET)
+    public @ResponseBody DataTablesOutput getEventAudits(@PathVariable Long eventId, @Valid DataTablesInput request) {
+        DataTablesOutput<Event> results = new DataTablesOutput<>();
+        List<Event> eventRevisions = eventService.findAllEventRevisions(eventId);
+        results.setData(eventRevisions);
+        return results;
+    }
+
+    @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/event/history/{employeeId}", method = RequestMethod.GET)
     public @ResponseBody DataTablesOutput getEventHistory(@PathVariable Long employeeId, @RequestParam Optional<String> startDateFilter, @RequestParam Optional<String> endDateFilter,
                                                                 @RequestParam Optional<Integer> monthFilter, @Valid DataTablesInput request) {
@@ -153,12 +164,6 @@ public class EventController {
         Employee employee = employeeRepository.findOne(employeeId);
         model.addAttribute("employee", employee);
         model.addAttribute("eventDto", eventDto);
-
-        if (eventDto.isUpdate()) {
-            List<Event> eventRevisions = eventService.findAllEventRevisions(eventDto.getId());
-            model.addAttribute("eventRevisions", eventRevisions);
-        }
-
 
         model.addAttribute("listCategory", eventCategoryRepository.findAllByOrderByName());
         model.addAttribute("listEventType", eventTypeRepository.findByCategoryIdOrderByName(eventDto.getCategoryId()));
