@@ -56,7 +56,7 @@
                             </div>
                          </div>
                         <div class="row">
-                            <div class="col-md-6" style="padding-left: 0px;">
+                            <div class="col-md-12" style="padding-left: 0px;">
                                 <div class="col-md-12">
                                     <h4><b>HR Clearance</b></h4>
                                 </div>
@@ -79,70 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="padding-left: 0px;">
-                                <div class="col-md-12">
-                                    <h4><b>Absent</b></h4>
-                                </div>
-                                <div class="col-md-12" >
-                                    <div class="table-responsive"  style="font-size: 11px">
-                                        <table id="absentTable" class="table table-bordered table-condensed table-hover" style="margin-top: -20px !important;">
-                                            <thead>
-                                            <tr class="info">
-                                                <td align="center"><b>No</b></td>
-                                                <td align="center"><b>Name</b></td>
-                                                <td align="center"><b>EE ID</b></td>
-                                                <td align="center"><b>Position</b></td>
-                                                <td align="center"><b>Department</b></td>
-                                                <td align="center"><b>Event</b></td>
-                                            </tr>
-                                            </thead>
-                                            <tbody style="font-size: 11px;">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-             		</td>
-             		<td width="20%" align="center" valign="top">
-                        <table border="0" width="100%">
-                            <tr>
-                                <td>
-                                    <div class="col-md-8 col-md-offset-2">
-                                        <div class="well well-sm" style="background-color: #cce6ff !important; border-color: #2aabd2; color: black">
-                                            <div class="row text-center">
-                                                <label style="color: black"><u>Quick Links</u></label>
-                                            </div>
-                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/duties}" th:target="_blank">Suitable Duties</a><br/>
-                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/event_report}" th:target="_blank">Event Report</a><br/>
-                                            &bull;&nbsp;&nbsp;<a href="#" style="color: black" th:href="@{/performance_report}" th:target="_blank">PM Report</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <div class="col-md-8 col-md-offset-2">
-                                        <div class="well well-sm" style="background-color: #cce6ff !important; border-color: #3e8f3e;">
-                                            <div class="row text-center">
-                                                <label style="color: black"><u>Trends</u></label>
-                                            </div>
-                                            <table border="0" width="100%" style="border-spacing: 5px;border-collapse: separate;">
-                                                <tr>
-                                                    <td><a href="#" th:href="@{/wcmc}" th:target="_blank"><button type="button" class="btn btn-success">WC | MC</button></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><button type="button" class="btn btn-success">UA | PA</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><button type="button" class="btn btn-success">UA | PH</button></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
              		</td>
              	</tr>
              </table>
@@ -232,64 +169,10 @@
                             return '<div class="dropdown"><a class="dropbtn">'+ row.employee.fullName +'</a>' +
                                         '<div class="dropdown-content">' +
                                             '<a href="'+_ctx + 'summary/'+ row.employee.id +'">View Employee Summary</a>' +
-                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/event" target="_blank">Add Event</a>' +
-                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/performance" target="_blank">Add PM</a>' +
-                                            '<a href="#">View Employee Record</a>' +
-                                            '<a href="#">Add Leave</a>' +
-                                        '</div>' +
-                                    '</div>';
-                        }
-                    },
-                    { "data": "employee.employeeNumber" },
-                    { "data": "employee.position.name" },
-                    { "data": "employee.department.name" },
-                    { "data": "eventName" },
-                    { "data": "employee.section.id" },
-                    { "data": "employee.shift.id" },
-                    { "data": "employee.fullName" }
-                ]
-            });
-
-            var absentTable = $('#absentTable').DataTable({
-                "ajax":         _ctx + "absentTable",
-                "serverSide":   true,
-                "processing": true,
-                "pagingType":   "full",
-                "searching":    true,
-                "lengthChange": true,
-                "pageLength": 10,
-                "lengthMenu": [ 5, 10, 25, 50 ],
-                "language": {
-                    "info":         "Total _TOTAL_ entries",
-                    "infoFiltered": "",
-                    "infoEmpty":    "",
-                    "infoPostFix":  "",
-                    "processing": "<div class='loader'></div>"
-                },
-                "columnDefs": [ {
-                    "targets": [0],
-                    "searchable": false,
-                    "orderable": false
-                }, {
-                    "targets": [6,7,8],
-                    "visible": false
-                } ],
-                "order": [ [ 1, 'asc' ] ],
-                "columns": [
-                    { "data": "id", render: function(data, type, row)
-                        {
-                            return row.counterNumber;
-                        }
-                    },
-                    { "data": "employee.firstName", render: function(data, type, row)
-                        {
-                            return '<div class="dropdown"><a class="dropbtn">'+ row.employee.fullName +'</a>' +
-                                        '<div class="dropdown-content">' +
-                                            '<a href="'+_ctx + 'summary/'+ row.employee.id +'">View Employee Summary</a>' +
-                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/event" target="_blank">Add Event</a>' +
-                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/performance" target="_blank">Add PM</a>' +
-                                            '<a href="#">View Employee Record</a>' +
-                                            '<a href="#">Add Leave</a>' +
+                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/event" target="_blank">Add Attendance Event</a>' +
+                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/performance" target="_blank">Add PM Event</a>' +
+                                            '<a href="#">View Employee Record (EC)</a>' +
+                                            '<a href="#">Add Leave (Kronos)</a>' +
                                         '</div>' +
                                     '</div>';
                         }
@@ -306,35 +189,25 @@
 
             $("#sectionId").change(function() {
                 if ($("#sectionId").val() != "") {
-                    absentTable.columns(6).search($("#sectionId").val() + '+').draw();
                     hrClearanceTable.columns(6).search($("#sectionId").val() + '+').draw();
                 } else {
-                    absentTable.columns(6).search("").draw();
                     hrClearanceTable.columns(6).search("").draw();
                 }
             });
 
             $("#shiftId").change(function() {
                 if ($("#shiftId").val() != "") {
-                    absentTable.columns(7).search($("#shiftId").val() + '+').draw();
                     hrClearanceTable.columns(7).search($("#shiftId").val() + '+').draw();
                 } else {
-                    absentTable.columns(7).search("").draw();
                     hrClearanceTable.columns(7).search("").draw();
                 }
             });
 
             $("#searchNameId").keyup(function () {
-                absentTable.columns(8).search($("#searchNameId").val()).draw();
                 hrClearanceTable.columns(8).search($("#searchNameId").val()).draw();
             });
 
             $("#clearFilterId").click(function() {
-                absentTable.columns(6).search("");
-                absentTable.columns(7).search("");
-                absentTable.columns(8).search("");
-                absentTable.draw();
-
                 hrClearanceTable.columns(6).search("");
                 hrClearanceTable.columns(7).search("");
                 hrClearanceTable.columns(8).search("");
@@ -344,7 +217,7 @@
             });
 
 
-            $("#absentTable_filter,#hrClearanceTable_filter").css("display","none");
+            $("#hrClearanceTable_filter").css("display","none");
         });
 
     </script>
