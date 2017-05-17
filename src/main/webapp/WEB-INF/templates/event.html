@@ -22,17 +22,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <b>Name:</b>
                                 <label class="normal" th:text="${employee.fullName}"/>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <b>Employee ID:</b>
                                 <label class="normal" th:text="${employee.employeeNumber}"/>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <b>Site:</b>
-                                <label class="normal" th:text="${employee.site.name}"/>
+                                <label class="normal" th:text="${employee.plant.name}"/>
                             </div>
                         </div>
                     </div>
