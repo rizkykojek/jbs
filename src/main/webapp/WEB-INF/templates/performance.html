@@ -363,7 +363,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-condensed table-hover">
+                                <table id="auditTable" class="table table-bordered table-condensed table-hover">
                                     <thead>
                                         <tr class="success">
                                             <td class="text-center">#</td>
@@ -377,16 +377,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="revision,iterationStatus  : ${performanceRevisions}" class="info">
-                                        <td class="text-center" th:text="${iterationStatus.count}"></td>
-                                        <td class="text-center"><a th:href="@{/} + 'performance/'+ ${revision.id} +'/revision/' + ${revision.revisionNumber}" th:text="${revision.id}" target="_blank"> </a></td>
-                                        <td class="text-center"th:text="${revision.action.name} + ' (' +${revision.action.code} + ')'"></td>
-                                        <td class="text-center"th:text="${#dates.format(revision.startDate, 'dd MMM yyyy')}"></td>
-                                        <td class="text-center"th:text="${#dates.format(revision.endDate, 'dd MMM yyyy')}"></td>
-                                        <td class="text-center"th:text="${#dates.format(revision.startTime, 'hh:mm aa')}"></td>
-                                        <td class="text-center"th:text="${#dates.format(revision.lastUpdateAt, 'dd MMM yyyy hh:mm aa')}"></td>
-                                        <td class="text-center"th:text="${revision.lastUpdateBy.fullName}"></td>
-                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -433,6 +423,57 @@
     $(document).ready(function(){
         var _ctx = /*[[@{/}]]*/ 'context';
         var employeeId = [[${employee.id}]];
+        var performanceId = [[${performanceDto.id}]];
+
+        var auditTable = $('#auditTable').on('preXhr.dt', function(e,settings,data){}).DataTable({
+            "ajax":         _ctx + "performance/audit/" + performanceId,
+            "serverSide":   true,
+            "processing": true,
+            "pagingType":   "simple",
+            "searching":    true,
+            "lengthChange": false,
+            "language": {
+                "info":         "",
+                "infoFiltered": "",
+                "infoEmpty":    "",
+                "infoPostFix":  "",
+                "processing": "<div class='loader'></div>"
+            },
+            "columnDefs": [{
+                "targets": [0,1,2,3,4,5,6,7],
+                "orderable": false
+            }],
+            "columns": [
+                { "data": "#", render: function(data, type, row)
+                    {
+                        return row.counterNumber;
+                    }
+                },
+                { "data": "id", render: function(data, type, row)
+                    {
+                        return '<a href="' + _ctx + 'performance/'+ row.id + '/revision/' + row.revisionNumber +  '" target="_blank">' + row.id + '</a>';
+                    }
+                },
+                { "data": "action.id", render: function(data, type, row)
+                    {
+                        return row.action.name + ' (' + row.action.code + ')';
+                    }
+                },
+                { "data": "startDate" },
+                { "data": "endDate" },
+                { "data": "startTime" },
+                { "data": "lastUpdateAt", render: function (data)
+                    {
+                        var date = new Date(data);
+                        return dateFormat(date, "dd mmm yyyy hh:MM TT");
+                    }
+                },
+                { "data": "lastUpdateBy.fullName" }
+            ],
+            "rowCallback": function( row, data, index ) {
+                $(row).addClass('info text-center');
+            }
+        });
 
         var historyTable = $('#historyTable').on('preXhr.dt', function(e,settings,data){
             data.startDateFilter = $("#historyStartDatePicker").val();
@@ -565,7 +606,7 @@
             historyTable.draw();
         });
 
-        $("#historyTable_paginate, #historyTable_filter").hide();
+        $("#historyTable_paginate, #historyTable_filter, #auditTable_paginate, #auditTable_filter").hide();
 
         $("#historyMonthId").change(function() {
             $('#historyStartDatePicker, #historyEndDatePicker').val("");

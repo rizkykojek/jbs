@@ -41,10 +41,9 @@ import javax.persistence.PersistenceContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by rizkykojek on 5/1/17.
@@ -139,9 +138,11 @@ public class PerformanceServiceImpl implements PerformanceService {
         query.addOrder(AuditEntity.revisionNumber().asc());
         List<Performance> audits = new ArrayList<>();
         List<Object[]> objects = query.getResultList();
+        AtomicInteger atomicInteger = new AtomicInteger(1);
         for (Object[] object: objects) {
             Performance performance = (Performance) object[0];
             performance.setRevisionNumber(((RevisionInfo) object[1]).getId());
+            performance.setCounterNumber(atomicInteger.getAndIncrement());
             performance.initializeLazyConnection();
             audits.add(performance);
         }

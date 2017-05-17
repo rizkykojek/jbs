@@ -167,6 +167,15 @@ public class PerformanceController {
         return results;
     }
 
+    @JsonView(DataTablesOutput.View.class)
+    @RequestMapping(value = "/performance/audit/{performanceId}", method = RequestMethod.GET)
+    public @ResponseBody DataTablesOutput getPerformanceAudits(@PathVariable Long performanceId, @Valid DataTablesInput request) {
+        DataTablesOutput<Performance> results = new DataTablesOutput<>();
+        List<Performance> performanceRevisions = performanceService.findAllPerformanceRevisions(performanceId);
+        results.setData(performanceRevisions);
+        return results;
+    }
+
     public static Specification<Performance> historySpecification(Long employeeId, Optional<String> startDate, Optional<String> endDate, Optional<Integer> month) {
         return (Root<Performance> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
             DateTimeFormatter formatter = DateTimeFormat.forPattern("dd MMM YYYY");
@@ -207,11 +216,6 @@ public class PerformanceController {
         Employee employee = employeeRepository.findOne(employeeId);
         model.addAttribute("employee", employee);
         model.addAttribute("performanceDto", performanceDto);
-
-        if (performanceDto.isUpdate()) {
-            List<Performance> performanceRevisions = performanceService.findAllPerformanceRevisions(performanceDto.getId());
-            model.addAttribute("performanceRevisions", performanceRevisions);
-        }
 
         Long parentCategoryId = performanceDto.getParentCategoryId();
         model.addAttribute("listAction", parentCategoryId != null ?  Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions()) : Lists.newArrayList());
