@@ -470,7 +470,11 @@
                 { "data": "startDate" },
                 { "data": "endDate" },
                 { "data": "startTime" },
-                { "data": "lastUpdateAt" },
+                { "data": "lastUpdateAt", render: function (data) {
+                        var date = new Date(data);
+                        return dateFormat(date, "dd mmm yyyy hh:MM TT");
+                    }
+                },
                 { "data": "lastUpdateBy.fullName" }
             ],
             "rowCallback": function( row, data, index ) {
