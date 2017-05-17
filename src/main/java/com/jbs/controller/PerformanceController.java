@@ -187,7 +187,7 @@ public class PerformanceController {
                 endFilter = currentDate;
                 startFilter = currentDate.minusMonths(month.get());
             } else {
-                endFilter = StringUtils.isNotEmpty(endDate.get()) ? formatter.parseDateTime(endDate.get()) : currentDate;
+                endFilter = StringUtils.isNotEmpty(endDate.get()) ? formatter.parseDateTime(endDate.get()) : currentDate.plusMonths(ApplicationUtil.DEFAULT_FILTER_DATE_MONTH);
                 startFilter = StringUtils.isNotEmpty(startDate.get()) ? formatter.parseDateTime(startDate.get()) : currentDate.minusMonths(ApplicationUtil.DEFAULT_FILTER_DATE_MONTH);
             }
 
