@@ -1,5 +1,6 @@
 package com.jbs.service.impl;
 
+import com.google.common.collect.Lists;
 import com.jbs.config.audit.RevisionInfo;
 import com.jbs.entity.Event;
 import com.jbs.service.EventService;
@@ -42,7 +43,7 @@ public class EventServiceImpl implements EventService {
             audits.add(event);
         }
 
-        return audits;
+        return Lists.reverse(audits);
     }
 
     @Transactional(readOnly = true)
