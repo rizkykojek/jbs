@@ -407,6 +407,8 @@ INSERT INTO letter_template(id, code, name, status, template_file) VALUES (21,'0
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (22,'022','Demand for Return of property',1,'Demand to return property.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (23,'023','Employee Exit Checklist',1,'Employee Exit Checklist.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (24,'024','New Employee Assessment',1,'New employee assessment.docx');
+INSERT INTO letter_template(id, code, name, status, template_file) VALUES (25,'025','Letter of Response (Work Performance)',1,'Letter of Response (Work Performance).docx');
+INSERT INTO letter_template(id, code, name, status, template_file) VALUES (26,'026','Termination (Misconduct)',1,'Termination (Misconduct).docx');
 
 INSERT INTO department(id, code, name) VALUES (1,'department_1', 'ADELAIDE');
 INSERT INTO department(id, code, name) VALUES (2,'department_2', 'BEEF BUYERS');
