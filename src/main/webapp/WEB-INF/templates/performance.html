@@ -573,23 +573,6 @@
 
                 $('#categoryId').html(html);
             });
-
-            $.getJSON(_ctx + 'performance/actions', {
-                parentCategoryId : $(this).val(),
-                ajax : 'true'
-            }, function(data) {
-                var html = '<option value="">-- Please Select --</option>';
-                var len = data.length;
-                for ( var i = 0; i < len; i++) {
-                    html += '<option value="' + data[i].id + '">'
-                            + data[i].name + '</option>';
-                }
-                html += '</option>';
-
-                $('#actionId').html(html);
-            });
-
-            $('#letterTemplateIdId').html('<option value="">-- Please Select --</option>');
         });
 
         $("#historyActionId").change(function() {
@@ -603,8 +586,8 @@
         if ($('#letterTemplateId').val() == '') {
             $('#generateLetterId').attr("disabled","disabled");
         }
+
         $('#letterTemplateId').change( function() {
-            console.info()
             if ($('#letterTemplateId').val() == '') {
                 $('#generateLetterId').attr("disabled","disabled");
             } else {

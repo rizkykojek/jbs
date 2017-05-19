@@ -36,8 +36,4 @@ public class PerformanceAction {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean status;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "actions")
-    private Set<PerformanceCategory> categories;
-
 }

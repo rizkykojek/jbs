@@ -124,7 +124,7 @@ public class PerformanceController {
         LetterTemplate letterTemplate = letterTemplateRepository.findOne(letterTemplateId);
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=" + letterTemplate.getTemplateFile());
+        response.setHeader("Content-Disposition", "attachment;filename=\"" + letterTemplate.getTemplateFile() +"\"");
         response.setContentLength((int) tempFile.length());
         InputStream inputStream = new BufferedInputStream(new FileInputStream(tempFile));
 
@@ -141,7 +141,7 @@ public class PerformanceController {
 
 
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=" + attachment.getDocumentName());
+        response.setHeader("Content-Disposition", "attachment;filename=\"" + attachment.getDocumentName()+"\"");
         response.setContentLength((int) doc.getContentStreamLength());
         InputStream inputStream = contentStream.getStream();
 
@@ -151,11 +151,6 @@ public class PerformanceController {
     @RequestMapping(value = "/performance/categories", method = RequestMethod.GET)
     public @ResponseBody List<PerformanceCategory> getCategories(@RequestParam Long parentCategoryId) {
         return performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryIdOrderByName(parentCategoryId);
-    }
-
-    @RequestMapping(value = "/performance/actions", method = RequestMethod.GET)
-    public @ResponseBody List<PerformanceAction> getActions(@RequestParam Long parentCategoryId) {
-        return Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions().stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList()));
     }
 
     @JsonView(DataTablesOutput.View.class)
@@ -217,8 +212,7 @@ public class PerformanceController {
         model.addAttribute("employee", employee);
         model.addAttribute("performanceDto", performanceDto);
 
-        Long parentCategoryId = performanceDto.getParentCategoryId();
-        model.addAttribute("listAction", parentCategoryId != null ?  Lists.newArrayList(performanceCategoryRepository.findById(parentCategoryId).getActions()) : Lists.newArrayList());
+        model.addAttribute("listAction", performanceActionRepository.findAllByOrderByName());
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNullOrderByName());
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryIdOrderByName(performanceDto.getParentCategoryId()));
         model.addAttribute("listLetterTemplate", letterTemplateRepository.findAllByOrderByName());
