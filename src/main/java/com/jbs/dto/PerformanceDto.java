@@ -103,7 +103,7 @@ public class PerformanceDto {
         return true;
     }
 
-    @AssertTrue(message = "Start date should not greater than End date")
+    @AssertTrue(message = "End date should greater than Start date")
     public boolean isStartDateBelowEndDate() {
         if (startDate != null && endDate != null) {
             return startDate.before(endDate) || startDate.equals(endDate);
