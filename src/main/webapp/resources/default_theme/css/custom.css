@@ -142,3 +142,7 @@ code {
     color: #a94442 !important;
 }
 
+.checkbox label, .radio label {
+    cursor: auto;
+}
+
