@@ -41,19 +41,19 @@
                             </div>
                             <div class="col-md-3">
                                 <select id="plantId" class="form-control">
-                                    <option value="">Please Select Site</option>
+                                    <option value="">Please Select a Site</option>
                                     <option th:each="plant : ${listPlant}" th:value="${plant.id}" th:text="${plant.name}"></option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <select id="sectionId" class="form-control">
-                                    <option value="">Please Select Section</option>
+                                    <option value="">Please Select a Section</option>
                                     <option th:each="section : ${listSection}" th:value="${section.id}" th:text="${section.name}"></option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <select id="shiftId" class="form-control">
-                                    <option value="">Please Select Shift</option>
+                                    <option value="">Please Select a Shift</option>
                                     <option th:each="shift : ${listShift}" th:value="${shift.id}" th:text="${shift.name}"></option>
                                 </select>
                             </div>
@@ -67,8 +67,7 @@
                                     <h4><b>HR Clearance</b></h4>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="table-responsive"  style="font-size: 11px">
-                                        <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover" style="margin-top: -20px !important;">
+                                    <table id="hrClearanceTable" class="table table-bordered table-responsive table-condensed table-hover">
                                             <thead>
                                             <tr class="info">
                                                 <td align="center"><b>No</b></td>
@@ -82,7 +81,6 @@
                                             <tbody style="font-size: 11px;">
                                             </tbody>
                                         </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
