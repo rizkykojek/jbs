@@ -267,7 +267,11 @@
                         <div class="col-md-2">
                             <button type="submit" class="btn btn-info" th:if="${!eventDto.isAuditVersion()}">Save</button>
                         </div>
-
+                    </div>
+                    <div class="row" th:if="${eventDto.isAuditVersion()}" style="margin-top: 20px">
+                        <div class="col-md-2 col-md-offset-10">
+                            <button type="button" class="btn btn-info" onclick="self.close()">Close</button>
+                        </div>
                     </div>
                     <div class="row" th:if="${!eventDto.isAuditVersion()}">
                         <div class="col-md-12">
