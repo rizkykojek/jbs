@@ -397,12 +397,12 @@ INSERT INTO letter_template(id, code, name, status, template_file) VALUES (11,'0
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (12,'012','2nd Warning',1,'Second Written Warning.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (13,'013','Final Warning',1,'Final Written Warning.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (14,'014','Attendance Monitoring Program',1,'Attendance Monitoring Program.docx');
-INSERT INTO letter_template(id, code, name, status, template_file) VALUES (15,'015','Request to respond to allegations',1,'Letter of Response (Misconduct).docx');
+INSERT INTO letter_template(id, code, name, status, template_file) VALUES (15,'015','Letter of Response (Misconduct)',1,'Letter of Response (Misconduct).docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (16,'016','Stood aside pending investigation',1,'Stood aside pending investigation.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (17,'017','Unauthorised absenteeism (1)',1,'Unauthorised Absenteeism 1.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (18,'018','Unauthorised absenteeism (2)',1,'Unauthorised Absenteeism 2.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (19,'019','Unauthorised absenteeism (3)',1,'Unauthorised Absenteeism 3.docx');
-INSERT INTO letter_template(id, code, name, status, template_file) VALUES (20,'020','Termination letter',1,'Termination (Probation).docx');
+INSERT INTO letter_template(id, code, name, status, template_file) VALUES (20,'020','Termination (Probation)',1,'Termination (Probation).docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (21,'021','Offer of support person',1,'Offer of Support Person.pdf');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (22,'022','Demand for Return of property',1,'Demand to return property.docx');
 INSERT INTO letter_template(id, code, name, status, template_file) VALUES (23,'023','Employee Exit Checklist',1,'Employee Exit Checklist.docx');
