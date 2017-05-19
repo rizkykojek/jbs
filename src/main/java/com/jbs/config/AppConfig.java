@@ -1,12 +1,7 @@
 package com.jbs.config;
 
 import com.google.common.collect.Sets;
-import com.jbs.util.ApplicationUtil;
-import com.jbs.util.ODataUtil;
-import com.jbs.util.OpenCmisUtil;
-import com.sap.ecm.api.EcmService;
-import org.apache.olingo.odata2.api.edm.Edm;
-import org.apache.olingo.odata2.api.exception.ODataException;
+import com.jbs.mapper.SkipDestinationMap;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -19,8 +14,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -37,8 +30,6 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-import javax.naming.NamingException;
-import java.io.IOException;
 import java.util.Locale;
 
 /**
@@ -68,7 +59,9 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.addMappings(new SkipDestinationMap());
+        return modelMapper;
     }
 
     @Override
