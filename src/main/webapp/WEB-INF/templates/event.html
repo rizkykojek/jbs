@@ -13,7 +13,7 @@
                                 <img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/>
                             </div>
                             <div class="col-md-10" style="margin-top: 10px;">
-                                <h2 class="panel-title"><label th:text="${eventDto.isUpdate()} ? 'Edit Event' : 'Add Event'"></label></h2>
+                                <h2 class="panel-title"><label th:text="${eventDto.isUpdate()} ? 'Edit Attendance Event' : 'Add Attendance Event'"></label></h2>
                             </div>
                         </div>
                         <div class="row">
@@ -45,7 +45,7 @@
                             </div>
                             <div class="row text-left">
                                 <div class="col-md-6">
-                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Add PM</a>
+                                    <label style="color: black">&bull;</label> <a href="#" style="color: black">Add PM Event</a>
                                 </div>
                                 <div class="col-md-6">
                                     <label style="color: black">&bull;</label> <a href="#" style="color: black">Add Leave (Kronos)</a>
@@ -115,7 +115,6 @@
                             <div class="input-group" th:class="${#fields.hasErrors('eventStatusId')} ? 'input-group has-error' : 'input-group'">
                                 <label class="input-group-addon borderless no-background"><label style="color: red">*</label> Status:</label>
                                 <select class="form-control" th:field="*{eventStatusId}" th:disabled="${eventDto.isAuditVersion()}">
-                                    <option value="">-- Please Select --</option>
                                     <option th:each="status : ${listEventStatus}" th:value="${status.id}" th:text="${status.value}"></option>
                                 </select>
                             </div>
@@ -169,7 +168,6 @@
                                     <div class="input-group" th:class="${#fields.hasErrors('eapId')} ? 'input-group has-error' : 'input-group'">
                                         <label class="input-group-addon borderless no-background"><label style="color: red">*</label> EAP:</label>
                                         <select class="form-control" th:field="*{eapId}" th:disabled="${eventDto.isAuditVersion()}">
-                                            <option value="">-- Please Select --</option>
                                             <option th:each="eap : ${listEap}" th:value="${eap.id}" th:text="${eap.value}"></option>
                                         </select>
                                     </div>
@@ -232,13 +230,7 @@
                             <div class="input-group">
                                 <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment Type :</label>
                                 <select class="form-control">
-                                    <option value="">Medical Certificate</option>
-                                    <option value="">Stat Declaration</option>
-                                    <option value="">Receipt</option>
-                                    <option value="">Funeral Notice</option>
-                                    <option value="">Penalty</option>
-                                    <option value="">Notice</option>
-                                    <option value="">Other</option>
+                                    <option th:each="attachmentType : ${listAttachmentType}" th:value="${attachmentType.id}" th:text="${attachmentType.value}"></option>
                                 </select>
                             </div>
                         </div>
@@ -330,7 +322,7 @@
                                     <table id="historyTable" class="table table-bordered table-condensed table-hover">
                                         <thead>
                                         <tr class="success">
-                                            <td class="text-center">PM ID</td>
+                                            <td class="text-center">Event ID</td>
                                             <td class="text-center">Event</td>
                                             <td class="text-center">Status</td>
                                             <td class="text-center">Start Date</td>
@@ -362,7 +354,7 @@
                                         <thead>
                                         <tr class="success">
                                             <td class="text-center">#</td>
-                                            <td class="text-center">PM ID</td>
+                                            <td class="text-center">Event ID</td>
                                             <td class="text-center">Event</td>
                                             <td class="text-center">Status</td>
                                             <td class="text-center">Start Date</td>

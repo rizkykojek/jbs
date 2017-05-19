@@ -27,6 +27,7 @@ public class EventDto {
         this.attachments = Lists.newArrayList();
         this.files = Lists.newArrayList();
         totalAttachmentsPersisted = 0;
+        eapComment = "Not Applicable";
     }
 
     private Long id;
