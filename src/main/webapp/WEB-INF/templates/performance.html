@@ -258,7 +258,7 @@
                     <div class="col-md-4">
                         <div class="input-group" style="margin-top: 15px" >
                             <a class="input-group-addon borderless no-background" style="text-align: left" href="#" th:href="@{/performance/download_attachment/} + ${attachment.id}" th:target="_blank" th:text="${attachment.documentName}"></a>
-                            <button type="button" class="btn btn-info btn-sm" style="width: 35px;" th:if="${!performanceDto.isAuditVersion()}" th:onclick="'javascript:removeAttachment(' + ${attachment.id} +  ',attachment'+${attachment.id} + ')'">
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#removedAttachmentModalId" style="width: 35px;" th:if="${!performanceDto.isAuditVersion()}" th:onclick="'javascript:onloadRemovedAttachmentModal(' + ${attachment.id} +  ')'">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -390,10 +390,38 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="removedAttachmentModalId" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">WARNING</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the file?</p>
+            </div>
+            <input type="hidden" id="attachmentHiddenId"/>
+            <div class="modal-footer">
+                <div class="col-md-6">
+                    <button id="attachmentModalYes" type="button" class="btn btn-info" data-dismiss="modal">Yes</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer th:replace="fragments/footer :: footer"/>
 
 <script th:inline="javascript">
-    function removeAttachment(attachmentId, element){
+    function onloadRemovedAttachmentModal(attachmentId){
+        $("#attachmentModalYes").attr('onClick', 'javascript:removeAttachment('+ attachmentId+ ')');
+    }
+
+    function removeAttachment(attachmentId){
         var attachmentIds = [];
 
         var arrayIds = $("#removedAttachmentsId").val();
@@ -404,7 +432,7 @@
         }
 
         $("#removedAttachmentsId").val(attachmentIds);
-        element.parentNode.removeChild(element);
+        $("#attachment" + attachmentId).remove();
     }
 
     function generateTemplate() {
