@@ -244,12 +244,12 @@
                             <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment :</label>
                             <label class="input-group-btn">
                                 <span class="btn btn-primary">
-                                    Browse&hellip; <input id="fileId" type="file" style="display: none;" multiple="true" th:field="*{files}" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                                    Browse&hellip; <input type="file" style="display: none;" multiple="true" th:field="*{files}" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
                                 </span>
                             </label>
-                            <input id="fileNameId" type="text" class="form-control" readonly="true"/>
-                            <a href="#" th:onclick="'javascript:clearFile()'" class="input-group-btn">
-                                <button type="button" class="btn btn-info">Clear</button>
+                            <input type="text" class="form-control" readonly="true"/>
+                            <a href="#" class="input-group-btn">
+                                <button type="button" class="btn btn-info clearAttachmentFile">Clear</button>
                             </a>
                         </div>
                     </div>
@@ -448,11 +448,6 @@
         } else {
             alert("You have to select the template")
         }
-    }
-
-    function clearFile() {
-        document.getElementById('fileId').value= null;
-        document.getElementById('fileNameId').value= '';
     }
 
     $(document).ready(function(){
@@ -662,6 +657,20 @@
             });
         });
 
+        $(document).on('change', ':file', function() {
+            var input = $(this);
+            numFiles = input.get(0).files ? input.get(0).files.length : 1;
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            var text = input.parents('.input-group').find(':text');
+            text.val(numFiles > 1 ? numFiles + ' files selected' : label);
+
+        });
+
+        $(document).on('click', '.clearAttachmentFile', function() {
+            var row = $(this).parent().parent();
+            row.find(":file").val(null);
+            row.find(":text").val("");
+        });
     });
 </script>
 </body>
