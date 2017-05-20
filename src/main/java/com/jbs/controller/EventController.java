@@ -174,6 +174,7 @@ public class EventController {
         model.addAttribute("listEap", eventAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.EAP_TYPE));
         model.addAttribute("listAttachmentType", eventAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.ATTACHMENT_TYPE));
         model.addAttribute("listEventTypeBasedHistory", eventTypeRepository.findAllByOrderByName());
+        model.addAttribute("eventSummary", eventService.getEventSummary(employeeId));
     }
 
     private Event convertToEntity(EventDto eventDto, Optional<Long> eventId) {

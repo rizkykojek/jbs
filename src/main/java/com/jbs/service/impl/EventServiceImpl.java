@@ -100,4 +100,17 @@ public class EventServiceImpl implements EventService {
         return event;
     }
 
+    @Transactional(readOnly = true)
+    public String getEventSummary(Long employeeId){
+        StringBuilder sb = new StringBuilder();
+        sb.append("UA(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "UA") + ")");
+        sb.append(" | ");
+        sb.append("AB(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "AB") + ")");
+        sb.append(" | ");
+        sb.append("PC(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "PC") + ")");
+        sb.append(" | ");
+        sb.append("PCN(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "PCN") + ")");
+        return sb.toString();
+    }
+
 }

@@ -1,11 +1,11 @@
 package com.jbs.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.google.common.collect.Lists;
 import com.jbs.dto.PerformanceDto;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
 import com.jbs.repository.datatable.PerformanceTableRepository;
+import com.jbs.service.EventService;
 import com.jbs.service.PerformanceService;
 import com.jbs.util.ApplicationUtil;
 import com.jbs.util.OpenCmisUtil;
@@ -73,6 +73,9 @@ public class PerformanceController {
 
     @Autowired
     private LetterTemplateRepository letterTemplateRepository;
+
+    @Autowired
+    private EventService eventService;
 
     @RequestMapping(value = {"/performance/{performanceId}", "/performance/{performanceId}/revision/{revisionNumber}", "/employee/{employeeId}/performance"}, method = RequestMethod.GET)
     public String getPerformance(@PathVariable Optional<Long> employeeId, @PathVariable Optional<Long> performanceId, @PathVariable Optional<Integer> revisionNumber, final Model model) {
@@ -219,6 +222,7 @@ public class PerformanceController {
         model.addAttribute("listSupportResponse", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.SUPPORT_RESPONSE_TYPE));
         model.addAttribute("listInterpreter", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.INTERPRETER_TYPE));
         model.addAttribute("listActionBasedHistory", performanceActionRepository.findAllByOrderByName());
+        model.addAttribute("eventSummary", eventService.getEventSummary(employeeId));
     }
 
     private Performance convertToEntity(PerformanceDto performanceDto, Optional<Long> performanceId) {

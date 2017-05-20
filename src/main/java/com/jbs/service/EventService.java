@@ -15,4 +15,6 @@ public interface EventService {
     List<Event> findAllEventRevisions(Long eventId);
 
     Event findEventRevision(Long eventId, Integer revisionNumber);
+
+    String getEventSummary(Long employeeId);
 }
