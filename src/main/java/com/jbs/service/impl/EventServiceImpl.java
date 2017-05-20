@@ -10,10 +10,12 @@ import com.jbs.repository.AttachmentRepository;
 import com.jbs.repository.EventAdminRepository;
 import com.jbs.repository.EventRepository;
 import com.jbs.service.EventService;
+import com.jbs.util.ApplicationUtil;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -102,14 +105,17 @@ public class EventServiceImpl implements EventService {
 
     @Transactional(readOnly = true)
     public String getEventSummary(Long employeeId){
+        DateTime currentDate  = DateTime.now().withTimeAtStartOfDay();
+        Date filterDate = currentDate.minusMonths(ApplicationUtil.DEFAULT_FILTER_DATE_MONTH).toDate();
+
         StringBuilder sb = new StringBuilder();
-        sb.append("UA(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "UA") + ")");
+        sb.append("UA(" + eventRepository.countByEmployeeIdAndEventTypeCodeAndEndDateGreaterThanEqual(employeeId, "UA", filterDate) + ")");
         sb.append(" | ");
-        sb.append("AB(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "AB") + ")");
+        sb.append("AB(" + eventRepository.countByEmployeeIdAndEventTypeCodeAndEndDateGreaterThanEqual(employeeId, "AB", filterDate) + ")");
         sb.append(" | ");
-        sb.append("PC(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "PC") + ")");
+        sb.append("PC(" + eventRepository.countByEmployeeIdAndEventTypeCodeAndEndDateGreaterThanEqual(employeeId, "PC", filterDate) + ")");
         sb.append(" | ");
-        sb.append("PCN(" + eventRepository.countByEmployeeIdAndEventTypeCode(employeeId, "PCN") + ")");
+        sb.append("PCN(" + eventRepository.countByEmployeeIdAndEventTypeCodeAndEndDateGreaterThanEqual(employeeId, "PCN", filterDate) + ")");
         return sb.toString();
     }
 
