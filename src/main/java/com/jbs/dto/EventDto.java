@@ -1,7 +1,9 @@
 package com.jbs.dto;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.jbs.entity.Attachment;
+import com.jbs.entity.EventAdmin;
 import com.jbs.util.ApplicationUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,12 +11,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rizkykojek on 4/15/17.
@@ -24,7 +26,7 @@ import java.util.List;
 public class EventDto {
 
     public EventDto(){
-        this.attachments = Lists.newArrayList();
+        this.attachments = Maps.newHashMap();
         this.files = Lists.newArrayList();
         totalAttachmentsPersisted = 0;
         eapComment = "Not Applicable";
@@ -81,9 +83,11 @@ public class EventDto {
 
     private Boolean isOther;
 
+    private List<Long> attachmentTypeIds;
+
     private List<MultipartFile> files;
 
-    private List<Attachment> attachments;
+    private Map<EventAdmin, Attachment> attachments;
 
     private Integer totalAttachmentsPersisted;
 

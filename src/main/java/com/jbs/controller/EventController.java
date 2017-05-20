@@ -80,8 +80,10 @@ public class EventController {
     public String create(@PathVariable Long employeeId, @Valid EventDto eventDto, BindingResult bindingResult, Model model) throws Exception {
         if (!bindingResult.hasErrors()) {
             Event event = convertToEntity(eventDto, Optional.empty());
-            event = eventRepository.save(event);
+            event = eventService.save(event, eventDto.getFiles(), eventDto.getAttachmentTypeIds(), eventDto.getRemovedAttachments());
             eventDto = convertToDto(event);
+        } else {
+            this.setAttachmentsView(Optional.empty(), eventDto);
         }
 
         populateModelAttribute(model, eventDto, employeeId);
@@ -92,8 +94,10 @@ public class EventController {
     public String update(@PathVariable Long employeeId, @PathVariable Optional<Long> eventId, @Valid EventDto eventDto, BindingResult bindingResult, Model model) throws Exception {
         if (!bindingResult.hasErrors()) {
             Event event = convertToEntity(eventDto, eventId);
-            event = eventRepository.save(event);
+            event = eventService.save(event, eventDto.getFiles(), eventDto.getAttachmentTypeIds(), eventDto.getRemovedAttachments());
             eventDto = convertToDto(event);
+        } else {
+            this.setAttachmentsView(Optional.empty(), eventDto);
         }
 
         populateModelAttribute(model, eventDto, employeeId);
@@ -184,7 +188,18 @@ public class EventController {
 
     private EventDto convertToDto(Event event) {
         EventDto eventDto = modelMapper.map(event, EventDto.class);
+        this.setAttachmentsView(Optional.ofNullable(event), eventDto);
         return eventDto;
+    }
+
+    private void setAttachmentsView(Optional<Event> event, EventDto eventDto){
+        if (event.isPresent()) {
+            eventDto.setAttachments(event.get().getAllAttachment());
+        } else if (eventDto.getId() != null){
+            eventDto.setAttachments(eventRepository.findOne(eventDto.getId()).getAllAttachment());
+        }
+
+        eventDto.setTotalAttachmentsPersisted(eventDto.getAttachments().size());
     }
 
 }

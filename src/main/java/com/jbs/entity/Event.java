@@ -2,7 +2,6 @@ package com.jbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.google.common.collect.ImmutableMap;
 import com.jbs.util.UserSessionUtil;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
@@ -13,8 +12,8 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by rizkykojek on 4/15/17.
@@ -206,22 +205,39 @@ public class Event {
     }
 
     public Map<EventAdmin, Attachment>  getAllAttachment() {
-        Map<EventAdmin, Attachment> attachments = ImmutableMap.<EventAdmin, Attachment> builder()
-                .put(attachmentType1, attachment1)
-                .put(attachmentType2, attachment2)
-                .put(attachmentType3, attachment3)
-                .put(attachmentType4, attachment4)
-                .put(attachmentType5, attachment5)
-                .put(attachmentType6, attachment6)
-                .put(attachmentType7, attachment7)
-                .put(attachmentType8, attachment8)
-                .put(attachmentType9, attachment9)
-                .put(attachmentType10, attachment10)
-                .build();
+        Map<EventAdmin, Attachment> attachments = new HashMap<>();
+        if(attachment1 != null && attachmentType1 != null) {
+            attachments.put(attachmentType1, attachment1);
+        }
+        if(attachment2 != null && attachmentType2 != null) {
+            attachments.put(attachmentType2, attachment2);
+        }
+        if(attachment3 != null && attachmentType3 != null) {
+            attachments.put(attachmentType3, attachment3);
+        }
+        if(attachment4 != null && attachmentType4 != null) {
+            attachments.put(attachmentType4, attachment4);
+        }
+        if(attachment5 != null && attachmentType5 != null) {
+            attachments.put(attachmentType5, attachment5);
+        }
+        if(attachment6 != null && attachmentType6 != null) {
+            attachments.put(attachmentType6, attachment6);
+        }
+        if(attachment7 != null && attachmentType7 != null) {
+            attachments.put(attachmentType7, attachment7);
+        }
+        if(attachment8 != null && attachmentType8 != null) {
+            attachments.put(attachmentType8, attachment8);
+        }
+        if(attachment9 != null && attachmentType9 != null) {
+            attachments.put(attachmentType9, attachment9);
+        }
+        if(attachment10 != null && attachmentType10 != null) {
+            attachments.put(attachmentType10, attachment10);
+        }
 
-        return attachments.entrySet().stream()
-                .filter(map -> map.getValue() != null)
-                .collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue()));
+        return attachments;
     }
 
     public void addAttachment(Attachment attachment, EventAdmin attachmentType) {

@@ -225,27 +225,47 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-bottom: 20px" th:if="${!eventDto.isAuditVersion()}">
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment Type :</label>
-                                <select class="form-control">
-                                    <option th:each="attachmentType : ${listAttachmentType}" th:value="${attachmentType.id}" th:text="${attachmentType.value}"></option>
-                                </select>
+                    <div id="attachmentGroupId" th:if="${!eventDto.isAuditVersion()}">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label class="input-group-addon borderless no-background" style="padding-left: 0px">Attachment Type :</label>
+                                    <select class="form-control" th:field="*{attachmentTypeIds}">
+                                        <option th:each="attachmentType : ${listAttachmentType}" th:value="${attachmentType.id}" th:text="${attachmentType.value}"></option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <label class="input-group-btn">
-                                <span class="btn btn-primary">
-                                    Browse&hellip; <input type="file" style="display: none;" multiple="true" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
-                                </span>
-                                </label>
-                                <input type="text" class="form-control" readonly="true"/>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary">
+                                            Browse&hellip; <input type="file" th:field="*{files}" style="display: none;" multiple="true" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control" readonly="true"/>
+                                    <a href="#" class="input-group-btn">
+                                        <button type="button" class="btn btn-info clearAttachmentFile">Clear</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="newAttachmentId" class="col-md-2">
+                                <button type="button" class="btn btn-info" onclick="javascript:addedNewAttachment()">New Attachment</button>
                             </div>
                         </div>
                     </div>
-                    <div class="row" th:if="${!eventDto.isAuditVersion()}">
+                    <div th:id="'attachment'+${attachment.value.id}" class="row" th:each="attachment : ${eventDto.getAttachments()}">
+                        <div class="col-md-8">
+                            <div class="input-group" style="margin-top: 15px" >
+                                <b class="input-group-addon borderless no-background"><label th:text="${attachment.key.value} + ': '"></label></b>
+                                <a style="text-align: left; margin-right: 10px;" href="#" th:href="@{/performance/download_attachment/} + ${attachment.value.id}" th:target="_blank" th:text="${attachment.value.documentName}"></a>
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#removedAttachmentModalId" style="width: 35px;" th:if="${!eventDto.isAuditVersion()}" th:onclick="'javascript:onloadRemovedAttachmentModal(' + ${attachment.value.id} +  ')'">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px" th:if="${!eventDto.isAuditVersion()}">
                         <div class="col-md-4">
                             <div class="well" style="background-color: #dca7a7 !important; border-color: #c9302c; color: white">
                                 <div class="row text-center">
@@ -377,9 +397,59 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="removedAttachmentModalId" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">WARNING</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete the file?</p>
+                </div>
+                <input type="hidden" id="attachmentHiddenId"/>
+                <div class="modal-footer">
+                    <div class="col-md-6">
+                        <button id="attachmentModalYes" type="button" class="btn btn-info" data-dismiss="modal">Yes</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer th:replace="fragments/footer :: footer"/>
 
     <script th:inline="javascript">
+        function onloadRemovedAttachmentModal(attachmentId){
+            $("#attachmentModalYes").attr('onClick', 'javascript:removeAttachment('+ attachmentId+ ')');
+        }
+
+        function removeAttachment(attachmentId){
+            var attachmentIds = [];
+
+            var arrayIds = $("#removedAttachmentsId").val();
+            if (arrayIds == "") {
+                attachmentIds.push(attachmentId);
+            } else {
+                attachmentIds.push(arrayIds,attachmentId);
+            }
+
+            $("#removedAttachmentsId").val(attachmentIds);
+            $("#attachment" + attachmentId).remove();
+        }
+
+        function addedNewAttachment(){
+            var row = $("#attachmentGroupId .row:first").clone();
+            row.find(":file").val(null);
+            row.find(":text").val("");
+            row.find("#newAttachmentId").remove();
+            row.appendTo("#attachmentGroupId");
+        }
+
         $(document).ready(function(){
             var _ctx = /*[[@{/}]]*/ 'context';
             var employeeId = [[${employee.id}]];
@@ -563,28 +633,19 @@
         });
 
         $(function() {
-            // We can attach the `fileselect` event to all file inputs on the page
             $(document).on('change', ':file', function() {
-                var input = $(this),
-                        numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [numFiles, label]);
+                var input = $(this);
+                numFiles = input.get(0).files ? input.get(0).files.length : 1;
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                var text = input.parents('.input-group').find(':text');
+                text.val(numFiles > 1 ? numFiles + ' files selected' : label);
             });
 
-            // We can watch for our custom `fileselect` event like this
-            $(document).ready( function() {
-                $(':file').on('fileselect', function(event, numFiles, label) {
-                    var input = $(this).parents('.input-group').find(':text'),
-                            log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                    if( input.length ) {
-                        input.val(log);
-                    } else {
-                        if( log ) alert(log);
-                    }
-                });
+            $(document).on('click', '.clearAttachmentFile', function() {
+                var row = $(this).parent().parent();
+                row.find(":file").val(null);
+                row.find(":text").val("");
             });
-
         });
     </script>
 </body>
