@@ -636,9 +636,16 @@
             $(document).on('change', ':file', function() {
                 var input = $(this);
                 numFiles = input.get(0).files ? input.get(0).files.length : 1;
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                var text = input.parents('.input-group').find(':text');
-                text.val(numFiles > 1 ? numFiles + ' files selected' : label);
+                if (numFiles == 1) {
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    var text = input.parents('.input-group').find(':text');
+                    text.val(numFiles > 1 ? numFiles + ' files selected' : label);
+                } else {
+                    var row = input.parent().parent().parent();
+                    row.find(":file").val(null);
+                    row.find(":text").val("");
+                    alert("Can select one(1) file only");
+                }
             });
 
             $(document).on('click', '.clearAttachmentFile', function() {
