@@ -13,7 +13,7 @@
                                 <img src="../static/images/JBS_Transparent.png" th:src="@{'/images/JBS_Transparent.png'}" class="img-thumbnail" width="100" height="200"/>
                             </div>
                             <div class="col-md-10" style="margin-top: 10px;">
-                                <h2 class="panel-title"><label th:text="${eventDto.isUpdate()} ? 'Edit Attendance Event' : 'Add Attendance Event'"></label></h2>
+                                <h2 class="panel-title"><label th:text="${eventDto.getHeadTitle()}"></label></h2>
                             </div>
                         </div>
                         <div class="row">

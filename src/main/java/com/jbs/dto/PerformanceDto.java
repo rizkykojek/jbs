@@ -91,6 +91,18 @@ public class PerformanceDto {
         return isUpdate() && revisionNumber != null && revisionNumber != 0;
     }
 
+    public String getHeadTitle(){
+        String title = "";
+        if (isAuditVersion()) {
+            title = "View Performance Management Event";
+        } else if (isUpdate()) {
+            title = "Edit Performance Management Event";
+        } else {
+            title = "Add Performance Management Event";
+        }
+        return title;
+    }
+
     @AssertTrue(message = "Maximum size per file should not more than 5 Mb ")
     public boolean isUploadSizeBelowMaximum() {
         if (files != null) {
@@ -103,7 +115,7 @@ public class PerformanceDto {
         return true;
     }
 
-    @AssertTrue(message = "End date should greater than Start date")
+    @AssertTrue(message = "End Date Should Be Greater Than Start Date")
     public boolean isStartDateBelowEndDate() {
         if (startDate != null && endDate != null) {
             return startDate.before(endDate) || startDate.equals(endDate);
