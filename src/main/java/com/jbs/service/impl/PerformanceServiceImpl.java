@@ -131,7 +131,7 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Transactional(readOnly = true)
-    public List<Performance> findAllPerformanceRevisions(Long performanceId) {
+    public List<Performance> findAllPerformanceRevisions(Long performanceId, Boolean idOrderAsc) {
         AuditReader reader = AuditReaderFactory.get(entityManager);
         AuditQuery query = reader.createQuery().forRevisionsOfEntity(Performance.class, false, true);
         query.add(AuditEntity.id().eq(performanceId));
@@ -147,7 +147,7 @@ public class PerformanceServiceImpl implements PerformanceService {
             audits.add(performance);
         }
 
-        return Lists.reverse(audits);
+        return idOrderAsc ? audits : Lists.reverse(audits);
     }
 
     @Transactional(readOnly = true)

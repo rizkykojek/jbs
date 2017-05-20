@@ -74,7 +74,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Transactional(readOnly = true)
-    public List<Event> findAllEventRevisions(Long eventId) {
+    public List<Event> findAllEventRevisions(Long eventId, Boolean idOrderAsc) {
         AuditReader reader = AuditReaderFactory.get(entityManager);
         AuditQuery query = reader.createQuery().forRevisionsOfEntity(Event.class, false, true);
         query.add(AuditEntity.id().eq(eventId));
@@ -90,7 +90,7 @@ public class EventServiceImpl implements EventService {
             audits.add(event);
         }
 
-        return Lists.reverse(audits);
+        return idOrderAsc ? audits : Lists.reverse(audits);
     }
 
     @Transactional(readOnly = true)

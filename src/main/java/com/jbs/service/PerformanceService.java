@@ -15,7 +15,7 @@ public interface PerformanceService {
 
     File generateLetterTemplate(Long letterTemplateId, Long employeeId) throws Exception;
 
-    List<Performance> findAllPerformanceRevisions(Long performanceId);
+    List<Performance> findAllPerformanceRevisions(Long performanceId, Boolean idOrderAsc);
 
     Performance findPerformanceRevision(Long performanceId, Integer revisionNumber);
 }

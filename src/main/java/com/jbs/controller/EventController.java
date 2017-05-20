@@ -112,8 +112,9 @@ public class EventController {
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/event/audit/{eventId}", method = RequestMethod.GET)
     public @ResponseBody DataTablesOutput getEventAudits(@PathVariable Long eventId, @Valid DataTablesInput request) {
+        Boolean idOrderAsc = request.getOrder().get(0).getColumn() == 0 ? request.getOrder().get(0).getDir().equals("asc") : false;
         DataTablesOutput<Event> results = new DataTablesOutput<>();
-        List<Event> eventRevisions = eventService.findAllEventRevisions(eventId);
+        List<Event> eventRevisions = eventService.findAllEventRevisions(eventId, idOrderAsc);
         results.setData(eventRevisions);
         return results;
     }

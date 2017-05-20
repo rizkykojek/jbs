@@ -168,8 +168,9 @@ public class PerformanceController {
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/performance/audit/{performanceId}", method = RequestMethod.GET)
     public @ResponseBody DataTablesOutput getPerformanceAudits(@PathVariable Long performanceId, @Valid DataTablesInput request) {
+        Boolean idOrderAsc = request.getOrder().get(0).getColumn() == 0 ? request.getOrder().get(0).getDir().equals("asc") : false;
         DataTablesOutput<Performance> results = new DataTablesOutput<>();
-        List<Performance> performanceRevisions = performanceService.findAllPerformanceRevisions(performanceId);
+        List<Performance> performanceRevisions = performanceService.findAllPerformanceRevisions(performanceId, idOrderAsc);
         results.setData(performanceRevisions);
         return results;
     }

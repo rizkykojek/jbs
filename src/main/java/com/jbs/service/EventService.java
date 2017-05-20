@@ -12,7 +12,7 @@ public interface EventService {
 
     Event save(Event event, List<MultipartFile> files, List<Long> attachmentTypeIds, Long[] removedAttachmentIds) throws Exception;
 
-    List<Event> findAllEventRevisions(Long eventId);
+    List<Event> findAllEventRevisions(Long eventId, Boolean idOrderAsc);
 
     Event findEventRevision(Long eventId, Integer revisionNumber);
 
