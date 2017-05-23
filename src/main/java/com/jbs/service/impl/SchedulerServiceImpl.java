@@ -10,6 +10,7 @@ import com.jbs.util.ODataUtil;
 import org.apache.olingo.odata2.api.edm.Edm;
 import org.apache.olingo.odata2.api.ep.entry.ODataEntry;
 import org.apache.olingo.odata2.api.ep.feed.ODataFeed;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,15 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Scheduled(fixedDelay = 1000000000, initialDelay = 1)
     @Transactional
     public void employeeDetails() throws Exception {
-        ODataFeed feed = ODataUtil.readFeed(edm, "PerPersonal");
+        //this.PopulateSfPosition();
+        //this.PopulateSfDepartment();
+
+        ODataFeed persons = ODataUtil.readFeed(edm, "PerPerson","$select=personIdExternal,%20dateOfBirth");
+        for (ODataEntry person: persons.getEntries()) {
+            String userId = (String) person.getProperties().get("userId");
+        }
+
+       /* ODataFeed feed = ODataUtil.readFeed(edm, "PerPersonal");
         List<Department> departments = Lists.newArrayList(departmentRepository.findAll());
         List<Position> positions = Lists.newArrayList(positionRepository.findAll());
         List<Section> sections = Lists.newArrayList(sectionRepository.findAll());
@@ -89,6 +98,40 @@ public class SchedulerServiceImpl implements SchedulerService {
                 employeeEventRepository.save(event);
                 i++;
             }
+        }*/
+    }
+
+    private void PopulateSfPosition() throws Exception{
+        ODataFeed feed = ODataUtil.readFeed(edm, "Position");
+        for (ODataEntry entry: feed.getEntries()) {
+            Gson gson = new Gson();
+            JsonElement jsonElement = gson.toJsonTree(entry.getProperties());
+            Position sfPosition = gson.fromJson(jsonElement, Position.class);
+            Position position = positionRepository.findOneByCode(sfPosition.getCode());
+            if (position == null) {
+                positionRepository.save(sfPosition);
+            } else {
+                BeanUtils.copyProperties(sfPosition, position, "id");
+                positionRepository.save(position);
+            }
         }
+        System.out.println("----- FINISHED Read Feed of entity: Position ------------------------------");
+    }
+
+    private void PopulateSfDepartment() throws Exception{
+        ODataFeed feed = ODataUtil.readFeed(edm, "FODepartment");
+        for (ODataEntry entry: feed.getEntries()) {
+            Gson gson = new Gson();
+            JsonElement jsonElement = gson.toJsonTree(entry.getProperties());
+            Department sfDepartment = gson.fromJson(jsonElement, Department.class);
+            Department department = departmentRepository.findOneByCode(sfDepartment.getCode());
+            if (department == null) {
+                departmentRepository.save(sfDepartment);
+            } else {
+                BeanUtils.copyProperties(sfDepartment, department, "id");
+                departmentRepository.save(department);
+            }
+        }
+        System.out.println("----- FINISHED Read Feed of entity: FODepartment ------------------------------");
     }
 }

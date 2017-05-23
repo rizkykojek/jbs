@@ -1,6 +1,7 @@
 package com.jbs.util;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.olingo.odata2.api.commons.HttpStatusCodes;
 import org.apache.olingo.odata2.api.edm.Edm;
 import org.apache.olingo.odata2.api.edm.EdmEntityContainer;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 
 /**
  * Created by rizkykojek on 4/2/17.
@@ -49,28 +51,32 @@ public final class ODataUtil {
     }
 
     public static ODataFeed readFeed(Edm edm, String entitySetName) throws IOException, ODataException {
-        print("\n----- Read Feed of entity: "+ entitySetName +" ------------------------------");
-        EdmEntityContainer entityContainer = edm.getDefaultEntityContainer();
-        String absolutUri = createUri(URI_API, entitySetName, null);
+        return readFeed(edm, entitySetName, null);
+    }
 
-        InputStream content = execute(absolutUri, AUTHORIZATION, APPLICATION_JSON, HTTP_METHOD_GET);
+    public static ODataFeed readFeed(Edm edm, String entitySetName, String filter) throws IOException, ODataException {
+        EdmEntityContainer entityContainer = edm.getDefaultEntityContainer();
+        String uri = createUri(URI_API, entitySetName, filter);
+        print("\n----- Read Feed of : "+ uri +" ------------------------------");
+
+        InputStream content = execute(uri, AUTHORIZATION, APPLICATION_JSON, HTTP_METHOD_GET);
         return EntityProvider.readFeed(APPLICATION_JSON, entityContainer.getEntitySet(entitySetName),
                 content, EntityProviderReadProperties.init().build());
     }
 
-    private static String createUri(String serviceUri, String entitySetName, String id) {
-        return createUri(serviceUri, entitySetName, id, null);
-    }
-
-    private static String createUri(String serviceUri, String entitySetName, String id, String expand) {
-        final StringBuilder absolutUri = new StringBuilder(serviceUri).append(SEPARATOR).append(entitySetName);
-        if(id != null) {
+    private static String createUri(String serviceUri, String entitySetName, String filter) {
+        final StringBuilder uri = new StringBuilder(serviceUri).append(SEPARATOR).append(entitySetName);
+        if (StringUtils.isNotEmpty(filter)) {
+            uri.append("?");
+            uri.append(filter);
+        }
+        /*if(id != null) {
             absolutUri.append("(").append(id).append(")");
         }
         if(expand != null) {
             absolutUri.append("/?$expand=").append(expand);
-        }
-        return absolutUri.toString();
+        }*/
+        return uri.toString();
     }
 
     private static InputStream execute(String relativeUri, String authorization, String contentType, String httpMethod) throws IOException {
