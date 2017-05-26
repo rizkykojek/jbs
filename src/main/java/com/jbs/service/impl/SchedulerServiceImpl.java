@@ -1,15 +1,14 @@
 package com.jbs.service.impl;
 
 import com.jbs.entity.Employee;
-import com.jbs.entity.Site;
 import com.jbs.repository.EmployeeRepository;
-import com.jbs.repository.SiteRepository;
 import com.jbs.service.SchedulerService;
 import com.jbs.util.ODataUtil;
 import org.apache.olingo.odata2.api.edm.Edm;
 import org.apache.olingo.odata2.api.ep.entry.ODataEntry;
 import org.apache.olingo.odata2.api.ep.feed.ODataDeltaFeed;
 import org.apache.olingo.odata2.api.ep.feed.ODataFeed;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -34,8 +33,9 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Scheduled(fixedDelay = 1000000000, initialDelay = 1)
     @Transactional
     public void employeeDetails() throws Exception {
-        ODataFeed perPerson = ODataUtil.readFeed(edm, "PerPerson","$top=10&$expand=employmentNav,personalInfoNav,personalInfoNav/salutationNav");
-
+        Calendar current = Calendar.getInstance();
+        current.setTime(DateTime.now().withTimeAtStartOfDay().toDate());
+        ODataFeed perPerson = ODataUtil.readFeed(edm, "PerPerson","$expand=employmentNav,personalInfoNav,personalInfoNav/salutationNav");
         for (ODataEntry person: perPerson.getEntries()) {
             String personIdExternal = (String) person.getProperties().get("personIdExternal");
             System.out.println("process " + personIdExternal);
@@ -49,12 +49,8 @@ public class SchedulerServiceImpl implements SchedulerService {
             employee.setDateOfBirth(dateOfBirth.isPresent() ? dateOfBirth.get().getTime() : null);
 
             Optional<ODataDeltaFeed> employmentNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("employmentNav"));
-            Optional<ODataDeltaFeed> personalInfoNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("personalInfoNav"));
-            if (!employmentNav.isPresent() || employmentNav.get().getEntries().size() == 0 || !personalInfoNav.isPresent() || personalInfoNav.get().getEntries().size() == 0) {
-                continue;
-            }
-
             Optional<ODataEntry> employment = employmentNav.get().getEntries().stream()
+                    .filter(e -> isCurrentBetween(current,(Calendar) e.getProperties().get("startDate"),(Calendar) e.getProperties().get("endDate")))
                     .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
                     .findFirst();
             if (employment.isPresent()) {
@@ -63,6 +59,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
                 ODataFeed empJob = ODataUtil.readFeed(edm, "EmpJob","$expand=departmentNav,positionNav,locationNav,shiftCodeNav,customString5Nav,customString15Nav&$filter=userId%20eq%20%27"+ userId +"%27");
                 Optional<ODataEntry> jobInfo = empJob.getEntries().stream()
+                        .filter(e -> isCurrentBetween(current,(Calendar) e.getProperties().get("startDate"),(Calendar) e.getProperties().get("endDate")))
                         .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
                         .findFirst();
                 if (jobInfo.isPresent()) {
@@ -75,7 +72,9 @@ public class SchedulerServiceImpl implements SchedulerService {
                 }
             }
 
+            Optional<ODataDeltaFeed> personalInfoNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("personalInfoNav"));
             Optional<ODataEntry> personalInfo = personalInfoNav.get().getEntries().stream()
+                    .filter(e -> isCurrentBetween(current,(Calendar) e.getProperties().get("startDate"),(Calendar) e.getProperties().get("endDate")))
                     .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
                     .findFirst();
             if (personalInfo.isPresent()) {
@@ -91,15 +90,17 @@ public class SchedulerServiceImpl implements SchedulerService {
                 Optional<String> gender = Optional.ofNullable((String) personalInfo.get().getProperties().get("gender"));
                 employee.setGender(gender.isPresent() ? gender.get() : null);
 
-                Optional<ODataDeltaFeed> salutationNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("salutationNav"));
+                Optional<ODataEntry> salutationNav = Optional.ofNullable((ODataEntry) personalInfo.get().getProperties().get("salutationNav"));
                 if (salutationNav.isPresent()) {
-                    ODataEntry salutationEntry = salutationNav.get().getEntries().get(0);
-                    employee.setSalutation((String) salutationEntry.getProperties().get("externalCode"));
+                    employee.setSalutation((String) salutationNav.get().getProperties().get("externalCode"));
                 } else {
                     employee.setSalutation(null);
                 }
             }
 
+            if (employee.getPersonIdExternal() == null || employee.getUserId() == null || employee.getFirstName() == null) {
+                continue;
+            }
             employeeRepository.save(employee);
         }
 
@@ -121,7 +122,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         Optional<ODataEntry> position = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("positionNav"));
         if (position.isPresent()) {
             employee.setPositionId((String) position.get().getProperties().get("code"));
-            employee.setPositionName((String) position.get().getProperties().get("name_en_GB"));
+            employee.setPositionName((String) position.get().getProperties().get("externalName_en_GB"));
         } else {
             employee.setPositionId(null);
             employee.setPositionName(null);
@@ -185,5 +186,21 @@ public class SchedulerServiceImpl implements SchedulerService {
             employee.setSiteName(null);
         }
         return employee;
+    }
+
+    private Boolean isCurrentBetween(Calendar current, Calendar start, Calendar end) {
+        boolean isAfterStart;
+        if (start == null) {
+            isAfterStart = false;
+        } else {
+            isAfterStart = (start.before(current) || start.equals(current));
+        }
+
+        boolean isBeforeEnd = true;
+        if (end != null) {
+            isBeforeEnd = (end.after(current) || end.equals(current));
+        }
+
+        return isAfterStart && isBeforeEnd;
     }
 }
