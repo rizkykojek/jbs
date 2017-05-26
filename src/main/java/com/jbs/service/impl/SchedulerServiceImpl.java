@@ -30,14 +30,11 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Autowired
-    private SiteRepository siteRepository;
 
     @Scheduled(fixedDelay = 1000000000, initialDelay = 1)
     @Transactional
     public void employeeDetails() throws Exception {
-        Site site = siteRepository.findOne(50001l);
-        ODataFeed perPerson = ODataUtil.readFeed(edm, "PerPerson","$expand=employmentNav,personalInfoNav,personalInfoNav/salutationNav");
+        ODataFeed perPerson = ODataUtil.readFeed(edm, "PerPerson","$top=10&$expand=employmentNav,personalInfoNav,personalInfoNav/salutationNav");
 
         for (ODataEntry person: perPerson.getEntries()) {
             String personIdExternal = (String) person.getProperties().get("personIdExternal");
@@ -74,7 +71,7 @@ public class SchedulerServiceImpl implements SchedulerService {
                     employee = setShift(employee, jobInfo);
                     employee = setLocation(employee, jobInfo);
                     employee = setSection(employee, jobInfo);
-                    employee = setPlant(employee, jobInfo);
+                    employee = setSite(employee, jobInfo);
                 }
             }
 
@@ -103,7 +100,6 @@ public class SchedulerServiceImpl implements SchedulerService {
                 }
             }
 
-            employee.setSite(site);
             employeeRepository.save(employee);
         }
 
@@ -179,14 +175,14 @@ public class SchedulerServiceImpl implements SchedulerService {
         return employee;
     }
 
-    private Employee setPlant(Employee employee, Optional<ODataEntry> jobInfo) {
-        Optional<ODataEntry> plant = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("customString15Nav"));
-        if (plant.isPresent()) {
-            employee.setPlantId((String) plant.get().getProperties().get("externalCode"));
-            employee.setPlantName((String) plant.get().getProperties().get("externalName"));
+    private Employee setSite(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> site = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("customString15Nav"));
+        if (site.isPresent()) {
+            employee.setSiteId((String) site.get().getProperties().get("externalCode"));
+            employee.setSiteName((String) site.get().getProperties().get("externalName"));
         } else {
-            employee.setPlantId(null);
-            employee.setPlantName(null);
+            employee.setSiteId(null);
+            employee.setSiteName(null);
         }
         return employee;
     }

@@ -116,7 +116,8 @@ public class PerformanceServiceImpl implements PerformanceService {
             Channel channel = session.openChannel("sftp");
             channel.connect();
             sftpChannel = (ChannelSftp) channel;
-            String remotePath = ApplicationUtil.FTP_SERVER_FOLDER + employee.getSite().getId() + "/" + letterTemplate.getTemplateFile();
+            //String remotePath = ApplicationUtil.FTP_SERVER_FOLDER + employee.getSite().getId() + "/" + letterTemplate.getTemplateFile();
+            String remotePath = ApplicationUtil.FTP_SERVER_FOLDER + "50001" + "/" + letterTemplate.getTemplateFile();
             InputStream inputStream = sftpChannel.get(remotePath);
 
             file = filledTemplatefile(inputStream, employee);

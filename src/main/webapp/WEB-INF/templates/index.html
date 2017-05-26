@@ -40,9 +40,9 @@
                                 </label>
                             </div>
                             <div class="col-md-3">
-                                <select id="plantId" class="form-control">
+                                <select id="siteId" class="form-control">
                                     <option value="">Please Select a Site</option>
-                                    <option th:each="plant : ${listPlant}" th:value="${plant.id}" th:text="${plant.name}"></option>
+                                    <option th:each="site : ${listSite}" th:value="${site.id}" th:text="${site.name}"></option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -183,18 +183,22 @@
                     },
                     { "data": "userId" },
                     { "data": "positionName" },
-                    { "data": "departmentName" },
-                    { "data": "personIdExternal" },
+                    { "data": "siteName" },
+                    { "data": "id", render: function(data, type, row)
+                    {
+                        return "";
+                    }
+                    },
                     { "data": "sectionId" },
                     { "data": "shiftId" },
                     { "data": "fullName" },
-                    { "data": "plantId" },
+                    { "data": "siteId" },
                 ]
             });
 
-            $("#plantId").change(function() {
-                if ($("#plantId").val() != "") {
-                    hrClearanceTable.columns(9).search($("#plantId").val() + '+').draw();
+            $("#siteId").change(function() {
+                if ($("#siteId").val() != "") {
+                    hrClearanceTable.columns(9).search($("#siteId").val() + '+').draw();
                 } else {
                     hrClearanceTable.columns(9).search("").draw();
                 }

@@ -78,13 +78,13 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private String departmentName;
 
-    @Column(name = "plant_id")
+    @Column(name = "site_id")
     @JsonView(DataTablesOutput.View.class)
-    private String plantId;
+    private String siteId;
 
-    @Column(name = "plant_name")
+    @Column(name = "site_name")
     @JsonView(DataTablesOutput.View.class)
-    private String plantName;
+    private String siteName;
 
     @Column(name = "section_id")
     @JsonView(DataTablesOutput.View.class)
@@ -109,10 +109,6 @@ public class Employee {
     @Column(name = "location_name")
     @JsonView(DataTablesOutput.View.class)
     private String locationName;
-
-    @ManyToOne
-    @JoinColumn(name="site_id", nullable=false)
-    private Site site;
 
     @Column(name = "processed_at", nullable = false)
     private Date processedAt;

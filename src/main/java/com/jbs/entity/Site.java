@@ -2,6 +2,7 @@ package com.jbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.Column;
@@ -28,5 +29,9 @@ public class Site {
     @Column(name = "name", nullable = false)
     @JsonView(DataTablesOutput.View.class)
     private String name;
+
+    @Column
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private Boolean status;
 
 }

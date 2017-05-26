@@ -2,8 +2,14 @@ package com.jbs.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
-import com.jbs.entity.*;
-import com.jbs.repository.*;
+import com.jbs.entity.Employee;
+import com.jbs.entity.Section;
+import com.jbs.entity.Shift;
+import com.jbs.entity.Site;
+import com.jbs.repository.EmployeeRepository;
+import com.jbs.repository.SectionRepository;
+import com.jbs.repository.ShiftRepository;
+import com.jbs.repository.SiteRepository;
 import com.jbs.repository.datatable.EmployeeTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -29,16 +35,13 @@ public class EmployeeController {
     private SectionRepository sectionRepository;
 
     @Autowired
-    private DepartmentRepository departmentRepository;
+    private SiteRepository siteRepository;
 
     @Autowired
     private EmployeeTableRepository employeeTableRepository;
 
     @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private PlantRepository plantRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndex() {
@@ -82,15 +85,11 @@ public class EmployeeController {
         return Lists.newArrayList(sectionRepository.findAll());
     }
 
-    @ModelAttribute("listDepartment")
-    public List<Department> getListDepartment() {
-        return Lists.newArrayList(departmentRepository.findAll());
+    @ModelAttribute("listSite")
+    public List<Site> getListSite() {
+        return Lists.newArrayList(siteRepository.findAll());
     }
 
-    @ModelAttribute("listPlant")
-    public List<Plant> getListPlant() {
-        return Lists.newArrayList(plantRepository.findAll());
-    }
 
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/hrClearanceTable", method = RequestMethod.GET)
