@@ -209,7 +209,7 @@ public class PerformanceServiceImpl implements PerformanceService {
         variables.addTextVariable(new TextVariable("<EMP_PHONE>", "<EMP_PHONE>"));
         variables.addTextVariable(new TextVariable("<ADDRESS_LINE_1>", "<ADDRESS_LINE_1>"));
         variables.addTextVariable(new TextVariable("<ADDRESS_LINE_2>", "<ADDRESS_LINE_2>"));
-        variables.addTextVariable(new TextVariable("<empID>", employee.getEmployeeNumber()));
+        variables.addTextVariable(new TextVariable("<empID>", employee.getUserId()));
 
         return variables;
     }

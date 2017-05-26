@@ -1,23 +1,22 @@
 package com.jbs.service.impl;
 
-import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.jbs.entity.*;
-import com.jbs.repository.*;
+import com.jbs.entity.Employee;
+import com.jbs.entity.Site;
+import com.jbs.repository.EmployeeRepository;
+import com.jbs.repository.SiteRepository;
 import com.jbs.service.SchedulerService;
 import com.jbs.util.ODataUtil;
 import org.apache.olingo.odata2.api.edm.Edm;
 import org.apache.olingo.odata2.api.ep.entry.ODataEntry;
+import org.apache.olingo.odata2.api.ep.feed.ODataDeltaFeed;
 import org.apache.olingo.odata2.api.ep.feed.ODataFeed;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Random;
+import java.util.Calendar;
+import java.util.Optional;
 
 /**
  * Created by rizkykojek on 4/2/17.
@@ -32,106 +31,163 @@ public class SchedulerServiceImpl implements SchedulerService {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    private EmployeeEventRepository employeeEventRepository;
-
-    @Autowired
-    private DepartmentRepository departmentRepository;
-
-    @Autowired
-    private PositionRepository positionRepository;
-
-    @Autowired
-    private SectionRepository sectionRepository;
-
-    @Autowired
-    private ShiftRepository shiftRepository;
-
-    @Autowired
     private SiteRepository siteRepository;
-
-    @Autowired
-    private PlantRepository plantRepository;
 
     @Scheduled(fixedDelay = 1000000000, initialDelay = 1)
     @Transactional
     public void employeeDetails() throws Exception {
-        //this.PopulateSfPosition();
-        //this.PopulateSfDepartment();
-
-        ODataFeed persons = ODataUtil.readFeed(edm, "PerPerson","$select=personIdExternal,%20dateOfBirth");
-        for (ODataEntry person: persons.getEntries()) {
-            String userId = (String) person.getProperties().get("userId");
-        }
-
-       /* ODataFeed feed = ODataUtil.readFeed(edm, "PerPersonal");
-        List<Department> departments = Lists.newArrayList(departmentRepository.findAll());
-        List<Position> positions = Lists.newArrayList(positionRepository.findAll());
-        List<Section> sections = Lists.newArrayList(sectionRepository.findAll());
-        List<Shift> shifts = Lists.newArrayList(shiftRepository.findAll());
-        List<Plant> plants = Lists.newArrayList(plantRepository.findAll());
         Site site = siteRepository.findOne(50001l);
-        Random randomizer = new Random();
-        String hrClearance[] = new String[]{"FW","AM","WR","SA","SR"};
-        String absent[] = new String[]{"AC","AB","AA","UA"};
-        int i = 0;
+        ODataFeed perPerson = ODataUtil.readFeed(edm, "PerPerson","$expand=employmentNav,personalInfoNav,personalInfoNav/salutationNav");
 
-        for (ODataEntry entry: feed.getEntries()) {
-            Gson gson = new Gson();
-            JsonElement jsonElement = gson.toJsonTree(entry.getProperties());
-            Employee employee = gson.fromJson(jsonElement, Employee.class);
-            if  (employee.getFirstName() != null && employee.getLastName() != null && employee.getEmployeeNumber() != null) {
-                employee.setDepartment(departments.get(randomizer.nextInt(departments.size())));
-                employee.setPosition(positions.get(randomizer.nextInt(positions.size())));
-                employee.setSection(sections.get(randomizer.nextInt(sections.size())));
-                employee.setShift(shifts.get(randomizer.nextInt(shifts.size())));
-                employee.setPlant(plants.get(randomizer.nextInt(plants.size())));
-                employee.setSite(site);
-                employeeRepository.save(employee);
-
-                int eventType = (i % 2 == 0) ? 1 : 2;
-                EmployeeEvent event = new EmployeeEvent();
-                event.setEmployee(employee);
-                //event.setEventType(eventType);
-                //event.setEventName(eventType == 1 ? hrClearance[randomizer.nextInt(hrClearance.length)] : absent[randomizer.nextInt(absent.length)]);
-                event.setEventType(1);
-                event.setEventName(hrClearance[randomizer.nextInt(hrClearance.length)]);
-                employeeEventRepository.save(event);
-                i++;
+        for (ODataEntry person: perPerson.getEntries()) {
+            String personIdExternal = (String) person.getProperties().get("personIdExternal");
+            System.out.println("process " + personIdExternal);
+            Employee employee = employeeRepository.findByPersonIdExternal(personIdExternal);
+            if (employee == null) {
+                employee = new Employee();
+                employee.setPersonIdExternal(personIdExternal);
             }
-        }*/
+
+            Optional<Calendar> dateOfBirth = Optional.ofNullable((Calendar) person.getProperties().get("dateOfBirth"));
+            employee.setDateOfBirth(dateOfBirth.isPresent() ? dateOfBirth.get().getTime() : null);
+
+            Optional<ODataDeltaFeed> employmentNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("employmentNav"));
+            Optional<ODataDeltaFeed> personalInfoNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("personalInfoNav"));
+            if (!employmentNav.isPresent() || employmentNav.get().getEntries().size() == 0 || !personalInfoNav.isPresent() || personalInfoNav.get().getEntries().size() == 0) {
+                continue;
+            }
+
+            Optional<ODataEntry> employment = employmentNav.get().getEntries().stream()
+                    .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
+                    .findFirst();
+            if (employment.isPresent()) {
+                String userId = (String) employment.get().getProperties().get("userId");
+                employee.setUserId(userId);
+
+                ODataFeed empJob = ODataUtil.readFeed(edm, "EmpJob","$expand=departmentNav,positionNav,locationNav,shiftCodeNav,customString5Nav,customString15Nav&$filter=userId%20eq%20%27"+ userId +"%27");
+                Optional<ODataEntry> jobInfo = empJob.getEntries().stream()
+                        .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
+                        .findFirst();
+                if (jobInfo.isPresent()) {
+                    employee = setDepartment(employee, jobInfo);
+                    employee = setPosition(employee, jobInfo);
+                    employee = setShift(employee, jobInfo);
+                    employee = setLocation(employee, jobInfo);
+                    employee = setSection(employee, jobInfo);
+                    employee = setPlant(employee, jobInfo);
+                }
+            }
+
+            Optional<ODataEntry> personalInfo = personalInfoNav.get().getEntries().stream()
+                    .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
+                    .findFirst();
+            if (personalInfo.isPresent()) {
+                Optional<String> firstName = Optional.ofNullable((String) personalInfo.get().getProperties().get("firstName"));
+                employee.setFirstName(firstName.isPresent() ? firstName.get() : null);
+
+                Optional<String> lastName = Optional.ofNullable((String) personalInfo.get().getProperties().get("lastName"));
+                employee.setLastName(lastName.isPresent() ? lastName.get() : null);
+
+                Optional<String> middleName = Optional.ofNullable((String) personalInfo.get().getProperties().get("middleName"));
+                employee.setMiddleName(middleName.isPresent() ? middleName.get() : null);
+
+                Optional<String> gender = Optional.ofNullable((String) personalInfo.get().getProperties().get("gender"));
+                employee.setGender(gender.isPresent() ? gender.get() : null);
+
+                Optional<ODataDeltaFeed> salutationNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("salutationNav"));
+                if (salutationNav.isPresent()) {
+                    ODataEntry salutationEntry = salutationNav.get().getEntries().get(0);
+                    employee.setSalutation((String) salutationEntry.getProperties().get("externalCode"));
+                } else {
+                    employee.setSalutation(null);
+                }
+            }
+
+            employee.setSite(site);
+            employeeRepository.save(employee);
+        }
+
     }
 
-    private void PopulateSfPosition() throws Exception{
-        ODataFeed feed = ODataUtil.readFeed(edm, "Position");
-        for (ODataEntry entry: feed.getEntries()) {
-            Gson gson = new Gson();
-            JsonElement jsonElement = gson.toJsonTree(entry.getProperties());
-            Position sfPosition = gson.fromJson(jsonElement, Position.class);
-            Position position = positionRepository.findOneByCode(sfPosition.getCode());
-            if (position == null) {
-                positionRepository.save(sfPosition);
-            } else {
-                BeanUtils.copyProperties(sfPosition, position, "id");
-                positionRepository.save(position);
-            }
+    private Employee setDepartment(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> department = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("departmentNav"));
+        if (department.isPresent()) {
+            employee.setDepartmentId((String) department.get().getProperties().get("externalCode"));
+            employee.setDepartmentName((String) department.get().getProperties().get("name_en_GB"));
+        } else {
+            employee.setDepartmentId(null);
+            employee.setDepartmentName(null);
         }
-        System.out.println("----- FINISHED Read Feed of entity: Position ------------------------------");
+        return employee;
     }
 
-    private void PopulateSfDepartment() throws Exception{
-        ODataFeed feed = ODataUtil.readFeed(edm, "FODepartment");
-        for (ODataEntry entry: feed.getEntries()) {
-            Gson gson = new Gson();
-            JsonElement jsonElement = gson.toJsonTree(entry.getProperties());
-            Department sfDepartment = gson.fromJson(jsonElement, Department.class);
-            Department department = departmentRepository.findOneByCode(sfDepartment.getCode());
-            if (department == null) {
-                departmentRepository.save(sfDepartment);
-            } else {
-                BeanUtils.copyProperties(sfDepartment, department, "id");
-                departmentRepository.save(department);
-            }
+    private Employee setPosition(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> position = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("positionNav"));
+        if (position.isPresent()) {
+            employee.setPositionId((String) position.get().getProperties().get("code"));
+            employee.setPositionName((String) position.get().getProperties().get("name_en_GB"));
+        } else {
+            employee.setPositionId(null);
+            employee.setPositionName(null);
         }
-        System.out.println("----- FINISHED Read Feed of entity: FODepartment ------------------------------");
+        return employee;
+    }
+
+    private Employee setShift(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> shift = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("shiftCodeNav"));
+        if (shift.isPresent()) {
+            employee.setShiftId((String) shift.get().getProperties().get("externalCode"));
+            switch (employee.getShiftId()) {
+                case "1":
+                    employee.setShiftName("Day Shift");
+                    break;
+                case "2":
+                    employee.setShiftName("Afternoon Shift");
+                    break;
+                case "3":
+                    employee.setShiftName("Night Shift");
+                    break;
+            }
+        } else {
+            employee.setShiftId(null);
+            employee.setShiftName(null);
+        }
+        return employee;
+    }
+
+    private Employee setLocation(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> location = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("locationNav"));
+        if (location.isPresent()) {
+            employee.setLocationId((String) location.get().getProperties().get("externalCode"));
+            employee.setLocationName((String) location.get().getProperties().get("name"));
+        } else {
+            employee.setLocationId(null);
+            employee.setLocationName(null);
+        }
+        return employee;
+    }
+
+    private Employee setSection(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> section = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("customString5Nav"));
+        if (section.isPresent()) {
+            employee.setSectionId((String) section.get().getProperties().get("externalCode"));
+            employee.setSectionName((String) section.get().getProperties().get("externalName"));
+        } else {
+            employee.setSectionId(null);
+            employee.setSectionName(null);
+        }
+        return employee;
+    }
+
+    private Employee setPlant(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> plant = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("customString15Nav"));
+        if (plant.isPresent()) {
+            employee.setPlantId((String) plant.get().getProperties().get("externalCode"));
+            employee.setPlantName((String) plant.get().getProperties().get("externalName"));
+        } else {
+            employee.setPlantId(null);
+            employee.setPlantName(null);
+        }
+        return employee;
     }
 }

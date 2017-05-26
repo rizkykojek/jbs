@@ -124,7 +124,6 @@ public class EventController {
     public @ResponseBody DataTablesOutput getEventHistory(@PathVariable Long employeeId, @RequestParam Optional<String> startDateFilter, @RequestParam Optional<String> endDateFilter,
                                                                 @RequestParam Optional<Integer> monthFilter, @Valid DataTablesInput request) {
         DataTablesOutput<Event> results = eventTableRepository.findAll(request, historySpecification(employeeId, startDateFilter, endDateFilter, monthFilter));
-        results.setData(results.getData().stream().sorted((e1, e2) -> Long.compare(e2.getId(), e1.getId())).collect(Collectors.toList()));
         return results;
     }
 

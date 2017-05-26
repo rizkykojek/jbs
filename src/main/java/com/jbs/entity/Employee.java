@@ -1,11 +1,13 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
+import org.joda.time.DateTime;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by rizkykojek on 3/10/17.
@@ -22,14 +24,21 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private Long id;
 
-    @Column(name = "employee_number", unique = true, nullable = false)
+    @Column(name = "person_id_external", unique = true, nullable = false)
     @JsonView(DataTablesOutput.View.class)
-    @SerializedName("personIdExternal")
-    private String employeeNumber;
+    private String personIdExternal;
+
+    @Column(name = "user_id", unique = true, nullable = false)
+    @JsonView(DataTablesOutput.View.class)
+    private String userId;
 
     @Column(name = "first_name", nullable = false)
     @JsonView(DataTablesOutput.View.class)
     private String firstName;
+
+    @Column(name = "middle_name")
+    @JsonView(DataTablesOutput.View.class)
+    private String middleName;
 
     @Column(name = "last_name")
     @JsonView(DataTablesOutput.View.class)
@@ -39,47 +48,99 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private String fullName;
 
-    @ManyToOne
-    @JoinColumn(name="position_id", nullable=false)
-    @JsonView(DataTablesOutput.View.class)
-    private Position position;
+    @Column(name = "gender")
+    private String gender;
 
-    @ManyToOne
-    @JoinColumn(name="plant_id", nullable=false)
-    @JsonView(DataTablesOutput.View.class)
-    private Plant plant;
+    @Column(name = "salutation")
+    private String salutation;
 
-    @ManyToOne
-    @JoinColumn(name="department_id", nullable=false)
-    @JsonView(DataTablesOutput.View.class)
-    private Department department;
+    @Column(name = "date_of_birth")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd MMM yyyy")
+    private Date dateOfBirth;
 
-    @ManyToOne
-    @JoinColumn(name="section_id", nullable=false)
+    @Column(name = "position_id")
     @JsonView(DataTablesOutput.View.class)
-    private Section section;
+    private String positionId;
 
-    @ManyToOne
-    @JoinColumn(name="shift_id", nullable=false)
+    @Column(name = "position_name")
     @JsonView(DataTablesOutput.View.class)
-    private Shift shift;
+    private String positionName;
+
+    @Column(name = "department_id")
+    @JsonView(DataTablesOutput.View.class)
+    private String departmentId;
+
+    @Column(name = "department_name")
+    @JsonView(DataTablesOutput.View.class)
+    private String departmentName;
+
+    @Column(name = "plant_id")
+    @JsonView(DataTablesOutput.View.class)
+    private String plantId;
+
+    @Column(name = "plant_name")
+    @JsonView(DataTablesOutput.View.class)
+    private String plantName;
+
+    @Column(name = "section_id")
+    @JsonView(DataTablesOutput.View.class)
+    private String sectionId;
+
+    @Column(name = "section_name")
+    @JsonView(DataTablesOutput.View.class)
+    private String sectionName;
+
+    @Column(name = "shift_id")
+    @JsonView(DataTablesOutput.View.class)
+    private String shiftId;
+
+    @Column(name = "shift_name")
+    @JsonView(DataTablesOutput.View.class)
+    private String shiftName;
+
+    @Column(name = "location_id")
+    @JsonView(DataTablesOutput.View.class)
+    private String locationId;
+
+    @Column(name = "location_name")
+    @JsonView(DataTablesOutput.View.class)
+    private String locationName;
 
     @ManyToOne
     @JoinColumn(name="site_id", nullable=false)
     private Site site;
 
+    @Column(name = "processed_at", nullable = false)
+    private Date processedAt;
+
     @PrePersist
     public void prePersist() {
-        this.fullName = this.firstName + " " + this.lastName;
+        this.fullName = builderFullName();
+        this.processedAt = DateTime.now().toDate();
     }
 
     @PreUpdate
     public void preUpdate() {
-        this.fullName = this.firstName + " " + this.lastName;
+        this.fullName = builderFullName();
+        this.processedAt = DateTime.now().toDate();
     }
 
     public Employee(Long id) {
         this.id = id;
+    }
+
+    private String builderFullName(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(firstName);
+        if (middleName != null) {
+            builder.append(" ");
+            builder.append(middleName);
+        }
+        if (lastName != null) {
+            builder.append(" ");
+            builder.append(lastName);
+        }
+        return builder.toString();
     }
 
 }

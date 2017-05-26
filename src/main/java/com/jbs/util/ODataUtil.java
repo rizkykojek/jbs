@@ -9,8 +9,10 @@ import org.apache.olingo.odata2.api.ep.EntityProvider;
 import org.apache.olingo.odata2.api.ep.EntityProviderReadProperties;
 import org.apache.olingo.odata2.api.ep.feed.ODataFeed;
 import org.apache.olingo.odata2.api.exception.ODataException;
+import org.springframework.core.io.DefaultResourceLoader;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -46,7 +48,9 @@ public final class ODataUtil {
 
     public static  Edm initEdm() throws IOException, ODataException {
         print("\n----- Read Edm ------------------------------");
-        InputStream content = execute(URI_API + SEPARATOR + METADATA, AUTHORIZATION, APPLICATION_XML, HTTP_METHOD_GET);
+        //InputStream content = execute(URI_API + SEPARATOR + METADATA, AUTHORIZATION, APPLICATION_XML, HTTP_METHOD_GET);
+        DefaultResourceLoader loader = new DefaultResourceLoader();
+        InputStream content = loader.getResource("classpath:com/jbs/doc/jbsaustralD-Metadata.xml").getInputStream();
         return EntityProvider.readMetadata(content, false);
     }
 
