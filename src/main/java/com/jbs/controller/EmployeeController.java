@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.google.common.collect.Lists;
 import com.jbs.entity.*;
 import com.jbs.repository.*;
-import com.jbs.repository.datatable.EmployeeEventTableRepository;
+import com.jbs.repository.datatable.EmployeeTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
@@ -32,7 +32,7 @@ public class EmployeeController {
     private DepartmentRepository departmentRepository;
 
     @Autowired
-    private EmployeeEventTableRepository employeeEventTableRepository;
+    private EmployeeTableRepository employeeTableRepository;
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -96,7 +96,7 @@ public class EmployeeController {
     @RequestMapping(value = "/hrClearanceTable", method = RequestMethod.GET)
     public @ResponseBody DataTablesOutput getHrClearanceTable(@Valid DataTablesInput request) {
         AtomicInteger atomicInteger = new AtomicInteger(request.getStart() + 1);
-        DataTablesOutput<EmployeeEvent> results = employeeEventTableRepository.findAll(request);
+        DataTablesOutput<Employee> results = employeeTableRepository.findAll(request);
         results.getData().stream().forEach(s -> s.setCounterNumber(atomicInteger.getAndIncrement()));
         return results;
     }
@@ -105,7 +105,7 @@ public class EmployeeController {
     @RequestMapping(value = "/absentTable", method = RequestMethod.GET)
     public @ResponseBody DataTablesOutput getAbsentTable(@Valid DataTablesInput request) {
         AtomicInteger atomicInteger = new AtomicInteger(request.getStart() + 1);
-        DataTablesOutput<EmployeeEvent> results = employeeEventTableRepository.findAll(request);
+        DataTablesOutput<Employee> results = employeeTableRepository.findAll(request);
         results.getData().stream().forEach(s -> s.setCounterNumber(atomicInteger.getAndIncrement()));
         return results;
     }

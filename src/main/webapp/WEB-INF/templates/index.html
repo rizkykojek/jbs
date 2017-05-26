@@ -168,27 +168,27 @@
                             return row.counterNumber;
                         }
                     },
-                    { "data": "employee.firstName", render: function(data, type, row)
+                    { "data": "firstName", render: function(data, type, row)
                         {
-                            return '<div class="dropdown"><a class="dropbtn">'+ row.employee.fullName +'</a>' +
+                            return '<div class="dropdown"><a class="dropbtn">'+ row.fullName +'</a>' +
                                         '<div class="dropdown-content">' +
-                                            '<a href="'+_ctx + 'summary/'+ row.employee.id +'">View Employee Summary</a>' +
-                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/event" target="_blank">Add Attendance Event</a>' +
-                                            '<a href="'+_ctx +'employee/' + row.employee.id +'/performance" target="_blank">Add PM Event</a>' +
+                                            '<a href="'+_ctx + 'summary/'+ row.id +'">View Employee Summary</a>' +
+                                            '<a href="'+_ctx +'employee/' + row.id +'/event" target="_blank">Add Attendance Event</a>' +
+                                            '<a href="'+_ctx +'employee/' + row.id +'/performance" target="_blank">Add PM Event</a>' +
                                             '<a href="#">View Employee Record (EC)</a>' +
                                             '<a href="#">Add Leave (Kronos)</a>' +
                                         '</div>' +
                                     '</div>';
                         }
                     },
-                    { "data": "employee.userId" },
-                    { "data": "employee.position.name" },
-                    { "data": "employee.department.name" },
-                    { "data": "eventName" },
-                    { "data": "employee.section.id" },
-                    { "data": "employee.shift.id" },
-                    { "data": "employee.fullName" },
-                    { "data": "employee.plant.id" },
+                    { "data": "userId" },
+                    { "data": "positionName" },
+                    { "data": "departmentName" },
+                    { "data": "personIdExternal" },
+                    { "data": "sectionId" },
+                    { "data": "shiftId" },
+                    { "data": "fullName" },
+                    { "data": "plantId" },
                 ]
             });
 

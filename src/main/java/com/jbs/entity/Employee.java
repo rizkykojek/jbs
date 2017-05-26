@@ -24,6 +24,10 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private Long id;
 
+    @Transient
+    @JsonView(DataTablesOutput.View.class)
+    private Integer counterNumber;
+
     @Column(name = "person_id_external", unique = true, nullable = false)
     @JsonView(DataTablesOutput.View.class)
     private String personIdExternal;
