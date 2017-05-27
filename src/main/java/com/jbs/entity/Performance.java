@@ -241,6 +241,7 @@ public class Performance {
         Hibernate.initialize(this.getLetterTemplate());
         Hibernate.initialize(this.getInterpreter());
         Hibernate.initialize(this.getSupportResponse());
+        Hibernate.initialize(this.getPerformanceStatus());
         Hibernate.initialize(this.getAttachment1());
         Hibernate.initialize(this.getAttachment2());
         Hibernate.initialize(this.getAttachment3());

@@ -1,7 +1,9 @@
 package com.jbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
 
@@ -17,6 +19,7 @@ public class PerformanceAdmin {
 
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private Long id;
 
     @Column(length = 30, unique = true)
@@ -26,6 +29,7 @@ public class PerformanceAdmin {
     private String type;
 
     @Column(length = 100)
+    @JsonView(DataTablesOutput.View.class)
     private String value;
 
     @Column

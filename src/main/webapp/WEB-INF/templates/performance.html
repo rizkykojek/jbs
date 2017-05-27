@@ -353,6 +353,7 @@
                                         <tr class="success">
                                             <td class="text-center">PM ID</td>
                                             <td class="text-center">Action</td>
+                                            <td class="text-center">Status</td>
                                             <td class="text-center">Start Date</td>
                                             <td class="text-center">End Date</td>
                                             <td class="text-center">Time</td>
@@ -384,6 +385,7 @@
                                             <td class="text-center">#</td>
                                             <td class="text-center">PM ID</td>
                                             <td class="text-center">Action</td>
+                                            <td class="text-center">Status</td>
                                             <td class="text-center">Start Date</td>
                                             <td class="text-center">End Date</td>
                                             <td class="text-center">Time</td>
@@ -478,7 +480,7 @@
                 "processing": "<div class='loader'></div>"
             },
             "columnDefs": [{
-                "targets": [1,2,3,4,5,6,7],
+                "targets": [1,2,3,4,5,6,7,8],
                 "orderable": false
             }],
             "order": [ 0, 'desc' ],
@@ -496,6 +498,11 @@
                 { "data": "action.id", render: function(data, type, row)
                     {
                         return row.action.name + ' (' + row.action.code + ')';
+                    }
+                },
+                { "data": "performanceStatus.id", render: function(data, type, row)
+                    {
+                        return row.performanceStatus.value;
                     }
                 },
                 { "data": "startDate" },
@@ -533,7 +540,7 @@
                 "processing": "<div class='loader'></div>"
             },
             "columnDefs": [{
-                "targets": [4,5,6],
+                "targets": [5,6,7],
                 "orderable": false
             }],
             "order": [ 0, 'desc' ],
@@ -546,6 +553,11 @@
                 { "data": "action.name", render: function(data, type, row)
                     {
                         return row.action.name + ' (' + row.action.code + ')';
+                    }
+                },
+                { "data": "performanceStatus.id", render: function(data, type, row)
+                    {
+                        return row.performanceStatus.value;
                     }
                 },
                 { "data": "startDate" },
