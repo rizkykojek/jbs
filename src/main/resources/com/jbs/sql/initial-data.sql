@@ -51,6 +51,8 @@ INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (2
 INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (3, 'Resp_003', 'Support_Response', 'Declined', 1, 3);
 INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (4, 'Interpreter_001', 'Interpreter', 'Yes', 1, 2);
 INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (5, 'Interpreter_002', 'Interpreter', 'No', 1, 1);
+INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (6, 'Stat_001', 'Status', 'Unresolved', 1, 1);
+INSERT INTO performance_admin(id, code, type, value, status, sequence) VALUES (7, 'Stat_002', 'Status', 'Resolved', 1, 2);
 
 INSERT INTO performance_category(id, code, name, status, sequence, parent_category_id) VALUES (1, 'OAD', 'Alcohol and other drugs policy', 1, 1, null);
 INSERT INTO performance_category(id, code, name, status, sequence, parent_category_id) VALUES (2, 'SC_046', 'General breach of Alcohol and other Drugs policy', 1, 2, 1);

@@ -44,6 +44,9 @@ public class PerformanceDto {
     @NotNull
     private Long actionId;
 
+    @NotNull
+    private Long performanceStatusId;
+
     private Long letterTemplateId;
 
     @NotNull

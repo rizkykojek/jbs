@@ -123,11 +123,10 @@
                 </div>
                 <div class="row" style="margin-bottom: 20px">
                     <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Template:</label>
-                            <select id="letterTemplateId" class="form-control" th:field="*{letterTemplateId}" th:disabled="${performanceDto.isAuditVersion()}">
-                                <option value="">-- Please Select --</option>
-                                <option th:each="template : ${listLetterTemplate}" th:value="${template.id}" th:text="${template.name}"></option>
+                        <div class="input-group" th:class="${#fields.hasErrors('performanceStatusId')} ? 'input-group has-error' : 'input-group'">
+                            <label class="input-group-addon borderless no-background" style="padding-left: 0px"><label style="color: red">*</label> Status:</label>
+                            <select class="form-control" th:field="*{performanceStatusId}" th:disabled="${performanceDto.isAuditVersion()}">
+                                <option th:each="status : ${listPerformanceStatus}" th:value="${status.id}" th:text="${status.value}"></option>
                             </select>
                         </div>
                     </div>
@@ -226,6 +225,15 @@
                                     <input type="checkbox" th:field="*{isSupervisorReport}" th:disabled="${performanceDto.isAuditVersion()}"/>
                                     <label style="margin-left: -15px">Supervisor Report</label>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <label class="input-group-addon borderless no-background" style="padding-left: 0px">Template:</label>
+                                <select id="letterTemplateId" class="form-control" th:field="*{letterTemplateId}" th:disabled="${performanceDto.isAuditVersion()}">
+                                    <option value="">-- Please Select --</option>
+                                    <option th:each="template : ${listLetterTemplate}" th:value="${template.id}" th:text="${template.name}"></option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">

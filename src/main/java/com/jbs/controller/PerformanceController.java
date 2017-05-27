@@ -215,6 +215,7 @@ public class PerformanceController {
         model.addAttribute("employee", employee);
         model.addAttribute("performanceDto", performanceDto);
 
+        model.addAttribute("listPerformanceStatus", performanceAdminRepository.findByStatusAndTypeOrderBySequenceAsc(Boolean.TRUE, ApplicationUtil.STATUS_TYPE));
         model.addAttribute("listAction", performanceActionRepository.findAllByOrderByName());
         model.addAttribute("listCategory", performanceCategoryRepository.findByParentCategoryIsNullOrderByName());
         model.addAttribute("listSubCategory", performanceCategoryRepository.findByParentCategoryNotNullAndParentCategoryIdOrderByName(performanceDto.getParentCategoryId()));

@@ -92,6 +92,11 @@ public class Performance {
     @JoinColumn(name="support_response_id")
     private PerformanceAdmin supportResponse;
 
+    @ManyToOne
+    @JoinColumn(name="performance_status_id", nullable = false)
+    @JsonView(DataTablesOutput.View.class)
+    private PerformanceAdmin performanceStatus;
+
     @Column(name = "is_supervisor_report")
     private Boolean isSupervisorReport;
 

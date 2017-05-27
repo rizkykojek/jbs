@@ -123,7 +123,7 @@
                     <div class="row" style="margin-bottom: 20px">
                         <div class="col-md-4">
                             <div class="input-group" style="width: 100%" th:class="${#fields.hasErrors('startDate')} ? 'input-group has-error' : 'input-group'">
-                                <label class="input-group-addon borderless no-background "><label style="color: red">*</label> Start Date:</label>
+                                <label class="input-group-addon borderless no-background" style="padding-left: 0px"><label style="color: red">*</label> Start Date:</label>
                                 <div class='input-group date' id='datetimepicker1'>
                                     <input type='text' class="form-control" th:field="*{startDate}" th:disabled="${eventDto.isAuditVersion()}"/>
                                     <span class="input-group-addon">

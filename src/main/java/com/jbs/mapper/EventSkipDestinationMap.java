@@ -7,7 +7,7 @@ import org.modelmapper.PropertyMap;
 /**
  * Created by rizkykojek on 5/16/17.
  */
-public class SkipDestinationMap extends PropertyMap<EventDto, Event> {
+public class EventSkipDestinationMap extends PropertyMap<EventDto, Event> {
 
     @Override
     protected void configure() {
