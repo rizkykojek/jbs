@@ -84,7 +84,7 @@
                                 <tr>
                                     <td class="borderless">
                                         <b>Position: </b>
-                                        <label th:text="${employee.position.name}" class="normal"/>
+                                        <label th:text="${employee.positionName}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>EE Type: </b>
@@ -100,7 +100,7 @@
                                     </td>
                                     <td class="borderless">
                                         <b>Shift: </b>
-                                        <label th:text="${employee.shift.name}" class="normal"/>
+                                        <label th:text="${employee.shiftName}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Roster: </b>
@@ -110,7 +110,7 @@
                                 <tr>
                                     <td class="borderless">
                                         <b>Department: </b>
-                                        <label th:text="${employee.department.name}" class="normal"/>
+                                        <label th:text="${employee.departmentName}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Status: </b>
@@ -194,100 +194,6 @@
                                     <label style="color: black">&bull;</label> <a href="#" style="color: black">Employee Central</a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-backward"></span>
-                                <u>Previous Pay Period</u>
-                            </a>
-                        </label>
-                    </div>
-                    <div class="col-md-3 text-center">
-                        <label>Amended Roster</label>
-                    </div>
-                    <div class="col-md-3 text-center">
-                        <label>
-                            <a href="#"><u>&lt;Kronos Calendar&gt;</u></a>
-                        </label>
-                    </div>
-                    <div class="col-md-3 text-right">
-                        <label>
-                            <a href="#">
-                                <u>Next Pay Period</u>
-                                <span class="glyphicon glyphicon-forward"></span>
-                            </a>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-hover">
-                                <thead>
-                                <tr style="background-color: #3e8f3e">
-                                    <td class="text-center text-white">6 FEB</td>
-                                    <td class="text-center text-white">7 FEB</td>
-                                    <td class="text-center text-white">8 FEB</td>
-                                    <td class="text-center text-white">9 FEB</td>
-                                    <td class="text-center text-white">10 FEB</td>
-                                    <td class="text-center text-white">11 FEB</td>
-                                    <td class="text-center text-white">12 FEB</td>
-                                    <td class="text-center text-white">13 FEB</td>
-                                    <td class="text-center text-white">14 FEB</td>
-                                    <td class="text-center text-white">15 FEB</td>
-                                    <td class="text-center text-white">16 FEB</td>
-                                    <td class="text-center text-white">17 FEB</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-center success"><b>Mon</b></td>
-                                    <td class="text-center success"><b>Tue</b></td>
-                                    <td class="text-center success"><b>Wed</b></td>
-                                    <td class="text-center success"><b>Thu</b></td>
-                                    <td class="text-center success"><b>Fri</b></td>
-                                    <td class="text-center success"><b>Sat</b></td>
-                                    <td class="text-center success"><b>Mon</b></td>
-                                    <td class="text-center success"><b>Sun</b></td>
-                                    <td class="text-center success"><b>Tue</b></td>
-                                    <td class="text-center success"><b>Wed</b></td>
-                                    <td class="text-center success"><b>Thu</b></td>
-                                    <td class="text-center success"><b>Fri</b></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center success">RO</td>
-                                    <td class="text-center success">RO</td>
-                                    <td class="text-center success">PH</td>
-                                    <td class="text-center success">-</td>
-                                    <td class="text-center success">-</td>
-                                    <td class="text-center success">-</td>
-                                    <td class="text-center success">-</td>
-                                    <td class="text-center success">-</td>
-                                    <td class="text-center success">AL</td>
-                                    <td class="text-center success">AL</td>
-                                    <td class="text-center success">PH</td>
-                                    <td class="text-center success">T</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                    <td class="text-center success">09.30-17.30</td>
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -514,108 +420,6 @@
                                     <td class="text-center success">17 Feb 2017</td>
                                     <td class="text-center success">Issued 1st Warning Letter</td>
                                     <td class="text-center success">Sarah Wong</td>
-                                </tr>
-                                <tr class="info">
-                                    <td class="text-center success">&nbsp;</td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                    <td class="text-center success"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>
-                            <a href="#"><u>&lt;Leave History&gt;</u></a>
-                        </label>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 10px">
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" style="padding-left: 0px">Leave :</label>
-                            <select class="form-control">
-                                <option value=""></option>
-                                <option value="">UNPAID ABSENCE</option>
-                                <option value="">PAID ABSENCE</option>
-                                <option value="">Stood aside</option>
-                                <option value="">Suspended</option>
-                                <option value="">Etc.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" >Start :</label>
-                            <div class='input-group date' id='datetimepicker5'>
-                                <input type='text' class="form-control"/>
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-addon borderless no-background" >End :</label>
-                            <div class='input-group date' id='datetimepicker6'>
-                                <input type='text' class="form-control"/>
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <select class="form-control">
-                            <option value="">Months</option>
-                            <option value="">3 Months</option>
-                            <option value="">6 Months</option>
-                            <option value="">9 Months</option>
-                            <option value="">12 Months</option>
-                            <option value="">18 Months</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-hover">
-                                <thead>
-                                <tr class="success">
-                                    <td class="text-center">Leave ID</td>
-                                    <td class="text-center">Leave Type</td>
-                                    <td class="text-center">Date Applied</td>
-                                    <td class="text-center">From</td>
-                                    <td class="text-center">To</td>
-                                    <td class="text-center">Status</td>
-                                    <td class="text-center">Action</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="info">
-                                    <td class="text-center success">1123</td>
-                                    <td class="text-center success">Annual Leave (AL)</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">6 Feb 2017</td>
-                                    <td class="text-center success">17 Feb 2017</td>
-                                    <td class="text-center success">Pending Approval</td>
-                                    <td class="text-center success"><a href="#"><u>View</u></a></td>
-                                </tr>
-                                <tr class="info">
-                                    <td class="text-center success">1124</td>
-                                    <td class="text-center success">Sick Leave (SL)</td>
-                                    <td class="text-center success">1 feb 2017</td>
-                                    <td class="text-center success">6 Feb 2017</td>
-                                    <td class="text-center success">17 Feb 2017</td>
-                                    <td class="text-center success">Approved</td>
-                                    <td class="text-center success"><a href="#"><u>View</u></a></td>
                                 </tr>
                                 <tr class="info">
                                     <td class="text-center success">&nbsp;</td>
