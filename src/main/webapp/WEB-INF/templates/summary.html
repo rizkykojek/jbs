@@ -40,7 +40,7 @@
                                     </td>
                                     <td class="borderless">
                                         <b>Gender: </b>
-                                        M
+                                        <label th:text="${employee.gender}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>EE ID: </b>
@@ -48,37 +48,37 @@
                                     </td>
                                     <td class="borderless">
                                         <b>DOB: </b>
-                                        1978/12/12
+                                        <label th:text="${#dates.format(employee.dateOfBirth, 'dd MMM yyyy')}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Mobile Phone: </b>
-                                        041044711
+                                        <label th:text="${employee.mobilePhone}" class="normal"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="borderless">
                                         <b>Address 1: </b>
-                                        6/10 Smith Street
+                                        <label th:text="${employee.address1}" class="normal"/>
                                     </td>
                                     <td class="borderless">
-                                        <b>Address 2: </b>
-                                        Neutral Bay
+                                        <b>City: </b>
+                                        <label th:text="${employee.addressCity}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>State: </b>
-                                        NSW
+                                        <label th:text="${employee.addressState}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Postal Code: </b>
-                                        2055
+                                        <label th:text="${employee.addressZipcode}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Hire Date: </b>
-                                        2016/12/12
+                                        <label th:text="${#dates.format(employee.hireDate, 'dd MMM yyyy')}" class="normal"/>
                                     </td>
                                     <td class="borderless">
-                                        <b>Plant: </b>
-                                        Dinmoore
+                                        <b>Home Phone: </b>
+                                        <label th:text="${employee.homePhone}" class="normal"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -96,7 +96,7 @@
                                     </td>
                                     <td class="borderless">
                                         <b>Job Class: </b>
-                                        4
+                                        <label th:text="${employee.jobClassName}" class="normal"/>
                                     </td>
                                     <td class="borderless">
                                         <b>Shift: </b>
@@ -115,6 +115,10 @@
                                     <td class="borderless">
                                         <b>Status: </b>
                                         Workers Comp
+                                    </td>
+                                    <td class="borderless">
+                                        <b>Plant: </b>
+                                        <label th:text="${employee.siteName}" class="normal"/>
                                     </td>
                                 </tr>
                                 </tbody>
