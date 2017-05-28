@@ -102,13 +102,44 @@ public class Employee {
     @JsonView(DataTablesOutput.View.class)
     private String shiftName;
 
+    @Column(name = "job_class_id")
+    private String jobClassId;
+
+    @Column(name = "job_class_name")
+    private String jobClassName;
+
     @Column(name = "location_id")
-    @JsonView(DataTablesOutput.View.class)
     private String locationId;
 
     @Column(name = "location_name")
-    @JsonView(DataTablesOutput.View.class)
     private String locationName;
+
+    @Column(name = "pay_grade_id")
+    private String payGradeId;
+
+    @Column(name = "pay_grade_name")
+    private String payGradeName;
+
+    @Column(name = "address_1")
+    private String address1;
+
+    @Column(name = "address_city")
+    private String addressCity;
+
+    @Column(name = "address_state")
+    private String addressState;
+
+    @Column(name = "address_zipcode")
+    private String addressZipcode;
+
+    @Column(name = "mobile_phone")
+    private String mobilePhone;
+
+    @Column(name = "home_phone")
+    private String homePhone;
+
+    @Column(name = "hire_date")
+    private Date hireDate;
 
     @Column(name = "processed_at", nullable = false)
     private Date processedAt;

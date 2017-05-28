@@ -4,6 +4,7 @@ import com.jbs.entity.Employee;
 import com.jbs.repository.EmployeeRepository;
 import com.jbs.service.SchedulerService;
 import com.jbs.util.ODataUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.olingo.odata2.api.edm.Edm;
 import org.apache.olingo.odata2.api.ep.entry.ODataEntry;
 import org.apache.olingo.odata2.api.ep.feed.ODataDeltaFeed;
@@ -29,13 +30,23 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-
     @Scheduled(fixedDelay = 1000000000, initialDelay = 1)
     @Transactional
-    public void employeeDetails() throws Exception {
+    public void populateEmployeeSfOnStart() throws Exception {
+        this.populateEmployeeSF();
+    }
+
+    @Scheduled(cron = "0 0 1 * * *") // 1:00 AM every day.
+    @Transactional
+    public void populateEmployeeSfOnSchedule() throws Exception {
+        this.populateEmployeeSF();
+    }
+
+    @Transactional
+    public void populateEmployeeSF() throws Exception {
         Calendar current = Calendar.getInstance();
         current.setTime(DateTime.now().withTimeAtStartOfDay().toDate());
-        ODataFeed perPerson = ODataUtil.readFeed(edm, "PerPerson","$expand=employmentNav,personalInfoNav,personalInfoNav/salutationNav");
+        ODataFeed perPerson = ODataUtil.readFeed(edm, "PerPerson","$expand=employmentNav,personalInfoNav/salutationNav,homeAddressNavDEFLT/cityNav,homeAddressNavDEFLT/stateNav,phoneNav/phoneTypeNav");
         for (ODataEntry person: perPerson.getEntries()) {
             String personIdExternal = (String) person.getProperties().get("personIdExternal");
             System.out.println("process " + personIdExternal);
@@ -57,7 +68,10 @@ public class SchedulerServiceImpl implements SchedulerService {
                 String userId = (String) employment.get().getProperties().get("userId");
                 employee.setUserId(userId);
 
-                ODataFeed empJob = ODataUtil.readFeed(edm, "EmpJob","$expand=departmentNav,positionNav,locationNav,shiftCodeNav,customString5Nav,customString15Nav&$filter=userId%20eq%20%27"+ userId +"%27");
+                Optional<Calendar> hireDate = Optional.ofNullable((Calendar) employment.get().getProperties().get("startDate"));
+                employee.setHireDate(hireDate.isPresent() ? hireDate.get().getTime() : null);
+
+                ODataFeed empJob = ODataUtil.readFeed(edm, "EmpJob","$expand=payGradeNav,jobCodeNav,departmentNav,positionNav,locationNav,shiftCodeNav,customString5Nav,customString15Nav&$filter=userId%20eq%20%27"+ userId +"%27");
                 Optional<ODataEntry> jobInfo = empJob.getEntries().stream()
                         .filter(e -> isCurrentBetween(current,(Calendar) e.getProperties().get("startDate"),(Calendar) e.getProperties().get("endDate")))
                         .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
@@ -69,6 +83,8 @@ public class SchedulerServiceImpl implements SchedulerService {
                     employee = setLocation(employee, jobInfo);
                     employee = setSection(employee, jobInfo);
                     employee = setSite(employee, jobInfo);
+                    employee = setJobClass(employee, jobInfo);
+                    employee = setPayGrade(employee, jobInfo);
                 }
             }
 
@@ -95,6 +111,43 @@ public class SchedulerServiceImpl implements SchedulerService {
                     employee.setSalutation((String) salutationNav.get().getProperties().get("externalCode"));
                 } else {
                     employee.setSalutation(null);
+                }
+            }
+
+            Optional<ODataDeltaFeed> addressNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("homeAddressNavDEFLT"));
+            Optional<ODataEntry> address = addressNav.get().getEntries().stream()
+                    .filter(e -> isCurrentBetween(current,(Calendar) e.getProperties().get("startDate"),(Calendar) e.getProperties().get("endDate")))
+                    .sorted((e1,e2) -> ((Calendar) e2.getProperties().get("endDate")).compareTo(((Calendar) e1.getProperties().get("startDate"))))
+                    .findFirst();
+            if (address.isPresent()) {
+                Optional<String> zipCode = Optional.ofNullable((String) address.get().getProperties().get("zipCode"));
+                employee.setAddressZipcode(zipCode.isPresent() ? zipCode.get() : null);
+
+                Optional<String> address1 = Optional.ofNullable((String) address.get().getProperties().get("address1"));
+                employee.setAddress1(address1.isPresent() ? address1.get() : null);
+
+                Optional<ODataEntry> stateNav = Optional.ofNullable((ODataEntry) address.get().getProperties().get("stateNav"));
+                if (stateNav.isPresent()) {
+                    employee.setAddressState((String) stateNav.get().getProperties().get("externalCode"));
+                } else {
+                    employee.setAddressState(null);
+                }
+
+                Optional<ODataEntry> cityNav = Optional.ofNullable((ODataEntry) address.get().getProperties().get("cityNav"));
+                if (cityNav.isPresent()) {
+                    employee.setAddressCity((String) cityNav.get().getProperties().get("externalCode"));
+                } else {
+                    employee.setAddressCity(null);
+                }
+            }
+
+            Optional<ODataDeltaFeed> phoneNav = Optional.ofNullable((ODataDeltaFeed) person.getProperties().get("phoneNav"));
+            for(ODataEntry phone: phoneNav.get().getEntries()) {
+                ODataEntry phoneType = (ODataEntry) phone.getProperties().get("phoneTypeNav");
+                if (StringUtils.equals((String) phoneType.getProperties().get("externalCode"),"O")) {
+                    employee.setMobilePhone((String) phone.getProperties().get("phoneNumber"));
+                } else if (StringUtils.equals((String) phoneType.getProperties().get("externalCode"),"H")) {
+                    employee.setHomePhone((String) phone.getProperties().get("phoneNumber"));
                 }
             }
 
@@ -184,6 +237,30 @@ public class SchedulerServiceImpl implements SchedulerService {
         } else {
             employee.setSiteId(null);
             employee.setSiteName(null);
+        }
+        return employee;
+    }
+
+    private Employee setJobClass(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> jobCode = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("jobCodeNav"));
+        if (jobCode.isPresent()) {
+            employee.setJobClassId((String) jobCode.get().getProperties().get("externalCode"));
+            employee.setJobClassName((String) jobCode.get().getProperties().get("name"));
+        } else {
+            employee.setJobClassId(null);
+            employee.setJobClassName(null);
+        }
+        return employee;
+    }
+
+    private Employee setPayGrade(Employee employee, Optional<ODataEntry> jobInfo) {
+        Optional<ODataEntry> payGrade = Optional.ofNullable((ODataEntry) jobInfo.get().getProperties().get("payGradeNav"));
+        if (payGrade.isPresent()) {
+            employee.setPayGradeId((String) payGrade.get().getProperties().get("externalCode"));
+            employee.setPayGradeName((String) payGrade.get().getProperties().get("name"));
+        } else {
+            employee.setPayGradeId(null);
+            employee.setPayGradeName(null);
         }
         return employee;
     }

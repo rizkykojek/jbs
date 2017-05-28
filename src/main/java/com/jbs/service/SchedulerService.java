@@ -5,6 +5,10 @@ package com.jbs.service;
  */
 public interface SchedulerService {
 
-    void employeeDetails() throws Exception;
+    void populateEmployeeSF() throws Exception;
+
+    void populateEmployeeSfOnStart() throws Exception;
+
+    void populateEmployeeSfOnSchedule() throws Exception;
 
 }
