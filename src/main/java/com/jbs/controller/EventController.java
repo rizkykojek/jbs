@@ -82,6 +82,8 @@ public class EventController {
             Event event = convertToEntity(eventDto, Optional.empty());
             event = eventService.save(event, eventDto.getFiles(), eventDto.getAttachmentTypeIds(), eventDto.getRemovedAttachments());
             eventDto = convertToDto(event);
+
+            model.addAttribute("success", "true");
         } else {
             this.setAttachmentsView(Optional.empty(), eventDto);
         }
@@ -96,6 +98,8 @@ public class EventController {
             Event event = convertToEntity(eventDto, eventId);
             event = eventService.save(event, eventDto.getFiles(), eventDto.getAttachmentTypeIds(), eventDto.getRemovedAttachments());
             eventDto = convertToDto(event);
+
+            model.addAttribute("success", "true");
         } else {
             this.setAttachmentsView(Optional.empty(), eventDto);
         }

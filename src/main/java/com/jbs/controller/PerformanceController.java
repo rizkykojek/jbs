@@ -99,6 +99,8 @@ public class PerformanceController {
             Performance performance = convertToEntity(performanceDto, Optional.empty());
             performance = performanceService.save(performance, performanceDto.getFiles(), performanceDto.getRemovedAttachments());
             performanceDto = convertToDto(performance);
+
+            model.addAttribute("success", "true");
         } else {
             this.setAttachmentsView(Optional.empty(), performanceDto);
         }
@@ -113,6 +115,8 @@ public class PerformanceController {
             Performance performance = convertToEntity(performanceDto, performanceId);
             performance = performanceService.save(performance, performanceDto.getFiles(), performanceDto.getRemovedAttachments());
             performanceDto = convertToDto(performance);
+
+            model.addAttribute("success", "true");
         } else {
             this.setAttachmentsView(Optional.empty(), performanceDto);
         }
